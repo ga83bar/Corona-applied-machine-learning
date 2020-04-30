@@ -1,0 +1,14 @@
+documentation/html/**
+documentation/latex/**
+documentation/logfiles**
+documentation/plots/**
+
+.vscode/
+__pycache__/
+*.log
+*.pyc
+plots/*
+models/*
+paper/*
+*.json
+
