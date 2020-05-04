@@ -32,16 +32,18 @@ def main():
     print('matplotlib version {}'.format(plt.__version__))
     print('scikit-learn version {}'.format(sk.__version__))
 
-    
     # This is how I think we will get a well seperation
     pDataset = proxyDataset()
     data = pDataset.getData()
     # if we can execute this and have valid data we can think about our learning classes .... but I think that is to far away
 
-
     #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     # If you want I can send you my .vscode/launche and task.json for automatically debugging by pressing F5 
     # and also in this case we will activate and deactivate venv before and after executing the script
+    #
+    # Because of the probably different operating systems it would be nice if 
+    # everyone would use os.path.join instead of using a fixed path
+
     #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ###########################
