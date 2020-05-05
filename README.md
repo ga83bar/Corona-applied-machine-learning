@@ -24,7 +24,7 @@ We then utilize predicted future trends (such as the future economic development
 We propose to limit the scope to regions in Germany for now, as the underlying causes for the distribution of various data points may vary by country.
 If deemed feasible and advantageous, we plan on including data from countries whose socioeconomic properties correlate greatly with those of Germany. Likely candidates are Northern European countries.  
 Note that data about the development of the pandemic, such as the infection rate, cannot be explicitly implemented as features.  
-Instead, they are implicitly included within the predictions of the other features estimated by third parties.  
+Instead, they are implicitly included within predictions of features estimated by third parties.  
 
 One advantage of this approach is its potential for interaction by an end user. 
 Guided by default predictions, users of the model could enter more pessimistic or optimistic trends to view the impact of varying trends on predicted emissions.  
