@@ -2,6 +2,7 @@ documentation/html/**
 documentation/latex/**
 documentation/logfiles**
 documentation/plots/**
+init_report/project.pdf
 
 .vscode/
 __pycache__/
