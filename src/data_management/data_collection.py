@@ -6,4 +6,3 @@ class DataCollection():
 
     def get_raw_data(self):
         '''Most important method of cls DataCollection returns the raw data as pandas frame'''
-        pass
