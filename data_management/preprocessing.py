@@ -2,7 +2,7 @@
 
 from interface import DatasetInterface
 
-class Dataset(DatasetInterface):
+class DataPreprocessor(DatasetInterface):
     '''Here the magic happens. We load the data in this class
     '''
     def __init__(self):

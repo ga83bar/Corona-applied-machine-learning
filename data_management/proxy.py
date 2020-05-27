@@ -1,6 +1,6 @@
 """here goes the proxy"""
 
-from preprocessing import Dataset
+from preprocessing import DataPreprocessor
 
 class Proxy():
     '''handles dataset access and makes the decision if we load the
@@ -45,7 +45,7 @@ class Proxy():
                 del Dataset
 
             # process it
-            dataHandler = clsDataHandler()
+            dataHandler = DataPreprocessor()
             data = dataHandler.handleMissingData(rawData)
             del rawData
 
