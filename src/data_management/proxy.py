@@ -21,44 +21,33 @@ class Proxy():
 
     def __init__(self):
         # set Bool values names and paths
-        self.__boolLoadAllNew = True
-        self.__boolLoadRawFromFile = False
+        self.__bool_load_all_new = True
+        self.__bool_load_raw_from_file = False
         # TODO set filenames ....
 
     # THIS IS the method we use to get the data
     def get_data(self):
         ''' Method handles the accesst to the dataset please just use this method from other classes to get the data'''
-        if (self.bool_load_processed_data_from_file):
+        if self.bool_load_processed_data_from_file:
             print('load processed dat from file {}')
             data = [
-                    1, 2, 
-                    3, 5
-                    ]
+                1, 2,
+                3, 5
+                ]
             return data
 
         else:
-            if (self.bool_load_raw_from_file):
+            if self.bool_load_raw_from_file:
                 # load rawData from file
                 print('load raw data from cached file')
+
             else:
                 # load rawData from file
                 data_collector = DataCollection()
-                raw_data = data_collector.getRawData()
+                raw_data = data_collector.get_raw_data()
+                print(raw_data)
 
                 data_processor = DataPreprocessor()
+                print(data_processor)
 
-                raw_data = our_data.loadData()
-                print('load raw data from web')
-                del Dataset
-
-            # process it
-            dataHandler = DataPreprocessor()
-            data = dataHandler.handleMissingData(rawData)
-            del rawData
-
-            data = dataHandler.scaleData(data)
-            data = dataHandler.transformeData(data)
-
-            # return it
             return data
-
