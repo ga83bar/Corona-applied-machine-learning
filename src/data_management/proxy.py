@@ -1,7 +1,7 @@
 """here goes the proxy"""
 
-from preprocessing import DataPreprocessor
-from data_collection import DataCollection
+from .preprocessing import DataPreprocessor
+from .data_collection import DataCollection
 
 
 class Proxy():
@@ -11,13 +11,13 @@ class Proxy():
 
     # ATTRIBUTES
     # PLEASE READ THIS!!!!!
-    __boolLoadProcessedDataFromFile = None      # load the whole dataset load rawdata + preprocessing
-    __boolLoadRawFromFile = None    # load raw data from file and process it check param.DEBUG + filePath
+    bool_load_processed_data_from_file = None      # load the whole dataset load rawdata + preprocessing
+    bool_load_raw_from_file = None    # load raw data from file and process it check param.DEBUG + filePath
 
-    __pathRawData = None
-    __pathProcessedData = None
-    __processedDataName = None
-    __rawDataName = None
+    path_raw_data = None
+    path_processed_data = None
+    processed_data_name = None
+    raw_data_name = None
 
     def __init__(self):
         # set Bool values names and paths
@@ -26,28 +26,28 @@ class Proxy():
         # TODO set filenames ....
 
     # THIS IS the method we use to get the data
-    def getData(self):
+    def get_data(self):
         ''' Method handles the accesst to the dataset please just use this method from other classes to get the data'''
-        if (self.__boolLoadProcessedDataFromFile):
+        if (self.bool_load_processed_data_from_file):
             print('load processed dat from file {}')
-            data = [1, 2, 43, 5, 5]
+            data = [
+                    1, 2, 
+                    3, 5
+                    ]
             return data
 
         else:
-            # TODO
-            # get Raw data
-            if (self.__boolLoadRawFromFile):
+            if (self.bool_load_raw_from_file):
                 # load rawData from file
                 print('load raw data from cached file')
             else:
                 # load rawData from file
                 data_collector = DataCollection()
-                rawData = data_collector.getRawData()
+                raw_data = data_collector.getRawData()
 
-                dataProcessor = DataPreprocessor()
+                data_processor = DataPreprocessor()
 
-                
-                rawData = our_data.loadData()
+                raw_data = our_data.loadData()
                 print('load raw data from web')
                 del Dataset
 
@@ -61,3 +61,4 @@ class Proxy():
 
             # return it
             return data
+

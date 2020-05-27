@@ -8,6 +8,7 @@ class DataPreprocessor(PreprocessDataInterface):
     '''
 
     def __init__(self):
+        super(DataPreprocessor, self).__init__()
         print('Dataset is not implemented')
 
    #TODO implement
