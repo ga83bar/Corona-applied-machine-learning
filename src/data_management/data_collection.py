@@ -6,6 +6,8 @@ class DataCollection():
 
     def return_raw_data(self):
         '''Most important method of cls DataCollection returns the raw data as pandas frame'''
+        raise NotImplementedError
 
     def parse_data_from_online_source(self):
         '''Most important method of cls DataCollection returns the raw data as pandas frame'''
+        raise NotImplementedError
