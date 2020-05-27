@@ -1,7 +1,7 @@
 """provides the interface for data_management"""
 
-import sys
-from .. import parameter
+from .parameter import Parameter
+
 
 class DatasetInterface():
     '''This interface defines the most important attributes and methods to load/get the raw dataset'''
@@ -12,6 +12,7 @@ class DatasetInterface():
     # methods
     def __init__(self):
         raise NotImplementedError
+        print('Hallo')
 
     def load_data(self):
         '''This method is an interface method for loading the data it is implemented inpreprocessing.py'''

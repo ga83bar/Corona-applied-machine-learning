@@ -8,7 +8,7 @@ import sklearn as sk
 import logging
 
 import data_management
-from parameter import Parameter
+from src.parameter import Parameter
 
 logging.basicConfig(level=logging.INFO)
 Params = Parameter()

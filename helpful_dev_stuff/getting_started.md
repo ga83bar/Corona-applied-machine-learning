@@ -93,3 +93,5 @@
 
 ## Logging
 - Please do not use print() instead use logging.info('message') or logging.error('mes') (see : https://docs.python.org/3/library/logging.html)
+
+## Flake8
