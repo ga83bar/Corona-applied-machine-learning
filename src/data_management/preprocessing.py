@@ -1,6 +1,6 @@
 """everythin related to preprocessing - might be extended to a whole package if required"""
 
-from interface import PreprocessDataInterface
+from .interface import PreprocessDataInterface
 
 
 class DataPreprocessor(PreprocessDataInterface):
@@ -11,8 +11,9 @@ class DataPreprocessor(PreprocessDataInterface):
         print('Dataset is not implemented')
 
    #TODO implement
-    def setScalingingAlgo(self, algo):
-        raise NotImplementedError
+    def set_scalinging_algo(self, algo):
+        print('much work do do here')
 
-    def scaleData(self, data):
-        raise NotImplementedError
+    def scale_data(self, data):
+        print('much work do do here')
+

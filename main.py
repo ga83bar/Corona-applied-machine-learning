@@ -7,23 +7,29 @@ import seaborn as sea
 import sklearn as sk
 import logging
 
-import data_management
+from src.data_management.preprocessing import DataPreprocessor
 from src.parameter import Parameter
 
 logging.basicConfig(level=logging.INFO)
-Params = Parameter()
+Params = Parameter.getInstance()
 
 
 def main():
+
+    #test
+    data=[
+        1, 2,
+        3, 4
+    ]
+    test = DataPreprocessor()
+    test.scale_data(data)
+    
 
     logging.debug('numpy version {}'.format(np.__version__))
     logging.debug('pandas version {}'.format(pd.__version__))
     logging.debug('seaborn version {}'.format(sea.__version__))
     logging.debug('matplotlib version {}'.format(plt.__version__))
     logging.debug('scikit-learn version {}'.format(sk.__version__))
-
-    our_data = data_management.Dataset()
-    print(our_data)
 
 
 if __name__ == '__main__':

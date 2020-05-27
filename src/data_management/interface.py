@@ -1,6 +1,6 @@
 """provides the interface for data_management"""
 
-from parameter import Parameter
+from ..parameter import Parameter
 
 
 class DatasetInterface():
@@ -28,10 +28,11 @@ class PreprocessDataInterface():
     def __init__(self):
         raise NotImplementedError
 
-    def setScalingingAlgo(self, algo):
+    def set_scalinging_algo(self, algo):
         raise NotImplementedError
 
-    def scaleData(self, data):
+    def scale_data(self, data):
         raise NotImplementedError
 
-    def 
+    def dummy(self):
+        raise NotImplementedError
