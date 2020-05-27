@@ -3,5 +3,6 @@
     "python.linting.pylintArgs": [
         "--rcfile",
         "${workspaceFolder}/.pylintrc"
-    ]
+    ],
+    "python.linting.pylintUseMinimalCheckers": false
 }
