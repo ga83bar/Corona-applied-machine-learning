@@ -43,9 +43,9 @@ class Parameter:
         """ Virtually private constructor."""
         if Parameter.__instance is not None:
             raise Exception("This class is a singleton!")
-        else:
-            Parameter.__instance = self
-            self.__singelton_init()
+
+        Parameter.__instance = self
+        self.__singelton_init()
 
     def get_working_directory(self):
         """returns current working directory"""
