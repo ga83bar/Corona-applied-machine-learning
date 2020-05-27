@@ -1,6 +1,6 @@
 """everythin related to preprocessing - might be extended to a whole package if required"""
 
-from interface import PreprocessDataInterface # pylint: disable=import-error
+from interface import PreprocessDataInterface   # pylint: disable=import-error
 
 
 class DataPreprocessor(PreprocessDataInterface):
@@ -11,7 +11,7 @@ class DataPreprocessor(PreprocessDataInterface):
         super(DataPreprocessor, self).__init__()
         print('Dataset is not implemented')
 
-   #TODO implement
+    # TODO implement
     def set_scalinging_algorithm(self, algo):
         """these functions only serve the purpose of providing an example"""
         raise NotImplementedError

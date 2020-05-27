@@ -26,7 +26,7 @@ class Parameter:
         """
         if Parameter.__instance is None:
             Parameter()
-            Parameter.__instance.__singelton_init()
+            Parameter.__instance.__singelton_init()   # pylint: disable=protected-access
 
         return Parameter.__instance
 
