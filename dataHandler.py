@@ -3,6 +3,8 @@
 #####                                    THIS IS THE : DATA INTERFACE                              #####
 ########################################################################################################
 # DO NOT IMPLEMENT THE INTERFACE
+
+
 class iDataHandler():
     '''This Interface defines the basic methods for the data class.
     The main task of this class is to handle data specific operations like 
@@ -11,18 +13,17 @@ class iDataHandler():
         - handle missing data
     '''
     # attributes for different ALGOS
-    HMD_MEAN = 1        #HMD == handle missing data ..
+    HMD_MEAN = 1        # HMD == handle missing data ..
     HMD_MEDIAN = 2
     HMD_DELET_ROW = 3
     __handelMissingDataAlgo = None
 
-    #TODO for other methods and algos...
+    # TODO for other methods and algos...
 
-
-    #def __init__(self):
+    # def __init__(self):
     #    raise NotImplementedError
 
-    def handleMissingData(self, p_data):# p for parameter
+    def handleMissingData(self, p_data):   # p for parameter
         raise NotImplementedError
 
     def transformeData(self, p_data):
