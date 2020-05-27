@@ -26,6 +26,7 @@ class Proxy():
         # TODO set filenames ....
 
     # THIS IS the method we use to get the data
+
     def get_data(self):
         ''' Method handles the accesst to the dataset please just use this method from other classes to get the data'''
         if self.bool_load_processed_data_from_file:
@@ -36,18 +37,22 @@ class Proxy():
                 ]
             return data
 
+
+        if self.bool_load_raw_from_file:
+            # load rawData from file
+            print('load raw data from cached file')
+
         else:
-            if self.bool_load_raw_from_file:
-                # load rawData from file
-                print('load raw data from cached file')
+            # load rawData from file
+            data_collector = DataCollection()
+            raw_data = data_collector.get_raw_data()
+            print(raw_data)
 
-            else:
-                # load rawData from file
-                data_collector = DataCollection()
-                raw_data = data_collector.get_raw_data()
-                print(raw_data)
+            data_processor = DataPreprocessor()
+            print(data_processor)
 
-                data_processor = DataPreprocessor()
-                print(data_processor)
+        return data
 
-            return data
+    def dummy_method(self):
+        """implement here"""
+        raise NotImplementedError
