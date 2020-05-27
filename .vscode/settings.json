@@ -1,4 +1,7 @@
 {
-    "python.linting.pylintUseMinimalCheckers": false,
-    "python.linting.pylintCategorySeverity.convention": "Warning"
+    "python.linting.pylintCategorySeverity.convention": "Warning",
+    "python.linting.pylintArgs": [
+        "--rcfile",
+        "${workspaceFolder}/.pylintrc"
+    ]
 }
