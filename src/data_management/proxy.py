@@ -37,7 +37,6 @@ class Proxy():
                 ]
             return data
 
-
         if self.bool_load_raw_from_file:
             # load rawData from file
             print('load raw data from cached file')
