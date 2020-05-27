@@ -4,7 +4,7 @@ from interface import PreprocessDataInterface # pylint: disable=import-error
 
 
 class DataPreprocessor(PreprocessDataInterface):
-    '''Here the magic happens. We load the data in this class
+    '''Here the magic happens. We 're about to load data here
     '''
 
     def __init__(self):
