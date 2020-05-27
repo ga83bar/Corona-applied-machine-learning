@@ -5,14 +5,12 @@ documentation/plots/**
 init_report/project.pdf
 
 venv
-.vscode/
 __pycache__/
 *.log
 *.pyc
 plots/*
 models/*
 paper/*
-*.json
 *.aux
 *.fdb_latexmk
 *.fls
