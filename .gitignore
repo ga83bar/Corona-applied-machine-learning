@@ -16,3 +16,4 @@ paper/*
 *.fdb_latexmk
 *.fls
 *.gz
+*.json
