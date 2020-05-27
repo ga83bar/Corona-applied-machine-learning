@@ -8,12 +8,18 @@ class DataPreprocessor(PreprocessDataInterface):
     '''
 
     def __init__(self):
+        super(DataPreprocessor, self).__init__()
         print('Dataset is not implemented')
 
-   #TODO implement
+    # TODO implement
     def set_scalinging_algo(self, algo):
+        '''Edit doxy !!!'''
         print('much work do do here')
 
     def scale_data(self, data):
+        '''Edit doxy !!!'''
         print('much work do do here')
 
+    def dummy(self):
+        '''Edit doxy !!!'''
+        print('dummyfunction')

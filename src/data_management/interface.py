@@ -7,32 +7,30 @@ class DatasetInterface():
     '''This interface defines the most important attributes and methods to load/get the raw dataset'''
     # DO NOT IMPLEMENT THIS
     # attributes
-    m_parameter = Parameter.getInstance()
+    m_parameter = Parameter.get_instance()
 
     # methods
     def __init__(self):
-        raise NotImplementedError
-        print('Hallo')
+        pass
 
     def load_data(self):
         '''This method is an interface method for loading the data it is implemented inpreprocessing.py'''
-        raise NotImplementedError
 
     def more_functions_tb_implemented(self):
         '''This method is an interface method for loading the data it is implemented inpreprocessing.py'''
-        raise NotImplementedError
 
 
 class PreprocessDataInterface():
+    '''Edit doxy !!!'''
 
     def __init__(self):
-        raise NotImplementedError
+        pass
 
     def set_scalinging_algo(self, algo):
-        raise NotImplementedError
+        '''Edit doxy !!!'''
 
     def scale_data(self, data):
-        raise NotImplementedError
+        '''Edit doxy !!!'''
 
     def dummy(self):
-        raise NotImplementedError
+        '''Edit doxy !!!'''
