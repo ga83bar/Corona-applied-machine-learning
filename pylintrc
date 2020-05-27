@@ -1,0 +1,17 @@
+[MASTER]
+persistent=no
+jobs=0
+
+[BASIC]
+include-naming-hint=yes
+good-names=_,
+           f
+
+[SIMILARITIES]
+min-similarity-lines=10
+
+[FORMAT]
+max-line-length=120
+
+[DESIGN]
+max-attributes=17
