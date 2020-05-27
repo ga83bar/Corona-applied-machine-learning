@@ -1,6 +1,8 @@
 """here goes the proxy"""
 
 from preprocessing import DataPreprocessor
+from data_collection import DataCollection
+
 
 class Proxy():
     '''handles dataset access and makes the decision if we load the
@@ -39,7 +41,12 @@ class Proxy():
                 print('load raw data from cached file')
             else:
                 # load rawData from file
-                our_data = Dataset()
+                data_collector = DataCollection()
+                rawData = data_collector.getRawData()
+
+                dataProcessor = DataPreprocessor()
+
+                
                 rawData = our_data.loadData()
                 print('load raw data from web')
                 del Dataset

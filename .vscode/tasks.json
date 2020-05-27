@@ -1,0 +1,29 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "prelaunch",
+            "type": "shell",
+            
+            "linux":{
+                "command": "${workspaceFolder}/helpful_dev_stuff/scripts/activate_venv.sh",
+            },
+            "windows": {
+                "command": "${workspaceFolder}\\helpful_dev_stuff\\scripts\\activate_venv.cmd"
+            }
+        },
+        {
+            "label": "postlaunch",
+            "type": "shell",
+
+            "linux":{
+                "command": "${workspaceFolder}/helpful_dev_stuff/scripts/disable_venv.sh",
+            },
+            "windows": {
+                "command": "${workspaceFolder}\\helpful_dev_stuff\\scripts\\disable_venv.cmd"
+            }
+        }
+    ]
+}
