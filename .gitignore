@@ -12,4 +12,7 @@ plots/*
 models/*
 paper/*
 *.json
-
+*.aux
+*.fdb_latexmk
+*.fls
+*.gz
