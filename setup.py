@@ -26,7 +26,7 @@ def read_requirements_in(path):
         ]
 
 
-INSTALL_REQUIRES = read_requirements_in('requirements.in')
+INSTALL_REQUIRES = read_requirements_in('dependencies/requirements.in')
 
 
 setup(name='TLS-gatherer',
