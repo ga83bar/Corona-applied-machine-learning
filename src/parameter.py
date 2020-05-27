@@ -20,23 +20,23 @@ class Parameter:
     __logfile_path = None
 
     @staticmethod
-    def getInstance():
+    def get_instance():
         """ Static access method.
         Use instead of Parameter(). So you get everytime the same instance of the object.
         """
         if Parameter.__instance is None:
             Parameter()
-            Parameter.__instance.__singeltonInit()
+            Parameter.__instance.__singelton_init()
 
         return Parameter.__instance
 
-    def __singeltonInit(self):
+    def __singelton_init(self):
         # INIT YOUR VARS HERE !!!!!
         '''
         This is the singelton init function if you want to init attributes do it here
         '''
-        self.__CWD = os.path.dirname(os.path.abspath(__file__))
-        self.__logfile_path = os.path.join(self.__CWD, 'documentation', 'logfiles', 'aml_log.log')
+        self.working_directory = os.path.dirname(os.path.abspath(__file__))
+        self.logfile_path = os.path.join(self.working_directory, 'documentation', 'logfiles', 'aml_log.log')
 
     def __init__(self):
         # DO NOT CHANGE THIS METHOD
@@ -45,20 +45,13 @@ class Parameter:
             raise Exception("This class is a singleton!")
         else:
             Parameter.__instance = self
-            self.__singeltonInit()
+            self.__singelton_init()
 
-    def getCWD(self):
-        return self.__CWD
+    def get_working_directory(self):
+        """returns current working directory"""
+        return self.working_directory
 
-    def getLogfilePath(self):
+    def get_logfile_path(self):
+        """returns file path"""
         filepath = self.__logfile_path
         return filepath
-
-    def setLogfileName(self, filename):
-        if isinstance(filename, str):
-            if (filename.endswith('.txt') or filename.endswith('.log')):
-                self.__logfile_path = os.path.join(self.__CWD, 'documentation', 'logfiles', filename)
-            else:
-                raise Exception('No valid Logfile ending (.txt or .log)')
-        else:
-            raise Exception('No valid Logfile name')
