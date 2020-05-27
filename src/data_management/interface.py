@@ -1,6 +1,6 @@
 """provides the interface for data_management"""
 
-from .parameter import Parameter
+from parameter import Parameter
 
 
 class DatasetInterface():
@@ -21,3 +21,17 @@ class DatasetInterface():
     def more_functions_tb_implemented(self):
         '''This method is an interface method for loading the data it is implemented inpreprocessing.py'''
         raise NotImplementedError
+
+
+class PreprocessDataInterface():
+
+    def __init__(self):
+        raise NotImplementedError
+
+    def setScalingingAlgo(self, algo):
+        raise NotImplementedError
+
+    def scaleData(self, data):
+        raise NotImplementedError
+
+    def 
