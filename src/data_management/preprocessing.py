@@ -1,6 +1,6 @@
 """everythin related to preprocessing - might be extended to a whole package if required"""
 
-from interface import PreprocessDataInterface
+from interface import PreprocessDataInterface # pylint: disable=import-error
 
 
 class DataPreprocessor(PreprocessDataInterface):
@@ -11,8 +11,10 @@ class DataPreprocessor(PreprocessDataInterface):
         print('Dataset is not implemented')
 
    #TODO implement
-    def setScalingingAlgo(self, algo):
+    def set_scalinging_algorithm(self, algo):
+        """these functions only serve the purpose of providing an example"""
         raise NotImplementedError
 
-    def scaleData(self, data):
+    def scale_data(self, data):
+        """feel free to replace them with something that actually makes sense"""
         raise NotImplementedError
