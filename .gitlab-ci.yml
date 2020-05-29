@@ -1,0 +1,21 @@
+stages:
+  - build
+  - test
+
+test-dev:
+  stage: test
+  image: python:3.8
+  script:
+    - export XDG_CACHE_HOME=/cache/pip
+    - apt update; apt install -y build-essential
+    - python3.8 -m venv venv
+    - ./venv/bin/pip install -r dependencies/requirements.txt
+    - ./venv/bin/python setup.py test --index-url ALL_DEPS_INSTALLED_BEFORE
+  coverage: '/\d+\%\s*$/'
+  artifacts:
+    paths:
+      - htmlcov
+    reports:
+      junit: report.xml
+  tags:
+    - docker

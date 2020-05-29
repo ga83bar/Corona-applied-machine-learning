@@ -5,6 +5,7 @@ documentation/plots/**
 
 init_report/project.pdf
 
+venv
 .vscode/
 __pycache__/
 *.log
@@ -12,5 +13,8 @@ __pycache__/
 plots/*
 models/*
 paper/*
+*.aux
+*.fdb_latexmk
+*.fls
+*.gz
 *.json
-
