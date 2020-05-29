@@ -2,7 +2,7 @@
 %=============================== DOCUMENT SETUP =================================
 %================================================================================
 
-\documentclass[lang=english,inputenc=utf8,fontsize=10pt]{ldvarticle}
+\documentclass[s=english,inputenc=utf8,fontsize=10pt]{ldvarticle}
 %PACKAGES
 
 \usepackage{parskip}
@@ -18,13 +18,13 @@
 \usepackage{lipsum}
 
 \definecolor{lightgray}{rgb}{0.75,0.75,0.75}
-
+% !TeX spellcheck = en_GB
 
 %================================================================================
 %================================= TITLE PAGE ===================================
 %================================================================================
 
-\title{Coronas impact on climate change via increase in internet traffic}
+\title{Coronas impact on climate change via increase in Internet traffic}
 \subtitle{Proposal}
 \author{Martin Schuck\\
 03683571
@@ -51,7 +51,7 @@ Maximilian Putz\\
 03682862
 \and
 Henrique Soares Frutuoso\\
-00000000
+03682137
 }
 
 \date{\today}
@@ -66,16 +66,7 @@ Henrique Soares Frutuoso\\
 
 \section*{Motivation}
 
-- corona \\
-- unbekannte auswirkungen \\
-- viel diskutierte positive effekte auf emissionen, aber wenig zu increase in emissionen \\
-- stark vermehrte nutzung von technik \\
-- co2 emissionen vergleichbar mit dem flugverkehr \\
-- 10\% increasing in a week due to corona because of : more meetings, more Netflix and youtube streaming also \\
-- In Germany, all Servers need about 10TWh its the same amount of energy consumed in Berlin \\
--> interessantes thema in unserer themendomäne
--> implikationen für zukünftiges arbeits- und konsumverhalten
-
+The Coronavirus pandemic and its consequences are the dominating topics in most of the recent discussions and research. Due to the sheer scale of this crisis, it is not at all clear what its impact on society, economy and our environment will be. There have been a number of reports on the positive effect on greenhouse gas emissions as well as air quality. However, the recommendation for social distancing has also lead to a surge in the use of virtual replacements and a rise in Internet traffic. The significant increase in emissions that can be expected from these activities has found less interest in the public so far. Nevertheless, the global emissions of the Internet are of relevant scales and comparable to the airline industry. Furthermore, with streaming and home office there is a trend towards higher data volumes consumed per person. Under normal circumstances, only the servers located in Germany alone use about the same energy as the whole city of Berlin. Because exploring this increase lies in the intersection of our area of expertise and the pressing matter of estimating the consequences of this pandemic, we deem this a very suitable topic to work on. It is also relevant because this increase in the use of digital technologies has long been predicted to happen for the coming years anyway, although not as fast as it is happening now.
 \vspace*{1cm}
 \hrule
 
@@ -83,60 +74,44 @@ Henrique Soares Frutuoso\\
 
 \section{Project Description}
 
-
-- More  and more CO2 emissions depending on Internet traffic. \\
-- Normally increasing traffic by 30\% a year \\
-- we want to predict future development \\
-- use ml models \\
-- different scenarios regarding homeoffice, energy mix
-
+During this project, we want use machine learning approaches to model the current and future greenhouse gas emissions due to Internet traffic in the context of the 2020 Corona pandemic. It is already known that the Internet continually increases in contributing to man made climate change. It is also known that web traffic grows by about 30\% on a yearly bases during normal times. Based on recent data about the growth induced by the pandemic, we want to quantify the irregular increase of this contribution to greenhouse gasses. We also want to make the model and its predictions accessible for users and add interaction possibilities.
 
 \section*{Research Question}
 
-
-- beschreibung von traffic herkunft (bzw beispiele) \\
-- inwiefern das treibhausgasemissionen beeinflusst \\
-"What will the impact of increased Internet Traffic due to Corona be on greenhouse gas emissions?"
+To concisely formulate our project task, we pose the following research question:
+What will the global quantitative impact of increased Internet traffic due to Corona be on greenhouse gas emissions?
 
 \section*{Goals}
 
-
-- fullfill research question with ml model\\
-- visualize results with a webinterface \\
-- make interface interactive so the user can run different scenarios with the model
-
+In the course of this project, we want to learn a model that predicts these greenhouse gas emissions from increased web traffic as accurately as possible. The predictions should be visually accessible with a web interface. Users should also be able to interact with the model by entering different scenarios such as whether there will be a second wave of infections in autumn 2020. The project is finished once the web environment is working, our model has been integrated and the our progress and achievements are documented by a video we intend to produce.
 
 \section*{Approaches}
 
-
-- data driven analysis \\
-- create ml model \\
-- data of data center energy consumption \\
-- internet traffic history \\
-- corona virus history 
+We approach our problem via data driven analysis. In the beginning of the project, we plan on collecting as much data as we can find on the energy consumption of data centres and Internet infrastructure as a whole. We will also try to gather information about the current greenhouse gas emissions for power generation as well as their historical development for individual countries. Combined with the data on web traffic and its increase due to COVID-19, we intend to train a variety of machine learning models to predict the increase in emissions during this pandemic. For future emission predictions, we will either rely on forecasts about the course of the pandemic, or try to generate these ourselves.
+For the web interface, we plan on using the Chart.js framework to create a visually appealing and interactive environment.
 
 \section{Work packages}
-
+To organize the project, we define the following work packages that closely follow the general process of creating a machine learning model. 
 \begin{itemize}
 	\item \textbf{Package 1: Data collection}
 		\begin{itemize}
 			\item \textbf{Data compilation:} Find sources, make accessible
-			\item \textbf{Data inspection:} assess quality, feature selection
+			\item \textbf{Data inspection:} Assess quality, feature selection
 		\end{itemize}
 	\item \textbf{Package 2: Data preprocessing}
 		\begin{itemize}
-			\item \textbf{Visualization:} gain insight on data, create data set
-			\item \textbf{Processing:} normalize, PCA, scaling, feature completion
+			\item \textbf{Visualization:} Gain insight on data, create data set
+			\item \textbf{Processing:} Normalize, PCA, scaling, feature completion
 		\end{itemize}
 	\item \textbf{Package 3: Model design}
 		\begin{itemize}
-			\item \textbf{Model selection:} implement different algorithms, compare approaches
+			\item \textbf{Model selection:} Implement different algorithms, compare approaches
 			\item \textbf{Model architecture:} Hyperparameter search, validation
-			\item \textbf{Testing:} seperate model tests
+			\item \textbf{Testing:} Seperate model tests
 		\end{itemize}
 	\item \textbf{Package 4: User webinterface}
 		\begin{itemize}
-			\item \textbf{Visualization:} choose framework, select design, implement
+			\item \textbf{Visualization:} Choose framework, select design, implement
 			\item \textbf{User interaction:} Choose different scenarios
 		\end{itemize}
 	\item \textbf{Package 5: Video creation}
@@ -147,20 +122,30 @@ Henrique Soares Frutuoso\\
 	\item \textbf{Package 6: Project management}
 		\begin{itemize}
 			\item \textbf{Communication:} Team coordination, document milestones
-			\item \textbf{Organization:} manage schedule, progress checking, weekly meetings
+			\item \textbf{Organization:} Manage schedule, progress checking, weekly meetings
 		\end{itemize}
 \end{itemize}
-
+Each group member will be assigned multiple, ideally non time conflicting packages in the next section.
 \newpage
 
 \section{Workload distribution}
 
-for data collection: each member gets a specific topic assigned to look for data sets \\
-- internet traffic (Maximilian Putz, Felix Montnacher)
-- energy consumption per country (Martin Schuck, Aladin Djuhera)
-- course of corona progression (Michael Brandner, Aron Endres)
-- electricity mix per country (Niklas Landerer, Alexander Griessel, Henrique Soares Frutuoso)
+We judge data collection to be one of the biggest working packages. However, without data, most of the other packages won't be able to start their work. For this reason, all team members are assigned to the data collection task. In order to avoid a missing sense of responsibility for this task, the research will be divided into subcategories for smaller groups of 2-3 members. Final data extraction will then be done by the data collection team.
+The subtopics are assigned as follows:
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{l|ccc} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+			\textbf{Subtopic} & Member 1 & Member 2 & Member 3\\
+			\hline
+			\textbf{Internet traffic} & Maximilian Putz & Felix Montnacher &\\
+			\textbf{Web energy consumption} & Martin Schuck & Aladin Djuhera & Henrique Soares Frutuoso\\
+			\textbf{Course of the corona progression} & Michael Brandner & Aron Endres &\\
+			\textbf{Electricity mix history} & Niklas Landerer & Alexander Griessel &\\
+		\end{tabular}
+	\end{center}
+\end{table}
 
+The other packages will be divided between the team members as follows. 
 \begin{center}
 	\begin{footnotesize}
 		\setlength{\arrayrulewidth}{1,05pt}
@@ -175,33 +160,27 @@ for data collection: each member gets a specific topic assigned to look for data
 			\hline	
 			\rowcolor{lightgray} Alexander Griessel & Project management, Data preprocessing, Software architecture \\
 			\hline
-			\rowcolor{lightgray} Aladin Djuhera & Data collection, Data preprocessing, Video \\
+			\rowcolor{lightgray} Aladin Djuhera & Data preprocessing, Video, Data collection \\
 			\hline
-			\rowcolor{lightgray} Niklas Landerer & Webinterface, Video, Data collection, Software architecture \\
+			\rowcolor{lightgray} Niklas Landerer & Web interface, Video, Software architecture \\
 			\hline
-			\rowcolor{lightgray} Felix Montnacher & Webinterface, Data collection \\
+			\rowcolor{lightgray} Felix Montnacher & Web interface, Data collection, Data preprocessing\\
 			\hline	
-			\rowcolor{lightgray} Aron Endres & Data preprocessing, Model design \\
+			\rowcolor{lightgray} Aron Endres & Data preprocessing, Model design, Video \\
 			\hline
-			\rowcolor{lightgray} Maximilian Putz & Webinterface, Data collection, Model design \\
+			\rowcolor{lightgray} Maximilian Putz & Web interface, Model design, Data collection \\
 			\hline
-			\rowcolor{lightgray} Henrique Soares Frutuoso & ???, ??? \\
+			\rowcolor{lightgray} Henrique Soares Frutuoso & Web interface, Data preprocessing, Model design \\
 			\hline
 		\end{tabular}
 	\end{footnotesize}
 \end{center}
-
+Changes to the planned schedule might of course occur and resources redistributed accordingly.
 \newpage
 
 \section{Time Table}
 
-
-- web development can start without data or model \\
-- data aquisition as well \\
-- model and pipeline have to be made sequentially \\
-- first three packages take longest probably \\
-- video makes most sense after project completion \\
-
+Data collection of course stands at the very beginning of the agenda. This is also required for the second milestone. Apart from defining interfaces the abstract process, data preprocessing can really only start once the data sets are acquired. The same goes for model design which needs the preprocessed data as input. Web development on the other hand can start independently from the model or any data and will therefore run in parallel with these packages. Due to the sequential timeline of the first three, we judge these as the most time consuming tasks. The video creation really only makes sense at the very end of the project when we know the content we can use. Management of course is needed throughout the whole project.
 
 \begin{center}
 \begin{footnotesize}
@@ -240,7 +219,7 @@ for data collection: each member gets a specific topic assigned to look for data
 
 \section{Risk Analysis}
 
-table erklären
+We identify the lack of data on the Corona pandemic and web electricity consumption as the biggest risk to our project. In case our data sets show a poor quality or essential data is missing for certain countries, we might need to limit our question to for example only western industrialized countries where we expect reliable data to be available. Furthermore, this pandemic produces highly atypical data with a very small sample size. This might lead to a poor model performance. In this case, we plan to further simplify our models and feature spaces. If everything else fails, we can only explain why our approaches did not produce useful predictions. We judge the other risks, although worth considering, as comparably manageable with sufficient commitment from each group member.
 
 \begin{center}
 	\begin{footnotesize}
@@ -250,15 +229,15 @@ table erklären
 			\textbf{Risk} & \textbf{Countermeasures} \\
 			\hline
 			\hline
-			\rowcolor{lightgray} Bad or missing data & adapt question \\
+			\rowcolor{lightgray} Bad or missing data & Adapt question \\
 			\hline
 			\rowcolor{lightgray} Bad model behavior & Simplify further, worst case: explain reason for failure \\
 			\hline	
-			\rowcolor{lightgray} Time constraints & reassignment of member responsibilities \\
+			\rowcolor{lightgray} Time constraints & Reassignment of member responsibilities \\
 			\hline
-			\rowcolor{lightgray} Hardware limitations during training & google colab and sufficient hardware from all members\\
+			\rowcolor{lightgray} Hardware limitations during training & Google Colab and sufficient hardware from all members\\
 			\hline
-			\rowcolor{lightgray} Difficulties with user interaction & restrict input possibilities \\
+			\rowcolor{lightgray} Difficulties with user interaction & Restrict input possibilities \\
 			\hline
 			\rowcolor{lightgray} Underperforming group members & Overperforming Nick \\
 			\hline	
