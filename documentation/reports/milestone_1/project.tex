@@ -66,7 +66,10 @@ Henrique Soares Frutuoso\\
 
 \section*{Motivation}
 
-The Coronavirus pandemic and its consequences are the dominating topics in most of the recent discussions and research. Due to the sheer scale of this crisis, it is not at all clear what its impact on society, economy and our environment will be. There have been a number of reports on the positive effect on greenhouse gas emissions as well as air quality. However, the recommendation for social distancing has also lead to a surge in the use of virtual replacements and a rise in Internet traffic. The significant increase in emissions that can be expected from these activities has found less interest in the public so far. Nevertheless, the global emissions of the Internet are of relevant scales and comparable to the airline industry. Furthermore, with streaming and home office there is a trend towards higher data volumes consumed per person. Under normal circumstances, only the servers located in Germany alone use about the same energy as the whole city of Berlin. Because exploring this increase lies in the intersection of our area of expertise and the pressing matter of estimating the consequences of this pandemic, we deem this a very suitable topic to work on. It is also relevant because this increase in the use of digital technologies has long been predicted to happen for the coming years anyway, although not as fast as it is happening now.
+Recently, the Covid-19 pandemic and its consequences have dominated public discourse and scientific research. It is yet unclear to what extent the sheer scale of the Covid-19 crisis will impact our society, our economy, and the environment. Covid-19 induced reductions to travel and manufacturing industries has led to a number of reports and studies discussing the positive effects of the pandemic on greenhouse gas emissions. However, the number of reports or studies discussing the negative effects of the pandemic on greenhouse gas emissions is lacking. Due to social distancing policies inducing an increased demand for virtual replacements of social and workplace communication, internet traffic has surged. This surge in internet traffic can be expected to increase internet-related emissions, which represent a relevant portion of total global emissions- nearly as high as emissions associated with the airline industry. 
+
+As people spend more time at home, they consume more internet-related entertainment in the form of streaming media, and spend more time and data on home-office related tasks. This has led to a trend in increasing data volumes by person. Under normal, pre-Covid circumstances, servers located in Germany required as much energy as the entire city of Berlin in a comparable time-span. Pressing public and policy-maker interest in estimating the consequences of the pandemic, as well as this group’s experience and interest in this area make this a suitable and relevant topic to work on. The results of the progress made on this topic are additionally applicable for the future, as the long predicted rise in digital technology volume will have an eventual effect on greenhouse gas emissions.
+
 \vspace*{1cm}
 \hrule
 
@@ -74,50 +77,51 @@ The Coronavirus pandemic and its consequences are the dominating topics in most 
 
 \section{Project Description}
 
-During this project, we want use machine learning approaches to model the current and future greenhouse gas emissions due to Internet traffic in the context of the 2020 Corona pandemic. It is already known that the Internet continually increases in contributing to man made climate change. It is also known that web traffic grows by about 30\% on a yearly bases during normal times. Based on recent data about the growth induced by the pandemic, we want to quantify the irregular increase of this contribution to greenhouse gasses. We also want to make the model and its predictions accessible for users and add interaction possibilities.
+The goal of this project is to model current and future greenhouse gas emissions arising from internet traffic in the context of the Covid-19 pandemic, utilizing a machine learning approach. Prior to the outbreak of Covid-19 it was already predicted that increased internet traffic would result in a continuing rise of greenhouse gas emissions. Pre-Covid-19, web traffic experienced a growth of roughly 30\% per annum. Based on recent growth data in internet traffic caused by the pandemic, we want to quantify the irregular rise of greenhouse gas contribution. The model and resulting predictions should be made accessible to a wider public, with the help of an interactive web interface.
 
 \section*{Research Question}
 
-To concisely formulate our project task, we pose the following research question:
-What will the global quantitative impact of increased Internet traffic due to Corona be on greenhouse gas emissions?
+To concisely formulate the scope of our project, we pose the following research question:
+
+What will the global quantitative impact of increased Internet traffic due to Corona on greenhouse gas emissions be?
 
 \section*{Goals}
 
-In the course of this project, we want to learn a model that predicts these greenhouse gas emissions from increased web traffic as accurately as possible. The predictions should be visually accessible with a web interface. Users should also be able to interact with the model by entering different scenarios such as whether there will be a second wave of infections in autumn 2020. The project is finished once the web environment is working, our model has been integrated and the our progress and achievements are documented by a video we intend to produce.
-
+Over the course of this project, we want to generate a model that predicts greenhouse gas emissions from increased internet traffic as accurately as possible. The predictions should be visually and interactively accessible with a web interface. Users should be able to interact with the model by entering various scenarios, such as differing curves for the progression of the pandemic. The project is finished once the generated model is integrated with a working web interface, and the progress and project achievements are video-documented.
 \section*{Approaches}
 
-We approach our problem via data driven analysis. In the beginning of the project, we plan on collecting as much data as we can find on the energy consumption of data centres and Internet infrastructure as a whole. We will also try to gather information about the current greenhouse gas emissions for power generation as well as their historical development for individual countries. Combined with the data on web traffic and its increase due to COVID-19, we intend to train a variety of machine learning models to predict the increase in emissions during this pandemic. For future emission predictions, we will either rely on forecasts about the course of the pandemic, or try to generate these ourselves.
+The problem is approached via data driven analysis. At the start of the project, we plan on collecting any data we can find on the energy consumption of data centres and internet infrastructure or internet traffic. We will also gather information on the current greenhouse gas emissions for power generation, as well as the historical development of greenhouse gas emissions for individual countries. Combined with the data on web traffic and its increase due to COVID-19, a variety of machine learning models will be trained to predict the increase in emissions during the pandemic. Future emission predictions will rely on forecasts about the course of the pandemic, or will be predictively generated based on past data.
 For the web interface, we plan on using the Chart.js framework to create a visually appealing and interactive environment.
 
+
 \section{Work packages}
-To organize the project, we define the following work packages that closely follow the general process of creating a machine learning model. 
+To organize the project, work packages are defined. The defined work packages closely follow the general process of machine learning projects. 
 \begin{itemize}
 	\item \textbf{Package 1: Data collection}
 		\begin{itemize}
-			\item \textbf{Data compilation:} Find sources, make accessible
-			\item \textbf{Data inspection:} Assess quality, feature selection
+			\item \textbf{Data compilation:} Find, download, and compile source data
+			\item \textbf{Data inspection:} Assess data quality for completeness and reliability
 		\end{itemize}
 	\item \textbf{Package 2: Data preprocessing}
 		\begin{itemize}
-			\item \textbf{Visualization:} Gain insight on data, create data set
-			\item \textbf{Processing:} Normalize, PCA, scaling, feature completion
+			\item \textbf{Visualization:} Gain insight on data, create final data set
+			\item \textbf{Processing:} Normalize, PCA, scaling, feature completion and selection
 		\end{itemize}
 	\item \textbf{Package 3: Model design}
 		\begin{itemize}
-			\item \textbf{Model selection:} Implement different algorithms, compare approaches
+			\item \textbf{Model selection:} Implement different models, compare approach success
 			\item \textbf{Model architecture:} Hyperparameter search, validation
 			\item \textbf{Testing:} Seperate model tests
 		\end{itemize}
 	\item \textbf{Package 4: User webinterface}
 		\begin{itemize}
 			\item \textbf{Visualization:} Choose framework, select design, implement
-			\item \textbf{User interaction:} Choose different scenarios
+			\item \textbf{User interaction:} Implement interactive interface, determine interaction limits
 		\end{itemize}
 	\item \textbf{Package 5: Video creation}
 		\begin{itemize}
 			\item \textbf{Planning:} Collect ideas, write storyboard
-			\item \textbf{Production:} Capture, cut, music
+			\item \textbf{Production:} Capture, cut, sound design
 		\end{itemize}
 	\item \textbf{Package 6: Project management}
 		\begin{itemize}
@@ -125,12 +129,12 @@ To organize the project, we define the following work packages that closely foll
 			\item \textbf{Organization:} Manage schedule, progress checking, weekly meetings
 		\end{itemize}
 \end{itemize}
-Each group member will be assigned multiple, ideally non time conflicting packages in the next section.
+Each group member will be assigned multiple and ideally non time-conflicting packages in the next section.
 \newpage
 
 \section{Workload distribution}
 
-We judge data collection to be one of the biggest working packages. However, without data, most of the other packages won't be able to start their work. For this reason, all team members are assigned to the data collection task. In order to avoid a missing sense of responsibility for this task, the research will be divided into subcategories for smaller groups of 2-3 members. Final data extraction will then be done by the data collection team.
+We judge data collection to be one of the largest working packages. However, without data, most of the other packages won't be able to progress far. For this reason, all team members are assigned to the data collection task. In order to avoid a missing sense of responsibility for this task, the research will be divided into subcategories for smaller groups of 2-3 members. Final data extraction will then be done by the data collection team.
 The subtopics are assigned as follows:
 \begin{table}[h]
 	\begin{center}
@@ -145,7 +149,7 @@ The subtopics are assigned as follows:
 	\end{center}
 \end{table}
 
-The other packages will be divided between the team members as follows. 
+The other packages will be divided between the team members as follows:
 \begin{center}
 	\begin{footnotesize}
 		\setlength{\arrayrulewidth}{1,05pt}
@@ -175,12 +179,12 @@ The other packages will be divided between the team members as follows.
 		\end{tabular}
 	\end{footnotesize}
 \end{center}
-Changes to the planned schedule might of course occur and resources redistributed accordingly.
+Changes to the planned schedule might occur and resources will be redistributed accordingly.
 \newpage
 
 \section{Time Table}
 
-Data collection of course stands at the very beginning of the agenda. This is also required for the second milestone. Apart from defining interfaces the abstract process, data preprocessing can really only start once the data sets are acquired. The same goes for model design which needs the preprocessed data as input. Web development on the other hand can start independently from the model or any data and will therefore run in parallel with these packages. Due to the sequential timeline of the first three, we judge these as the most time consuming tasks. The video creation really only makes sense at the very end of the project when we know the content we can use. Management of course is needed throughout the whole project.
+Naturually, data collection stands at the very beginning of the agenda. This is also required for the second milestone. Apart from defining interfaces, and abstract processes in each task, data preprocessing can only start once the data sets are acquired. The same is true for model design which relies on preprocessed data in order to benchmark performance. Web development can start independently from the model or the existence of sufficient data, and will therefore run in parallel with the previous work packages. Due to the sequential timeline of the first three work packages, we judge these work packages to be the most time-consuming tasks. Beginning video creation only makes sense at the end of the project. Proper management is needed throughout the whole project.
 
 \begin{center}
 \begin{footnotesize}
@@ -219,8 +223,7 @@ Data collection of course stands at the very beginning of the agenda. This is al
 
 \section{Risk Analysis}
 
-We identify the lack of data on the Corona pandemic and web electricity consumption as the biggest risk to our project. In case our data sets show a poor quality or essential data is missing for certain countries, we might need to limit our question to for example only western industrialized countries where we expect reliable data to be available. Furthermore, this pandemic produces highly atypical data with a very small sample size. This might lead to a poor model performance. In this case, we plan to further simplify our models and feature spaces. If everything else fails, we can only explain why our approaches did not produce useful predictions. We judge the other risks, although worth considering, as comparably manageable with sufficient commitment from each group member.
-
+The biggest risks to the project are potentially insufficient data on the Corona pandemic and web electricity consumption. In case data sets show a poor quality or missing essential data for certain countries, the question may need to be limited or modified. This can be done by, for example, limiting the project to industrialized western countries where reliable data is likely to be more readily available. Furthermore, the pandemic produces highly atypical data with a very small sample size. This might lead to poor model performance. In this case, we plan to further simplify our models and feature spaces. If everything else fails, we can only explain why our approaches did not produce useful predictions. We judge the other risks, although worth considering, as comparably manageable with sufficient commitment from each group member.
 \begin{center}
 	\begin{footnotesize}
 		\setlength{\arrayrulewidth}{1,05pt}
