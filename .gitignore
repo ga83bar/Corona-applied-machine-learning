@@ -3,7 +3,12 @@ documentation/latex/**
 documentation/logfiles**
 documentation/plots/**
 
-init_report/project.pdf
+documentation/reports/milestone_1/project.aux
+documentation/reports/milestone_1/project.dvi
+documentation/reports/milestone_1/project.log
+documentation/reports/milestone_1/project.out
+documentation/reports/milestone_1/project.pdf
+documentation/reports/milestone_1/project.synctex.gz
 
 venv
 .vscode/
