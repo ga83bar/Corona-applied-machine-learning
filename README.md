@@ -46,4 +46,4 @@ Modeling these differences is difficult because of a lack of data.
 
 ## __CURRENT PROGRESS__
 
-[Team session 09.06.20](/blob/master/documentation/meeting_transcripts/work_assignment_data.md)
+[Team session 09.06.20](/documentation/meeting_transcripts/work_assignment_data.md)
