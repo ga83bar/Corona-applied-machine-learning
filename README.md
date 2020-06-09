@@ -44,6 +44,6 @@ Countries that are currently unaffected may be unaffected because they differ in
 Unaffected countries tend to be non industrialized, and as such their CO2 emissions may react differently to a pandemic than those of an industrialized nation. 
 Modeling these differences is difficult because of a lack of data.  
 
-## __FUTURE__
+## __CURRENT PROGRESS__
 
-TODO: Future content
+[Team session 09.06.20](/blob/master/documentation/meeting_transcripts/work_assignment_data.md)
