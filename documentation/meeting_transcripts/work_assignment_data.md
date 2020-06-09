@@ -4,7 +4,7 @@
 
 ### infrastructure in general:
 * rise in IP traffic (nodes/data centers) -> increased datacenter power usage? (felix, max)
-* less cellular network usage (martin, niklas)
+* reduced cellular network usage (martin, niklas)
 
 ### increased service usage:
 
