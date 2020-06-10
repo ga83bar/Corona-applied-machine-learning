@@ -1,4 +1,4 @@
-# How does the corona crysis affect the online world?
+# How does the corona crisis affect the online world?
 
 ## work assignment *09.06.2020* until *16.06.20*
 
@@ -25,5 +25,3 @@
 **no geographical focus**
 
 **emphasis on modeling the past**
-
-besprechungsniederschrift
