@@ -36,6 +36,7 @@
 
 ### computer vision für CIX graphen
 * Ala + Felix + Mike
+* mal schauen: http://www.graphreader.com
 
 ### cloudflare de-cix anschreiben
 * Max
