@@ -25,3 +25,20 @@
 **no geographical focus**
 
 **emphasis on modeling the past**
+
+## work assignment *16.06.20* until *23.06.20*
+
+### de-cix and ix api
+* Aron + Max
+
+### social blade crawler
+* Martin + Nick
+
+### computer vision für CIX graphen
+* Ala + Felix + Mike
+
+### cloudflare de-cix anschreiben
+* Max
+
+### Amerikaner anschreiben
+* Alex
