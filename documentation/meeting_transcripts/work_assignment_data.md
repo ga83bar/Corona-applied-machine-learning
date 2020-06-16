@@ -41,5 +41,5 @@
 ### cloudflare de-cix anschreiben
 * Max
 
-### facebook, youtube und andere kleinere unternehmen anschreiben
+### facebook, youtube und andere kleine unternehmen anschreiben
 * Alex
