@@ -5,13 +5,15 @@ import time
 import logging
 import literals
 import random
+import glob
 
+logging.basicConfig(level=logging.DEBUG)
 
 class ContainerManager:
 
     def __init__(self, max_containers=20):
-        self.job_dir = os.path.join(os.path.abspath(""), 'docker\\jobs')
-        self.results_dir = os.path.join(os.path.abspath(""), 'docker\\results')
+        self.job_dir = os.path.join(os.path.abspath(""), 'docker/jobs')
+        self.results_dir = os.path.join(os.path.abspath(""), 'docker/results')
         self.finished = False
         self.max_containers = max_containers
         self.docker_client = docker.from_env()
@@ -26,27 +28,31 @@ class ContainerManager:
 
     def _reset(self):
         self.known_job_list = []
+        jobfiles = glob.glob(self.job_dir + '/*')
+        for f in jobfiles:
+            os.remove(f)
 
     def watch_jobs(self, job_type):
-        print('watch thread started')
+        logging.info('watch thread started')
         while not self.finished:
             job_files = [f for f in os.listdir(self.job_dir) if os.path.isfile(os.path.join(self.job_dir, f))]
             job_files = [f for f in job_files if f not in self.known_job_list]
             container_count = len(self.docker_client.containers.list())
-            print('container count: {}'.format(container_count))
+            logging.info('container count: {}'.format(container_count))
             while not container_count > self.max_containers and job_files:
                 file = job_files.pop()
                 self.known_job_list.append(file)
                 self.run(file, job_type)
             time.sleep(0.5)
-        self.finished = True
+            if not job_files and not self.docker_client.containers.list():
+                self.finished = True 
         self._reset()
 
     def run(self, job_file, job_type):
-        print('RUN CALLED')
-        print('JOB FILE: \n{}'.format(job_file))
+        logging.info('RUN CALLED')
+        logging.info('JOB FILE: \n{}'.format(job_file))
         self.docker_client.images.build(path="./docker/", tag="scrape")
-        logging.info(f"Image built.")
+        logging.info("Image built.")
         country = self._choose_a_country(literals.VPN_DESTINATIONS, ["europe"])
         self.docker_client.containers.run(image="scrape", auto_remove=True,
                                           environment=["JOBT=" + country, "IDX=" + job_file, "ACTIVATION_CODE=EH5VWAJ5HRM7T5XPSY392IB", "SERVER=ITALY"],

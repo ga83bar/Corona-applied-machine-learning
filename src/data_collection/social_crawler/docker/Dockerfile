@@ -18,10 +18,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN apt-get update && apt-get install python3-pip -y
 
-RUN pip3 install cloudscraper pandas
+RUN pip3 install cloudscraper pandas beautifulsoup4 js2xml requests
 
 COPY initializer.sh /tmp/initializer.sh
 COPY expressvpnActivate.sh /tmp/expressvpnActivate.sh
 COPY docker_scraper.py /tmp/docker_scraper.py
+COPY sb_scraper_docker.py /tmp/sb_scraper_docker.py
 
 ENTRYPOINT ["/bin/bash", "/tmp/initializer.sh"]
