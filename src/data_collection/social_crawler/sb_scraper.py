@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import js2xml
 import requests
+import random
 
 
 class SBScraper:
@@ -38,6 +39,7 @@ class SBScraper:
     @staticmethod
     def _get_url(url, proxies=None):
         scraper = cloudscraper.create_scraper()
+        # TODO: catch all network related errors.
         try:
             html_rsp = scraper.get(url, proxies=proxies).text
             return html_rsp
@@ -113,11 +115,15 @@ def main():
     sb_scraper = SBScraper()
     country_url_list = sb_scraper.get_all_country_urls()
     print(country_url_list)
-    country_dict = sb_scraper.get_channels_by_country(country_url_list[0])
-    print(country_dict)
-    data = sb_scraper.get_channel_data(country_dict['au'][0])
-    for key, val in data.items():
-        print(key, val)
+    for _ in range(10):
+        i = random.randint(0, len(country_url_list) - 1)
+        country_dict = sb_scraper.get_channels_by_country(country_url_list[i])
+        key = list(country_dict.keys())[0]
+        j = random.randint(0, len(country_dict[key]) - 1)
+        print(country_dict)
+        data = sb_scraper.get_channel_data(country_dict[key][j])
+        for key, val in data.items():
+            print(key, val)
     with open('C:\\tmp\\crawl\\channel.txt', 'w') as f:
         json.dump(data, f)
 
