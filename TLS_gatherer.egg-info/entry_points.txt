@@ -1,0 +1,3 @@
+[console_scripts]
+supervisor = src.garthering_supervisor:run_supervisor
+

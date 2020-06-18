@@ -1,85 +1,83 @@
-"""collects data"""
+""" 
+This class serves as the interface between the data selection CLI and the necessary
+data collection APIS.
+"""
+from datetime import timedelta as t_delta
+from requests import get
+import pandas as pd
+from matplotlib import plyplot as plot
+
+# Error Codes
+COUNTRY_REQUEST_FAILED = 'REQUEST STATUS {}: {}'
+INVALID_REQUEST = 'REQUEST INVALID'
+
+# Date constants
+DATE_SRT = '2019-04-01T00:00:00Z'
+DATE_END = '2020-05-01T00:00:00Z'
+
+# APIs
+API_COVID_COUNTRY = 'https://api.covid19api.com/live/country/{}/status/confirmed/date/{DATE_SRT}'
+API_COVID_WORLD = 'https://api.covid19api.com/world?from={DATE_SRT}&to={DATE_END}'
+
+# Top 60 Countries, Cases / 1M, Tot. Cases > 2000
+REGIONS = ['Europe', 'Asia', 'MiddleEast', 'Africa', 'SouthAmerica', 'NorthAmerica']
+EUROPE = ['Poland', 'Italy', 'Turkey', 'Finland', 'Denmark', 'Czechia', 'Romania', 'Norway',
+                'Serbia', 'Austria', 'Russia', 'Germany', 'Portugal', 'France', 'Switzerland',
+                'Netherlands', 'Luxembourg', 'Armenia', 'Spain','Belarus', 'Sweden', 'Belgium',
+                'Ireland', 'UK', 'England']
+ASIA = ['Singapore', 'China', 'Bangladesh']
+MIDDLEEAST = ['Kasakhstan', 'Israel', 'Quatar', 'Bahrain', 'Kuwait', 'Oman', 'UAE',
+                'Saudi Arabia', 'Iran']
+AFRICA = ['South Africa', 'Egypt', 'Ghana', 'Haiti', 'Senegal']
+SOUTHAMERICA = ['Chile', 'Peru', 'Brazil', 'Ecuador', 'Bolivia', 'Colombia']
+NORTHAMERICA = ['USA', 'Panama', 'Canada', 'Dominican Republic', 'Mexico', 'Honduras']
+
 
 class DataCollection():
-    '''This class is responsible for collecting raw data from div databases or API`s'''
+    """This class is responsible for collecting raw data from div databases or API`s"""
 
     def __init__(self):
         self.get_raw_data()
 
-    def get_raw_data(self):
-        '''Most important method of cls DataCollection returns the raw data as pandas frame'''
-        self.get_raw_covid_data
+    def get_all_data(self):
+        """ Returns all Data"""
 
-    def parse_data_from_online_source(self):
-        '''Most important method of cls DataCollection returns the raw data as pandas frame'''
+    def val_source_data(self):
+        """ Validate raw Data for Completeness"""
         raise NotImplementedError
 
-    def get_raw_covid_data(self, start_date, end_date):
-        '''
-        this function returns a the world wide, daily covid data:
-        NewConfirmed, TotalConfirmed, NewDeaths, TotalDeaths, NewRecovered
-        and TotalRecovered
-        '''
-        # FIXME
-        countries = ['south-africa', 'switzerland', 'germany']
-
-        # TODO convert date time object to this kind of format
-        date_start = '2019-04-01T00:00:00Z'
-        date_end = '2020-05-01T00:00:00Z'
-
-        # create a list containing date time objects from to
-        split_start = date_start.split('T')
-        start = datetime.datetime.strptime(split_start[0], "%Y-%m-%d")
-        split_end = date_end.split('T')
-        end = datetime.datetime.strptime(split_end[0], "%Y-%m-%d")
-
-        # select one of the requests:
-        # this is too much data to handle with my pc =(
-        # get_request = "https://api.covid19api.com/all"
-        get_request = 'https://api.covid19api.com/world?from={}&to={}'.format(
-            date_start, date_end)
-        # this request returns the data for a specific country
-        # get_request = []
-        # for single_country in countries:
-        #     get_request.append('https://api.covid19api.com/live/country/{}/status/confirmed/date/{}T13:13:30Z'.format(single_country, split_start[0]))
-        # df = self.covid_request(get_request[2])
+    def get_covid_data(self, countries, save_frame=False, do_plot=False):
+        """ Return only Covid Data"""
+        country_pd_frames = [self.covid_request(country) for country in countries]
+        self.handle_result(countries, save_frame, do_plot)
+        return country_pd_frames
 
     def get_date_list(self, start_date, end_date):
-        '''
-        Generates a list of dates containing all dates from start_date to end_date
-        '''
-        date_list = [start_date + datetime.timedelta(days=x) for x in range(0, (end_date - start_date).days)]
+        """ Gen list of all dates between start and end date"""
+        date_list = [DATE_SRT + t_delta(days=x) for x in range(0, (DATE_END - DATE_SRT).days)]
         return date_list
 
-    def covid_request(self, get_request, plot=True):
-        '''
-        Returns the data from the request as pandas frame.
-        May we should drop the data we do not need??
-        '''
-        covid_request = request.get(get_request)
-        # process the data if it was a valid request
+    def covid_request(self, country, do_plot=True):
+        """ Return Covid data for requested country"""
+        covid_request = get(API_COVID_COUNTRY.format(country))
         if covid_request.status_code == 200:
-            # print(request.text)
-            df = pd.read_json(covid_request.text)
-            print(df.head())
+            frame = pd.read_json(covid_request.text)
         else:
-            print('REQUEST STATUS : {}'.format(covid_request.status_code))
-            raise Exception('NO valid request!!')
+            print(COUNTRY_REQUEST_FAILED.format(country, covid_request.status_code))
+            raise Exception(INVALID_REQUEST)
+        return (country, frame)
 
-        self.handle_result(df, bool_plot=plot)
-        return df
-
-    def handle_result(self, dataframe, save_frame=False, bool_plot=True):
+    def handle_result(self, dataframes, save_frame=False, do_plot=False):
         '''
         Here we define what we want to do with the data
         '''
         if save_frame:
-            dataframe.to_pickle("./dummy.pkl")
+            [frame[1].to_pickle(f"./res/{frame[0]}/covid19_{frame[0]}.pkl") for frame in dataframes]
 
-        if bool_plot:
-            dataframe.plot(kind='line', title='Some title', x='Date', y=['Confirmed', 'Deaths', 'Active'])
-
-            plt.show()
+        if do_plot:
+            for frame in dataframes:
+                frame[1].plot(kind='line', title=frame[0], x='Date', y=['Confirmed', 'Deaths', 'Active'])
+                plot.show()
 
 
 data_collector = DataCollection()

@@ -1,0 +1,9 @@
+Metadata-Version: 1.2
+Name: TLS-gatherer
+Version: 0.0.0
+Summary: A docker based system gathering pcap traces
+Home-page: UNKNOWN
+License: Apache-2.0
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.7.0
