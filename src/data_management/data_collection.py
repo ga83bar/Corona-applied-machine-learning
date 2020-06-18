@@ -37,7 +37,7 @@ class DataCollection():
     """This class is responsible for collecting raw data from div databases or API`s"""
 
     def __init__(self):
-        self.get_covid_data(EUROPE, do_plot=True)
+        self.get_covid_data(EUROPE)
 
     def get_all_data(self):
         """ Returns all Data"""
@@ -49,7 +49,7 @@ class DataCollection():
     def get_covid_data(self, countries, save_frame=False, do_plot=False):
         """ Return only Covid Data"""
         country_pd_frames = [self.covid_request(country) for country in countries]
-        self.handle_result(countries, save_frame, do_plot)
+        self.handle_result(country_pd_frames, save_frame, do_plot)
         return country_pd_frames
 
     def get_date_list(self):
@@ -77,8 +77,9 @@ class DataCollection():
 
         if do_plot:
             for frame in dataframes:
-                frame[1].plot(kind='line', title=frame[0], x='Date', y=['Confirmed', 'Deaths', 'Active'])
-                plot.show()
+                if frame is not None:
+                    frame[1].plot(kind='line', title=frame[0], x='Date', y=['Confirmed', 'Deaths', 'Active'])
+                    plot.show()
 
 
 DATA_COLLECTOR = DataCollection()
