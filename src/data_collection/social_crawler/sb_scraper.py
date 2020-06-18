@@ -1,10 +1,8 @@
 import cloudscraper
 from bs4 import BeautifulSoup
-from utils import iso_3166_list
 import json
-from slimit import ast
-from slimit.parser import Parser
-from slimit.visitors import nodevisitor
+import js2xml
+import requests
 
 
 class SBScraper:
@@ -12,31 +10,52 @@ class SBScraper:
     def __init__(self):
         pass
 
-    @staticmethod
-    def get_all_country_urls(proxies=None):
-        scraper = cloudscraper.create_scraper()
+    def get_all_country_urls(self, proxies=None):
+        html_rsp = self._get_url('https://socialblade.com/youtube/top/100', proxies=proxies)
+        if not html_rsp:
+            return False
+        country_id_list = self._extract_country_ids(html_rsp)
         url_list = list()
-        for country_code in iso_3166_list:
-            url_list.append('https://socialblade.com/youtube/top/country/' + country_code)
+        for country_id in country_id_list:
+            url_list.append('https://socialblade.com/youtube/top/country/' + country_id)
         return url_list
 
     def get_channels_by_country(self, url, proxies=None):
-        iso_code = url.split('/')[-1]  # Get the iso code which is always last on sb country urls.
+        country_id = url.split('/')[-1]  # The country id iso code is always last on sb country urls.
         html_rsp = self._get_url(url, proxies=proxies)
+        if not html_rsp:
+            return False
         channel_list = self._extract_channels_from_sb_country(html_rsp)
-        # TODO: Catch scraper error and modify dict accordingly
-        return {iso_code: channel_list}
+        return {country_id: channel_list}
 
     def get_channel_data(self, url, proxies=None):
-        html_rsp = SBScraper._get_url(url, proxies=proxies)
-        viewer_data = self._extract_channel_data(html_rsp)
-        return viewer_data
+        html_rsp = self._get_url(url, proxies=proxies)
+        if not html_rsp:
+            return False
+        data_dict = self._extract_channel_data(html_rsp)
+        return data_dict
 
     @staticmethod
     def _get_url(url, proxies=None):
         scraper = cloudscraper.create_scraper()
-        html_rsp = scraper.get(url, proxies=proxies).text
-        return html_rsp
+        try:
+            html_rsp = scraper.get(url, proxies=proxies).text
+            return html_rsp
+        except requests.exceptions.ProxyError as e:
+            print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
+            print('Error message was: {}'.format(e))
+            return False
+
+    @staticmethod
+    def _extract_country_ids(html_rsp):
+        soup = BeautifulSoup(html_rsp, 'html.parser')
+        country_id_list = list()
+        for option in soup.find_all('option'):
+            c_id = option.get('value')
+            # Only country ids have len 2 on this website. Filter out non values to avoid errors.
+            if c_id is not None and len(c_id) == 2 and c_id not in country_id_list:
+                country_id_list.append(c_id)
+        return country_id_list
 
     @staticmethod
     def _extract_channels_from_sb_country(html_rsp):
@@ -48,35 +67,59 @@ class SBScraper:
                 channel_list.append('https://socialblade.com' + url + '/monthly')  # Get the detailed statistics page.
         return channel_list
 
-    @staticmethod
-    def _extract_channel_data(html_rsp):
+    def _extract_channel_data(self, html_rsp):
         soup = BeautifulSoup(html_rsp, 'html.parser')
-        script_list = list()
-        for script in soup.find_all('script'):
-            SBScraper._parse_js(script)
-            script_list.append(str(script))
-        print(script_list)
-        return str(soup)
+        script = self._filter_scripts(soup.find_all('script'))
+        data_dict = self._parse_js(script)
+        return data_dict
 
     @staticmethod
-    def _parse_js(script):
-        print(str(script))
-        return
-        parser = Parser()
-        tree = parser.parse(script)
-        fields = {getattr(node.left, 'value', ''): getattr(node.right, 'value', '')
-                  for node in nodevisitor.visit(tree)
-                  if isinstance(node, ast.Assign)}
+    def _filter_scripts(scripts):
+        for script in scripts:
+            if script.contents and len(script.contents[0]) > 1000:  # Target script is the only one with > 1000 chars.
+                return script.contents[0]
+
+    def _parse_js(self, script):
+        parsed = js2xml.parse(script)
+        # Find all highchart identifiers and their data in the xml'ified js tree.
+        categories = [c.xpath('./../../../../arguments/string')
+                      for c in parsed.xpath("//identifier[@name='Highcharts']")]
+        data = [d.xpath("./array/array/number/@value") for d in parsed.xpath("//property[@name='data']")]
+        # Remove empty arrays from bad relative paths, access string content, strip unnecessary parts.
+        categories = self._process_categories(categories)
+        data = self._process_data(data)
+        return dict(zip(categories, data))
+
+    @staticmethod
+    def _process_categories(categories):
+        categories = [c[0].text for c in categories if c and 'graph' in c[0].text]
+        for bad_str in ['graph-youtube-', '-container']:
+            categories = [c.replace(bad_str, '') for c in categories]
+        return categories
+
+    @staticmethod
+    def _process_data(data):
+        for array in data:
+            # Check if time is inverted. If so, reverse array while keeping the time/data structure.
+            if array[0] > array[2]:
+                buff_1 = array[::2][::-1]
+                buff_2 = array[1::2][::-1]
+                array[::2] = buff_1
+                array[1::2] = buff_2
+        return data
 
 
 def main():
     sb_scraper = SBScraper()
     country_url_list = sb_scraper.get_all_country_urls()
+    print(country_url_list)
     country_dict = sb_scraper.get_channels_by_country(country_url_list[0])
-    data = sb_scraper.get_channel_data(country_dict['af'][0])
+    print(country_dict)
+    data = sb_scraper.get_channel_data(country_dict['au'][0])
+    for key, val in data.items():
+        print(key, val)
     with open('C:\\tmp\\crawl\\channel.txt', 'w') as f:
         json.dump(data, f)
-    print(country_dict)
 
 
 if __name__ == '__main__':

@@ -53,10 +53,10 @@ def get_all_sb_country_urls():
 
 
 def main():
-
+    prox_rand = ProxyRandomizer()
     scraper = cloudscraper.create_scraper()
     country_url_list = get_all_sb_country_urls()
-    html_rsp = scraper.get(country_url_list[0]).text
+    html_rsp = scraper.get(country_url_list[0], proxies=prox_rand.random_proxy()).text
     soup = BeautifulSoup(html_rsp, 'html.parser')
     channel_list = list()
     for link in soup.find_all('a'):
