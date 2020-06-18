@@ -1,6 +1,7 @@
 import threading
 import os
 import docker
+import time
 
 
 class ContainerManager:
@@ -20,14 +21,15 @@ class ContainerManager:
     def watch_jobs(self):
         while not self.finished:
             job_files = [f for f in os.listdir(self.path) if os.path.isfile(os.path.join(self.path, f))]
+            job_files = [f for f in job_files if f not in self.known_job_list]
             container_count = len(self.docker_client.containers.list())
-            if not container_count > self.max_containers and job_files:
-                for file in job_files:
-                    if file.exists(file + 'dockerout'):
-                        delete
-            self.finished = True
+            while not container_count > self.max_containers and job_files:
+                file = job_files.pop()
+                self.known_job_list.append(file)
+                self.run(file)
+            time.sleep(0.5)
+        self.finished = True
         self._reset()
 
-    def run(self):
-
-
+    def run(self, job_file):
+        raise NotImplementedError
