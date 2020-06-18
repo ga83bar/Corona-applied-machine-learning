@@ -23,17 +23,17 @@ class ContainerManager:
         self.finished = False
         self.watch_thread = threading.Thread(target=self.watch_jobs, kwargs={"job_type": job_type}, daemon=True)
         self.watch_thread.start()
- 
 
     def _reset(self):
         self.known_job_list = []
 
-
     def watch_jobs(self, job_type):
+        print('watch thread started')
         while not self.finished:
             job_files = [f for f in os.listdir(self.job_dir) if os.path.isfile(os.path.join(self.job_dir, f))]
             job_files = [f for f in job_files if f not in self.known_job_list]
             container_count = len(self.docker_client.containers.list())
+            print('container count: {}'.format(container_count))
             while not container_count > self.max_containers and job_files:
                 file = job_files.pop()
                 self.known_job_list.append(file)
@@ -43,6 +43,8 @@ class ContainerManager:
         self._reset()
 
     def run(self, job_file, job_type):
+        print('RUN CALLED')
+        print('JOB FILE: \n{}'.format(job_file))
         self.docker_client.images.build(path="./docker/", tag="scrape")
         logging.info(f"Image built.")
         country = self._choose_a_country(literals.VPN_DESTINATIONS, ["europe"])

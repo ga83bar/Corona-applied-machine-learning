@@ -22,6 +22,6 @@ RUN pip3 install cloudscraper pandas
 
 COPY initializer.sh /tmp/initializer.sh
 COPY expressvpnActivate.sh /tmp/expressvpnActivate.sh
-COPY filecreator.py /tmp/filecreator.py
+COPY docker_scraper.py /tmp/docker_scraper.py
 
 ENTRYPOINT ["/bin/bash", "/tmp/initializer.sh"]

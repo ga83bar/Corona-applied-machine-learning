@@ -24,7 +24,7 @@ if __name__ == '__main__':
     country_url_list = sb_scraper.get_all_country_urls()
     assemble_work_packages(country_url_list, 'country')
 
-    container_manager.start_containers()
+    container_manager.start_containers(job_type='country')
     while not container_manager.finished:
         time.sleep(1)
 
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     channel_list = load_files(os.path.join(PATH, 'results'))
     assemble_work_packages(channel_list, 'channel')
 
-    container_manager.start_containers()
+    container_manager.start_containers(job_type='channel')
     while not container_manager.finished:
         time.sleep(1)
 

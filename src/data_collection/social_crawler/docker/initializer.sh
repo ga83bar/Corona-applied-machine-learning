@@ -6,5 +6,5 @@ cp /tmp/resolv.conf /etc/resolv.conf
 service expressvpn restart
 /usr/bin/expect /tmp/expressvpnActivate.sh
 expressvpn connect $SERVER
-python3 /tmp/filecreator.py
+python3 /tmp/docker_scraper.py
 exec "$@"
