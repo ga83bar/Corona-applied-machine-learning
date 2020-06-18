@@ -1,11 +1,11 @@
-""" 
+"""
 This class serves as the interface between the data selection CLI and the necessary
 data collection APIS.
 """
 from datetime import timedelta as t_delta
 from requests import get
 import pandas as pd
-from matplotlib import plyplot as plot
+from matplotlib import pyplot as plot
 
 # Error Codes
 COUNTRY_REQUEST_FAILED = 'REQUEST STATUS {}: {}'
@@ -16,18 +16,18 @@ DATE_SRT = '2019-04-01T00:00:00Z'
 DATE_END = '2020-05-01T00:00:00Z'
 
 # APIs
-API_COVID_COUNTRY = 'https://api.covid19api.com/live/country/{}/status/confirmed/date/{DATE_SRT}'
-API_COVID_WORLD = 'https://api.covid19api.com/world?from={DATE_SRT}&to={DATE_END}'
+API_COVID_COUNTRY = 'https://api.covid19api.com/live/country/{}/status/confirmed/date/' + DATE_SRT
+API_COVID_WORLD = 'https://api.covid19api.com/world?from=' + DATE_SRT + '&to=' + DATE_END
 
 # Top 60 Countries, Cases / 1M, Tot. Cases > 2000
 REGIONS = ['Europe', 'Asia', 'MiddleEast', 'Africa', 'SouthAmerica', 'NorthAmerica']
 EUROPE = ['Poland', 'Italy', 'Turkey', 'Finland', 'Denmark', 'Czechia', 'Romania', 'Norway',
-                'Serbia', 'Austria', 'Russia', 'Germany', 'Portugal', 'France', 'Switzerland',
-                'Netherlands', 'Luxembourg', 'Armenia', 'Spain','Belarus', 'Sweden', 'Belgium',
-                'Ireland', 'UK', 'England']
+          'Serbia', 'Austria', 'Russia', 'Germany', 'Portugal', 'France', 'Switzerland',
+          'Netherlands', 'Luxembourg', 'Armenia', 'Spain', 'Belarus', 'Sweden', 'Belgium',
+          'Ireland', 'UK', 'England']
 ASIA = ['Singapore', 'China', 'Bangladesh']
 MIDDLEEAST = ['Kasakhstan', 'Israel', 'Quatar', 'Bahrain', 'Kuwait', 'Oman', 'UAE',
-                'Saudi Arabia', 'Iran']
+              'Saudi Arabia', 'Iran']
 AFRICA = ['South Africa', 'Egypt', 'Ghana', 'Haiti', 'Senegal']
 SOUTHAMERICA = ['Chile', 'Peru', 'Brazil', 'Ecuador', 'Bolivia', 'Colombia']
 NORTHAMERICA = ['USA', 'Panama', 'Canada', 'Dominican Republic', 'Mexico', 'Honduras']
@@ -37,7 +37,7 @@ class DataCollection():
     """This class is responsible for collecting raw data from div databases or API`s"""
 
     def __init__(self):
-        self.get_raw_data()
+        self.get_covid_data(EUROPE, do_plot=True)
 
     def get_all_data(self):
         """ Returns all Data"""
@@ -52,12 +52,12 @@ class DataCollection():
         self.handle_result(countries, save_frame, do_plot)
         return country_pd_frames
 
-    def get_date_list(self, start_date, end_date):
+    def get_date_list(self):
         """ Gen list of all dates between start and end date"""
         date_list = [DATE_SRT + t_delta(days=x) for x in range(0, (DATE_END - DATE_SRT).days)]
         return date_list
 
-    def covid_request(self, country, do_plot=True):
+    def covid_request(self, country):
         """ Return Covid data for requested country"""
         covid_request = get(API_COVID_COUNTRY.format(country))
         if covid_request.status_code == 200:
@@ -65,14 +65,15 @@ class DataCollection():
         else:
             print(COUNTRY_REQUEST_FAILED.format(country, covid_request.status_code))
             raise Exception(INVALID_REQUEST)
-        return (country, frame)
+        return [country, frame]
 
     def handle_result(self, dataframes, save_frame=False, do_plot=False):
         '''
         Here we define what we want to do with the data
         '''
         if save_frame:
-            [frame[1].to_pickle(f"./res/{frame[0]}/covid19_{frame[0]}.pkl") for frame in dataframes]
+            for frame in dataframes:
+                _ = [frame[1].to_pickle(("./res/{}/covid19_{}.pkl").format(frame[0], frame[0])) for frame in dataframes]
 
         if do_plot:
             for frame in dataframes:
@@ -80,4 +81,4 @@ class DataCollection():
                 plot.show()
 
 
-data_collector = DataCollection()
+DATA_COLLECTOR = DataCollection()
