@@ -2,6 +2,7 @@
 This class serves as the interface between the data selection CLI and the necessary
 data collection APIS.
 """
+import os
 from datetime import timedelta as t_delta
 from requests import get
 import pandas as pd
@@ -46,7 +47,7 @@ class DataCollection():
         """ Validate raw Data for Completeness"""
         raise NotImplementedError
 
-    def get_covid_data(self, countries, save_frame=False, do_plot=False):
+    def get_covid_data(self, countries, save_frame=True, do_plot=False):
         """ Return only Covid Data"""
         country_pd_frames = [self.covid_request(country) for country in countries]
         self.handle_result(country_pd_frames, save_frame, do_plot)
@@ -73,11 +74,18 @@ class DataCollection():
         '''
         if save_frame:
             for frame in dataframes:
-                _ = [frame[1].to_pickle(("./res/{}/covid19_{}.pkl").format(frame[0], frame[0])) for frame in dataframes]
+                if not frame[1].empty:
+                    folder_path = ('./res/{}').format(frame[0])
+                    if os.path.exists(folder_path):
+                        pass
+                    else:
+                        os.mkdir(folder_path)
+
+                    _ = frame[1].to_pickle(("./res/{}/covid19_{}.pkl").format(frame[0], frame[0]))
 
         if do_plot:
             for frame in dataframes:
-                if frame is not None:
+                if not frame[1].empty:
                     frame[1].plot(kind='line', title=frame[0], x='Date', y=['Confirmed', 'Deaths', 'Active'])
                     plot.show()
 
