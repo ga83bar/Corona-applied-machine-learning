@@ -9,15 +9,15 @@
 import threading
 import os
 import time
-import random
 import glob
 import logging
+import requests
 import docker
 import literals
 
 
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 class ContainerManager:
@@ -27,7 +27,7 @@ class ContainerManager:
     these jobs. The container manager creates new containers as soon as containers are finished and also reassigns the
     jobs created upon failure of a container.
     """
-    def __init__(self, max_containers=20):
+    def __init__(self, max_containers=1):
         """!@brief Creates a new ContainerManager object.
 
             @warning Docker image is not built during initialization, builds only after calling the run method!
@@ -41,6 +41,9 @@ class ContainerManager:
         self.containers = []
         self.known_job_list = list()
         self.watch_thread = None
+        self.vpn_container = {}
+        self.job_container = {}
+        self.vpn_servers = self._query_server_list()
 
     def start_containers(self, job_type):
         """!@brief Starts the docker containers.
@@ -87,6 +90,8 @@ class ContainerManager:
                 file = job_files.pop()
                 self.known_job_list.append(file)
                 self.run(file, job_type)
+                return
+                ############## remove return
             time.sleep(0.5)
             if not job_files and not self.docker_client.containers.list():
                 self.finished = True 
@@ -101,22 +106,41 @@ class ContainerManager:
         @param job_file File name for the file in docker/jobs specifying the current job.
         @param job_type Defines the type of jobs currently present in the jobs folder. Either 'country' or 'channel'.
         """
-        self.docker_client.images.build(path="./docker/", tag="scrape")
-        logging.info("Image built.")
-        country = self._choose_a_country(literals.VPN_DESTINATIONS, ["Europe"])
-        self.docker_client.containers.run(image="scrape", auto_remove=True,
-                                          environment=["JOBT=" + country, "IDX=" + job_file,
-                                                       "ACTIVATION_CODE=EH5VWAJ5HRM7T5XPSY392IB", "SERVER=ITALY"],
-                                          detach=True, tty=True,
-                                          privileged=True,
-                                          devices=["/dev/net/tun"],
-                                          cap_add=["NET_RAW", "NET_ADMIN"],
-                                          volumes={self.job_path: {"bind": "/jobs/"},
-                                                   self.results_path: {"bind": "/results/"}}
-                                          )
+        job_id = job_file.split(".")[0]
 
+        server = self.vpn_servers.pop().split(".")[0]
+
+        logging.info(f"starting vpn server: {server}, job_id: {job_id}")
+
+        self.docker_client.images.build(path="./docker/", tag="vpn_hybrid")
+        logging.info(f"image built")
+
+
+        self.vpn_container[job_id] = self.docker_client.containers.run(image="vpn_hybrid",
+                                    environment=["JOBT=smart", "IDX=" + job_id, "USER=patrick.kalmbach@tum.de", "PASS=LA#kYs1#o:`Z", "CONNECT="+ server, "TECHNOLOGY=NordLynx"],
+                                    detach=True, tty=True, stdin_open=True,
+                                    sysctls={"net.ipv4.conf.all.rp_filter": 2},
+                                    privileged=True,
+                                    devices=["/dev/net/tun"],
+                                    name=job_id,
+                                    cap_add=["NET_ADMIN", "SYS_MODULE"],
+                                    volumes={self.job_path: {"bind": "/jobs/"}, self.results_path: {"bind": "/results/"}})
+
+        
+
+        logging.info("done")
+        
+        """
+        self.docker_client.images.build(path="./docker/", tag="jobcontainer")
+        logging.info("image built. starting python")
+        self.job_container[job_id] = self.docker_client.containers.run(image="jobcontainer", network="container:" + job_id,
+                                                                       environment=["JOBT=smart", "IDX=" + job_id],
+                                                                       detach=True, volumes={self.job_path: {"bind": "/jobs/"},
+                                                                       self.results_path: {"bind": "/results/"}}, name="jobs_"+job_id, tty=True, stdin_open=True)
+        """
+        logging.info("python started")
     @staticmethod
-    def _choose_a_country(vpn_destinations, continents):
+    def _query_server_list():
         """!@brief Selects a random country from predefined continents.
 
         Valid VPN destinations are defined in literals.
@@ -126,8 +150,10 @@ class ContainerManager:
         @param continents List of continents the country should lie in.
         @return Returns a single country name string.
         """
-        candidates = []
-        for continent in continents:
-            candidates.append(vpn_destinations[continent])
-        candidates = [item for sublist in candidates for item in sublist]
-        return random.choice(candidates)
+        req = requests.get("https://api.nordvpn.com/v1/servers?limit=" + str(literals.NUMBER_OF_SERVERS))
+        vpn_list = []
+
+        for server in req.json():
+            if server["load"] < 40:
+                vpn_list.append(server["hostname"])
+        return vpn_list

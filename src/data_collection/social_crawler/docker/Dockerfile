@@ -1,28 +1,40 @@
-FROM debian:buster-slim
-LABEL maintainer "n.landerer@tum.de"
+ARG ARCH=amd64
+FROM balenalib/${ARCH}-debian
 
 ENV JOBT jobtype
 ENV IDX file_id
-ENV ACTIVATION_CODE Code
-ENV LOCATION smart
 
-ARG APP=expressvpn_2.4.5.2-1_amd64.deb
+ARG NORDVPN_VERSION
+LABEL maintainer="Julio Gutierrez"
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates wget python3 expect iproute2 curl \
-    && rm -rf /var/lib/apt/lists/* \
-    && wget -q "https://download.expressvpn.xyz/clients/linux/${APP}" -O /tmp/${APP} \
-    && dpkg -i /tmp/${APP} \
-    && rm -rf /tmp/*.deb \
-    && apt-get purge -y --auto-remove wget
+HEALTHCHECK --interval=5m --timeout=20s --start-period=1m \
+  CMD if test $( curl -m 10 -s https://api.nordvpn.com/vpn/check/full | jq -r '.["status"]' ) = "Protected" ; then exit 0; else nordvpn connect ${CONNECT} ; exit $?; fi
 
-RUN apt-get update && apt-get install python3-pip -y
+#CROSSRUN [ "cross-build-start" ]
+RUN addgroup --system vpn && \
+    apt-get update && apt-get upgrade -y && \
+    apt-get install -y wget dpkg curl gnupg2 jq && \
+    wget -nc https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb && dpkg -i nordvpn-release_1.0.0_all.deb && \
+    apt-get update && apt-get install -yqq nordvpn${NORDVPN_VERSION:+=$NORDVPN_VERSION} || sed -i "s/init)/$(ps --no-headers -o comm 1))/" /var/lib/dpkg/info/nordvpn.postinst && \
+    update-alternatives --set iptables /usr/sbin/iptables-legacy && \
+    update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy && \
+    apt-get install -yqq && apt-get clean && \
+    rm -rf \
+        ./nordvpn* \
+        /tmp/* \
+        /var/lib/apt/lists/* \
+        /var/tmp/*
+#CROSSRUN [ "cross-build-end" ]
 
+RUN apt-get update && apt-get install python3 python3-pip -y
+RUN pip3 install --upgrade setuptools
 RUN pip3 install cloudscraper pandas beautifulsoup4 js2xml requests
-
-COPY initializer.sh /tmp/initializer.sh
-COPY expressvpnActivate.sh /tmp/expressvpnActivate.sh
 COPY docker_scraper.py /tmp/docker_scraper.py
 COPY sb_scraper_docker.py /tmp/sb_scraper_docker.py
 
-ENTRYPOINT ["/bin/bash", "/tmp/initializer.sh"]
+
+COPY start_vpn.sh /usr/bin
+CMD /usr/bin/start_vpn.sh
+
+
+RUN ["chmod", "+x", "/usr/bin/start_vpn.sh"]

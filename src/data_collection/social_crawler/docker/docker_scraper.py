@@ -1,13 +1,19 @@
 import json
 import os
-from sb_scraper_docker import SBScraper
+import requests
+#from sb_scraper_docker import SBScraper
+print("python script running #########################################################")
 
 scr_type = os.environ['JOBT']
-file_id = os.environ['IDX']
+file_id = os.environ['IDX']+".json"
+print(file_id)
+print(scr_type)
+
+ip = requests.get('https://api.ipify.org').text
 
 
 def read_jobs():
-    with open(os.path.join("/jobs", FILE_ID), 'r') as f:
+    with open(os.path.join("/jobs", file_id), 'r') as f:
         workload = json.load(f)
     return workload
 
@@ -19,14 +25,14 @@ def scrape_it():
 
 
 def write_results(results):
-    with open(os.path.join('/results', FILE_ID), 'w') as f:
+    with open(os.path.join('/results', file_id), 'w') as f:
         json.dump(results, f)
 
 
 if __name__ == "__main__":
     jobs = read_jobs()
     # scrape_it()
-    write_results(jobs)
+    write_results(ip)
 
 
 # read jobs from file

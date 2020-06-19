@@ -20,7 +20,7 @@ data gets assembled into a single data file.
 from sb_scraper import SBScraper
 import json
 import os
-import uuid
+import shortuuid
 from container_manager import ContainerManager
 import time
 
@@ -39,7 +39,7 @@ def assemble_work_packages(url_list):
     """
     work_packages = [url_list[x:x + PACKAGE_SIZE] for x in range(0, len(url_list), PACKAGE_SIZE)]
     for package in work_packages:
-        with open(os.path.join(PATH, 'jobs', str(uuid.uuid4()) + '.json'), 'w') as f:
+        with open(os.path.join(PATH, 'jobs', str(shortuuid.uuid()) + '.json'), 'w') as f:
             json.dump(package, f)
 
 
