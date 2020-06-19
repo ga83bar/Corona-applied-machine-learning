@@ -8,12 +8,13 @@
 
 import threading
 import os
-import docker
 import time
-import logging
-import literals
 import random
 import glob
+import logging
+import docker
+import literals
+
 
 
 logging.basicConfig(level=logging.DEBUG)
