@@ -6,6 +6,7 @@ from sb_scraper_docker import SBScraper
 JOB_TYPE = os.environ['JOBT']
 FILE_ID = os.environ['IDX']
 
+
 def read_jobs():
     with open(os.path.join("/jobs", FILE_ID), 'r') as f:
         workload = json.load(f)
@@ -24,7 +25,7 @@ def write_results(results):
 
 if __name__ == "__main__":
     jobs = read_jobs()
-    #scrape_it()
+    # scrape_it()
     write_results(jobs)
 
 
