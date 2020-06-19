@@ -1,4 +1,8 @@
-"""literals needed for social_crawler"""
+"""!@brief Literals used in the social crawler.
+@file Literals file. Stored tables for the crawler.
+@author Niklas Landerer
+@date 18.6.2020
+"""
 
 VPN_DESTINATIONS = {'europe': ['Albania', 'Andorra', 'Armenia', 'Austria', 'Azerbaijan', 'Belarus',
                                      'Belgium', 'Bosnia & Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus',
