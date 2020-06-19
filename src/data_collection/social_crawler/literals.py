@@ -17,3 +17,5 @@ VPN_DESTINATIONS = {'europe': ['Albania', 'Andorra', 'Armenia', 'Austria', 'Azer
                           'america':  ['Argentina', 'Bahamas', 'Brazil', 'Canada', 'Chile', 'Colombia',
                                        'Costa Rica', 'Ecuador', 'Guatemala', 'Mexico', 'Panama', 'Peru', 'United States', 'Uruguay', 'Venez']
                           }
+
+NUMBER_OF_SERVERS = 100

@@ -1,39 +1,16 @@
-"""reads jobs, processes jobs, writes results and failed jobs back to json"""
 import json
 import os
 import cloudscraper
+from requests import get
 
-from sb_scraper_docker import SBScraper
+ip = get('https://api.ipify.org').text
 
-JOB_TYPE = os.environ['JOBT']
-FILE_ID = os.environ['IDX']
+scr_type = os.environ['JOBT']
+file_id = os.environ['IDX']
 
-def read_jobs():
-    with open(os.path.join("/jobs", FILE_ID), 'r') as f:
-        workload = json.load(f)
-    return workload
+rsp = {'addr': ip, 'type': scr_type, 'file_id': file_id}
 
+docker_path = '/results'
 
-def scrape_it():
-    scraper = SBScraper()
-    scraper.get_channels_by_country()
-
-
-def write_results(results):
-    with open(os.path.join('/results', FILE_ID), 'w') as f:
-        json.dump(results, f)
-
-
-if __name__ == "__main__":
-    jobs = read_jobs()
-    #scrape_it()
-    write_results(jobs)
-
-
-# read jobs from file
-
-# do shit
-
-# write results
-
-# write failed jobs
+with open(os.path.join(docker_path, file_id), 'w') as f:
+    json.dump(rsp, f)
