@@ -16,7 +16,6 @@ import docker
 import literals
 
 
-
 logging.basicConfig(level=logging.INFO)
 
 
@@ -107,17 +106,17 @@ class ContainerManager:
         @param job_type Defines the type of jobs currently present in the jobs folder. Either 'country' or 'channel'.
         """
         job_id = job_file.split(".")[0]
-
+        if not self.vpn_servers:  # Refresh in case all servers are used.
+            self.vpn_servers = self._query_server_list()
         server = self.vpn_servers.pop().split(".")[0]
 
         logging.info(f"starting vpn server: {server}, job_id: {job_id}")
 
-        self.docker_client.images.build(path="./docker/", tag="vpn_hybrid")
+        self.docker_client.images.build(path=os.path.join(os.path.abspath(""), "docker"), tag="vpn_hybrid")
         logging.info(f"image built")
 
-
         self.vpn_container[job_id] = self.docker_client.containers.run(image="vpn_hybrid",
-                                    environment=["JOBT=smart", "IDX=" + job_id, "USER=patrick.kalmbach@tum.de", "PASS=LA#kYs1#o:`Z", "CONNECT="+ server, "TECHNOLOGY=NordLynx"],
+                                    environment=["JOBT=smart", "IDX=" + job_id, "USER=patrick.kalmbach@tum.de", "PASS=LA#kYs1#o:`Z", "CONNECT=" + server, "TECHNOLOGY=NordLynx"],
                                     detach=True, tty=True, stdin_open=True,
                                     sysctls={"net.ipv4.conf.all.rp_filter": 2},
                                     privileged=True,
@@ -126,19 +125,6 @@ class ContainerManager:
                                     cap_add=["NET_ADMIN", "SYS_MODULE"],
                                     volumes={self.job_path: {"bind": "/jobs/"}, self.results_path: {"bind": "/results/"}})
 
-        
-
-        logging.info("done")
-        
-        """
-        self.docker_client.images.build(path="./docker/", tag="jobcontainer")
-        logging.info("image built. starting python")
-        self.job_container[job_id] = self.docker_client.containers.run(image="jobcontainer", network="container:" + job_id,
-                                                                       environment=["JOBT=smart", "IDX=" + job_id],
-                                                                       detach=True, volumes={self.job_path: {"bind": "/jobs/"},
-                                                                       self.results_path: {"bind": "/results/"}}, name="jobs_"+job_id, tty=True, stdin_open=True)
-        """
-        logging.info("python started")
     @staticmethod
     def _query_server_list():
         """!@brief Selects a random country from predefined continents.

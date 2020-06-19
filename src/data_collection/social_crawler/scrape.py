@@ -43,6 +43,16 @@ def assemble_work_packages(url_list):
             json.dump(package, f)
 
 
+def load_country_results(path):
+    files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+    channel_url_list = list()
+    for file in files:
+        with open(os.path.join(path, file), 'r') as f:
+            country_dict = json.load(f)
+            channel_url_list.extend(list(country_dict.values())[0])
+    return channel_url_list
+
+
 if __name__ == '__main__':
     sb_scraper = SBScraper()
     container_manager = ContainerManager()
@@ -56,7 +66,7 @@ if __name__ == '__main__':
 
     print('Finished country packages. \n\nStarting channel packages...')
 
-    channel_list = load_files(os.path.join(PATH, 'results'))
+    channel_list = load_country_results(os.path.join(PATH, 'results'))
     assemble_work_packages(channel_list)
 
     container_manager.start_containers(job_type='channel')
