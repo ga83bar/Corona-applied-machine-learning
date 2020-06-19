@@ -12,5 +12,5 @@ requests
 docker
 cloudscraper
 js2xml
-beautifulsoup4
+bs4
 setuptools
