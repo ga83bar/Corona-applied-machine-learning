@@ -9,4 +9,9 @@ seaborn
 matplotlib
 scikit-learn
 requests
-asyncio
+docker
+cloudscraper
+js2xml
+beautifulsoup4
+docker-py
+setuptools

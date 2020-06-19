@@ -1,8 +1,6 @@
 """reads jobs, processes jobs, writes results and failed jobs back to json"""
 import json
 import os
-import cloudscraper
-
 from sb_scraper_docker import SBScraper
 
 JOB_TYPE = os.environ['JOBT']
