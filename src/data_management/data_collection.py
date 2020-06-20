@@ -43,7 +43,7 @@ class DataCollection():
     def get_all_data(self):
         """ Returns all Data"""
 
-    def val_source_data(self):
+    def __val_source_data(self):
         """ Validate raw Data for Completeness"""
         raise NotImplementedError
 
@@ -53,7 +53,7 @@ class DataCollection():
         self.handle_result(country_pd_frames, save_frame, do_plot)
         return country_pd_frames
 
-    def get_date_list(self):
+    def __get_date_list(self):
         """ Gen list of all dates between start and end date"""
         date_list = [DATE_SRT + t_delta(days=x) for x in range(0, (DATE_END - DATE_SRT).days)]
         return date_list
@@ -68,7 +68,7 @@ class DataCollection():
             raise Exception(INVALID_REQUEST)
         return [country, frame]
 
-    def handle_result(self, dataframes, save_frame=False, do_plot=False):
+    def __handle_result(self, dataframes, save_frame=False, do_plot=False):
         '''
         Here we define what we want to do with the data
         '''
