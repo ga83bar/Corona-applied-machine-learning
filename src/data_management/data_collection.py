@@ -43,22 +43,13 @@ class DataCollection():
     def get_all_data(self):
         """ Returns all Data"""
 
-    def __val_source_data(self):
-        """ Validate raw Data for Completeness"""
-        raise NotImplementedError
-
     def get_covid_data(self, countries, save_frame=True, do_plot=False):
         """ Return only Covid Data"""
         country_pd_frames = [self.covid_request(country) for country in countries]
         self.handle_result(country_pd_frames, save_frame, do_plot)
         return country_pd_frames
 
-    def __get_date_list(self):
-        """ Gen list of all dates between start and end date"""
-        date_list = [DATE_SRT + t_delta(days=x) for x in range(0, (DATE_END - DATE_SRT).days)]
-        return date_list
-
-    def covid_request(self, country):
+    def __covid_request(self, country):
         """ Return Covid data for requested country"""
         covid_request = get(API_COVID_COUNTRY.format(country))
         if covid_request.status_code == 200:
@@ -69,9 +60,7 @@ class DataCollection():
         return [country, frame]
 
     def __handle_result(self, dataframes, save_frame=False, do_plot=False):
-        '''
-        Here we define what we want to do with the data
-        '''
+        """ Save and/or plot data as per user defined"""
         if save_frame:
             for frame in dataframes:
                 if not frame[1].empty:
@@ -88,6 +77,15 @@ class DataCollection():
                 if not frame[1].empty:
                     frame[1].plot(kind='line', title=frame[0], x='Date', y=['Confirmed', 'Deaths', 'Active'])
                     plot.show()
+
+    def __val_source_data(self):
+        """ Validate raw Data for Completeness"""
+        raise NotImplementedError
+
+    def __get_date_list(self):
+        """ Gen list of all dates between start and end date"""
+        date_list = [DATE_SRT + t_delta(days=x) for x in range(0, (DATE_END - DATE_SRT).days)]
+        return date_list
 
 
 DATA_COLLECTOR = DataCollection()
