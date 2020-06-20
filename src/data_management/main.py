@@ -29,16 +29,24 @@ class DataShell(Cmd):
 
     # ----- All actionable commands -----
     def do_req_covid_data_all(self, arg):
-        """ Request and update current hardware_io information"""
+        """ Request all covid data"""
         self.loop.create_task()
 
     def do_req_covid_data_world(self, arg):
-        """ Request and update current hardware_io information"""
+        """ Request world covid data"""
         self.loop.create_task()
 
-    def do_req_covid_data_countries(self, arg):
-        """ Request and update current hardware_io information"""
-        self.loop.create_task()
+    def do_req_c_dat_c(self, arg):
+        """ Request covid data by country"""
+        countries = []
+        while True:
+            country = get_input("Next Country: ")
+            if country:
+                countries.append(country)
+            else:
+                break
+        save_frame, do_plot = self.man_data()
+        # self.loop.create_task(self.get_covid_data(countries))
 
     def do_terminate(self, arg):
         """ Stop the shell and exit:  terminate"""
@@ -50,6 +58,11 @@ class DataShell(Cmd):
         self.loop = loop
         super().cmdloop(loop)
 
+    def man_data(self):
+        save_frame = get_bool("Save Data y/n?")
+        do_plot = get_bool("Plot Data y/n?")
+        return save_frame, do_plot
+
     async def get_covid_data(self, countries, save_frame=False, do_plot=False):
         """ Access point for the async CLI to access COVID API """
         dc.get_covid_data(countries, save_frame, do_plot)
@@ -58,6 +71,21 @@ class DataShell(Cmd):
 
 def parse(arg):
     return tuple(map(int, arg.split()))
+
+
+def get_bool(string):
+    value = str(input(string))
+    if value == "y" or "yes":
+        return True
+    return False
+
+
+def get_input(string):
+    value = input(string)
+    print(value)
+    if value == "end" or value == "":
+        return False
+    return value
 
 
 if sys.platform == 'win32':

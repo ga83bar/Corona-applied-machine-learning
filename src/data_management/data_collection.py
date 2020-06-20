@@ -45,8 +45,8 @@ class DataCollection():
 
     def get_covid_data(self, countries, save_frame=True, do_plot=False):
         """ Return only Covid Data"""
-        country_pd_frames = [self.covid_request(country) for country in countries]
-        self.handle_result(country_pd_frames, save_frame, do_plot)
+        country_pd_frames = [self.__covid_request(country) for country in countries]
+        self.__handle_result(country_pd_frames, save_frame, do_plot)
         return country_pd_frames
 
     def __covid_request(self, country):
