@@ -68,7 +68,7 @@ class DataCollection():
                     if os.path.exists(folder_path):
                         pass
                     else:
-                        os.mkdir(folder_path)
+                        os.makedirs(folder_path)
 
                     _ = frame[1].to_pickle(("./res/{}/covid19_{}.pkl").format(frame[0], frame[0]))
 
