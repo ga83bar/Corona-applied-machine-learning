@@ -124,6 +124,11 @@ class ContainerManager:
                                     cap_add=["NET_ADMIN", "SYS_MODULE"],
                                     volumes={self.job_path: {"bind": "/jobs/"}, self.results_path: {"bind": "/results/"}})
 
+    def kill_container(self, container):
+        """kills a container.
+        """
+        self.docker_client.containers.kill(self.vpn_container[container])
+
     @staticmethod
     def _query_server_list():
         """!@brief Selects a random country from predefined continents.
