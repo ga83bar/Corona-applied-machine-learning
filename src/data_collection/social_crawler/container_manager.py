@@ -133,7 +133,14 @@ class ContainerManager:
             if os.path.isfile(os.path.join(self.job_path, 'failed_'+ key + '.json')) or os.path.isfile(os.path.join(self.results_path, key + '.json')):
                 old_keys.append(key)
         for key in old_keys:
+            self._kill_container(key)
             del(self.vpn_container[key])
+
+
+    def _kill_container(self, container):
+        """kills a container.
+        """
+        self.docker_client.containers.kill(self.vpn_container[container])
 
     @staticmethod
     def _query_server_list():
