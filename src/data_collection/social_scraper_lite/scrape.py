@@ -34,6 +34,13 @@ def load_channel_urls(package_id):
     return channel_url_list
 
 
+def load_quicksave(package_id):
+    work_package_path = os.path.join(PATH, 'work_packages', 'package_' + str(package_id))
+    with open(os.path.join(work_package_path, 'quicksave.json'), 'r') as f:
+        quicksave = json.load(f)
+    return quicksave
+
+
 def clear_dictionary(package_id):
     work_package_path = os.path.join(PATH, 'work_packages', 'package_' + str(package_id))
     for filename in ['results.json', 'quicksave.json']:
@@ -46,6 +53,7 @@ def show_dialogue(dialogue_nr=0):
         print('#####################################################')
         print('###  Warning: Script is supposed to run on Linux! ###')
         print('###     NordVPN has to be installed in advance    ###')
+        print('#####################################################')
         print('#####################################################')
         print('###         Starting Socialblade scraper.         ###')
         print('### Please enter the package you want to work on! ###')
@@ -60,7 +68,10 @@ def show_dialogue(dialogue_nr=0):
             print('#####################################################')
             print('###          Working on package number {:2d}         ###'.format(package_id))
             print('#####################################################')
-        return package_id
+        print('\n#####################################################')
+        print('###   Do you want to load a quicksave? (yes/no)   ###')
+        print('#####################################################')
+        return package_id, input().lower() == 'yes'
     if dialogue_nr == 1:
         print('##################################')
         print('###  Finished working package  ###')
@@ -98,9 +109,15 @@ def get_vpn_servers():
 
 
 if __name__ == '__main__':
-    package_id = show_dialogue(dialogue_nr=0)
+    package_id, load_save = show_dialogue(dialogue_nr=0)
+    if load_save:
+        save = load_quicksave(package_id)
+        channel_url_list = save['channel_url_list']
+        results = save['results']
+    else:
+        channel_url_list = load_channel_urls(package_id)
+        results = list()
     clear_dictionary(package_id)
-    channel_url_list = load_channel_urls(package_id)
 
     sb_scraper = SBScraper()
 
@@ -112,7 +129,6 @@ if __name__ == '__main__':
 
     tot_len = len(channel_url_list)
     it = 1
-    results = list()
     while channel_url_list:
         channel_url = channel_url_list.pop()
         channel_data = sb_scraper.get_channel_data(channel_url)

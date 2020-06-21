@@ -95,19 +95,15 @@ class SBScraper:
         @return Returns the website as a string in case of success or False in case of failure.
         """
         scraper = cloudscraper.create_scraper()
-        # TODO: catch all network related errors.
         try:
             html_rsp = scraper.get(url, proxies=proxies).text
+            if html_rsp is None:
+                print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
+                print('Web response had NoneType.')
+                return False
             return html_rsp
-        except requests.exceptions.ProxyError as e:
-            print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
-            print('Error message was: {}'.format(e))
-            return False
-        except requests.exceptions.ConnectionError as e:
-            print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
-            print('Error message was: {}'.format(e))
-            return False
-        except cloudscraper.exceptions.CloudflareCode1020 as e:
+        except (requests.exceptions.ProxyError, requests.exceptions.ConnectionError,
+        cloudscraper.exceptions.CloudflareCode1020) as e:
             print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
             print('Error message was: {}'.format(e))
             return False
@@ -222,7 +218,7 @@ class SBScraper:
         """
         for array in data:
             # Check if time is inverted. If so, reverse array while keeping the time/data structure.
-            if len(array) > 2 and array[0] > array[2]:
+            if array and len(array) > 2 and array[0] > array[2]:
                 buff_1 = array[::2][::-1]
                 buff_2 = array[1::2][::-1]
                 array[::2] = buff_1
