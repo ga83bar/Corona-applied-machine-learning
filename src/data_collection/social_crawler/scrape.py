@@ -17,15 +17,19 @@ data gets assembled into a single data file.
 """
 
 
-from sb_scraper import SBScraper
+
 import json
 import os
-import shortuuid
-from container_manager import ContainerManager
+
 import time
+import glob
+import logging
+import shortuuid
+from sb_scraper import SBScraper
+from container_manager import ContainerManager
 
 
-PACKAGE_SIZE = 50
+PACKAGE_SIZE = 20
 PATH = os.path.join(os.path.abspath(""), 'docker')
 
 
@@ -49,11 +53,24 @@ def load_country_results(path):
     for file in files:
         with open(os.path.join(path, file), 'r') as f:
             country_dict = json.load(f)
-            channel_url_list.extend(list(country_dict.values())[0])
+            for key in country_dict.keys():
+                channel_url_list.extend(country_dict[key])
     return channel_url_list
+
+def clear_dictionaries():
+    cl_path = os.path.join(PATH, "jobs")
+    job_files = glob.glob(cl_path + '/*')
+    
+    for f in job_files:
+        os.remove(f)
+    cl_path = os.path.join(PATH, "results")
+    r_files = glob.glob(cl_path + '/*')
+    for f in r_files:
+        os.remove(f)
 
 
 if __name__ == '__main__':
+    clear_dictionaries()
     sb_scraper = SBScraper()
     container_manager = ContainerManager()
 
@@ -64,7 +81,7 @@ if __name__ == '__main__':
     while not container_manager.finished:
         time.sleep(1)
 
-    print('Finished country packages. \n\nStarting channel packages...')
+    logging.info('Finished country packages. \n\nStarting channel packages...')
 
     channel_list = load_country_results(os.path.join(PATH, 'results'))
     assemble_work_packages(channel_list)
@@ -73,4 +90,4 @@ if __name__ == '__main__':
     while not container_manager.finished:
         time.sleep(1)
 
-    print('Finished data collection.')
+    logging.info('Finished data collection.')

@@ -1,7 +1,7 @@
 import json
 import os
 import requests
-#from sb_scraper_docker import SBScraper
+from sb_scraper_docker import SBScraper
 print("python script running #########################################################")
 
 scr_type = os.environ['JOBT']
@@ -17,11 +17,28 @@ def read_jobs():
         workload = json.load(f)
     return workload
 
+def write_failed_jobs(jobs):
+    with open(os.path.join("/jobs", "failed_"+file_id), 'w') as f:
+        json.dump(jobs, f)
+
+
 docker_path = '/results'
 
-def scrape_it():
+def scrape_country(job_list):
     scraper = SBScraper()
-    scraper.get_channels_by_country()
+    results = {}
+    for job in job_list:
+        result = scraper.get_channels_by_country(job)
+        results[list(result.keys())[0]] = list(result.values())[0]
+    return results
+
+def scrape_channel(job_list):
+    scraper = SBScraper()
+    results = {}
+    for job in job_list:
+        result = scraper.get_channel_data(job)
+        results[list(result.keys())[0]] = list(result.values())[0]
+    return results
 
 
 def write_results(results):
@@ -31,8 +48,18 @@ def write_results(results):
 
 if __name__ == "__main__":
     jobs = read_jobs()
-    # scrape_it()
-    write_results(ip)
+    try:
+        if scr_type == "country":
+            biggest_dict = scrape_country(jobs)
+        elif scr_type == "channel":
+            biggest_dict = scrape_channel(jobs)
+        write_results(biggest_dict)
+
+    except Exception as e:
+        write_failed_jobs(jobs)
+        print(e)
+
+    
 
 
 # read jobs from file
