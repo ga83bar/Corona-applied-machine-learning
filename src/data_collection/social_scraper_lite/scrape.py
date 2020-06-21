@@ -23,7 +23,6 @@ import math
 import time
 import glob
 import logging
-import shortuuid
 from sb_scraper import SBScraper
 from container_manager import ContainerManager
 
@@ -36,8 +35,6 @@ def assemble_work_packages(url_list, n_packages):
     work_packages = [url_list[x:x + package_size] for x in range(0, len(url_list), package_size)]
     for idx, package in enumerate(work_packages):
         os.makedirs(os.path.join(PATH))
-        with open(os.path.join(PATH, 'jobs', str(shortuuid.uuid()) + '.json'), 'w') as f:
-            json.dump(package, f)
 
 
 def load_country_results(path):
