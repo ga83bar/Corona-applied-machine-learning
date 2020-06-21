@@ -27,7 +27,7 @@ class ContainerManager:
     these jobs. The container manager creates new containers as soon as containers are finished and also reassigns the
     jobs created upon failure of a container.
     """
-    def __init__(self, max_containers=10):
+    def __init__(self, max_containers=3):
         """!@brief Creates a new ContainerManager object.
 
             @warning Docker image is not built during initialization, builds only after calling the run method!
@@ -140,7 +140,7 @@ class ContainerManager:
     def _kill_container(self, container):
         """kills a container.
         """
-        self.docker_client.containers.kill(self.vpn_container[container])
+        self.vpn_container[container].kill()
 
     @staticmethod
     def _query_server_list():
@@ -157,7 +157,8 @@ class ContainerManager:
         vpn_list = []
 
         for server in req.json():
-            if server["load"] < 40:
+            if server["load"] < 20:
                 vpn_list.append(server["hostname"])
         random.shuffle(vpn_list)
+        print('VPN Server list has length: {}'.format(vpn_list))
         return vpn_list
