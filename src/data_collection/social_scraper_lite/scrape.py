@@ -36,7 +36,7 @@ def load_channel_urls(package_id):
 
 def clear_dictionary(package_id):
     work_package_path = os.path.join(PATH, 'work_packages', 'package_' + str(package_id))
-    for filename in ['results.json', 'fails.json', 'quicksave.json']:
+    for filename in ['results.json', 'quicksave.json']:
         if os.path.isfile(os.path.join(work_package_path, filename)):
             os.remove(os.path.join(work_package_path, filename))
 
@@ -68,37 +68,32 @@ def show_dialogue(dialogue_nr=0):
         print('##################################')
 
 
-def write_fails(fails, package_id):
-    with open(os.path.join(PATH, 'work_packages', 'package_' + str(package_id), 'fails.json'), 'w') as f:
-        json.dump(fails, f)
-
-
 def write_results(results, package_id):
     with open(os.path.join(PATH, 'work_packages', 'package_' + str(package_id), 'results.json'), 'w') as f:
         json.dump(results, f)
 
 
-def quicksave(channel_url_list, results, failed_urls):
+def quicksave(channel_url_list, results):
     save = {'channel_url_list': channel_url_list,
-            'results': results,
-            'failed_urls': failed_urls}
+            'results': results}
     with open(os.path.join(PATH, 'work_packages', 'package_' + str(package_id), 'quicksave.json'), 'w') as f:
         json.dump(save, f)
 
 
-def change_vpn(server)
+def change_vpn(server):
+    os.system('nordvpn disconnect')
+    server = server.split('.')[0]
     os.system('nordvpn connect ' + server)
-    time.sleep(3)  # Wait for nordvpn to connect.
 
 
 def get_vpn_servers():
-    req = requests.get("https://api.nordvpn.com/v1/servers?limit=100")
+    req = requests.get("https://api.nordvpn.com/v1/servers?limit=10000")
     vpn_list = []
     for server in req.json():
-        if server["load"] < 40:
+        if server["load"] < 50:
             vpn_list.append(server["hostname"])
     random.shuffle(vpn_list)
-    print('VPN Server list has length: {}'.format(vpn_list))
+    print('VPN Server list has length: {}'.format(len(vpn_list)))
     return vpn_list
 
 
@@ -107,24 +102,22 @@ if __name__ == '__main__':
     clear_dictionary(package_id)
     channel_url_list = load_channel_urls(package_id)
 
-    failed_urls = list()
-    results = list()
-
     sb_scraper = SBScraper()
 
     # Connect to VPNs to avoid getting blocked by cloudflare.
+    vpn_server_list = get_vpn_servers()
     while not vpn_server_list:
         vpn_server_list = get_vpn_servers()
     change_vpn(vpn_server_list.pop())
 
     tot_len = len(channel_url_list)
     it = 1
+    results = list()
     while channel_url_list:
         channel_url = channel_url_list.pop()
         channel_data = sb_scraper.get_channel_data(channel_url)
         if not channel_data:
-            print('### WARNING: SCRAPING COUNTRY FAILED ###')
-            failed_urls.append(channel_url)
+            print('### WARNING: SCRAPING CHANNEL FAILED ###')
             channel_url_list.append(channel_url)
             while not vpn_server_list:
                 vpn_server_list = get_vpn_servers()
@@ -134,11 +127,9 @@ if __name__ == '__main__':
             results.append(channel_data)
         if not it % 50:
             print('Quicksaving...')
-            quicksave(channel_url_list, results, failed_urls)
+            quicksave(channel_url_list, results)
         it += 1
-        time.sleep(random.uniform(2., 3.))
-    if failed_urls:
-        write_fails(failed_urls, package_id=package_id)
+        # time.sleep(random.uniform(2., 3.))
     if results:
         write_results(results, package_id=package_id)
     show_dialogue(dialogue_nr=1)

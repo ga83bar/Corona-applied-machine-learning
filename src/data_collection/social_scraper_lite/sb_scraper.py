@@ -222,7 +222,7 @@ class SBScraper:
         """
         for array in data:
             # Check if time is inverted. If so, reverse array while keeping the time/data structure.
-            if array[0] > array[2]:
+            if len(array) > 2 and array[0] > array[2]:
                 buff_1 = array[::2][::-1]
                 buff_2 = array[1::2][::-1]
                 array[::2] = buff_1
