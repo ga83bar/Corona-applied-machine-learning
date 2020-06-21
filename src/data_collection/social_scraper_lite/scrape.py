@@ -16,71 +16,130 @@ data gets assembled into a single data file.
 @date 18.6.2020
 """
 
-
 import json
 import os
-import math
 import time
-import glob
-import logging
+import requests
+import random
 from sb_scraper import SBScraper
-from container_manager import ContainerManager
 
 
 PATH = os.path.join(os.path.abspath(""))
 
 
-def assemble_work_packages(url_list, n_packages):
-    package_size = math.ceil(len(url_list)/n_packages)
-    work_packages = [url_list[x:x + package_size] for x in range(0, len(url_list), package_size)]
-    for idx, package in enumerate(work_packages):
-        os.makedirs(os.path.join(PATH))
-
-
-def load_country_results(path):
-    files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
-    channel_url_list = list()
-    for file in files:
-        with open(os.path.join(path, file), 'r') as f:
-            country_dict = json.load(f)
-            for key in country_dict.keys():
-                channel_url_list.extend(country_dict[key])
+def load_channel_urls(package_id):
+    work_package_path = os.path.join(PATH, 'work_packages', 'package_' + str(package_id))
+    with open(os.path.join(work_package_path, 'job.json'), 'r') as f:
+        channel_url_list = json.load(f)
     return channel_url_list
 
 
-def clear_dictionaries():
-    cl_path = os.path.join(PATH, "work_packages")
-    job_files = glob.glob(cl_path + '/*')
-    
-    for f in job_files:
-        os.remove(f)
-    cl_path = os.path.join(PATH, "results")
-    r_files = glob.glob(cl_path + '/*')
-    for f in r_files:
-        os.remove(f)
+def clear_dictionary(package_id):
+    work_package_path = os.path.join(PATH, 'work_packages', 'package_' + str(package_id))
+    for filename in ['results.json', 'fails.json', 'quicksave.json']:
+        if os.path.isfile(os.path.join(work_package_path, filename)):
+            os.remove(os.path.join(work_package_path, filename))
+
+
+def show_dialogue(dialogue_nr=0):
+    if dialogue_nr == 0:
+        print('#####################################################')
+        print('###  Warning: Script is supposed to run on Linux! ###')
+        print('###     NordVPN has to be installed in advance    ###')
+        print('#####################################################')
+        print('###         Starting Socialblade scraper.         ###')
+        print('### Please enter the package you want to work on! ###')
+        print('#####################################################')
+        package_id = int(input())
+        while not os.path.isfile(os.path.join(PATH, 'work_packages', 'package_' + str(package_id), 'job.json')):
+            print('#####################################################')
+            print('###         Please enter a valid package!         ###')
+            print('#####################################################')
+            package_id = int(input())
+        else:
+            print('#####################################################')
+            print('###          Working on package number {:2d}         ###'.format(package_id))
+            print('#####################################################')
+        return package_id
+    if dialogue_nr == 1:
+        print('##################################')
+        print('###  Finished working package  ###')
+        print('### The scraper will now close ###')
+        print('##################################')
+
+
+def write_fails(fails, package_id):
+    with open(os.path.join(PATH, 'work_packages', 'package_' + str(package_id), 'fails.json'), 'w') as f:
+        json.dump(fails, f)
+
+
+def write_results(results, package_id):
+    with open(os.path.join(PATH, 'work_packages', 'package_' + str(package_id), 'results.json'), 'w') as f:
+        json.dump(results, f)
+
+
+def quicksave(channel_url_list, results, failed_urls):
+    save = {'channel_url_list': channel_url_list,
+            'results': results,
+            'failed_urls': failed_urls}
+    with open(os.path.join(PATH, 'work_packages', 'package_' + str(package_id), 'quicksave.json'), 'w') as f:
+        json.dump(save, f)
+
+
+def change_vpn(server)
+    os.system('nordvpn connect ' + server)
+    time.sleep(3)  # Wait for nordvpn to connect.
+
+
+def get_vpn_servers():
+    req = requests.get("https://api.nordvpn.com/v1/servers?limit=100")
+    vpn_list = []
+    for server in req.json():
+        if server["load"] < 40:
+            vpn_list.append(server["hostname"])
+    random.shuffle(vpn_list)
+    print('VPN Server list has length: {}'.format(vpn_list))
+    return vpn_list
 
 
 if __name__ == '__main__':
-    clear_dictionaries()
+    package_id = show_dialogue(dialogue_nr=0)
+    clear_dictionary(package_id)
+    channel_url_list = load_channel_urls(package_id)
+
+    failed_urls = list()
+    results = list()
+
     sb_scraper = SBScraper()
-    container_manager = ContainerManager()
 
-    country_url_list = sb_scraper.get_all_country_urls()
-    assemble_work_packages(country_url_list)
+    # Connect to VPNs to avoid getting blocked by cloudflare.
+    while not vpn_server_list:
+        vpn_server_list = get_vpn_servers()
+    change_vpn(vpn_server_list.pop())
 
-    container_manager.start_containers(job_type='country')
-    while not container_manager.finished:
-        time.sleep(1)
-
-    logging.info('Finished country packages. \n\nStarting channel packages...')
-
-    channel_list = load_country_results(os.path.join(PATH, 'results'))
-    logging.info(channel_list)
-    clear_dictionaries()
-    assemble_work_packages(channel_list)
-
-    container_manager.start_containers(job_type='channel')
-    while not container_manager.finished:
-        time.sleep(1)
-
-    logging.info('Finished data collection.')
+    tot_len = len(channel_url_list)
+    it = 1
+    while channel_url_list:
+        channel_url = channel_url_list.pop()
+        channel_data = sb_scraper.get_channel_data(channel_url)
+        if not channel_data:
+            print('### WARNING: SCRAPING COUNTRY FAILED ###')
+            failed_urls.append(channel_url)
+            channel_url_list.append(channel_url)
+            while not vpn_server_list:
+                vpn_server_list = get_vpn_servers()
+            change_vpn(vpn_server_list.pop())
+        else:
+            print('Scraping at {:.2f}%'.format((1 - len(channel_url_list)/tot_len)*100))
+            results.append(channel_data)
+        if not it % 50:
+            print('Quicksaving...')
+            quicksave(channel_url_list, results, failed_urls)
+        it += 1
+        time.sleep(random.uniform(2., 3.))
+    if failed_urls:
+        write_fails(failed_urls, package_id=package_id)
+    if results:
+        write_results(results, package_id=package_id)
+    show_dialogue(dialogue_nr=1)
+    time.sleep(1)

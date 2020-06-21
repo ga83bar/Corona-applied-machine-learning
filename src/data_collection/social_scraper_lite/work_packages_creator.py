@@ -22,6 +22,7 @@ import math
 import time
 import glob
 import random
+import shutil
 from sb_scraper import SBScraper
 
 
@@ -29,10 +30,15 @@ PATH = os.path.join(os.path.abspath(""))
 
 
 def assemble_work_packages(url_list, n_packages):
+    shutil.rmtree(os.path.join(PATH, 'work_packages'))
     package_size = math.ceil(len(url_list) / n_packages)
     work_packages = [url_list[x:x + package_size] for x in range(0, len(url_list), package_size)]
     for idx, package in enumerate(work_packages):
-        os.makedirs(os.path.join(PATH))
+        os.makedirs(os.path.join(PATH, 'work_packages', 'package_' + str(idx)))
+        with open(os.path.join(PATH, 'work_packages', 'package_' + str(idx), 'job.json'), 'w') as f:
+            json.dump(package, f)
+    with open(os.path.join(PATH, 'work_packages', 'results.json'), 'w') as f:  # Save the deleted results file again.
+        json.dump(url_list, f)
 
 
 def load_country_results(result_file='results.json'):
@@ -61,34 +67,40 @@ def clear_dictionaries():
 def show_dialogue(dialogue_nr=0):
     if dialogue_nr == 0:
         print('##########################################################')
-        print('###   YOU ARE ABOUT TO ASSEMBLE NEW WORKING PACKAGES   ###')
+        print('###   You are about to assemble new working packages   ###')
         print('### ALL DATA IN THE WORK PACKAGES FOLDERS WILL BE LOST ###')
-        print('###               PLEASE CONFIRM (yes/no)              ###')
-        print('##########################################################\n\n')
+        print('###               Please confirm! (yes/no)             ###')
+        print('##########################################################')
         rsp = (input().lower() == 'yes')
         if rsp:
-            print('##########################################################')
-            print('###                    CONFIRMED                       ###')
+            print('\n##########################################################')
+            print('###                    Confirmed                       ###')
             print('##########################################################')
         else:
-            print('##########################################################')
-            print('###                     ABORTED                        ###')
+            print('\n##########################################################')
+            print('###                     Aborted                        ###')
             print('##########################################################')
         return rsp
     if dialogue_nr == 1:
         print('########################################')
-        print('###      FINISHED COUNTRY SCAPE      ###')
-        print('###  CREATE NEW PACKAGES (yes/no)?   ###')
+        print('###      Finished country scrape     ###')
+        print('###  Create new packages (yes/no)?   ###')
         print('########################################')
         rsp = (input().lower() == 'yes')
         if rsp:
-            print('##########################################################')
-            print('###                    CONFIRMED                       ###')
+            print('\n##########################################################')
+            print('###                    Confirmed                       ###')
             print('##########################################################')
         else:
+            print('\n##########################################################')
+            print('###                     Aborted                        ###')
             print('##########################################################')
-            print('###                     ABORTED                        ###')
-            print('##########################################################')
+        return rsp
+    if dialogue_nr == 2:
+        print('##################################################################')
+        print('### Enter the number of working packages do you want to create ###')
+        print('##################################################################')
+        rsp = int(input())
         return rsp
 
 
@@ -130,6 +142,6 @@ if __name__ == '__main__':
     confirm = show_dialogue(dialogue_nr=1)
     if confirm:
         channel_urls = load_country_results()
-        print(channel_urls)
-        print(len(channel_urls))
-    print('Working packages assembled')
+        n_packages = show_dialogue(dialogue_nr=2)
+        assemble_work_packages(channel_urls, n_packages=n_packages)
+        print('Working packages assembled.')
