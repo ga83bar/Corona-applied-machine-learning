@@ -57,6 +57,7 @@ def load_country_results(path):
                 channel_url_list.extend(country_dict[key])
     return channel_url_list
 
+
 def clear_dictionaries():
     cl_path = os.path.join(PATH, "jobs")
     job_files = glob.glob(cl_path + '/*')
@@ -84,6 +85,8 @@ if __name__ == '__main__':
     logging.info('Finished country packages. \n\nStarting channel packages...')
 
     channel_list = load_country_results(os.path.join(PATH, 'results'))
+    logging.info(channel_list)
+    clear_dictionaries()
     assemble_work_packages(channel_list)
 
     container_manager.start_containers(job_type='channel')

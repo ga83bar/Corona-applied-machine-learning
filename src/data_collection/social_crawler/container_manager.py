@@ -27,7 +27,7 @@ class ContainerManager:
     these jobs. The container manager creates new containers as soon as containers are finished and also reassigns the
     jobs created upon failure of a container.
     """
-    def __init__(self, max_containers=1):
+    def __init__(self, max_containers=10):
         """!@brief Creates a new ContainerManager object.
 
             @warning Docker image is not built during initialization, builds only after calling the run method!
@@ -83,13 +83,16 @@ class ContainerManager:
         while not self.finished:
             job_files = [f for f in os.listdir(self.job_path) if os.path.isfile(os.path.join(self.job_path, f))]
             job_files = [f for f in job_files if f not in self.known_job_list]
+            logging.info(len(job_files))
             container_count = len(self.vpn_container)
             logging.info('container count: {}'.format(container_count))
-            while len(self.vpn_container) <= self.max_containers and job_files:
+            while len(self.vpn_container) < self.max_containers and job_files:
                 file = job_files.pop()
                 self.known_job_list.append(file)
                 self.run(file, job_type)
+                time.sleep(0.1)
             time.sleep(0.5)
+            self._check_container_status()
             if not job_files and not self.vpn_container: #todo fixxx
                 self.finished = True
         self._reset()
@@ -123,6 +126,14 @@ class ContainerManager:
                                     name=job_id,
                                     cap_add=["NET_ADMIN", "SYS_MODULE"],
                                     volumes={self.job_path: {"bind": "/jobs/"}, self.results_path: {"bind": "/results/"}})
+
+    def _check_container_status(self):
+        old_keys = list()
+        for key in self.vpn_container.keys():
+            if os.path.isfile(os.path.join(self.job_path, 'failed_'+ key + '.json')) or os.path.isfile(os.path.join(self.results_path, key + '.json')):
+                old_keys.append(key)
+        for key in old_keys:
+            del(self.vpn_container[key])
 
     @staticmethod
     def _query_server_list():

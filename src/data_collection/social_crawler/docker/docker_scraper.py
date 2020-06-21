@@ -1,5 +1,7 @@
 import json
 import os
+import time
+import random
 import requests
 from sb_scraper_docker import SBScraper
 print("python script running #########################################################")
@@ -30,6 +32,7 @@ def scrape_country(job_list):
     for job in job_list:
         result = scraper.get_channels_by_country(job)
         results[list(result.keys())[0]] = list(result.values())[0]
+        time.sleep(random.uniform(0.5, 1))  # Sleep so Cloudflare is not suspicious.
     return results
 
 def scrape_channel(job_list):
@@ -53,6 +56,8 @@ if __name__ == "__main__":
             biggest_dict = scrape_country(jobs)
         elif scr_type == "channel":
             biggest_dict = scrape_channel(jobs)
+        print('######## RESULT WAS: #########')
+        print(biggest_dict)
         write_results(biggest_dict)
 
     except Exception as e:
