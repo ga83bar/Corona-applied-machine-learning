@@ -1,9 +1,7 @@
 """!@brief SBScaper class. Scrapes Socialblade for Youtube data.
 @details To get as much data as possible from the website, we look for the top 250 channels in more than 240 available
 country options for a total of > 60.000 channels. These channels are the most successful ones in their respective
-country, so we assume the data to be representative of the countries Youtube activities. This file is necessary as a
-duplicate to the one provided in the social_crawler folder as docker needs it within its own file space. This file
-should always mirror the contents in src/data_collection/social_crawler/sb_scraper.py!
+country, so we assume the data to be representative of the countries Youtube activities.
 @file SBScaper class file.
 @author Martin Schuck
 @date 18.6.2020
@@ -99,12 +97,13 @@ class SBScraper:
         scraper = cloudscraper.create_scraper()
         try:
             html_rsp = scraper.get(url, proxies=proxies).text
+            if html_rsp is None:
+                print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
+                print('Web response had NoneType.')
+                return False
             return html_rsp
-        except requests.exceptions.ProxyError as e:
-            print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
-            print('Error message was: {}'.format(e))
-            return False
-        except requests.exceptions.ConnectionError as e:
+        except (requests.exceptions.ProxyError, requests.exceptions.ConnectionError,
+        cloudscraper.exceptions.CloudflareCode1020) as e:
             print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
             print('Error message was: {}'.format(e))
             return False
@@ -164,15 +163,19 @@ class SBScraper:
     def _filter_scripts(scripts):
         """!@brief Filters the data script from a list of js scripts.
 
-        A somewhat heuristic search. Only the data script exceeds a length of 1000 chars. Therefore uses the first
-        script larger than 1000 chars.
+        A somewhat heuristic search. Data scripts are the largest script on the website. Therefore we filter the largest script and return it.
 
         @param scripts A list of scripts scraped from the website with BeautifulSoup.
         @return Returns the first script larger than 1000 chars.
         """
-        for script in scripts:
-            if script.contents and len(script.contents[0]) > 1000:  # Target script is the only one with > 1000 chars.
-                return script.contents[0]
+        top_idx = 0
+        top_len = 0
+        for idx, script in enumerate(scripts):
+            if script.contents:  # Emptry script entries have no contents attribute.
+                if len(script.contents[0]) > top_len:
+                    top_idx = idx
+                    top_len = len(script.contents[0])
+        return scripts[top_idx].contents[0] if scripts[top_idx].contents else False
 
     def _parse_js(self, script):
         """!@brief Parses a javascript for charts data.
@@ -183,15 +186,19 @@ class SBScraper:
         @param script A javascript as string.
         @return Returns a dictionary of all processed chart descriptions and their data.
         """
-        parsed = js2xml.parse(script)
-        # Find all highchart identifiers and their data in the xml'ified js tree.
-        categories = [c.xpath('./../../../../arguments/string')
-                      for c in parsed.xpath("//identifier[@name='Highcharts']")]
-        data = [d.xpath("./array/array/number/@value") for d in parsed.xpath("//property[@name='data']")]
-        # Remove empty arrays from bad relative paths, access string content, strip unnecessary parts.
-        categories = self._process_categories(categories)
-        data = self._process_data(data)
-        return dict(zip(categories, data))
+        if script:
+            parsed = js2xml.parse(script)
+            # Find all highchart identifiers and their data in the xml'ified js tree.
+            categories = [c.xpath('./../../../../arguments/string')
+                        for c in parsed.xpath("//identifier[@name='Highcharts']")]
+            data = [d.xpath("./array/array/number/@value") for d in parsed.xpath("//property[@name='data']")]
+            # Remove empty arrays from bad relative paths, access string content, strip unnecessary parts.
+            categories = self._process_categories(categories)
+            data = self._process_data(data)
+            return dict(zip(categories, data))
+        else:
+            print('INVALID DATA RETURNED')
+            return {'Invalid_data': [0, 0]}
 
     @staticmethod
     def _process_categories(categories):
@@ -219,7 +226,7 @@ class SBScraper:
         """
         for array in data:
             # Check if time is inverted. If so, reverse array while keeping the time/data structure.
-            if array[0] > array[2]:
+            if array and len(array) > 2 and array[0] > array[2]:
                 buff_1 = array[::2][::-1]
                 buff_2 = array[1::2][::-1]
                 array[::2] = buff_1

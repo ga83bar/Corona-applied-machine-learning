@@ -103,6 +103,10 @@ class SBScraper:
             print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
             print('Error message was: {}'.format(e))
             return False
+        except requests.exceptions.ConnectionError as e:
+            print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
+            print('Error message was: {}'.format(e))
+            return False
 
     @staticmethod
     def _extract_country_ids(html_rsp):
