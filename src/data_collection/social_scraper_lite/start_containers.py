@@ -1,4 +1,4 @@
-"""quick and dirty script that builds and runs docker containers for social scraper"""
+"""quick and dirty script that builds and runs docker containers for social scraper"""s
 import argparse
 import os
 import docker
@@ -11,7 +11,7 @@ def build_container(client):
 
 def start_container(client, work_package, load_saved):
     """uses docker client to start a container"""
-    package_path = os.path.join(PATH, "/work_packages")
+    package_path = os.path.join(PATH, "work_packages")
 
     client.containers.run(image="scrape_light",
                           environment=["PACKAGE="+work_package, "LOAD_FILE=" + load_saved, "USERNAME=patrick.kalmbach@tum.de", "PASSWORD=LA#kYs1#o:`Z"],
@@ -26,12 +26,13 @@ def start_container(client, work_package, load_saved):
 if __name__ == "__main__":
     client = docker.from_env()
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--package_id', default=0, help='provide id for the work package, comma separated if multiple')
+    parser.add_argument('--package_id', default='0', help='provide id for the work package, comma separated if multiple')
     parser.add_argument('--load_quicksave', default="no", help='wanna load? -> yes/no')
     args = parser.parse_args()
     packages = args.package_id.split(",")
-
+    print('Building docker container. This might take a while.')
     build_container(client)
-
+    print('Build finished. Starting containers.')
     for package in packages:
-        start_container(client, int(package), args.load_quicksave)
+        start_container(client, package, args.load_quicksave)
+    print('Containers are running. Check Docker Dashboard for container health. Script will exit.')

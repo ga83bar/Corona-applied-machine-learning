@@ -31,3 +31,4 @@ RUN service nordvpn start
 
 RUN chmod +x /usr/bin/init.sh
 ENTRYPOINT ["/bin/bash", "/usr/bin/init.sh"]
+

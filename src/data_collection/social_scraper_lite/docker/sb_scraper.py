@@ -77,14 +77,10 @@ class SBScraper:
         or 6. Might also have only 2 keys.
         @warning Won't work anymore if Socialblade changes the structure of its js nodes!
         """
-        print('starting get url {}'.format(url))
         html_rsp = self._get_url(url, proxies=proxies)
-        print('got url')
         if not html_rsp:
             return False
-        print('starting extraction')
         data_dict = self._extract_channel_data(html_rsp)
-        print('extracted')
         return data_dict
 
     @staticmethod
@@ -158,11 +154,8 @@ class SBScraper:
         @param html_rsp The website's HTML as a string.
         @return Returns the dictionary with processed table names as keys and the data as values.
         """
-        print('getting soup')
         soup = BeautifulSoup(html_rsp, 'html.parser')
-        print('filter scripts')
         script = self._filter_scripts(soup.find_all('script'))
-        print('parse js')
         data_dict = self._parse_js(script)
         return data_dict
 
@@ -179,8 +172,10 @@ class SBScraper:
         top_len = 0
         for idx, script in enumerate(scripts):
             if script.contents:  # Emptry script entries have no contents attribute.
-                top_idx = idx if len(script.contents[0]) > top_len else top_idx
-        return scripts[top_idx].contents[0]
+                if len(script.contents[0]) > top_len:
+                    top_idx = idx
+                    top_len = len(script.contents[0])
+        return scripts[top_idx].contents[0] if scripts[top_idx].contents else False
 
     def _parse_js(self, script):
         """!@brief Parses a javascript for charts data.
@@ -191,15 +186,19 @@ class SBScraper:
         @param script A javascript as string.
         @return Returns a dictionary of all processed chart descriptions and their data.
         """
-        parsed = js2xml.parse(script)
-        # Find all highchart identifiers and their data in the xml'ified js tree.
-        categories = [c.xpath('./../../../../arguments/string')
-                      for c in parsed.xpath("//identifier[@name='Highcharts']")]
-        data = [d.xpath("./array/array/number/@value") for d in parsed.xpath("//property[@name='data']")]
-        # Remove empty arrays from bad relative paths, access string content, strip unnecessary parts.
-        categories = self._process_categories(categories)
-        data = self._process_data(data)
-        return dict(zip(categories, data))
+        if script:
+            parsed = js2xml.parse(script)
+            # Find all highchart identifiers and their data in the xml'ified js tree.
+            categories = [c.xpath('./../../../../arguments/string')
+                        for c in parsed.xpath("//identifier[@name='Highcharts']")]
+            data = [d.xpath("./array/array/number/@value") for d in parsed.xpath("//property[@name='data']")]
+            # Remove empty arrays from bad relative paths, access string content, strip unnecessary parts.
+            categories = self._process_categories(categories)
+            data = self._process_data(data)
+            return dict(zip(categories, data))
+        else:
+            print('INVALID DATA RETURNED')
+            return {'Invalid_data': [0, 0]}
 
     @staticmethod
     def _process_categories(categories):
