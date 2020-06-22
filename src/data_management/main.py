@@ -29,15 +29,16 @@ class DataShell(Cmd):
             print(task)
 
     # ----- All actionable commands -----
-    def do_req_covid_data_all(self, arg):
+    def do_req_covid_all(self, arg):
         """ Request all covid data"""
-        self.loop.create_task()
+        save_frame, do_plot = self.man_data()
+        self.loop.create_task(self.get_covid_data_all( save_frame, do_plot))
 
-    def do_req_covid_data_world(self, arg):
+    def do_req_covid_world(self, arg):
         """ Request world covid data"""
         self.loop.create_task()
 
-    def do_req_c_dat_c(self, arg):
+    def do_req_covid_country(self, arg):
         """ Request covid data by country"""
         countries = []
         while True:

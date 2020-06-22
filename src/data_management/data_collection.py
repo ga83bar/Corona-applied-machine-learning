@@ -49,6 +49,16 @@ class DataCollection():
         self.__handle_result(country_pd_frames, save_frame, do_plot)
         return country_pd_frames
 
+    def get_covid_data_all(self, save_frame=True, do_plot=False):
+        """ Generate list of all countries and fetch data"""
+        countries = EUROPE + ASIA + MIDDLEEAST + AFRICA + NORTHAMERICA + SOUTHAMERICA + NORTHAMERICA
+        country_pd_frames = [self.__covid_request(country) for country in countries]
+        self.__handle_result(country_pd_frames, save_frame, do_plot)
+        return country_pd_frames
+
+    def get_covid_data_world(self, save_frame=True, do_plot=False):
+        """ Fetch worldwide corona totals"""
+
     def __covid_request(self, country):
         """ Return Covid data for requested country"""
         covid_request = get(API_COVID_COUNTRY.format(country))
