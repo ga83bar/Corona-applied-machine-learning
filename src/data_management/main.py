@@ -18,6 +18,7 @@ PROMPT = '---ENTER COMMAND: '
 class DataShell(Cmd):
     def __init__(self, mode, intro, prompt):
         super().__init__(mode=mode)
+        self.data_c = dc()
         self.intro = 'Welcome to the Data Management Shell.   Type help or ? to list commands.\n'
         self.prompt = '---ENTER COMMAND: '
         self.loop = None
@@ -46,7 +47,7 @@ class DataShell(Cmd):
             else:
                 break
         save_frame, do_plot = self.man_data()
-        # self.loop.create_task(self.get_covid_data(countries))
+        self.loop.create_task(self.get_covid_data(countries, save_frame, do_plot))
 
     def do_terminate(self, arg):
         """ Stop the shell and exit:  terminate"""
@@ -65,7 +66,8 @@ class DataShell(Cmd):
 
     async def get_covid_data(self, countries, save_frame=False, do_plot=False):
         """ Access point for the async CLI to access COVID API """
-        dc.get_covid_data(countries, save_frame, do_plot)
+        print(countries)
+        self.data_c.get_covid_data(countries, save_frame, do_plot)
         return True
 
 
@@ -84,6 +86,7 @@ def get_input(string):
     value = input(string)
     print(value)
     if value == "end" or value == "":
+        print(False)
         return False
     return value
 
