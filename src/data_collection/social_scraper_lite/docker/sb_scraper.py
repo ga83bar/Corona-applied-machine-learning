@@ -77,10 +77,14 @@ class SBScraper:
         or 6. Might also have only 2 keys.
         @warning Won't work anymore if Socialblade changes the structure of its js nodes!
         """
+        print('starting get url {}'.format(url))
         html_rsp = self._get_url(url, proxies=proxies)
+        print('got url')
         if not html_rsp:
             return False
+        print('starting extraction')
         data_dict = self._extract_channel_data(html_rsp)
+        print('extracted')
         return data_dict
 
     @staticmethod
@@ -154,8 +158,11 @@ class SBScraper:
         @param html_rsp The website's HTML as a string.
         @return Returns the dictionary with processed table names as keys and the data as values.
         """
+        print('getting soup')
         soup = BeautifulSoup(html_rsp, 'html.parser')
+        print('filter scripts')
         script = self._filter_scripts(soup.find_all('script'))
+        print('parse js')
         data_dict = self._parse_js(script)
         return data_dict
 
@@ -163,15 +170,17 @@ class SBScraper:
     def _filter_scripts(scripts):
         """!@brief Filters the data script from a list of js scripts.
 
-        A somewhat heuristic search. Only the data script exceeds a length of 1000 chars. Therefore uses the first
-        script larger than 1000 chars.
+        A somewhat heuristic search. Data scripts are the largest script on the website. Therefore we filter the largest script and return it.
 
         @param scripts A list of scripts scraped from the website with BeautifulSoup.
         @return Returns the first script larger than 1000 chars.
         """
-        for script in scripts:
-            if script.contents and len(script.contents[0]) > 1000:  # Target script is the only one with > 1000 chars.
-                return script.contents[0]
+        top_idx = 0
+        top_len = 0
+        for idx, script in enumerate(scripts):
+            if script.contents:  # Emptry script entries have no contents attribute.
+                top_idx = idx if len(script.contents[0]) > top_len else top_idx
+        return scripts[top_idx].contents[0]
 
     def _parse_js(self, script):
         """!@brief Parses a javascript for charts data.
