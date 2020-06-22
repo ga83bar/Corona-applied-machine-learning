@@ -130,12 +130,17 @@ if __name__ == '__main__':
 
     tot_len = len(channel_url_list)
     it = 1
+    err_cnt = 0
     while channel_url_list:
         channel_url = channel_url_list.pop()
         channel_data = sb_scraper.get_channel_data(channel_url)
         if not channel_data:
             print('### WARNING: SCRAPING CHANNEL FAILED ###')
-            channel_url_list.append(channel_url)
+            err_cnt += 1
+            if err_cnt < 20:  # In case a bad link was passed, give up parsing after 20 tries.
+                channel_url_list.append(channel_url)
+            else:
+                err_cnt = 0
             while not vpn_server_list:
                 vpn_server_list = get_vpn_servers()
             change_vpn(vpn_server_list.pop())

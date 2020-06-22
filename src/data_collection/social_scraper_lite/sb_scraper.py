@@ -103,7 +103,8 @@ class SBScraper:
                 return False
             return html_rsp
         except (requests.exceptions.ProxyError, requests.exceptions.ConnectionError,
-        cloudscraper.exceptions.CloudflareCode1020, cloudscraper.exceptions.CloudflareChallengeError) as e:
+                cloudscraper.exceptions.CloudflareCode1020, cloudscraper.exceptions.CloudflareChallengeError,
+                cloudscraper.exceptions.CloudflareIUAMError) as e:
             print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
             print('Error message was: {}'.format(e))
             return False
