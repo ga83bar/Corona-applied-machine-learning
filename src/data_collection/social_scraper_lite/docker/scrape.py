@@ -24,7 +24,7 @@ import random
 from sb_scraper import SBScraper
 
 
-PATH = "/work_packages"
+PATH = "/"
 package_id = os.environ['PACKAGE']
 load_save = True if os.environ['LOAD_FILE'] == "yes" else False
 
