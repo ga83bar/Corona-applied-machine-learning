@@ -32,11 +32,12 @@ class DataShell(Cmd):
     def do_req_covid_all(self, arg):
         """ Request all covid data"""
         save_frame, do_plot = self.man_data()
-        self.loop.create_task(self.get_covid_data_all( save_frame, do_plot))
+        self.loop.create_task(self.get_covid_data_all(save_frame, do_plot))
 
     def do_req_covid_world(self, arg):
         """ Request world covid data"""
-        self.loop.create_task()
+        save_frame, do_plot = self.man_data()
+        self.loop.create_task(self.get_covid_data_world(save_frame, do_plot))
 
     def do_req_covid_country(self, arg):
         """ Request covid data by country"""
@@ -66,9 +67,18 @@ class DataShell(Cmd):
         return save_frame, do_plot
 
     async def get_covid_data(self, countries, save_frame=False, do_plot=False):
-        """ Access point for the async CLI to access COVID API """
-        print(countries)
+        """ Access point for the async CLI to access country COVID API """
         self.data_c.get_covid_data(countries, save_frame, do_plot)
+        return True
+
+    async def get_covid_data_all(self, save_frame=False, do_plot=False):
+        """ Access point for the async CLI to access COVID API """
+        self.data_c.get_covid_data_all(save_frame, do_plot)
+        return True
+
+    async def get_covid_data_world(self, save_frame=False, do_plot=False):
+        """ Access point for the async CLI to access World COVID API """
+        self.data_c.get_covid_data_world(save_frame, do_plot)
         return True
 
 

@@ -58,6 +58,10 @@ class DataCollection():
 
     def get_covid_data_world(self, save_frame=True, do_plot=False):
         """ Fetch worldwide corona totals"""
+        world = ["world"]
+        world_pd_frame = [self.__covid_request(world)]
+        self.__handle_result(world_pd_frame, save_frame, do_plot)
+        return world_pd_frame
 
     def __covid_request(self, country):
         """ Return Covid data for requested country"""
