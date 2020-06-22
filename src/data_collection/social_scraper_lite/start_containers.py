@@ -1,4 +1,5 @@
-"""quick and dirty script that builds and runs docker containers for social scraper"""
+"""quick and dirty script that builds and runs docker containers for social scraper
+"""
 import argparse
 import os
 import docker
