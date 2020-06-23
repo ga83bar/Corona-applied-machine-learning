@@ -102,9 +102,8 @@ class SBScraper:
                 print('Web response had NoneType.')
                 return False
             return html_rsp
-        except (requests.exceptions.ProxyError, requests.exceptions.ConnectionError,
-                cloudscraper.exceptions.CloudflareCode1020, cloudscraper.exceptions.CloudflareChallengeError,
-                cloudscraper.exceptions.CloudflareIUAMError) as e:
+        #  General exception as there are lots of errors with cloudflare, but every exception is handled via the return values.
+        except Exception as e:
             print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
             print('Error message was: {}'.format(e))
             return False
