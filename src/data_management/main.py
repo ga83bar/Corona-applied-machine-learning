@@ -3,12 +3,10 @@ This class serves as the CLI access point to intelligently and selectively acces
 The User has the option of receiving ONLY the data they want, or all the data available to them.
 Please use this CLI as the starting point for all future expansions.
 """
-
-
 import asyncio
 import sys
-from asynccmd import Cmd
-from data_collection import DataCollection as dc
+from asynccmd import Cmd                            # pylint: disable=import-error
+from data_collection import DataCollection as dc    # pylint: disable=import-error
 
 # Prompts
 INTRO = 'Welcome to the Data Management Shell.   Type help or ? to list commands.\n'
@@ -16,30 +14,31 @@ PROMPT = '---ENTER COMMAND: '
 
 
 class DataShell(Cmd):
-    def __init__(self, mode, intro, prompt):
+    """ Entry Point Command Shell"""
+    def __init__(self, mode, intro=INTRO, prompt=PROMPT):
         super().__init__(mode=mode)
         self.data_c = dc()
-        self.intro = 'Welcome to the Data Management Shell.   Type help or ? to list commands.\n'
-        self.prompt = '---ENTER COMMAND: '
+        self.intro = intro
+        self.prompt = prompt
         self.loop = None
 
-    def do_tasks(self, arg):
-        """"""
+    def do_tasks(self):
+        """ Control Loop"""
         for task in asyncio.Task.all_tasks(loop=self.loop):
             print(task)
 
     # ----- All actionable commands -----
-    def do_req_covid_all(self, arg):
+    def do_req_covid_all(self):
         """ Request all covid data"""
-        save_frame, do_plot = self.man_data()
+        save_frame, do_plot = man_data()
         self.loop.create_task(self.get_covid_data_all(save_frame, do_plot))
 
-    def do_req_covid_world(self, arg):
+    def do_req_covid_world(self):
         """ Request world covid data"""
-        save_frame, do_plot = self.man_data()
+        save_frame, do_plot = man_data()
         self.loop.create_task(self.get_covid_data_world(save_frame, do_plot))
 
-    def do_req_covid_country(self, arg):
+    def do_req_covid_country(self):
         """ Request covid data by country"""
         countries = []
         while True:
@@ -48,23 +47,19 @@ class DataShell(Cmd):
                 countries.append(country)
             else:
                 break
-        save_frame, do_plot = self.man_data()
+        save_frame, do_plot = man_data()
         self.loop.create_task(self.get_covid_data(countries, save_frame, do_plot))
 
-    def do_terminate(self, arg):
+    def do_terminate(self):
         """ Stop the shell and exit:  terminate"""
         print("CLI terminated\n")
         self.loop.stop()
         return True
 
     def start(self, loop=None):
+        """ Start Async Loop"""
         self.loop = loop
         super().cmdloop(loop)
-
-    def man_data(self):
-        save_frame = get_bool("Save Data y/n?")
-        do_plot = get_bool("Plot Data y/n?")
-        return save_frame, do_plot
 
     async def get_covid_data(self, countries, save_frame=False, do_plot=False):
         """ Access point for the async CLI to access country COVID API """
@@ -82,11 +77,20 @@ class DataShell(Cmd):
         return True
 
 
+def man_data():
+    """ Additional user spec"""
+    save_frame = get_bool("Save Data y/n?")
+    do_plot = get_bool("Plot Data y/n?")
+    return save_frame, do_plot
+
+
 def parse(arg):
+    """ Parse input"""
     return tuple(map(int, arg.split()))
 
 
 def get_bool(string):
+    """ For string to booleans"""
     value = str(input(string))
     if value == "y" or "yes":
         return True
@@ -94,26 +98,26 @@ def get_bool(string):
 
 
 def get_input(string):
+    """ For string inputs"""
     value = input(string)
     print(value)
     if value == "end" or value == "":
-        print(False)
         return False
     return value
 
 
 if sys.platform == 'win32':
-    loop = asyncio.ProactorEventLoop()
-    mode = "Run"
+    LOOP = asyncio.ProactorEventLoop()
+    MODE = "Run"
 else:
-    loop = asyncio.get_event_loop()
-    mode = "Reader"
+    LOOP = asyncio.get_event_loop()
+    MODE = "Reader"
 
 
-cmd = DataShell(mode=mode, intro=INTRO, prompt=PROMPT)
-cmd.start(loop)
+CMD = DataShell(mode=MODE, intro=INTRO, prompt=PROMPT)
+CMD.start(LOOP)
 
 try:
-    loop.run_forever()
+    LOOP.run_forever()
 except KeyboardInterrupt:
-    loop.stop()
+    LOOP.stop()
