@@ -11,7 +11,6 @@ country, so we assume the data to be representative of the countries Youtube act
 import cloudscraper
 from bs4 import BeautifulSoup
 import js2xml
-import requests
 
 
 class SBScraper:
@@ -102,7 +101,7 @@ class SBScraper:
                 print('Web response had NoneType.')
                 return False
             return html_rsp
-        #  General exception as there are lots of errors with cloudflare, but every exception is handled via the return values.
+        # General exception as there are lots of errors with cloudflare. Every exception is handled via return values.
         except Exception as e:
             print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
             print('Error message was: {}'.format(e))
