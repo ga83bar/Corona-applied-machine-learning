@@ -30,12 +30,12 @@ class DataShell(Cmd):
     # ----- All actionable commands -----
     def do_req_covid_all(self):
         """ Request all covid data"""
-        save_frame, do_plot = self.man_data()
+        save_frame, do_plot = man_data()
         self.loop.create_task(self.get_covid_data_all(save_frame, do_plot))
 
     def do_req_covid_world(self):
         """ Request world covid data"""
-        save_frame, do_plot = self.man_data()
+        save_frame, do_plot = man_data()
         self.loop.create_task(self.get_covid_data_world(save_frame, do_plot))
 
     def do_req_covid_country(self):
@@ -47,7 +47,7 @@ class DataShell(Cmd):
                 countries.append(country)
             else:
                 break
-        save_frame, do_plot = self.man_data()
+        save_frame, do_plot = man_data()
         self.loop.create_task(self.get_covid_data(countries, save_frame, do_plot))
 
     def do_terminate(self):
@@ -60,12 +60,6 @@ class DataShell(Cmd):
         """ Start Async Loop"""
         self.loop = loop
         super().cmdloop(loop)
-
-    def man_data(self):
-        """ Additional user spec"""
-        save_frame = get_bool("Save Data y/n?")
-        do_plot = get_bool("Plot Data y/n?")
-        return save_frame, do_plot
 
     async def get_covid_data(self, countries, save_frame=False, do_plot=False):
         """ Access point for the async CLI to access country COVID API """
@@ -81,6 +75,13 @@ class DataShell(Cmd):
         """ Access point for the async CLI to access World COVID API """
         self.data_c.get_covid_data_world(save_frame, do_plot)
         return True
+
+
+def man_data():
+    """ Additional user spec"""
+    save_frame = get_bool("Save Data y/n?")
+    do_plot = get_bool("Plot Data y/n?")
+    return save_frame, do_plot
 
 
 def parse(arg):
