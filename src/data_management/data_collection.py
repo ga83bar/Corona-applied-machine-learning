@@ -78,13 +78,13 @@ def __handle_result(dataframes, save_frame=False, do_plot=False):
     if save_frame:
         for frame in dataframes:
             if not frame[1].empty:
-                folder_path = ('./res/{}').format(frame[0])
+                folder_path = ('./res/covid/{}').format(frame[0])
                 if os.path.exists(folder_path):
                     pass
                 else:
                     os.makedirs(folder_path)
 
-                _ = frame[1].to_pickle(("./res/{}/covid19_{}.pkl").format(frame[0], frame[0]))
+                _ = frame[1].to_pickle(("./res/covid/{}/covid19_{}.pkl").format(frame[0], frame[0]))
 
     if do_plot:
         for frame in dataframes:
