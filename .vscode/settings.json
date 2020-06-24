@@ -4,5 +4,6 @@
         "--rcfile",
         "${workspaceFolder}/.pylintrc"
     ],
-    "python.linting.pylintUseMinimalCheckers": false
+    "python.linting.pylintUseMinimalCheckers": false,
+    "python.pythonPath": "/usr/bin/python3"
 }
