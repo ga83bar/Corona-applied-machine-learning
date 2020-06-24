@@ -145,6 +145,7 @@ if __name__ == '__main__':
                 vpn_server_list = get_vpn_servers()
             change_vpn(vpn_server_list.pop())
         else:
+            err_cnt = 0
             print('Scraping at {:.2f}%'.format((1 - len(channel_url_list)/tot_len)*100))
             results.append(channel_data)
         if not it % 50:
