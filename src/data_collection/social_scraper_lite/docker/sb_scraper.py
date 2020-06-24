@@ -76,9 +76,11 @@ class SBScraper:
         or 6. Might also have only 2 keys.
         @warning Won't work anymore if Socialblade changes the structure of its js nodes!
         """
+        print('SBScraper: Requesting HTML')
         html_rsp = self._get_url(url, proxies=proxies)
         if not html_rsp:
             return False
+        print('SBScraper: Extracting channel data')
         data_dict = self._extract_channel_data(html_rsp)
         return data_dict
 
@@ -153,8 +155,11 @@ class SBScraper:
         @param html_rsp The website's HTML as a string.
         @return Returns the dictionary with processed table names as keys and the data as values.
         """
+        print('SBScraper: Creating soup')
         soup = BeautifulSoup(html_rsp, 'html.parser')
+        print('SBScraper: Filtering scripts')
         script = self._filter_scripts(soup.find_all('script'))
+        print('SBScraper: Parsing js')
         data_dict = self._parse_js(script)
         return data_dict
 
