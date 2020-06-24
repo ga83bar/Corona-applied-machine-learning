@@ -28,6 +28,7 @@ PATH = "/"
 package_id = os.environ['PACKAGE']
 load_save = True if os.environ['LOAD_FILE'] == "yes" else False
 
+
 def load_channel_urls(package_id):
     work_package_path = os.path.join(PATH, 'work_packages', 'package_' + str(package_id))
     with open(os.path.join(work_package_path, 'job.json'), 'r') as f:
@@ -139,7 +140,7 @@ if __name__ == '__main__':
         if not channel_data:
             print('### WARNING: SCRAPING CHANNEL FAILED ###')
             err_cnt += 1
-            if err_cnt < 25:  # In case a bad link was passed, give up parsing after 20 tries.
+            if err_cnt < 25:  # In case a bad link was passed, give up parsing after 25 tries.
                 channel_url_list.append(channel_url)
             else:
                 err_cnt = 0
