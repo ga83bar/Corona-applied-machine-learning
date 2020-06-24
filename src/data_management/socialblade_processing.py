@@ -41,7 +41,7 @@ def show_data_subset(raw_data, index):
 
 def main():
     raw_data = load_raw_data(PATH)
-    for index in np.random.randint(0, len(raw_data)-1, 100):
+    for index in np.random.randint(0, len(raw_data)-1, 1):
         show_data_subset(raw_data, index)
     key_list = extract_key_list(raw_data)
     print(key_list)
@@ -54,6 +54,6 @@ def main():
 
 if __name__ == '__main__':
     sns.set(style="whitegrid")
-    PATH = PurePath.joinpath(Path(__file__).parents[2], 'res', 'socialblade', 'raw')
+    PATH = PurePath.joinpath(Path(__file__).resolve().parents[2], 'res', 'socialblade', 'raw')
     main()
 
