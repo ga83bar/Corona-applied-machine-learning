@@ -77,19 +77,62 @@ def show_data_subset(data_dict):
         plt.show()
 
 
+def merge_channel_data(data_dict):
+    merged_dict = dict()
+    for (key, val) in data_dict.items():
+        merged_dict[key] = list()
+        data_arr = get_data_array(key, val)
+        for arr in val:
+            for idx, el in enumerate(arr[0]):
+                if el not in t_dict[key]:
+                    t_dict[key].append(el)
+    return t_dict
+
+
+def get_min_max_time(array):
+    t_min = 9999999999
+    t_max = 0
+    for sub_array in array:
+        t_min = np.min(sub_array[0]) if np.min(sub_array[0]) < t_min else t_min
+        t_max = np.max(sub_array[0]) if np.max(sub_array[0]) > t_max else t_max
+    return t_min, t_max
+
+
+def get_data_array(key, val):
+    t_diff = 2592000 if 'monthly' in key else 604800
+    t_min, t_max = get_min_max_time(val)
+    t_max = np.round((t_max-t_min)/t_diff)*t_diff + t_min  # Get a matching discrete time step boundary.
+    data_array = np.array(size=(2, (t_max-t_min)/t_diff))
+    data_array[0] = np.arange(t_min, t_max + 1, t_diff)
+    return data_array
+
+
 def main():
     raw_data = load_raw_data(PATH)
     key_list = extract_key_list(raw_data)
     data_dict = sort_data(raw_data, key_list)
+    df = pd.DataFrame.from_dict(raw_data)
+    df.head()
+    print('NO HEAD')
     data_dict = remove_false_data(data_dict)
     print('Press enter to inspect a new set, or any other key to finish.')
     while input() == '':
         show_data_subset(data_dict)
         print('Press enter to inspect a new set, or any other key to finish.')
+    t_dict = merge_channel_data(data_dict)
+    with open('timestamps.json', 'w') as f:
+        json.dump(t_dict, f)
 
 
 if __name__ == '__main__':
     sns.set(style="darkgrid")
     PATH = PurePath.joinpath(Path(__file__).resolve().parents[2], 'res', 'socialblade', 'raw')
     main()
-
+    with open('timestamps.json', 'r') as f:
+        t_dict = json.load(f)
+    for key in t_dict.keys():
+        print(key)
+    arr = t_dict['daily-weekly-vidviews']
+    arr = sorted(arr)
+    plt.plot(arr)
+    plt.show()
