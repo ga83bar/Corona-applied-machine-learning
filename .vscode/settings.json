@@ -1,0 +1,9 @@
+{
+    "python.linting.pylintCategorySeverity.convention": "Warning",
+    "python.linting.pylintArgs": [
+        "--rcfile",
+        "${workspaceFolder}/.pylintrc"
+    ],
+    "python.linting.pylintUseMinimalCheckers": false,
+    "python.pythonPath": "/usr/bin/python3"
+}

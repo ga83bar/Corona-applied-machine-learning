@@ -28,6 +28,7 @@ PATH = "/"
 package_id = os.environ['PACKAGE']
 load_save = True if os.environ['LOAD_FILE'] == "yes" else False
 
+
 def load_channel_urls(package_id):
     work_package_path = os.path.join(PATH, 'work_packages', 'package_' + str(package_id))
     with open(os.path.join(work_package_path, 'job.json'), 'r') as f:
@@ -137,21 +138,22 @@ if __name__ == '__main__':
         if not channel_data:
             print('### WARNING: SCRAPING CHANNEL FAILED ###')
             err_cnt += 1
-            if err_cnt < 20:  # In case a bad link was passed, give up parsing after 20 tries.
+            if err_cnt < 25:  # In case a bad link was passed, give up parsing after 25 tries.
                 channel_url_list.append(channel_url)
             else:
                 err_cnt = 0
             while not vpn_server_list:
                 vpn_server_list = get_vpn_servers()
             change_vpn(vpn_server_list.pop())
+            time.sleep(random.uniform(1., 2.))
         else:
+            err_cnt = 0
             print('Scraping at {:.2f}%'.format((1 - len(channel_url_list)/tot_len)*100))
             results.append(channel_data)
         if not it % 50:
             print('Quicksaving...')
             quicksave(channel_url_list, results)
         it += 1
-        # time.sleep(random.uniform(2., 3.))
     if results:
         write_results(results, package_id=package_id)
     show_dialogue(dialogue_nr=1)

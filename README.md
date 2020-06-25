@@ -3,31 +3,17 @@
 ## Table of contents
 [[_TOC_]]
 
-## Introduction
-The overall goal of this project is to predictively model the impact of the increase in internet traffic due to the COVID-19 outbreak on CO2 emissions.
+## Project Description
+The goal of this project is to model current and future greenhouse gas emissions arising from internet traffic in the context of the Covid-19 pandemic, utilizing a machine learning approach. Prior to the outbreak of Covid-19 it was already predicted that increased internet traffic would result in a continuing rise of greenhouse gas emissions. Pre-Covid-19, web traffic experienced a growth of roughly 30% per annum. Based on recent growth data in internet traffic caused by the pandemic, we want to quantify the irregular rise of greenhouse gas contribution. The model and resulting predictions should be made accessible to a wider public, with the help of an interactive web interface.
 
-## Project ideas
+## Research Question
+To concisely formulate the scope of our project, we pose the following research question: What will the global quantitative impact of increased Internet traffic due to Corona on green- house gas emissions be?
 
-### Overview
-Utilizing geographically progressions of segmented COVID-19 and internet traffic metrics during the pandemic, a predictive model will be trained with the aim of accurately reproducing the internet traffic related CO2 emission trend over the course of the pandemic. 
+## Goals
+Over the course of this project, we want to generate a model that predicts greenhouse gas emissions from increased internet traffic as accurately as possible. The predictions should be visually and interactively accessible with a web interface. Users should be able to interact with the model by entering various scenarios, such as differing curves for the progression of the pandemic. The project is finished once the generated model is integrated with a working web interface, and the progress and project achievements are video-documented.
 
-The resulting model can be extrapolated to enable CO2 emission prediction in future novel COVID-19 outbreaks, as well as predictions for second-wave outbreaks or future non-COVID-19 pandemics.
-
-### Process
-As the goal of the project is to reproduce and predict CO2 emissions due to the change in internet traffic as a result of COVID-19, two approaches must be defined.
-
-1.) The goal of the project is to model the per ton *increase* or percentage *increase* in CO2 emissions
-
-2.) The goal of the project is to model the *total* CO2 emissions
-
-Despite the seemingly trivial difference between these approaches, it is important that data collected and trained with is specifically tailored for each approach. In the first approach, it is a requirement that the training data for internet traffic reflects not the *total* internet traffic at a given point in time, but rather as an *increase* attributal to the COVID-19 pandemic. In the second approach, training data reflects the total internet traffic during the pandemic. However, in the second approach, it is imperative that the model is also trained using data from before the COVID-19 outbreak, as the model should learn to recognize the increase as being attributal to COVID-19.
-
-The major difference then, is that within the first approach, preprocessing of the internet traffic - CO2 emissions relationship is accomplished manually, while in the second approach, the relationship is implcitly encoded into the model. It remains to be seen if human error or model error in regards to this relationship are more likely to impact the performance of the model.
-
-Upon model completion, the model will be offered to a wide audience in the form of an interactive website, where the user can change parametrics of the COVID-19 progression in order to observe the resulting impact on internet-traffic related CO2 emissions.
-An early idea of how this might look like can be seen [here](https://www.chartjs.org/).
-
-A key challenge for the success of the model is the reliance on geographic COVID-19 data. Each country employs a differing methodology, as well as differing testing COVID-19 capabilities.
+## Approaches
+The problem is approached via data driven analysis. At the start of the project, we plan on collecting any data we can find on the energy consumption of data centres and internet infrastructure or internet traffic. We will also gather information on the current greenhouse gas emissions for power generation, as well as the historical development of greenhouse gas emissions for individual countries. Combined with the data on web traffic and its increase due to COVID-19, a variety of machine learning models will be trained to predict the increase in emissions during the pandemic. Future emission predictions will rely on forecasts about the course of the pandemic, or will be predictively generated based on past data. For the web interface, we plan on using the Chart.js framework to create a visually appealing and interactive environment.
 
 ## __CURRENT PROGRESS__
 
