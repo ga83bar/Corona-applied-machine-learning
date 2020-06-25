@@ -25,4 +25,5 @@ paper/*
 .idea/
 .vscode/launch.json
 .vscode/tasks.json
+.vdcode/settings.json
 *.DS_STORE
