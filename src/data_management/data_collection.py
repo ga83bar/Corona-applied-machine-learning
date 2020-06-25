@@ -4,12 +4,17 @@ data collection APIS.
 """
 import os
 from datetime import timedelta as t_delta
+from datetime import date
 import logging
 import pandas as pd
+import numpy as np
+import webbrowser
 
 from requests import get
 from matplotlib import pyplot as plot
 import matplotlib.dates as dates
+
+from abc import ABCMeta, abstractmethod
 
 # Error Codes
 COUNTRY_REQUEST_FAILED = 'REQUEST STATUS {}: {}'
@@ -110,7 +115,7 @@ class DataCollection():
         return date_list
 
 
-class CovidDataCollection():
+class CovidCollector():
     '''This class is responsible for Covid data collection.
     It loads the data from the API api.covid19api.com.
     it contains the data for each country of our worldlist
@@ -256,18 +261,23 @@ class CovidDataCollection():
             plot.show()
 
 
-class ICollector(object):
+class ICollector(metaclass=ABCMeta):
     '''
     Simple interface to define basic functions.
     '''
     def __init__(self, path_name):
         self.source = None
         self.path_to_raw = None
-        self.path_to_processed = None        
+        self.path_to_processed = None
+        self.csv_name = None
+        self.name = path_name
         paths = self.__get_paths(path_name)
 
     def __get_paths(self, name):
-        '''g'''
+        '''
+        Sets the paths to the raw and processed folders.
+        Input should be a string similar to the naming in the res folder e.g 'pornhub'
+        '''
         # check if name object is string
         if isinstance(name, str):
             path_to_res = os.path.join('.', 'res')
@@ -287,47 +297,110 @@ class ICollector(object):
 
     def __load_data(self):
         '''
-        Method loads the data from csv/ API ..
+        Method loads the data from the raw folder if this fil does not exist we can download the file from the internet.
         '''
-        raise NotImplementedError
+        # first we try to download the data
+        if not os.path.exists(self.path_to_raw):
+            self.download_data()
+
+        if not os.path.exists(self.path_to_raw):
+            raise Exception('{} : load_data there is no raw data'.format(instance.__class__.__name__))
+
+        if os.path.exists(self.path_to_raw):
+            frame = pd.read_csv(self.path_to_raw)
+            frame = self.process_data(frame)
+            frame.to_csv(self.path_to_processed)
+
+        else:
+            raise Exception('There is no{}'.format(self.path_to_raw))
 
     def get_data(self):
         '''
-        Method returns the the preprocessed data
+        Method returns the processed frame saved in res/'name'/processed/???.csv
         '''
-        raise NotImplementedError
+        # first check if raw exist and processed not and handle this
+        if ((not os.path.exists(self.path_to_processed)) and os.path.exists(self.path_to_raw)):
+            self.__load_data()
+            steam_frame = pd.read_csv(self.path_to_processed)
+        
+        # if the processed file exist we read it
+        elif os.path.exists(self.path_to_processed):
+            steam_frame = pd.read_csv(self.path_to_processed)
+
+        else:
+            raise Exception('There is no processed or raw file {} in  folder {}'.format(self.csv_name, self.name))
+
+        return steam_frame
 
     def plot(self, frame):
         '''
-        Method plots the data for first inspection
+        Method plots the data to get a first impression
         '''
-        frame.plot(x_compat=True, kind='line')
-        plot.show()
+        if not frame.empty:
+            frame.plot(x_compat=True, kind='line', title=self.name)
+            plot.gca().xaxis.set_major_locator(dates.DayLocator())
+            plot.gca().xaxis.set_major_formatter(dates.DateFormatter('%d\n\n%a'))
+            plot.show()
+
+        else:
+            raise Exception('plot frame is empty')
+
+    def __download_data(self):
+        '''
+        Method for downloading the data from the internet.
+        Load from source save to path_to_raw (NOT IMPLEMENTET)
+        '''
+        # FIXME
+        pass
+    
+    @abstractmethod
+    def process_data(self, fram_raw):
+        '''
+        This is an abstract method!!
+        Simple processing of the raw data e.g drop null values.
+        Returns the processed dataframe.
+        '''
+        pass
 
 
 class SteamCollector(ICollector):
     '''
     Class handles the datacollection of the worldwide Steam data.
-
+    Example sage:
+    STEAM = SteamCollector()
+    stframe = STEAM.get_data()
+    STEAM.plot(stframe)
     '''
     def __init__(self):
-        ICollector.__init__(self)  # add arguements if req
-        self.source = ''
-        self.__set_paths('steam')
+        ICollector.__init__(self, 'steam')  # add arguements if req
+        self.source = None
+        self.csv_name = 'steam_user_3y.csv'
 
-    def __load_data(self, value=0):
-        '''
-        '''
-        pass
+        self.path_to_raw = os.path.join(self.path_to_raw, self.csv_name)
+        self.path_to_processed = os.path.join(self.path_to_processed, self.csv_name)
 
-    def get_data(self):
-        '''d'''
-        pass
+    def process_data(self, frame_raw):
+        '''
+        Simple preprocessing of the steam dataset. Drop null values and set Date as index.
+        '''
+        # set index 
+        frame_raw.columns = ['Date', 'Users', 'In-Game']
+        frame_raw = frame_raw.set_index('Date')
+
+        # drop rows with no entry
+        frame_raw.dropna(subset=['Users', 'In-Game'], inplace=True)
+        return frame_raw
 
 
 class PornhubCollector(ICollector):
     '''
-    This Colector handles
+    This Colector handles the collection, and simple preprocessing of the pornhub dataset.
+
+    Example usage:
+    PORN = PornhubCollector()
+    frame = PORN.get_data()
+    PORN.plot(frame)
+    PORN.show() 
     '''
     def __init__(self):
         ICollector.__init__(self, 'pornhub')  # add arguements if req
@@ -337,72 +410,51 @@ class PornhubCollector(ICollector):
         self.path_to_raw = os.path.join(self.path_to_raw, self.csv_name)
         self.path_to_processed = os.path.join(self.path_to_processed, self.csv_name)
 
-    def __load_data(self):
+    def process_data(self, frame_raw):
         '''
-        Downloads the data from pornhub insights. If your IP is in this set you are fucked up ;).
-        Dataset contains daily changes in youporntraffic during Corona.
+        Preprocessing of the pornhub dataset.transformation of 10% -> 0.1.
+        Set Date as Index.
+        Input is the raw data as pandas frame.
+        Returns the preprocessed dataset as pandas frame.
         '''
-        if not os.path.exists(self.path_to_raw):
-            # FIXME download data and save it to self.path_to_raw
-            pass
-
-        if os.path.exists(self.path_to_raw):
-            pornhub_frame = pd.read_csv(self.path_to_raw)
-            pornhub_frame.columns = ['Date', 'Traffic_inc']
-            pornhub_frame = pornhub_frame.set_index('Date')
+            frame_raw.columns = ['Date', 'Traffic_inc']
+            frame_raw = frame_raw.set_index('Date')
 
             # convert 10% to 0.1
-            pornhub_frame['Traffic_inc'] = pornhub_frame['Traffic_inc'].str.rstrip('%').astype('float') / 100.0
+            frame_raw['Traffic_inc'] = frame_raw['Traffic_inc'].str.rstrip('%').astype('float') / 100.0
+            return frame_raw
 
-            # save the processed frame
-            pornhub_frame.to_csv(self.path_to_processed)
-
-        else:
-            raise Exception('There is no raw World.csv file in res/pornhub')
-
-    def get_data(self):
-        '''d'''
-        # first check if raw exist and processed not and handle this
-        if ((not os.path.exists(self.path_to_processed)) and os.path.exists(self.path_to_raw)):
-            self.__load_data()
-            pornhub_frame = pd.read_csv(self.path_to_processed)
-        
-        # if the processed file exist we read it
-        elif os.path.exists(self.path_to_processed):
-            pornhub_frame = pd.read_csv(self.path_to_processed)
-
-        else:
-            raise Exception('There is no processed or raw file WOrld.csv in pornhub folder')
-
-        return pornhub_frame
+    def show(self):
+        '''
+        Most important method to gain insights in the pornhub dataset ;-).
+        '''
+        webbrowser.open('https://de.pornhub.com')
 
 
 class PSCollector(ICollector):
     '''
-    This Colector handles the collection of Playstation data
+    This Colector handles the collection of Playstation data.
+
+    Example usage :
+    PS = PSCollector()
+    ps_frame = PS.get_data()
+    PS.plot(ps_frame)
     '''
     def __init__(self):
-        ICollector.__init__(self)  # add arguements if req
+        ICollector.__init__(self, 'playstation')
         self.source = ''
-        self.__set_paths('playstation')
+        self.csv_name = 'ps_players.csv'
 
-    def __load_data(self, value=0):
+        self.path_to_raw = os.path.join(self.path_to_raw, self.csv_name)
+        self.path_to_processed = os.path.join(self.path_to_processed, self.csv_name)
+
+    def process_data(self, frame_raw):
         '''
+        Processing the Playstation data.
+        Input is the raw data as pandas frame.
+        Returns the preprocessed dataset as pandas frame.
         '''
-        pass
+            frame_raw.columns = ['Date', 'PS3', 'PS4', 'Vita']
+            frame_raw = frame_raw.set_index('Date')
 
-    def get_data(self):
-        '''d'''
-        pass
-
-    def plot(self):
-        '''d'''
-        pass  
-
-
-PORN = PornhubCollector()
-frame = PORN.get_data()
-PORN.plot(frame)
-
-del(PORN)
-del(frame)
+            return frame_raw

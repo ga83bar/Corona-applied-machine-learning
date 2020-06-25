@@ -6,8 +6,13 @@ Worldwide traffic to Pornhub continues to be much higher than it was before the 
 ## DATA ORIGIN
 https://www.pornhub.com/insights/coronavirus-update-may-26
 
-## CODE FOR OBTAINING
-[Datacollector](/./src/data_management/data_collection.py)
-
 ## CODE FOR PREPROCESSING
+[PornhubCollector](/./src/data_management/data_collection.py)
+
+## DATA 
+The processed data contains the attributes 
+  - Date
+  - daily increase in traffic
+
+The interesting thing about the data is the significant increase in the number of users from/on the first day of the lockdown. 
 
