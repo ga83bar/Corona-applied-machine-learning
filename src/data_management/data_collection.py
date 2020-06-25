@@ -3,18 +3,15 @@ This class serves as the interface between the data selection CLI and the necess
 data collection APIS.
 """
 import os
-from datetime import timedelta as t_delta
-from datetime import date
-import logging
-import pandas as pd
-import numpy as np
 import webbrowser
+from datetime import timedelta as t_delta
+import logging
+from abc import ABCMeta, abstractmethod
+import pandas as pd
 
 from requests import get
 from matplotlib import pyplot as plot
 import matplotlib.dates as dates
-
-from abc import ABCMeta, abstractmethod
 
 # Error Codes
 COUNTRY_REQUEST_FAILED = 'REQUEST STATUS {}: {}'
@@ -271,7 +268,7 @@ class ICollector(metaclass=ABCMeta):
         self.path_to_processed = None
         self.csv_name = None
         self.name = path_name
-        paths = self.__get_paths(path_name)
+        _ = self.__get_paths(path_name)
 
     def __get_paths(self, name):
         '''
@@ -288,8 +285,8 @@ class ICollector(metaclass=ABCMeta):
             if not os.path.exists(self.path_to_raw):
                 os.makedirs(self.path_to_raw)
             if not os.path.exists(self.path_to_processed):
-                os.makedirs(path_to_processed)
-        
+                os.makedirs(self.path_to_processed)
+
         else:
             raise Exception('ICollector : get_paths name is no valid string')
 
@@ -304,7 +301,7 @@ class ICollector(metaclass=ABCMeta):
             self.download_data()
 
         if not os.path.exists(self.path_to_raw):
-            raise Exception('{} : load_data there is no raw data'.format(instance.__class__.__name__))
+            raise Exception('{} : load_data there is no raw data'.format(instance.__class__.__name__))  # # noqa: F821
 
         if os.path.exists(self.path_to_raw):
             frame = pd.read_csv(self.path_to_raw)
@@ -322,7 +319,7 @@ class ICollector(metaclass=ABCMeta):
         if ((not os.path.exists(self.path_to_processed)) and os.path.exists(self.path_to_raw)):
             self.__load_data()
             steam_frame = pd.read_csv(self.path_to_processed)
-        
+
         # if the processed file exist we read it
         elif os.path.exists(self.path_to_processed):
             steam_frame = pd.read_csv(self.path_to_processed)
@@ -345,22 +342,22 @@ class ICollector(metaclass=ABCMeta):
         else:
             raise Exception('plot frame is empty')
 
-    def __download_data(self):
+    def download_data(self):
         '''
         Method for downloading the data from the internet.
         Load from source save to path_to_raw (NOT IMPLEMENTET)
         '''
-        # FIXME
-        pass
-    
+        # TODO
+        print('download data is not implementet')
+
     @abstractmethod
-    def process_data(self, fram_raw):
+    def process_data(self, frame_raw):
         '''
         This is an abstract method!!
         Simple processing of the raw data e.g drop null values.
         Returns the processed dataframe.
         '''
-        pass
+        raise NotImplementedError
 
 
 class SteamCollector(ICollector):
@@ -383,7 +380,7 @@ class SteamCollector(ICollector):
         '''
         Simple preprocessing of the steam dataset. Drop null values and set Date as index.
         '''
-        # set index 
+        # set index
         frame_raw.columns = ['Date', 'Users', 'In-Game']
         frame_raw = frame_raw.set_index('Date')
 
@@ -400,7 +397,7 @@ class PornhubCollector(ICollector):
     PORN = PornhubCollector()
     frame = PORN.get_data()
     PORN.plot(frame)
-    PORN.show() 
+    PORN.show()
     '''
     def __init__(self):
         ICollector.__init__(self, 'pornhub')  # add arguements if req
@@ -417,12 +414,12 @@ class PornhubCollector(ICollector):
         Input is the raw data as pandas frame.
         Returns the preprocessed dataset as pandas frame.
         '''
-            frame_raw.columns = ['Date', 'Traffic_inc']
-            frame_raw = frame_raw.set_index('Date')
+        frame_raw.columns = ['Date', 'Traffic_inc']
+        frame_raw = frame_raw.set_index('Date')
 
-            # convert 10% to 0.1
-            frame_raw['Traffic_inc'] = frame_raw['Traffic_inc'].str.rstrip('%').astype('float') / 100.0
-            return frame_raw
+        # convert 10% to 0.1
+        frame_raw['Traffic_inc'] = frame_raw['Traffic_inc'].str.rstrip('%').astype('float') / 100.0
+        return frame_raw
 
     def show(self):
         '''
@@ -454,7 +451,7 @@ class PSCollector(ICollector):
         Input is the raw data as pandas frame.
         Returns the preprocessed dataset as pandas frame.
         '''
-            frame_raw.columns = ['Date', 'PS3', 'PS4', 'Vita']
-            frame_raw = frame_raw.set_index('Date')
+        frame_raw.columns = ['Date', 'PS3', 'PS4', 'Vita']
+        frame_raw = frame_raw.set_index('Date')
 
-            return frame_raw
+        return frame_raw
