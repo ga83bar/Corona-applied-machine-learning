@@ -1,6 +1,9 @@
 """
-This class serves as data collection for different Datapoints.
+@brief This class serves as data collection for different Datapoints.
 It uses APIs and simple Webcrawling
+@file Datapoint Collection preprocessing and raw
+@author Max Putz, Aron Endres
+@date 25.06.2020
 """
 
 import csv
@@ -31,16 +34,17 @@ RESOURC_PATH_PROC = '../../../res/ix/processed'
 
 class DataPointCollection():
     """
-    This class is responsible for collecting raw data from different
+    @brief This class is responsible for collecting raw data from different
     databases or API's
     """
+    ## @param do_single_print if dataframes should be saved in singles or in one big df
     do_single_print = True
 
     def __init__(self):
-        """ Constructor"""
+        """@brief Constructor"""
 
     def get_six_avg_raw(self):
-        """getting the data from SIX the average usage"""
+        """@brief getting the data from SIX the average usage"""
 
         # getting data from website
         source_avg = requests.get(SIX_AVG_URL).text
@@ -63,7 +67,7 @@ class DataPointCollection():
                 writer_avg.writerow(line.split('\t'))
 
     def get_six_max_raw(self):
-        """getting the data from SIX the max usage"""
+        """@brief getting the data from SIX the max usage"""
 
         # getting data from website
         source_max = requests.get(SIX_MAX_URL).text
@@ -86,7 +90,7 @@ class DataPointCollection():
                 writer_max.writerow(line.split('\t'))
 
     def get_mskix_raw(self):
-        """getting data from MSK-IX Average and Max"""
+        """@brief getting data from MSK-IX Average and Max"""
 
         # getting data from website
         source = requests.get(MSKIX_URL)
@@ -111,15 +115,16 @@ class DataPointCollection():
                 max_writer.writerow(line)
 
     def get_raw(self):
-        """is getting and saving all the raw data"""
+        """@brief is getting and saving all the raw data"""
         self.get_mskix_raw()
         self.get_six_avg_raw()
         self.get_six_max_raw()
 
     def get_six_pre(self):
         """
-        This method is to standardize the datasets
-        and add the feature of which datapoint it is
+        @brief  This method is to standardize the datasets
+                and add the feature of which datapoint it is
+        @return preprocessed df when do_single_print is set to False 
         """
         # get raw data
         df_six_avg = pd.read_csv(
@@ -158,8 +163,9 @@ class DataPointCollection():
 
     def get_mskix_pre(self):
         """
-        This method is to standardize the datasets
-        and add the feature of which datapoint it is
+        @ brief This method is to standardize the datasets
+                and add the feature of which datapoint it is
+        @return preprocessed df when do_single_print is set to False 
         """
         # get raw data
         df_mskix_avg = pd.read_csv(
@@ -205,7 +211,11 @@ class DataPointCollection():
             return df_mskix_avg, df_mskix_max
 
     def df_timestamp_floor(self, df_conv):
-        """floor Timestamps"""
+        """
+        @brief floor Timestamps
+        @param dataframe that has Timestamps that should be converted
+        @return preprocessed df when do_single_print is set to False 
+        """
         try:
             df_conv['Timestamp']
         except KeyError:
@@ -232,7 +242,8 @@ class DataPointCollection():
 
     def get_linx(self):
         """
-        This method is to get from LINX
+        @brief This method is to get from LINX
+        @return preprocessed df when do_single_print is set to False 
         """
         # get data from API
         response = self.get_request_json(LINX_URL)
@@ -275,7 +286,9 @@ class DataPointCollection():
 
     def get_peering_cz(self, start_time=1498305600, end_time=1592990400):
         """
-        This method extracts data form peering.cz
+        @brief This method extracts data form peering.cz
+        @param from when until when in Timestamp format in milliseconds
+        @return saves and returns preprocessed data from linx datapoint
         """
         # intialise variables
         data_pee = pd.DataFrame()
@@ -320,7 +333,8 @@ class DataPointCollection():
 
     def get_ficix(self):
         """
-        This method extracts data fro, the ficix csv
+        @brief This method extracts data fro, the ficix csv
+        @return saves and returns preprocessed data from linx datapoint
         """
         # read csv data
         data_ficix = pd.read_csv(
@@ -361,7 +375,8 @@ class DataPointCollection():
 
     def create_date(self, concat):
         """
-        Concat all pandaframes to output it as on big dataframe
+        @brief Concat all pandaframes to output it as on big dataframe
+        @param should be one dataframe put together (True) or seperated dataframes (False) be created        
         """
         self.do_single_print = not concat
         if concat:
@@ -386,7 +401,10 @@ class DataPointCollection():
     @staticmethod
     def save_dataframe(data, name, path):
         """
-        This method is to save the pandaframe.
+        @brief This method is to save the pandaframe.
+        @param data dataframe that should be saved
+        @param name under what name should the data be saved
+        @param path where should the name be saved in absolute path 
         """
         data.to_pickle(os.path.join(path, name + '.pkl'))
         data.to_csv(os.path.join(path, name + '.csv'), sep='\t')
@@ -394,7 +412,9 @@ class DataPointCollection():
     @staticmethod
     def get_request_json(url):
         """
-        This method makes "get" http request.
+        @brief This method makes "get" http request.
+        @param url where to retrieve the data
+        @return json response 
         """
         response = requests.get(url)
         return response.json()
