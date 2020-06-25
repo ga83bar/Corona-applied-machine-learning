@@ -1,7 +1,6 @@
 """!@brief SBScaper class. Scrapes Socialblade for Youtube data.
-@details To get as much data as possible from the website, we look for the top 250 channels in more than 240 available
-country options for a total of > 60.000 channels. These channels are the most successful ones in their respective
-country, so we assume the data to be representative of the countries Youtube activities.
+@details Class gets used for all scraping requests to Socialblade. Error handling and IP masking has to be done
+externally!
 @file SBScaper class file.
 @author Martin Schuck
 @date 18.6.2020
@@ -89,6 +88,14 @@ class SBScraper:
         return data_dict
 
     def _get_url_wrapper(self, url, proxies=None):
+        """!@brief Wrapper for the _get_url function.
+
+        _get_url results in most of the errors. Sometimes, requests also get stuck indefinitely. Wrapper starts a
+        timeout to deal with this.
+        @param url Url to scrape from.
+        @param proxies Proxy to be used for the request. Used exactly as in pythons requests library.
+        @return Returns the HTML page in case of success and False in case of failure.
+        """
         self.request_thread = threading.Thread(target=self._get_url,
                                                kwargs={'url': url, 'proxies': proxies}, daemon=True)
         self.request_thread.start()
@@ -101,19 +108,19 @@ class SBScraper:
         if t_diff >= 10:
             print('### RAN INTO TIMEOUT ###')
             return False
-        else:
-            print('Nominal execution')
-            return self.html_response
+        print('Nominal execution')
+        return self.html_response
 
     def _get_url(self, url, proxies=None):
         """!@brief Scrapes the specified url.
 
         Uses the cloudscraper module to scrape Socialblade despite Cloudflare protection. Cloudscraper imitates the
-        required js response for accessing Socialblade. For more information, @see https://pypi.org/project/cloudscraper
+        required js response for accessing Socialblade. For more information,
+        @see https://pypi.org/project/cloudscraper.
+        The HTML document gets stored in self.html_response to transfer the web page to the wrapper.
 
         @param url url to the channel's statistics page.
         @param proxies Proxy to be used for the request. Used exactly as in pythons requests library.
-        @return Returns the website as a string in case of success or False in case of failure.
         """
         scraper = cloudscraper.create_scraper()
         try:
@@ -126,9 +133,9 @@ class SBScraper:
             self.html_response = html_rsp
             return
         # General exception as there are lots of errors with cloudflare. Every exception is handled via return values.
-        except Exception as e:
+        except Exception as err:
             print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
-            print('Error message was: {}'.format(e))
+            print('Error message was: {}'.format(err))
             self.html_response = False
             return
 
@@ -187,7 +194,8 @@ class SBScraper:
     def _filter_scripts(scripts):
         """!@brief Filters the data script from a list of js scripts.
 
-        A somewhat heuristic search. Data scripts are the largest script on the website. Therefore we filter the largest script and return it.
+        A somewhat heuristic search. Data scripts are the largest script on the website. Therefore we filter the largest
+        script and return it.
 
         @param scripts A list of scripts scraped from the website with BeautifulSoup.
         @return Returns the first script larger than 1000 chars.
@@ -195,7 +203,7 @@ class SBScraper:
         top_idx = 0
         top_len = 0
         for idx, script in enumerate(scripts):
-            if script.contents:  # Emptry script entries have no contents attribute.
+            if script.contents:  # Empty script entries have no contents attribute.
                 if len(script.contents[0]) > top_len:
                     top_idx = idx
                     top_len = len(script.contents[0])
@@ -214,7 +222,7 @@ class SBScraper:
             parsed = js2xml.parse(script)
             # Find all highchart identifiers and their data in the xml'ified js tree.
             categories = [c.xpath('./../../../../arguments/string')
-                        for c in parsed.xpath("//identifier[@name='Highcharts']")]
+                          for c in parsed.xpath("//identifier[@name='Highcharts']")]
             data = [d.xpath("./array/array/number/@value") for d in parsed.xpath("//property[@name='data']")]
             # Remove empty arrays from bad relative paths, access string content, strip unnecessary parts.
             categories = self._process_categories(categories)

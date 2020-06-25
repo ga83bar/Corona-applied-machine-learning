@@ -1,19 +1,11 @@
-"""!@brief Main script for scraping from Socialblade.
+"""!@brief Script to create work packages for the Docker containers.
 
-To get as much data as possible from the website, we look for the top 250 channels in more than 240 available
-country options for a total of > 60.000 channels. These channels are the most successful ones in their respective
-country, so we assume the data to be representative of the countries Youtube activities.
-
-First, the scraper gets all available country top channel urls and assembles work packages from the results. Then docker
-containers are used to connect to a VPN, each with a different IP to avoid blocking by Cloudflare. Each container gets
-a work package assigned. Once all containers finished scraping for the urls of the top 250 channels per country, new
-work packages are created and again assigned to docker containers with random IPs. After completion of all tasks, the
-data gets assembled into a single data file.
-
-@file Scrape main script file.
-@author Niklas Landerer
+Scrapes all available countries from Socialblade, then also scrapes the respective top 250 channel lists from the site.
+Reads the user input on how many work packages should be created, splits the link list accordingly and creates the
+necessary folders.
+@file Work packages creator script file.
 @author Martin Schuck
-@date 18.6.2020
+@date 25.6.2020
 """
 
 import json
@@ -30,6 +22,12 @@ PATH = os.path.join(os.path.abspath(""))
 
 
 def assemble_work_packages(url_list, n_packages):
+    """!@brief Assembles a list of URLs into work packages.
+
+    Work packages are saved at work_packages/package_xx.
+    @param url_list List of url strings that have to be scraped.
+    @param n_packages Number of packages to divide the url list into.
+    """
     shutil.rmtree(os.path.join(PATH, 'work_packages'))
     package_size = math.ceil(len(url_list) / n_packages)
     work_packages = [url_list[x:x + package_size] for x in range(0, len(url_list), package_size)]
@@ -42,6 +40,11 @@ def assemble_work_packages(url_list, n_packages):
 
 
 def load_country_results(result_file='results.json'):
+    """!@brief Loads the list of countries available on socialblade from a json file.
+
+    @param result_file Filename of the save file located under work_packages.
+    @return Returns the list of list of all country main page urls for socialblade.
+    """
     channel_url_list = list()
     with open(os.path.join(PATH, 'work_packages', result_file), 'r') as f:
         country_list = json.load(f)
@@ -52,6 +55,8 @@ def load_country_results(result_file='results.json'):
 
 
 def clear_dictionaries():
+    """!@brief Clears all dictionaries below the work packages folder.
+    """
     work_packages_path = os.path.join(PATH, "work_packages")
     for directory in [d for d in os.listdir(work_packages_path) if os.path.isdir(os.path.join(work_packages_path, d))]:
         r_files = glob.glob(os.path.join(work_packages_path, directory) + '/*')
@@ -65,6 +70,12 @@ def clear_dictionaries():
 
 
 def show_dialogue(dialogue_nr=0):
+    """!@brief Prints dialogue options to the console and processes input.
+
+    Dialogue options are called via their dialogue number. Convenient way to store all prints into a single function.
+    @param dialogue_nr Number of the dialogue and input check to perform.
+    @return Returns the parsed and processed user input. Differs in between different dialogue numbers.
+    """
     if dialogue_nr == 0:
         print('##########################################################')
         print('###   You are about to assemble new working packages   ###')
@@ -105,16 +116,27 @@ def show_dialogue(dialogue_nr=0):
 
 
 def write_fails(fails):
+    """!@brief Writes a list of urls into a fails.json file.
+
+    @param fails List of failed urls."""
     with open(os.path.join(PATH, 'work_packages', 'fails.json'), 'w') as f:
         json.dump(fails, f)
 
 
 def write_results(results):
+    """!@brief Writes dictionary of results into a results.json file.
+
+    @param results Result dictionary to write."""
     with open(os.path.join(PATH, 'work_packages', 'results.json'), 'w') as f:
         json.dump(results, f)
 
 
-if __name__ == '__main__':
+def main():
+    """!@brief Main function for the script.
+
+    Controls the dialogue flow, sets parameters accordingly, starts the scraping and saves the results and fails into
+    the respective files.
+    """
     confirm = show_dialogue(dialogue_nr=0)
     if confirm:
         clear_dictionaries()
@@ -132,7 +154,7 @@ if __name__ == '__main__':
                 print('### WARNING: SCRAPING COUNTRY FAILED ###')
                 failed_urls.append(country_url)
             else:
-                print('Scraping at {:.2f}%'.format((1 - len(country_url_list)/tot_len)*100))
+                print('Scraping at {:.2f}%'.format((1 - len(country_url_list) / tot_len) * 100))
                 results.append(country_channels)
             time.sleep(random.uniform(2., 3.))
         if failed_urls:
@@ -145,3 +167,7 @@ if __name__ == '__main__':
         n_packages = show_dialogue(dialogue_nr=2)
         assemble_work_packages(channel_urls, n_packages=n_packages)
         print('Working packages assembled.')
+
+
+if __name__ == '__main__':
+    main()

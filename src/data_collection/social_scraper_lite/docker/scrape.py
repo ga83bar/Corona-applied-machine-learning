@@ -19,17 +19,17 @@ data gets assembled into a single data file.
 import json
 import os
 import time
-import requests
 import random
+import requests
 from sb_scraper import SBScraper
 
 
-PATH = "/"
-package_id = os.environ['PACKAGE']
-load_save = True if os.environ['LOAD_FILE'] == "yes" else False
-
-
 def load_channel_urls(package_id):
+    """!@brief Loads the channel urls from the package directory.
+
+    @param package_id ID of the work package. Specifies the folder to load.
+    @return Returns the list of channel urls saved in the job.
+    """
     work_package_path = os.path.join(PATH, 'work_packages', 'package_' + str(package_id))
     with open(os.path.join(work_package_path, 'job.json'), 'r') as f:
         channel_url_list = json.load(f)
@@ -37,56 +37,45 @@ def load_channel_urls(package_id):
 
 
 def load_quicksave(package_id):
+    """!@brief Loads a quicksave from the package directory.
+
+    @param package_id ID of the work package. Specifies the folder to load.
+    @return Returns the quicksave dictionary.
+    """
     work_package_path = os.path.join(PATH, 'work_packages', 'package_' + str(package_id))
     with open(os.path.join(work_package_path, 'quicksave.json'), 'r') as f:
-        quicksave = json.load(f)
-    return quicksave
+        save = json.load(f)
+    return save
 
 
 def clear_dictionary(package_id):
+    """!@brief Clears all files from the package directory.
+
+    @param package_id ID of the work package. Specifies the folder to load.
+    """
     work_package_path = os.path.join(PATH, 'work_packages', 'package_' + str(package_id))
     for filename in ['results.json', 'quicksave.json']:
         if os.path.isfile(os.path.join(work_package_path, filename)):
             os.remove(os.path.join(work_package_path, filename))
 
 
-def show_dialogue(dialogue_nr=0):
-    if dialogue_nr == 0:
-        print('#####################################################')
-        print('###  Warning: Script is supposed to run on Linux! ###')
-        print('###     NordVPN has to be installed in advance    ###')
-        print('#####################################################')
-        print('#####################################################')
-        print('###         Starting Socialblade scraper.         ###')
-        print('### Please enter the package you want to work on! ###')
-        print('#####################################################')
-        package_id = int(input())
-        while not os.path.isfile(os.path.join(PATH, 'work_packages', 'package_' + str(package_id), 'job.json')):
-            print('#####################################################')
-            print('###         Please enter a valid package!         ###')
-            print('#####################################################')
-            package_id = int(input())
-        else:
-            print('#####################################################')
-            print('###          Working on package number {:2d}         ###'.format(package_id))
-            print('#####################################################')
-        print('\n#####################################################')
-        print('###   Do you want to load a quicksave? (yes/no)   ###')
-        print('#####################################################')
-        return package_id, input().lower() == 'yes'
-    if dialogue_nr == 1:
-        print('##################################')
-        print('###  Finished working package  ###')
-        print('### The scraper will now close ###')
-        print('##################################')
-
-
 def write_results(results, package_id):
+    """!@brief Writes the results to the package directory.
+
+    @param results The result array that is to be saved.
+    @param package_id ID of the work package. Specifies the folder to load.
+    """
     with open(os.path.join(PATH, 'work_packages', 'package_' + str(package_id), 'results.json'), 'w') as f:
         json.dump(results, f)
 
 
-def quicksave(channel_url_list, results):
+def quicksave(channel_url_list, results, package_id):
+    """!@brief Stores a quicksave to the package directory.
+
+    @param channel_url_list The list of still unhandled urls.
+    @param results The results array that was assembled so far.
+    @param package_id ID of the work package. Specifies the folder to load.
+    """
     save = {'channel_url_list': channel_url_list,
             'results': results}
     with open(os.path.join(PATH, 'work_packages', 'package_' + str(package_id), 'quicksave.json'), 'w') as f:
@@ -94,13 +83,26 @@ def quicksave(channel_url_list, results):
 
 
 def change_vpn(server):
+    """!@brief Changes the connections VPN server.
+
+    @warning We use NordVPN for our connection. This function will only work with the correct NordVPN setup and
+    installations.
+
+    @param server The NordVPN server address to connect to as string.
+    """
     os.system('nordvpn disconnect')
     server = server.split('.')[0]
     os.system('nordvpn connect ' + server)
 
 
 def get_vpn_servers():
-    req = requests.get("https://api.nordvpn.com/v1/servers?limit=10000")
+    """!@brief Loads a list of available NordVPN servers.
+
+    Server list is filtered to only include servers below 50% capacity and shuffled.
+
+    @return Returns a list of available servers.
+    """
+    req = requests.get("https://api.nordvpn.com/v1/servers?limit=10000")  # Set limit to get more than 100 servers.
     vpn_list = []
     for server in req.json():
         if server["load"] < 50:
@@ -110,19 +112,22 @@ def get_vpn_servers():
     return vpn_list
 
 
-if __name__ == '__main__':
-    # package_id, load_save = show_dialogue(dialogue_nr=0)
-    if load_save:
-        save = load_quicksave(package_id)
+def main():
+    """!@brief Main function of the docker scrape script.
+
+    Uses the environment variables to scrape the assigned work package and takes care of scraping error handling.
+    Scraping is done with quicksaves to be able to continue the work in case an unforeseen error appears.
+    """
+    if LOAD_SAVE:
+        save = load_quicksave(PACKAGE_ID)
         channel_url_list = save['channel_url_list']
         results = save['results']
     else:
-        channel_url_list = load_channel_urls(package_id)
+        channel_url_list = load_channel_urls(PACKAGE_ID)
         results = list()
-    clear_dictionary(package_id)
+    clear_dictionary(PACKAGE_ID)
 
     sb_scraper = SBScraper()
-
     # Connect to VPNs to avoid getting blocked by cloudflare.
     vpn_server_list = get_vpn_servers()
     while not vpn_server_list:
@@ -152,10 +157,19 @@ if __name__ == '__main__':
             results.append(channel_data)
         if not it % 50:
             print('Quicksaving...')
-            quicksave(channel_url_list, results)
+            quicksave(channel_url_list, results, PACKAGE_ID)
         it += 1
     if results:
-        write_results(results, package_id=package_id)
-    show_dialogue(dialogue_nr=1)
+        write_results(results, package_id=PACKAGE_ID)
+    print('##################################')
+    print('###  Finished working package  ###')
+    print('### The scraper will now close ###')
+    print('##################################')
     time.sleep(1)
 
+
+if __name__ == '__main__':
+    PATH = "/"
+    PACKAGE_ID = os.environ['PACKAGE']
+    LOAD_SAVE = os.environ['LOAD_FILE'] == "yes"
+    main()
