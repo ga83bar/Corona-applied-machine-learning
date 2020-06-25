@@ -113,6 +113,7 @@ def show_dialogue(dialogue_nr=0):
         print('##################################################################')
         rsp = int(input())
         return rsp
+    return False
 
 
 def write_fails(fails):

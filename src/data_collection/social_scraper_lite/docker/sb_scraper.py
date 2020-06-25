@@ -133,7 +133,7 @@ class SBScraper:
             self.html_response = html_rsp
             return
         # General exception as there are lots of errors with cloudflare. Every exception is handled via return values.
-        except Exception as err:
+        except Exception as err:  # pylint: disable=broad-except
             print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
             print('Error message was: {}'.format(err))
             self.html_response = False
@@ -228,9 +228,8 @@ class SBScraper:
             categories = self._process_categories(categories)
             data = self._process_data(data)
             return dict(zip(categories, data))
-        else:
-            print('INVALID DATA RETURNED')
-            return {'Invalid_data': [0, 0]}
+        print('INVALID DATA RETURNED')
+        return {'Invalid_data': [0, 0]}
 
     @staticmethod
     def _process_categories(categories):

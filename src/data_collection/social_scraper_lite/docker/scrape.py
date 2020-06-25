@@ -135,7 +135,7 @@ def main():
     change_vpn(vpn_server_list.pop())
 
     tot_len = len(channel_url_list)
-    it = 1
+    it_cnt = 1
     err_cnt = 0
     while channel_url_list:
         channel_url = channel_url_list.pop()
@@ -155,10 +155,10 @@ def main():
             err_cnt = 0
             print('Scraping at {:.2f}%'.format((1 - len(channel_url_list)/tot_len)*100))
             results.append(channel_data)
-        if not it % 50:
+        if not it_cnt % 50:
             print('Quicksaving...')
             quicksave(channel_url_list, results, PACKAGE_ID)
-        it += 1
+        it_cnt += 1
     if results:
         write_results(results, package_id=PACKAGE_ID)
     print('##################################')
