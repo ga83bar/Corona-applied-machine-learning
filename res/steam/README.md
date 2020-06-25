@@ -1,6 +1,8 @@
-# README FOR _____ DATASET
+# README FOR STEAM DATASET
 
 ## DATA ORIGIN
+https://steam.internet.byu.edu/
+this set contains 17GB of data we dont want to have this in our git
 
 ## CODE FOR OBTAINING
 
