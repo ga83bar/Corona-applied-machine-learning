@@ -1,4 +1,3 @@
-                     
 import os
 from pytrends.request import TrendReq
 
@@ -15,21 +14,25 @@ def get_keywords(keywords_file):
     return keywords
 
 def get_interest_over_time(kw_list):
-    kw_lists = list(divide_chunks(kw_list, 5))
+    
+    #kw_lists = list(divide_chunks(kw_list, 5))
     pytrend = TrendReq()
     # Interest by Region
     counter = 1
-    for kw_list in kw_lists:
-        pytrend.build_payload(kw_list=kw_list)
+    
+    for kw in kw_list:
+        pytrend.build_payload(kw_list=[kw])
         trends_df = pytrend.interest_over_time()
-        trends_df.drop("isPartial",1,inplace=True)
-        trends_df.to_csv("{}/Data/{}.csv".format(dir_path, counter))
+        trends_df.drop("isPartial", 1, inplace=True)
+        trends_df.to_csv("{}/Data/{}.csv".format(dir_path, kw))
         counter += 1
 
 def divide_chunks(list, size):
     # looping till length l
     for keyword in range(0, len(list), size):
         yield list[keyword + size]
+def get_data():
+    kw_list = get_keywords("{}/keywords.txt".format(dir_path))
+    get_interest_over_time(kw_list)
 
-kw_list = get_keywords("{}/keywords.txt".format(dir_path))
-get_interest_over_time(kw_list)
+get_data()
