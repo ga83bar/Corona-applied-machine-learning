@@ -1,7 +1,7 @@
 # README FOR _____ DATASET
 
 ## DATA ORIGIN
-COllected by google and downloaded fromhttps://www.google.com/covid19/mobility/
+COllected by google and downloaded from https://www.google.com/covid19/mobility/
 ## CODE FOR OBTAINING
 Data was downloaded directly as a csv file
 ## CODE FOR PREPROCESSING
