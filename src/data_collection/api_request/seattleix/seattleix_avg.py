@@ -6,7 +6,7 @@
 """
 import csv
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # pylint: disable=import-error
 
 # Website
 URL = 'https://www.seattleix.net/statistics/agg_avg_daily.txt'

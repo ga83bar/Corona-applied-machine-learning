@@ -13,7 +13,7 @@ from datetime import datetime
 import logging
 import requests
 import pandas as pd
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # pylint: disable=import-error
 
 logging.basicConfig(level=logging.DEBUG)
 

@@ -6,7 +6,7 @@
 """
 import csv
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # pylint: disable=import-error
 
 # Website
 URL = 'https://www.msk-ix.ru/data/json/traffic/ix.all/yearly/?0.615278690833298'

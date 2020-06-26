@@ -5,7 +5,7 @@
 @date 20.06.2020
 """
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # pylint: disable=import-error
 
 source = requests.get('https://www.ams-ix.net/ams/documentation/total-stats').text
 
