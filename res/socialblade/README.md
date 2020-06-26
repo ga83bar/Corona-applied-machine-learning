@@ -1,4 +1,4 @@
-# Readme for the Socialblade Dataset
+# README for the Socialblade Dataset
 
 ## Data origin
 The data for this data set was scraped from [Socialblade](https://socialblade.com/), a website that tracks daily, 
