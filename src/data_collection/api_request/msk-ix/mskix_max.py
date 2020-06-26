@@ -1,15 +1,25 @@
-import requests
+"""
+@brief getting the raw data max from MSKIX
+@file MSKIX_MAX
+@author Aron Endres
+@date 20.06.2020
+"""
 import csv
+import requests
 from bs4 import BeautifulSoup
 
-url = 'https://www.msk-ix.ru/data/json/traffic/ix.all/yearly/?0.615278690833298'
+# Website
+URL = 'https://www.msk-ix.ru/data/json/traffic/ix.all/yearly/?0.615278690833298'
 
-source = requests.get(url)
+# get Website
+source = requests.get(URL)
 
+# save website in json
 result_dict = source.json()
 # print(result_dict['AVERAGE'][0])
 
-with open('mskix_max.csv','w') as file_max:
+# save raw in file
+with open('mskix_max.csv', 'w') as file_max:
     csv.writer = csv.writer(file_max)
     for line in result_dict['MAX']:
         csv.writer.writerow(line)

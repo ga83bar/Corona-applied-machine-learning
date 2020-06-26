@@ -11,9 +11,9 @@ import os
 import json
 from datetime import datetime
 import logging
-from bs4 import BeautifulSoup
-import pandas as pd
 import requests
+import pandas as pd
+from bs4 import BeautifulSoup
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -124,7 +124,7 @@ class DataPointCollection():
         """
         @brief  This method is to standardize the datasets
                 and add the feature of which datapoint it is
-        @return preprocessed df when do_single_print is set to False 
+        @return preprocessed df when do_single_print is set to False
         """
         # get raw data
         df_six_avg = pd.read_csv(
@@ -165,7 +165,7 @@ class DataPointCollection():
         """
         @ brief This method is to standardize the datasets
                 and add the feature of which datapoint it is
-        @return preprocessed df when do_single_print is set to False 
+        @return preprocessed df when do_single_print is set to False
         """
         # get raw data
         df_mskix_avg = pd.read_csv(
@@ -214,7 +214,7 @@ class DataPointCollection():
         """
         @brief floor Timestamps
         @param dataframe that has Timestamps that should be converted
-        @return preprocessed df when do_single_print is set to False 
+        @return preprocessed df when do_single_print is set to False
         """
         try:
             df_conv['Timestamp']
@@ -243,7 +243,7 @@ class DataPointCollection():
     def get_linx(self):
         """
         @brief This method is to get from LINX
-        @return preprocessed df when do_single_print is set to False 
+        @return preprocessed df when do_single_print is set to False
         """
         # get data from API
         response = self.get_request_json(LINX_URL)
@@ -376,7 +376,7 @@ class DataPointCollection():
     def create_date(self, concat):
         """
         @brief Concat all pandaframes to output it as on big dataframe
-        @param should be one dataframe put together (True) or seperated dataframes (False) be created        
+        @param should be one dataframe put together (True) or seperated dataframes (False) be created
         """
         self.do_single_print = not concat
         if concat:
@@ -404,7 +404,7 @@ class DataPointCollection():
         @brief This method is to save the pandaframe.
         @param data dataframe that should be saved
         @param name under what name should the data be saved
-        @param path where should the name be saved in absolute path 
+        @param path where should the name be saved in absolute path
         """
         data.to_pickle(os.path.join(path, name + '.pkl'))
         data.to_csv(os.path.join(path, name + '.csv'), sep='\t')
@@ -414,7 +414,7 @@ class DataPointCollection():
         """
         @brief This method makes "get" http request.
         @param url where to retrieve the data
-        @return json response 
+        @return json response
         """
         response = requests.get(url)
         return response.json()
