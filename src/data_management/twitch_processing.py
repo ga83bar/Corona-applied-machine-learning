@@ -8,11 +8,11 @@ sorted into a pandas data frame.
 
 
 from pathlib import Path, PurePath
+import json
+import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import json
-import requests
 from bs4 import BeautifulSoup
 
 
@@ -76,13 +76,13 @@ def plot_data_frame(data_frame):
     @param data_frame The pandas data frame object.
     """
     for key in ['av_conc_viewers', 'av_conc_channels', 'time_watched', 'active_streamers']:
-        _, ax = plt.subplots(figsize=(10, 10))
+        _, axis = plt.subplots(figsize=(10, 10))
         sns.lineplot(data_frame['Date'],
                      data_frame[key],
                      color='purple')
-        ax.set(xlabel='Date',
-               ylabel=key,
-               title=key)
+        axis.set(xlabel='Date',
+                 ylabel=key,
+                 title=key)
         plt.show()
 
 
