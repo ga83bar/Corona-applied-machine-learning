@@ -159,7 +159,7 @@ class DataPointCollection():
                                 data=df_six_avg)
             self.save_dataframe(path=RESOURC_PATH_PROC, name='seattleix_max',
                                 data=df_six_max)
-            return None
+            return df_six_avg, df_six_max
         else:
             return df_six_avg, df_six_max
 
@@ -209,7 +209,7 @@ class DataPointCollection():
         if self.do_single_print:
             self.save_dataframe(data=df_mskix_avg, name='mskix_avg', path=RESOURC_PATH_PROC)
             self.save_dataframe(data=df_mskix_max, name='mskix_max', path=RESOURC_PATH_PROC)
-            return None
+            return df_mskix_avg, df_mskix_max
         else:
             return df_mskix_avg, df_mskix_max
 
@@ -284,7 +284,7 @@ class DataPointCollection():
         # save data
         if self.do_single_print:
             self.save_dataframe(data_linx, 'linx', RESOURC_PATH_PROC)
-            return None
+            return data_linx
         else:
             return data_linx
 
@@ -332,7 +332,7 @@ class DataPointCollection():
         # save data
         if self.do_single_print:
             self.save_dataframe(data_pee, 'peering_cz', RESOURC_PATH_PROC)
-            return None
+            return data_pee
         else:
             return data_pee
 
@@ -373,7 +373,7 @@ class DataPointCollection():
         # save data
         if self.do_single_print:
             self.save_dataframe(data=data_ficix, name='ficix', path=RESOURC_PATH_PROC)
-            return None
+            return data_ficix
         else:
             return data_ficix
 
