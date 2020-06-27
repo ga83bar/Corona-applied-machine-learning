@@ -7,7 +7,7 @@ Worldwide traffic to Pornhub continues to be much higher than it was before the 
 The data comes from the official [Pornhub statistics website](https://www.pornhub.com/insights/coronavirus-update-may-26).
 
 ## Code for preprocessing
-The data can be found in the [PornhubCollector](/./src/data_management/data_collection.py) class.
+The data can be found in the [PornhubCollector](/src/data_management/data_collection.py) class.
 
 ## Data
 The processed data contains the attributes 

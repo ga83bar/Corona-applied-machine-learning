@@ -4,7 +4,7 @@
 The data was downloaded from the [steam database website](https://steamdb.info/app/753/graphs/).
 
 ## Code for obtaining and preprocessing
-The code can be found in the [SteamCollector](/./src/data_management/data_collection.py) class.
+The code can be found in the [SteamCollector](/src/data_management/data_collection.py) class.
 
 ## Data
 The processed data contains the attributes :

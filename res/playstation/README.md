@@ -1,7 +1,7 @@
-# README for the playstation dataset
+# README for the Playstation dataset
 
 ## Data origin
-The data was downloaded from the [gamstat website](https://gamstat.com/playstation/).
+The data was downloaded from the [gamestat website](https://gamstat.com/playstation/).
 
 ## Code for preprocessing
 The code can be found in the [data collection file](/./src/data_management/data_collection.py) in the PSCollector class.
