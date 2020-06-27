@@ -310,8 +310,9 @@ class ICollector(metaclass=ABCMeta):
         Method loads the data from the raw folder if this fil does not exist we can download the file from the internet.
         '''
         # first we try to download the data
-        if not os.path.exists(self.path_to_raw):
-            self.download_data()
+        # commented out since method wasn't implemented yet
+        # if not os.path.exists(self.path_to_raw):
+        #     self.download_data()
 
         if not os.path.exists(self.path_to_raw):
             raise Exception('{} : load_data there is no raw data'.format(self.__class__.__name__))  # # noqa: F821
@@ -354,14 +355,6 @@ class ICollector(metaclass=ABCMeta):
 
         else:
             raise Exception('plot frame is empty')
-
-    @abstractmethod
-    def download_data(self):
-        '''
-        Method for downloading the data from the internet.
-        Load from source save to path_to_raw (NOT IMPLEMENTET)
-        '''
-        raise NotImplementedError
 
     @abstractmethod
     def process_data(self, frame_raw):

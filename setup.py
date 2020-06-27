@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#
+# Maintainer: Niklas Landerer
 # Copyright 2020 Lehrstuhl für Kommunikationsnetze
 # SPDX-License-Identifier: Apache-2.0
 
