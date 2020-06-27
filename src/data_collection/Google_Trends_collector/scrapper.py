@@ -7,7 +7,8 @@ import os
 from pytrends.request import TrendReq
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-cwd = os.getcwd()
+cwd = os.getcwd(
+
 
 def get_keywords(keywords_file):
     """
@@ -22,7 +23,8 @@ def get_keywords(keywords_file):
         if line[0] != '#':
             keywords.append(line[:-1])
     print(keywords)
-    return keywords
+    return keyword
+
 
 def get_interest_over_time(kw_list):
     """
@@ -40,7 +42,6 @@ def get_interest_over_time(kw_list):
         trends_df.drop("isPartial", 1, inplace=True)
         trends_df.to_csv("{}/Data/{}.csv".format(dir_path, keyword))
         counter += 1
-
 
 
 def get_data():
