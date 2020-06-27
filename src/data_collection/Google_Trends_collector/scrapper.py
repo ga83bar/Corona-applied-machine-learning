@@ -7,7 +7,7 @@ import os
 from pytrends.request import TrendReq
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-cwd = os.getcwd(
+cwd = os.getcwd()
 
 
 def get_keywords(keywords_file):
