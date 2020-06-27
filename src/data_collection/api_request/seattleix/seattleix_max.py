@@ -7,7 +7,7 @@
 
 import csv
 import requests
-from bs4 import BeautifulSoup # pylint: disable=import-error
+from bs4 import BeautifulSoup  # pylint: disable=import-error
 
 # getting Website
 source = requests.get('https://www.seattleix.net/statistics/agg_max_daily.txt').text
