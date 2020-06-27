@@ -104,7 +104,7 @@ def get_input(string):
     """ For string inputs"""
     value = input(string)
     logging.info(value)
-    if value == "end" or value == "":
+    if value in ("end", ""):
         return False
     return value
 
