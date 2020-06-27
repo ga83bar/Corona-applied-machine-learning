@@ -46,6 +46,11 @@ The final workflow was as follows:
 The complete code can be found in [social_scraper_lite](../../src/data_collection/social_scraper_lite), all Docker related files are located in the
 [Docker subfolder](../../src/data_collection/social_scraper_lite/docker). Please note that the duplicate files in Docker are intentional to be able to load them into the containers.
 
+![Screenshot Scraping](screenshot_docker.png)
+
+In a nutshell, the crawler sends requests until cloudflare blocks the IP address used. It then switches over to another VPN server, leaving Cloudflare clueless of prior activity.
+
+
 ## Code for preprocessing
 
 Proprocessing was done by reading the raw data, resampling into consistent time intervals and dropping false values such as 
