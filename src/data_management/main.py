@@ -5,12 +5,15 @@ Please use this CLI as the starting point for all future expansions.
 """
 import asyncio
 import sys
+import logging
 from asynccmd import Cmd                            # pylint: disable=import-error
 from data_collection import DataCollection as dc    # pylint: disable=import-error
 
 # Prompts
 INTRO = 'Welcome to the Data Management Shell.   Type help or ? to list commands.\n'
 PROMPT = '---ENTER COMMAND: '
+
+logging.basicConfig(level=logging.INFO)
 
 
 class DataShell(Cmd):
@@ -22,23 +25,23 @@ class DataShell(Cmd):
         self.prompt = prompt
         self.loop = None
 
-    def do_tasks(self):
+    def do_tasks(self, _):
         """ Control Loop"""
-        for task in asyncio.Task.all_tasks(loop=self.loop):
+        for task in asyncio.Task.all_tasks(loop=self.loop):  # pylint: disable=consider-using-in
             print(task)
 
     # ----- All actionable commands -----
-    def do_req_covid_all(self):
+    def do_req_covid_all(self, _):
         """ Request all covid data"""
         save_frame, do_plot = man_data()
         self.loop.create_task(self.get_covid_data_all(save_frame, do_plot))
 
-    def do_req_covid_world(self):
+    def do_req_cworld(self, _):
         """ Request world covid data"""
         save_frame, do_plot = man_data()
         self.loop.create_task(self.get_covid_data_world(save_frame, do_plot))
 
-    def do_req_covid_country(self):
+    def do_req_ccountry(self, _):
         """ Request covid data by country"""
         countries = []
         while True:
@@ -50,9 +53,9 @@ class DataShell(Cmd):
         save_frame, do_plot = man_data()
         self.loop.create_task(self.get_covid_data(countries, save_frame, do_plot))
 
-    def do_terminate(self):
+    def do_terminate(self, _):
         """ Stop the shell and exit:  terminate"""
-        print("CLI terminated\n")
+        logging.info("CLI terminated\n")
         self.loop.stop()
         return True
 
@@ -100,7 +103,7 @@ def get_bool(string):
 def get_input(string):
     """ For string inputs"""
     value = input(string)
-    print(value)
+    logging.info(value)
     if value == "end" or value == "":
         return False
     return value
