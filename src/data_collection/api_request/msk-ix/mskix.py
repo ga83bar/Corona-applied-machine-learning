@@ -1,4 +1,4 @@
-"""
+"""!
 @brief getting the raw data avgerage from MSKIX
 @file MSKIX_AVG
 @author Aron Endres
@@ -6,7 +6,7 @@
 """
 import csv
 import requests
-from bs4 import BeautifulSoup # pylint: disable=import-error
+# from bs4 import BeautifulSoup # pylint: disable=import-error
 
 # Website
 URL = 'https://www.msk-ix.ru/data/json/traffic/ix.all/yearly/?0.615278690833298'
