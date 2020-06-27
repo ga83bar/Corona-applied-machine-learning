@@ -14,5 +14,5 @@ cloudscraper
 js2xml
 bs4
 beautifulsoup4
-setuptool
+setuptools
 pytrends
