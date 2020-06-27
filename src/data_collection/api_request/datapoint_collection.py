@@ -1,4 +1,4 @@
-"""
+"""!
 @brief This class serves as data collection for different Datapoints.
 It uses APIs and simple Webcrawling
 @file Datapoint Collection preprocessing and raw

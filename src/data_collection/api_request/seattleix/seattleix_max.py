@@ -1,4 +1,4 @@
-"""
+"""!
 @brief getting the raw data max from Seattleix
 @file SEATTLEIX_MAX
 @author Aron Endres

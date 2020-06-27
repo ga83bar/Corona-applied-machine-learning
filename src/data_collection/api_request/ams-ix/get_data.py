@@ -1,4 +1,4 @@
-"""
+"""!
 @brief try to get data from AMS-IX
 @file AMS-IX datacollection
 @author Aron Endres

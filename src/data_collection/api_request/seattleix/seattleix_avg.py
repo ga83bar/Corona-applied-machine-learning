@@ -1,4 +1,4 @@
-"""
+"""!
 @brief getting the raw data avgerage from Seattleix
 @file SEATTLEIX_AVG
 @author Aron Endres
