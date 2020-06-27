@@ -3,7 +3,6 @@ This class serves as the interface between the data selection CLI and the necess
 data collection APIS.
 """
 import os
-import webbrowser
 from datetime import timedelta as t_delta
 import logging
 from abc import ABCMeta, abstractmethod
@@ -13,9 +12,6 @@ from requests import get
 from matplotlib import pyplot as plot
 import matplotlib.dates as dates
 
-# Error Codes
-COUNTRY_REQUEST_FAILED = 'REQUEST STATUS {}: {}'
-INVALID_REQUEST = 'REQUEST INVALID'
 
 # Date constants
 DATE_SRT = '2020-02-01T00:00:00Z'
@@ -46,6 +42,9 @@ class DataCollection():
 
     def __init__(self, logging_level=logging.INFO):
         logging.basicConfig(filename='data_collection.log', level=logging_level)
+        self.COUNTRY_REQUEST_FAILED = 'REQUEST STATUS {}: {}'
+        self.INVALID_REQUEST = 'REQUEST INVALID'
+        self.PATH = "./res/covid/raw/{}/covid19_{}.csv"
 
     def get_all_data(self):
         """ Returns all Data"""
@@ -76,7 +75,7 @@ class DataCollection():
         if req.status_code == 200:
             frame = pd.read_json(req.text)
         else:
-            loggign_str = COUNTRY_REQUEST_FAILED.format(world, req.status_code)
+            loggign_str = self.COUNTRY_REQUEST_FAILED.format(world, req.status_code)
             logging.error(loggign_str)
             raise Exception(INVALID_REQUEST)
         return [world, frame]
@@ -87,7 +86,7 @@ class DataCollection():
         if covid_request.status_code == 200:
             frame = pd.read_json(covid_request.text)
         else:
-            loggign_str = COUNTRY_REQUEST_FAILED.format(country, covid_request.status_code)
+            loggign_str = self.COUNTRY_REQUEST_FAILED.format(country, covid_request.status_code)
             logging.error(loggign_str)
             raise Exception(INVALID_REQUEST)
         return [country, frame]
@@ -104,7 +103,7 @@ class DataCollection():
                         os.makedirs(folder_path)
 
                     # _ = frame[1].to_pickle(("./res/covid/raw/{}/covid19_{}.pkl").format(frame[0], frame[0]))
-                    _ = frame[1].to_csv(("./res/covid/raw/{}/covid19_{}.csv").format(frame[0], frame[0]))
+                    _ = frame[1].to_csv((self.PATH).format(frame[0], frame[0]))
             logging.info('Saved raw covid data in folders')
 
         if do_plot:
@@ -117,10 +116,10 @@ class DataCollection():
         """ Validate raw Data for Completeness"""
         raise NotImplementedError
 
-    def __get_date_list(self):
-        """ Gen list of all dates between start and end date"""
-        date_list = [DATE_SRT + t_delta(days=x) for x in range(0, (DATE_END - DATE_SRT).days)]
-        return date_list
+def __get_date_list():
+    """ Gen list of all dates between start and end date"""
+    date_list = [DATE_SRT + t_delta(days=x) for x in range(0, (DATE_END - DATE_SRT).days)]
+    return date_list
 
 
 class CovidCollector():
@@ -358,8 +357,7 @@ class ICollector(metaclass=ABCMeta):
         Method for downloading the data from the internet.
         Load from source save to path_to_raw (NOT IMPLEMENTET)
         '''
-        # TODO
-        print('download data is not implementet')
+        raise NotImplementedError
 
     @abstractmethod
     def process_data(self, frame_raw):
@@ -414,7 +412,6 @@ class PornhubCollector(ICollector):
         ICollector.__init__(self, 'pornhub')  # add arguements if req
         self.source = 'http://www.pornhub.com/insights/coronavirus-update'
         self.csv_name = 'World.csv'
-
         self.path_to_raw = os.path.join(self.path_to_raw, self.csv_name)
         self.path_to_processed = os.path.join(self.path_to_processed, self.csv_name)
 
@@ -431,12 +428,6 @@ class PornhubCollector(ICollector):
         # convert 10% to 0.1
         frame_raw['Traffic_inc'] = frame_raw['Traffic_inc'].str.rstrip('%').astype('float') / 100.0
         return frame_raw
-
-    def show(self):
-        '''
-        Most important method to gain insights in the pornhub dataset ;-).
-        '''
-        webbrowser.open('https://de.pornhub.com')
 
 
 class PSCollector(ICollector):
