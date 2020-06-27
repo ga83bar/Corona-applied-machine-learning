@@ -48,7 +48,7 @@ def divide_chunks(lst, size):
         yield lst[keyword + size]
 
 def get_data():
-        """
+    """
     !@brief Run to get all the data and save them into a csv
     @param  None
     @return None
