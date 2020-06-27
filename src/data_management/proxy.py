@@ -1,7 +1,6 @@
 """here goes the proxy"""
 
 from .preprocessing import DataPreprocessor
-from .data_collection import DataCollection
 
 
 class Proxy():
@@ -43,10 +42,6 @@ class Proxy():
 
         else:
             # load rawData from file
-            data_collector = DataCollection()
-            raw_data = data_collector.get_raw_data()
-            print(raw_data)
-
             data_processor = DataPreprocessor()
             print(data_processor)
 
