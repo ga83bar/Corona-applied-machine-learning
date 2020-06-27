@@ -22,13 +22,13 @@ joblib==0.15.1            # via scikit-learn
 js2xml==0.3.1             # via -r requirements.in
 kiwisolver==1.2.0         # via matplotlib
 lazy-object-proxy==1.4.3  # via astroid
-lxml==4.5.1               # via js2xml
+lxml==4.5.1               # via js2xml, pytrends
 matplotlib==3.2.1         # via -r requirements.in, seaborn
 mccabe==0.6.1             # via flake8, pylint
 more-itertools==8.3.0     # via pytest
 numpy==1.18.4             # via -r requirements.in, matplotlib, pandas, scikit-learn, scipy, seaborn
 packaging==20.4           # via pytest
-pandas==1.0.3             # via -r requirements.in, seaborn
+pandas==1.0.3             # via -r requirements.in, pytrends, seaborn
 pluggy==0.13.1            # via pytest
 ply==3.11                 # via slimit
 py==1.8.1                 # via pytest
@@ -42,9 +42,10 @@ pytest-mock==3.1.0        # via -r requirements.in
 pytest-pylint==0.17.0     # via -r requirements.in
 pytest==5.4.2             # via -r requirements.in, pytest-cov, pytest-flake8, pytest-mock, pytest-pylint
 python-dateutil==2.8.1    # via matplotlib, pandas
+pytrends==4.7.3           # via -r requirements.in
 pytz==2020.1              # via pandas
 requests-toolbelt==0.9.1  # via cloudscraper
-requests==2.24.0          # via -r requirements.in, cloudscraper, docker, requests-toolbelt
+requests==2.24.0          # via -r requirements.in, cloudscraper, docker, pytrends, requests-toolbelt
 scikit-learn==0.23.1      # via -r requirements.in
 scipy==1.4.1              # via scikit-learn, seaborn
 seaborn==0.10.1           # via -r requirements.in
