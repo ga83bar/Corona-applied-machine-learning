@@ -290,9 +290,9 @@ def get_peering_cz(start_time=1498305600, end_time=1592990400):
     # get data from API
     body = json.dumps(
         {"operationName": "traffics", "variables": {"timestampRanges": [{"since": start_time, "until": end_time}]},
-            "query": "query traffics($timestampRanges: [TimestampRangeInput!]!) \
-            {\n  traffics(timestampRanges: $timestampRanges) \
-            {\n    timestamp\n    traffic\n    __typename\n  }\n}\n"})
+         "query": "query traffics($timestampRanges: [TimestampRangeInput!]!) \
+         {\n  traffics(timestampRanges: $timestampRanges) \
+         {\n    timestamp\n    traffic\n    __typename\n  }\n}\n"})
     response = requests.post(PEERING_CZ_URL, body)
     json_response = response.json()
 
@@ -373,7 +373,7 @@ def create_date(concat):
         data_six_avg, data_six_max = get_six_pre()
         data_ficix = get_ficix()
         data_all = pd.concat([data_linx, data_pee, data_mkix_avg, data_mkix_max, data_six_avg,
-                             data_six_max, data_ficix], ignore_index=True)
+                              data_six_max, data_ficix], ignore_index=True)
 
         save_dataframe(data_all, 'all', RESOURC_PATH)
     else:
