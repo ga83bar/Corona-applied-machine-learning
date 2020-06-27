@@ -12,8 +12,8 @@ import json
 from datetime import datetime
 import logging
 import requests
-import pandas as pd  # pylint: disable=import-error
 from bs4 import BeautifulSoup  # pylint: disable=import-error
+import pandas as pd  # pylint: disable=import-error
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -298,8 +298,8 @@ class DataPointCollection():
 
         # get data from API
         body = json.dumps(
-            {"operationName":"traffics", "variables": {"timestampRanges": [{"since": start_time, "until": end_time}]},
-             "query":"query traffics($timestampRanges: [TimestampRangeInput!]!) \
+            {"operationName": "traffics", "variables": {"timestampRanges": [{"since": start_time, "until": end_time}]},
+             "query": "query traffics($timestampRanges: [TimestampRangeInput!]!) \
                 {\n  traffics(timestampRanges: $timestampRanges) \
                 {\n    timestamp\n    traffic\n    __typename\n  }\n}\n"})
         response = requests.post(PEERING_CZ_URL, body)
@@ -365,7 +365,6 @@ class DataPointCollection():
         # get values of Date
         for idx, date in enumerate(data_ficix['Timestamp']):
             data_ficix.iloc[idx, 1] = datetime.fromtimestamp(date).date()
-
 
         # save data
         if self.do_single_print:
