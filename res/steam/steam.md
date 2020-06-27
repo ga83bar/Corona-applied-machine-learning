@@ -1,12 +1,12 @@
-# README FOR STEAM DATASET
+# README for the Steam dataset
 
-## DATA ORIGIN
-ASK: Henrique
+## Data origin
+The data was downloaded from the [steam database website](https://steamdb.info/app/753/graphs/).
 
-## CODE FOR OBTAINING AND PREPROCESSING
-[SteamCollector](/./src/data_management/data_collection.py)
+## Code for obtaining and preprocessing
+The code can be found in the [SteamCollector](/./src/data_management/data_collection.py) class.
 
-## DATA
+## Data
 The processed data contains the attributes :
   - Date
   - number of Users

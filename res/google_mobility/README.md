@@ -1,9 +1,8 @@
-# README FOR _____ DATASET
+# README for the Google Mobility Dataset
 
-## DATA ORIGIN
-COllected by google and downloaded from https://www.google.com/covid19/mobility/
-## CODE FOR OBTAINING
-Data was downloaded directly as a csv file
-## CODE FOR PREPROCESSING
-No need for preprocessing after analysis of Data since it aldready comes in a csv file
-reference to src/data_management/preprocessing_xxx.py
+## Data origin
+Collected by google and downloaded from their official [covid study website](https://www.google.com/covid19/mobility/).
+## Code for obtaining
+Data was downloaded directly as a csv file.
+## Code for preprocessing
+No need for preprocessing after analysis of data since it aldready comes in a csv file and is in excellent shape.

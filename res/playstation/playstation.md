@@ -1,12 +1,12 @@
-# README FOR PLAYSTATION DATASET
+# README for the playstation dataset
 
-## DATA ORIGIN
-https://gamstat.com/playstation/
+## Data origin
+The data was downloaded from the [gamstat website](https://gamstat.com/playstation/).
 
-## CODE FOR PREPROCESSING
-[PSCollector](/./src/data_management/data_collection.py)
+## Code for preprocessing
+The code can be found in the [data collection file](/./src/data_management/data_collection.py) in the PSCollector class.
 
-## DATA
+## Data structure
 The processed data contains the attributes :
   - Date
   - number of PS3 players
