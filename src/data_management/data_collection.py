@@ -22,8 +22,8 @@ DATE_SRT = '2020-02-01T00:00:00Z'
 DATE_END = '2020-06-20T00:00:00Z'
 
 # APIs https://api.covid19api.com/live/country/Poland/status/confirmed/date/2019-01-01T00:00:00Z
-API_COVID_COUNTRY = 'https://api.covid19api.com/country/{}/status/confirmed?from=' + DATE_SRT + '&to=' + DATE_END
-API_COVID_WORLD = 'https://api.covid19api.com/world?from=' + DATE_SRT + '&to=' + DATE_END
+API_COVID_COUNTRY = 'https://api.covid19api.com/live/country/{}/status/confirmed/date/' + DATE_SRT
+API_COVID_WORLD = 'https://corona-api.com/timeline'
 API_COVID_DAY_ONE = 'https://api.covid19api.com/dayone/country/{}'  # need to add the country
 
 # Top 60 Countries, Cases / 1M, Tot. Cases > 2000
@@ -65,10 +65,21 @@ class DataCollection():
 
     def get_covid_data_world(self, save_frame=True, do_plot=False):
         """ Fetch worldwide corona totals"""
-        world = ["world"]
-        world_pd_frame = [self.__covid_request(world)]
+        world = "world"
+        world_pd_frame = [self.__covid_request_world(world)]
         self.__handle_result(world_pd_frame, save_frame, do_plot)
         return world_pd_frame
+
+    def __covid_request_world(self, world):
+        """ Return time series of world data"""
+        req = get(API_COVID_WORLD)
+        if req.status_code == 200:
+            frame = pd.read_json(req.text)
+        else:
+            loggign_str = COUNTRY_REQUEST_FAILED.format(world, req.status_code)
+            logging.error(loggign_str)
+            raise Exception(INVALID_REQUEST)
+        return [world, frame]
 
     def __covid_request(self, country):
         """ Return Covid data for requested country"""
@@ -99,7 +110,7 @@ class DataCollection():
         if do_plot:
             for frame in dataframes:
                 if not frame[1].empty:
-                    frame[1].plot(kind='line', title=frame[0], x='Date', y=['Confirmed', 'Deaths', 'Active'])
+                    frame[1].plot(kind='line', title=frame[0], x='date', y=['Confirmed', 'Deaths', 'Active'])
                     plot.show()
 
     def __val_source_data(self):
