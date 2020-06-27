@@ -34,7 +34,7 @@ RESOURC_PATH_PROC = '../../../res/ix/processed'
 
 
 class DataPointCollection():
-    """
+    """!
     @brief This class is responsible for collecting raw data from different
     databases or API's
     """
@@ -42,10 +42,10 @@ class DataPointCollection():
     do_single_print = True
 
     def __init__(self):
-        """@brief Constructor"""
+        """! @brief Constructor"""
 
     def get_six_avg_raw(self):
-        """@brief getting the data from SIX the average usage"""
+        """! @brief getting the data from SIX the average usage"""
 
         # getting data from website
         source_avg = requests.get(SIX_AVG_URL).text
@@ -68,7 +68,7 @@ class DataPointCollection():
                 writer_avg.writerow(line.split('\t'))
 
     def get_six_max_raw(self):
-        """@brief getting the data from SIX the max usage"""
+        """! @brief getting the data from SIX the max usage"""
 
         # getting data from website
         source_max = requests.get(SIX_MAX_URL).text
@@ -91,7 +91,7 @@ class DataPointCollection():
                 writer_max.writerow(line.split('\t'))
 
     def get_mskix_raw(self):
-        """@brief getting data from MSK-IX Average and Max"""
+        """! @brief getting data from MSK-IX Average and Max"""
 
         # getting data from website
         source = requests.get(MSKIX_URL)
@@ -116,13 +116,13 @@ class DataPointCollection():
                 max_writer.writerow(line)
 
     def get_raw(self):
-        """@brief is getting and saving all the raw data"""
+        """! @brief is getting and saving all the raw data"""
         self.get_mskix_raw()
         self.get_six_avg_raw()
         self.get_six_max_raw()
 
     def get_six_pre(self):
-        """
+        """!
         @brief  This method is to standardize the datasets
                 and add the feature of which datapoint it is
         @return preprocessed df when do_single_print is set to False
@@ -159,12 +159,13 @@ class DataPointCollection():
                                 data=df_six_avg)
             self.save_dataframe(path=RESOURC_PATH_PROC, name='seattleix_max',
                                 data=df_six_max)
+            return None
         else:
             return df_six_avg, df_six_max
 
     def get_mskix_pre(self):
-        """
-        @ brief This method is to standardize the datasets
+        """!
+        @brief This method is to standardize the datasets
                 and add the feature of which datapoint it is
         @return preprocessed df when do_single_print is set to False
         """
@@ -208,11 +209,12 @@ class DataPointCollection():
         if self.do_single_print:
             self.save_dataframe(data=df_mskix_avg, name='mskix_avg', path=RESOURC_PATH_PROC)
             self.save_dataframe(data=df_mskix_max, name='mskix_max', path=RESOURC_PATH_PROC)
+            return None
         else:
             return df_mskix_avg, df_mskix_max
 
     def df_timestamp_floor(self, df_conv):
-        """
+        """!
         @brief floor Timestamps
         @param dataframe that has Timestamps that should be converted
         @return preprocessed df when do_single_print is set to False
@@ -242,7 +244,7 @@ class DataPointCollection():
         return df_conv
 
     def get_linx(self):
-        """
+        """!
         @brief This method is to get from LINX
         @return preprocessed df when do_single_print is set to False
         """
@@ -282,11 +284,12 @@ class DataPointCollection():
         # save data
         if self.do_single_print:
             self.save_dataframe(data_linx, 'linx', RESOURC_PATH_PROC)
+            return None
         else:
             return data_linx
 
     def get_peering_cz(self, start_time=1498305600, end_time=1592990400):
-        """
+        """!
         @brief This method extracts data form peering.cz
         @param from when until when in Timestamp format in milliseconds
         @return saves and returns preprocessed data from linx datapoint
@@ -329,11 +332,12 @@ class DataPointCollection():
         # save data
         if self.do_single_print:
             self.save_dataframe(data_pee, 'peering_cz', RESOURC_PATH_PROC)
+            return None
         else:
             return data_pee
 
     def get_ficix(self):
-        """
+        """!
         @brief This method extracts data fro, the ficix csv
         @return saves and returns preprocessed data from linx datapoint
         """
@@ -369,11 +373,12 @@ class DataPointCollection():
         # save data
         if self.do_single_print:
             self.save_dataframe(data=data_ficix, name='ficix', path=RESOURC_PATH_PROC)
+            return None
         else:
             return data_ficix
 
     def create_date(self, concat):
-        """
+        """!
         @brief Concat all pandaframes to output it as on big dataframe
         @param should be one dataframe put together (True) or seperated dataframes (False) be created
         """
@@ -399,7 +404,7 @@ class DataPointCollection():
 
     @staticmethod
     def save_dataframe(data, name, path):
-        """
+        """!
         @brief This method is to save the pandaframe.
         @param data dataframe that should be saved
         @param name under what name should the data be saved
@@ -410,7 +415,7 @@ class DataPointCollection():
 
     @staticmethod
     def get_request_json(url):
-        """
+        """!
         @brief This method makes "get" http request.
         @param url where to retrieve the data
         @return json response
@@ -420,9 +425,9 @@ class DataPointCollection():
 
 
 def main():
-    '''
+    """!
     This function is call Class method. So it is possible to generate dataset.
-    '''
+    """
     # create Dataset
     dp_f = DataPointCollection()
     dp_f.get_raw()
