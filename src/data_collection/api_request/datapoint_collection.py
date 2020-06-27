@@ -12,8 +12,8 @@ import json
 from datetime import datetime
 import logging
 import requests
-import pandas as pd
-from bs4 import BeautifulSoup # pylint: disable=import-error
+import pandas as pd  # pylint: disable=import-error
+from bs4 import BeautifulSoup  # pylint: disable=import-error
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -32,12 +32,13 @@ RESOURC_PATH = '../../../res/ix'
 RESOURC_PATH_RAW = '../../../res/ix/raw'
 RESOURC_PATH_PROC = '../../../res/ix/processed'
 
+
 class DataPointCollection():
     """
     @brief This class is responsible for collecting raw data from different
     databases or API's
     """
-    ## @param do_single_print if dataframes should be saved in singles or in one big df
+    # @param do_single_print if dataframes should be saved in singles or in one big df
     do_single_print = True
 
     def __init__(self):
@@ -144,7 +145,7 @@ class DataPointCollection():
         df_six_avg['type'] = 'avg'
         df_six_max['type'] = 'max'
 
-        #delet last row
+        # delet last row
         df_six_avg.drop(df_six_avg.tail(1).index, inplace=True)
         df_six_max.drop(df_six_max.tail(1).index, inplace=True)
 
@@ -249,10 +250,10 @@ class DataPointCollection():
         response = self.get_request_json(LINX_URL)
         throughput = response['throughput']
 
-        #create final Frame
+        # create final Frame
         data_linx = pd.DataFrame()
 
-        #get all datacentre in a list
+        # get all datacentre in a list
         items = throughput.keys()
 
         # iterate through all datacentres
@@ -269,7 +270,7 @@ class DataPointCollection():
             data_linx = pd.concat([data_linx, data_new], ignore_index=True)
 
         # bring timestamps from millieseconds to seconds
-        data_linx.iloc[:, 0] = data_linx.iloc[:, 0]/ 1000
+        data_linx.iloc[:, 0] = data_linx.iloc[:, 0] / 1000
 
         # Add feature Date
         data_linx.insert(1, "Date", 0)
@@ -278,7 +279,7 @@ class DataPointCollection():
         for idx, date in enumerate(data_linx['Timestamp']):
             data_linx.iloc[idx, 1] = datetime.fromtimestamp(date).date()
 
-        #save data
+        # save data
         if self.do_single_print:
             self.save_dataframe(data_linx, 'linx', RESOURC_PATH_PROC)
         else:
@@ -297,7 +298,7 @@ class DataPointCollection():
 
         # get data from API
         body = json.dumps(
-            {"operationName":"traffics", "variables":{"timestampRanges":[{"since": start_time, "until": end_time}]},
+            {"operationName":"traffics", "variables": {"timestampRanges": [{"since": start_time, "until": end_time}]},
              "query":"query traffics($timestampRanges: [TimestampRangeInput!]!) \
                 {\n  traffics(timestampRanges: $timestampRanges) \
                 {\n    timestamp\n    traffic\n    __typename\n  }\n}\n"})
@@ -314,7 +315,7 @@ class DataPointCollection():
         data_pee = pd.DataFrame(list(zip(time_list, data_list)),
                                 columns=['Timestamp', 'bitrate'])
 
-        #Add missing features
+        # Add missing features
         data_pee['IX'] = 'peering.cz'
         data_pee['type'] = 'avg'
 
@@ -341,7 +342,7 @@ class DataPointCollection():
             os.path.abspath(os.path.join(
                 RESOURC_PATH, 'raw/ficix.csv')), sep=',', names=['Timestamp', 'bitrate', 'del1', 'del2'])
 
-        #delet unnessary data
+        # delet unnessary data
         del data_ficix['del2']
         del data_ficix['del1']
 
@@ -371,7 +372,6 @@ class DataPointCollection():
             self.save_dataframe(data=data_ficix, name='ficix', path=RESOURC_PATH_PROC)
         else:
             return data_ficix
-
 
     def create_date(self, concat):
         """
@@ -420,13 +420,11 @@ class DataPointCollection():
         return response.json()
 
 
-
-
 def main():
     '''
     This function is call Class method. So it is possible to generate dataset.
     '''
-    #create Dataset
+    # create Dataset
     dp_f = DataPointCollection()
     dp_f.get_raw()
     dp_f.create_date(concat=False)
