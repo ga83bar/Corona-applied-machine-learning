@@ -129,7 +129,7 @@ class SBScraper:
         try:
             html_rsp = scraper.get(url, proxies=proxies).text
             if html_rsp is None:
-                logging.info('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
+                logging.info('Error in SBScraper._get_url with url %s and proxy %s.', url, proxies)
                 logging.info('Web response had NoneType.')
                 self.html_response = False
                 return
@@ -137,8 +137,8 @@ class SBScraper:
             return
         # General exception as there are lots of errors with cloudflare. Every exception is handled via return values.
         except Exception as err:  # pylint: disable=broad-except
-            logging.info('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
-            logging.info('Error message was: {}'.format(err))
+            logging.info('Error in SBScraper._get_url with url %s and proxy %s.', url, proxies)
+            logging.info('Error message was: %s', err)
             self.html_response = False
             return
 
