@@ -9,9 +9,12 @@ externally!
 
 import threading
 import time
+import logging
 import cloudscraper
 from bs4 import BeautifulSoup
 import js2xml
+
+logging.basicConfig(level=logging.INFO)
 
 
 class SBScraper:
@@ -104,11 +107,11 @@ class SBScraper:
         while self.request_thread.is_alive() and t_diff < 10:
             time.sleep(0.5)
             t_diff = time.time() - t_start
-            print('Timeout running...')
+            # logging.info('Timeout running...')
         if t_diff >= 10:
-            print('### RAN INTO TIMEOUT ###')
+            logging.info('### RAN INTO TIMEOUT ###')
             return False
-        print('Nominal execution')
+        logging.info('Nominal execution')
         return self.html_response
 
     def _get_url(self, url, proxies=None):
@@ -126,16 +129,16 @@ class SBScraper:
         try:
             html_rsp = scraper.get(url, proxies=proxies).text
             if html_rsp is None:
-                print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
-                print('Web response had NoneType.')
+                logging.info('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
+                logging.info('Web response had NoneType.')
                 self.html_response = False
                 return
             self.html_response = html_rsp
             return
         # General exception as there are lots of errors with cloudflare. Every exception is handled via return values.
         except Exception as err:  # pylint: disable=broad-except
-            print('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
-            print('Error message was: {}'.format(err))
+            logging.info('Error in SBScraper._get_url with url {} and proxy {}.'.format(url, proxies))
+            logging.info('Error message was: {}'.format(err))
             self.html_response = False
             return
 
@@ -228,7 +231,7 @@ class SBScraper:
             categories = self._process_categories(categories)
             data = self._process_data(data)
             return dict(zip(categories, data))
-        print('INVALID DATA RETURNED')
+        logging.info('INVALID DATA RETURNED')
         return {'Invalid_data': [0, 0]}
 
     @staticmethod
