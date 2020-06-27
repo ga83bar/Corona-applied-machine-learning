@@ -154,14 +154,11 @@ class DataPointCollection():
         df_six_max = self.df_timestamp_floor(df_six_max)
 
         # save preprocessed
-        if self.do_single_print:
-            self.save_dataframe(path=RESOURC_PATH_PROC, name='seattleix_avg',
-                                data=df_six_avg)
-            self.save_dataframe(path=RESOURC_PATH_PROC, name='seattleix_max',
-                                data=df_six_max)
-            return None
-        else:
-            return df_six_avg, df_six_max
+        self.save_dataframe(path=RESOURC_PATH_PROC, name='seattleix_avg',
+                            data=df_six_avg)
+        self.save_dataframe(path=RESOURC_PATH_PROC, name='seattleix_max',
+                            data=df_six_max)
+        return df_six_avg, df_six_max
 
     def get_mskix_pre(self):
         """!
@@ -206,12 +203,9 @@ class DataPointCollection():
             df_mskix_max.iloc[idx, 1] = datetime.fromtimestamp(date).date()
 
         # save data
-        if self.do_single_print:
-            self.save_dataframe(data=df_mskix_avg, name='mskix_avg', path=RESOURC_PATH_PROC)
-            self.save_dataframe(data=df_mskix_max, name='mskix_max', path=RESOURC_PATH_PROC)
-            return None
-        else:
-            return df_mskix_avg, df_mskix_max
+        self.save_dataframe(data=df_mskix_avg, name='mskix_avg', path=RESOURC_PATH_PROC)
+        self.save_dataframe(data=df_mskix_max, name='mskix_max', path=RESOURC_PATH_PROC)
+        return df_mskix_avg, df_mskix_max
 
     def df_timestamp_floor(self, df_conv):
         """!
@@ -282,11 +276,8 @@ class DataPointCollection():
             data_linx.iloc[idx, 1] = datetime.fromtimestamp(date).date()
 
         # save data
-        if self.do_single_print:
-            self.save_dataframe(data_linx, 'linx', RESOURC_PATH_PROC)
-            return None
-        else:
-            return data_linx
+        self.save_dataframe(data_linx, 'linx', RESOURC_PATH_PROC)
+        return data_linx
 
     def get_peering_cz(self, start_time=1498305600, end_time=1592990400):
         """!
@@ -330,11 +321,8 @@ class DataPointCollection():
             data_pee.iloc[idx, 1] = datetime.fromtimestamp(date).date()
 
         # save data
-        if self.do_single_print:
-            self.save_dataframe(data_pee, 'peering_cz', RESOURC_PATH_PROC)
-            return None
-        else:
-            return data_pee
+        self.save_dataframe(data_pee, 'peering_cz', RESOURC_PATH_PROC)
+        return data_pee
 
     def get_ficix(self):
         """!
@@ -370,12 +358,9 @@ class DataPointCollection():
         for idx, date in enumerate(data_ficix['Timestamp']):
             data_ficix.iloc[idx, 1] = datetime.fromtimestamp(date).date()
 
-        # save data
-        if self.do_single_print:
-            self.save_dataframe(data=data_ficix, name='ficix', path=RESOURC_PATH_PROC)
-            return None
-        else:
-            return data_ficix
+    # save data
+        self.save_dataframe(data=data_ficix, name='ficix', path=RESOURC_PATH_PROC)
+        return data_ficix
 
     def create_date(self, concat):
         """!
