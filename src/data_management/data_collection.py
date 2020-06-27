@@ -18,11 +18,11 @@ COUNTRY_REQUEST_FAILED = 'REQUEST STATUS {}: {}'
 INVALID_REQUEST = 'REQUEST INVALID'
 
 # Date constants
-DATE_SRT = '2019-01-01T00:00:00Z'
+DATE_SRT = '2020-02-01T00:00:00Z'
 DATE_END = '2020-06-20T00:00:00Z'
 
 # APIs https://api.covid19api.com/live/country/Poland/status/confirmed/date/2019-01-01T00:00:00Z
-API_COVID_COUNTRY = 'https://api.covid19api.com/live/country/{}/status/confirmed/date/' + DATE_SRT
+API_COVID_COUNTRY = 'https://api.covid19api.com/country/{}/status/confirmed?from=' + DATE_SRT + '&to=' + DATE_END
 API_COVID_WORLD = 'https://api.covid19api.com/world?from=' + DATE_SRT + '&to=' + DATE_END
 API_COVID_DAY_ONE = 'https://api.covid19api.com/dayone/country/{}'  # need to add the country
 
