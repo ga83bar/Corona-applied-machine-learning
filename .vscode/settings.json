@@ -5,8 +5,8 @@
         "${workspaceFolder}/.pylintrc"
     ],
     "python.linting.pylintUseMinimalCheckers": false,
-    "python.pythonPath": "/usr/bin/python3",
-    "python.linting.pylintEnabled": false,
+    "python.pythonPath": "/home/aron/Dokumente/venv/ami/bin/python",
+    "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
-    "python.linting.flake8Enabled": true
+    "python.linting.flake8Enabled": false
 }
