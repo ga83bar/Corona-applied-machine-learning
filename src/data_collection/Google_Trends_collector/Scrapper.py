@@ -15,7 +15,6 @@ def get_keywords(keywords_file):
     @param name of the file to search for
     @return Returns the keywords as a list
     """
-
     kw_file = open(keywords_file)
     keywords = []
     for line in kw_file:
@@ -42,13 +41,10 @@ def get_interest_over_time(kw_list):
         trends_df.to_csv("{}/Data/{}.csv".format(dir_path, keyword))
         counter += 1
 
-def divide_chunks(lst, size):
-    # looping till length l
-    for keyword in range(0, len(lst), size):
-        yield lst[keyword + size]
+
 
 def get_data():
-        """
+    """
     !@brief Run to get all the data and save them into a csv
     @param  None
     @return None
