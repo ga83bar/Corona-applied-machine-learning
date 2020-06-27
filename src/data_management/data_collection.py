@@ -42,9 +42,9 @@ class DataCollection():
 
     def __init__(self, logging_level=logging.INFO):
         logging.basicConfig(filename='data_collection.log', level=logging_level)
-        self.COUNTRY_REQUEST_FAILED = 'REQUEST STATUS {}: {}'
-        self.INVALID_REQUEST = 'REQUEST INVALID'
-        self.PATH = "./res/covid/raw/{}/covid19_{}.csv"
+        self.country_request_failed = 'REQUEST STATUS {}: {}'
+        self.invalid_request = 'REQUEST INVALID'
+        self.path = "./res/covid/raw/{}/covid19_{}.csv"
 
     def get_all_data(self):
         """ Returns all Data"""
@@ -75,9 +75,9 @@ class DataCollection():
         if req.status_code == 200:
             frame = pd.read_json(req.text)
         else:
-            loggign_str = self.COUNTRY_REQUEST_FAILED.format(world, req.status_code)
+            loggign_str = self.country_request_failed.format(world, req.status_code)
             logging.error(loggign_str)
-            raise Exception(INVALID_REQUEST)
+            raise Exception(self.invalid_request)
         return [world, frame]
 
     def __covid_request(self, country):
@@ -86,9 +86,9 @@ class DataCollection():
         if covid_request.status_code == 200:
             frame = pd.read_json(covid_request.text)
         else:
-            loggign_str = self.COUNTRY_REQUEST_FAILED.format(country, covid_request.status_code)
+            loggign_str = self.country_request_failed.format(country, covid_request.status_code)
             logging.error(loggign_str)
-            raise Exception(INVALID_REQUEST)
+            raise Exception(self.invalid_request)
         return [country, frame]
 
     def __handle_result(self, dataframes, save_frame=False, do_plot=False):
@@ -103,7 +103,7 @@ class DataCollection():
                         os.makedirs(folder_path)
 
                     # _ = frame[1].to_pickle(("./res/covid/raw/{}/covid19_{}.pkl").format(frame[0], frame[0]))
-                    _ = frame[1].to_csv((self.PATH).format(frame[0], frame[0]))
+                    _ = frame[1].to_csv((self.path).format(frame[0], frame[0]))
             logging.info('Saved raw covid data in folders')
 
         if do_plot:
@@ -115,6 +115,7 @@ class DataCollection():
     def __val_source_data(self):
         """ Validate raw Data for Completeness"""
         raise NotImplementedError
+
 
 def __get_date_list():
     """ Gen list of all dates between start and end date"""
@@ -137,6 +138,8 @@ class CovidCollector():
         logfile_path = os.path.join('.', 'res', 'covid', 'data_collection.log')
         logging.basicConfig(filename=logfile_path, level=logging_level)
         self.keep = 'dummy'
+        self.invalid_request = 'REQUEST INVALID'
+        self.country_request_failed = 'REQUEST STATUS {}: {}'
 
     def __load_covid_countries(self, countries, save_frame=True, do_plot=False):
         """ Return only Covid Data"""
@@ -157,7 +160,7 @@ class CovidCollector():
         if covid_request.status_code == 200:
             frame = pd.read_json(covid_request.text)
         else:
-            raise Exception(INVALID_REQUEST)
+            raise Exception(self.invalid_request)
         self.__handle_result([country, frame], save_frame=save_frame, do_plot=do_plot)
 
     def __handle_result(self, frame, save_frame=True, do_plot=False):
@@ -311,7 +314,7 @@ class ICollector(metaclass=ABCMeta):
             self.download_data()
 
         if not os.path.exists(self.path_to_raw):
-            raise Exception('{} : load_data there is no raw data'.format(instance.__class__.__name__))  # # noqa: F821
+            raise Exception('{} : load_data there is no raw data'.format(self.__class__.__name__))  # # noqa: F821
 
         if os.path.exists(self.path_to_raw):
             frame = pd.read_csv(self.path_to_raw)
@@ -352,6 +355,7 @@ class ICollector(metaclass=ABCMeta):
         else:
             raise Exception('plot frame is empty')
 
+    @abstractmethod
     def download_data(self):
         '''
         Method for downloading the data from the internet.
