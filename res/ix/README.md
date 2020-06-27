@@ -7,9 +7,9 @@ The list of IX points we tried to scrape can be found in the [IX list file](../.
 ## Code for obtaining and preprocessing
 The code for scraping and preprocessing can be found [here](../../src/data_collection/api_request/datapoint_collection.py). 
 
-## Info about dataset
+## Info about the dataset
 
-- 20230 Datasamples 
+- 20230 Data samples 
 - Features
     - Timestamp
     - Date
