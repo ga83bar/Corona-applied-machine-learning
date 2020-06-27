@@ -23,7 +23,7 @@ def get_keywords(keywords_file):
         if line[0] != '#':
             keywords.append(line[:-1])
     print(keywords)
-    return keyword
+    return keywords
 
 
 def get_interest_over_time(kw_list):
