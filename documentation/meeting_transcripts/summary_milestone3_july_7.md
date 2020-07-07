@@ -31,10 +31,10 @@ In order to quickly recall the requirements for milestone three, the main checkp
         optimization, no final decision on model).
 
 **Deliverable:**\
-    ● Submit a document describing
-        o the data processing pipeline
-        o the set of candidate machine learning models and
-        o a short summary of your preliminary assessment of candidate ML models.
+    ● Submit a document describing \
+            o the data processing pipeline\
+            o the set of candidate machine learning models and\
+            o a short summary of your preliminary assessment of candidate ML models.\
     ● A mock-up of a front-end to use and explain the model (design).\
     ● A Python software, implementing a running data analysis pipeline using a simple
        (dummy) test set for testing and verification.
@@ -56,7 +56,7 @@ It is of greater importance to **rather quickly finish** the data pre-processing
 ## Model Evaluation & Discussion
 Although having agreed upon a suitable machine learning (ML) model - or better say idea - already, AMI further demands us to compare and assess some possible (algorithmic) realizations.
 
-***Let's quickly recall Mike's proposal:*** 
+**Let's quickly recall Mike's proposal:** \
 *The underlying data sets are split up into two different time windows: pre and post corona-start.* 
 
 *The former data set is used to train a ML model which is able to sufficiently characterize and predict the model outcome (internet traffic, social media, porn consumption, etc.) for a scenario where the corona pandemic did not occur. By doing this, we can very clearly address the **impact of corona** through the respective error between the obtained data sets and the predicted model output. This can be nicely demonstrated in the final web-interface as a "first step" before further manipulating the corona data.* 
@@ -65,6 +65,7 @@ Although having agreed upon a suitable machine learning (ML) model - or better s
 
 *In summary, two models are effectively being trained where the first predicts a future without corona and the second one with it.* 
 
+**To Do's** \
 In order to be able to realize Mike's proposal, every group member is advised to reflect upon possible ML implementations and methods. To this, **Recurrent Neural Networks (RNNs)** and other time series predictors can be analyzed. In particular, it might make sense to have a look at some very advanced concepts that have not been yet adressed in the AMI sessions. Thus might show that our group has considered some fancy concepts and thus performed intensive research.
 
 It can be helpful to make a **pro-con list** which will aid to the explanation of why the final model was eventually chosen as it is. Furthermore, think of some reasonable figures of merit that will help to identifiy the quality of the model.
@@ -77,6 +78,6 @@ In particular, it is important to discuss these models next week in order to qui
     ●  Set a time window\
     ●  Adapt all relevant data sets to it\
     ●  Data pre-processing\
-    ●  ML model evaluation & discussion\
+    ●  ML model evaluation & discussion
     
 **Next group session:** July 14
