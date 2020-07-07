@@ -15,6 +15,9 @@ Over the course of this project, we want to generate a model that predicts green
 ## Approaches
 The problem is approached via data driven analysis. At the start of the project, we plan on collecting any data we can find on the energy consumption of data centres and internet infrastructure or internet traffic. We will also gather information on the current greenhouse gas emissions for power generation, as well as the historical development of greenhouse gas emissions for individual countries. Combined with the data on web traffic and its increase due to COVID-19, a variety of machine learning models will be trained to predict the increase in emissions during the pandemic. Future emission predictions will rely on forecasts about the course of the pandemic, or will be predictively generated based on past data. For the web interface, we plan on using the Chart.js framework to create a visually appealing and interactive environment.
 
-## __CURRENT PROGRESS__
+## __Current Project D__
 
-[Team session 09.06.20](/documentation/meeting_transcripts/work_assignment_data.md)
+**Last team session:** July 7
+[Meeting Summary](/documentation/meeting_transcripts/summary_milestone3_july_7.md)
+
+**Next team session:** July 14
