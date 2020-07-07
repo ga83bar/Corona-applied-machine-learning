@@ -32,9 +32,9 @@ In order to quickly recall the requirements for milestone three, the main checkp
 
 **Deliverable:**\
     ● Submit a document describing \
-            o the data processing pipeline\
-            o the set of candidate machine learning models and\
-            o a short summary of your preliminary assessment of candidate ML models.\
+            --> the data processing pipeline\
+            --> the set of candidate machine learning models and\
+            --> a short summary of your preliminary assessment of candidate ML models.\
     ● A mock-up of a front-end to use and explain the model (design).\
     ● A Python software, implementing a running data analysis pipeline using a simple
        (dummy) test set for testing and verification.
