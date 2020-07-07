@@ -1,6 +1,4 @@
 # Meeting Summary (07/07/20)
-
-# Hot Topics
 [[_TOC_]]
 
 # Quick Summary
