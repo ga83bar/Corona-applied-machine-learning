@@ -1,12 +1,12 @@
-#  Meeting Summary (07/07/20)
+Meeting Summary (07/07/20)
 
-## Hot Topics
+Hot Topics
 [[_TOC_]]
 
-## Quick Summary
+# Quick Summary
 Some elementary steps regarding the third milestone achievement have been adressed and the next week's plan was set. In particular, below key points towards data pre-processing and model evaluation as well as their respective subtasks were discussed.  
 
-## Milestone 3: A Checklist
+# Milestone 3: A Checklist
 In order to quickly recall the requirements for milestone three, the main checkpoints are given as follows.
 
 **Title:**  Data Analysis Pipeline
@@ -39,14 +39,14 @@ In order to quickly recall the requirements for milestone three, the main checkp
     ● A Python software, implementing a running data analysis pipeline using a simple
        (dummy) test set for testing and verification.
 
-## Time Synchronization
+# Time Synchronization
 Before discussing any data pre-processing techniques, first the respective time window shall be set and consequently synchronized with all our considered data sets.
 
 To this, Niklas and Martin will investigate the optimal time window of our most "standing out" feature, the socialblade crawler. Setting this particular set as a more or less "reference" once again points out the respective importance of this feature - which probably makes our group somewhat unique compared to the other ones - and thus justifies the decision to decide for a common time basis.
 
 As soon as the time window has been set, **all group members** are advised to adapt their collected data sets to it, that is only data based on the common time basis shall be considered. 
 
-## Data Pre-Processing
+# Data Pre-Processing
 After having agreed upon a common data and time basis, data pre-processing can be applied which involves elementary processing methods that **every member deems reasonable**.
 
 In particular, methods such as **PCA**, **c-scoring**, etc. shall be considered. Evidently, some data sets might not need any further processing.
@@ -72,7 +72,7 @@ It can be helpful to make a **pro-con list** which will aid to the explanation o
 
 In particular, it is important to discuss these models next week in order to quickly progress with the deliverable as this report might take longer due to some more intensive argumentation. Also, **no more than three** different approaches shall be discussed.
 
-## Work Assignment
+# Work Assignment
 
 **In summary:**  
     ●  Set a time window\
