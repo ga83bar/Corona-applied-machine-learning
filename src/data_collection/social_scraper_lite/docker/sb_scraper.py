@@ -88,6 +88,7 @@ class SBScraper:
         if not html_rsp:
             return False
         data_dict = self._extract_channel_data(html_rsp)
+        data_dict['channel_url'] = url
         return data_dict
 
     def _get_url_wrapper(self, url, proxies=None):
