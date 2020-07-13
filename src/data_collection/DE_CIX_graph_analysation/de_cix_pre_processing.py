@@ -3,7 +3,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-def processFile(csvFileName, newFileName, dataUnitFactor, ixName, ixType):
+def process_file(csv_file_name, new_file_name, data_unit_factor, ix_name, ix_type):
     """
     !@brief Generate a new csv-file with processed data from a csv-file with
     data from a graph.
@@ -11,7 +11,9 @@ def processFile(csvFileName, newFileName, dataUnitFactor, ixName, ixType):
     Generates a new csv-file with the given name.
     Process raw data to usable data and add the input information.
     Write new lines with the specified format.
-    @param Name of the CSV-file, name of the new file to generate, which factor to multiply datarate to receive b/s, name of the IX of the data, type of the ix.
+    @param Name of the CSV-file, name of the new file to generate,
+    which factor to multiply datarate to receive b/s,
+    name of the IX of the data, type of the ix.
     @return None
     """
 
@@ -19,12 +21,13 @@ def processFile(csvFileName, newFileName, dataUnitFactor, ixName, ixType):
     header = ['ID', 'Timestamp', 'Date', 'bitrate', 'IX', 'type']
 
     # Open existing and unprocessed CSV file
-    raw_folder = Path("raw/{}".format(csvFileName))
+    raw_folder = Path("raw/{}".format(csv_file_name))
     with open(raw_folder, 'rt') as rawCsvFile:
         csv_reader = csv.reader(rawCsvFile)
 
-        # Open or create a new file (Overwrites everything when file already exists)
-        processed_folder = Path("processed/{}".format(newFileName))
+        # Open or create a new file
+        # (Overwrites everything when file already exists)
+        processed_folder = Path("processed/{}".format(new_file_name))
         with open(processed_folder, 'wt', newline='') as newFile:
 
             csv_writer = csv.writer(newFile)
@@ -32,37 +35,37 @@ def processFile(csvFileName, newFileName, dataUnitFactor, ixName, ixType):
             csv_writer.writerow(header)
 
             # Loop trough every existing line in the CSV file
-            for rawLine in csv_reader:
-                
-                formattedRawLine = list()
-                # Change seperation symbol from ";" to "," (EXCEL default is ";")
-                for item in rawLine:
-                    splitList = list()
-                    splitList = item.split(";")
-                    # Add the new items in the splitList to the newLine
-                    formattedRawLine += splitList
+            for raw_line in csv_reader:
+                formatted_raw_line = list()
+                # Change seperation symbol from ";" to ","
+                # (EXCEL default is ";")
+                for item in raw_line:
+                    split_list = list()
+                    split_list = item.split(";")
+                    # Add the new items in the split_list to the newLine
+                    formatted_raw_line += split_list
 
                 processedLine = list()
 
                 # Add the ID
-                processedLine.append(formattedRawLine[0])
+                processedLine.append(formatted_raw_line[0])
                 # Add the Timestamp
-                date = datetime.strptime(formattedRawLine[2], "%d.%m.%Y")
+                date = datetime.strptime(formatted_raw_line[2], "%d.%m.%Y")
                 timestamp = datetime.timestamp(date)
                 processedLine.append(timestamp)
                 # Add the Date
                 processedLine.append(date.date())
                 # Add the bitrate
-                processedLine.append(float(formattedRawLine[1]) * dataUnitFactor)
+                processedLine.append(float(formatted_raw_line[1]) * data_unit_factor)
                 # Add the IX
-                processedLine.append(ixName)
+                processedLine.append(ix_name)
                 # Add the type
-                processedLine.append(ixType)
+                processedLine.append(ix_type)
 
                 csv_writer.writerow(processedLine)
 
 
-processFile("DE-CIX Dusseldorf_1_year.csv", "ix_dusseldorf_1_year.csv", 10**9, "ix_dusseldorf", "incoming")
-processFile("DE-CIX Frankfurt_1_year.csv", "ix_Frankfurt_1_year.csv", 10**12, "ix_frankfurt", "incoming")
-processFile("DE-CIX Hamburg_1_year.csv", "ix_Hamburg_1_year.csv", 10**9, "ix_hamburg", "incoming")
-processFile("DE-CIX Munich_1_year.csv", "ix_Munich_1_year.csv", 10**9, "ix_munich", "incoming")
+process_file("DE-CIX Dusseldorf_1_year.csv", "ix_dusseldorf_1_year.csv", 10**9, "ix_dusseldorf", "incoming")
+process_file("DE-CIX Frankfurt_1_year.csv", "ix_Frankfurt_1_year.csv", 10**12, "ix_frankfurt", "incoming")
+process_file("DE-CIX Hamburg_1_year.csv", "ix_Hamburg_1_year.csv", 10**9, "ix_hamburg", "incoming")
+process_file("DE-CIX Munich_1_year.csv", "ix_Munich_1_year.csv", 10**9, "ix_munich", "incoming")
