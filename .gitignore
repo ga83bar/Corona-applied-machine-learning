@@ -31,7 +31,6 @@ paper/*
 .idea/
 .vscode/launch.json
 .vscode/tasks.json
-.vdcode/settings.json
+.vscode/settings.json
 *.DS_STORE
 src/data_management/.ipynb_checkpoints/
-
