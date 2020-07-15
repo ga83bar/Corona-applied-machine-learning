@@ -2,7 +2,7 @@
 [[_TOC_]]
 
 # Quick Summary
-Some elementary steps regarding the third milestone achievement have been adressed and the next week's plan was set. In particular, below key points towards data pre-processing and model evaluation as well as their respective subtasks were discussed.  
+Time series modeling and prediction is a more or less standard problem in the field of statistical modeling for which many different approaches exist. One of the main goals during the AMI project is to evaluate some of these candidate models and to eventually decide for one that suits the project task at hand. This underlying document thus presents a quick & dirty analysis of three possible learning approaches and discusses their respective feasibility.  
 
 # Milestone 3: A Checklist
 In order to quickly recall the requirements for milestone three, the main checkpoints are given as follows.
