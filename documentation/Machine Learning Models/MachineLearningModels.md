@@ -10,12 +10,12 @@ One possible and very promising emerging approach to combat regression and class
 
 The probably most distinct property embedded in the ELM nature is the non-iterative linear solution for the respective output weights. This is mainly due to the independence between the input and output weights, unlike in a backpropagation scenario. This ultimately renders ELMs to be very fast compared to similar MLP and SVM solutions. 
 
-Most of the discussed concepts below can be re-read in the following articles:
+Most of the discussed concepts below can be re-read in the following articles: \
 [High-Performance Extreme Learning Machines:
-A Complete Toolbox for Big Data Applications](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7140733)
-[Extreme learning machine: Theory and applications](http://www.di.unito.it/~cancelli/retineu11_12/ELM-NC-2006.pdf)
+A Complete Toolbox for Big Data Applications](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7140733) \
+[Extreme learning machine: Theory and applications](http://www.di.unito.it/~cancelli/retineu11_12/ELM-NC-2006.pdf) \
 [tfelm: a TensorFlow Toolbox for the Investigation of ELMs and
-MLPs Performance](https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICA4128.pdf)
+MLPs Performance](https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICA4128.pdf) \
 
 ## ELM Model
 
