@@ -67,6 +67,18 @@ Nevertheless, a unique solution can be found using the pseudoinverse:
 
 ## Conclusion
 
+In order to summarize, ELMs have very promising and efficient properties. They have been proven to be very useful for regression tasks as needed in our project. Nevertheless, there have been some reports on negative effects such as 
+
+* Bad initial randomization
+* Speedy performance but low accuracy
+* Need of regularization options
+
+In particular, it has to be pointed out that ELMs only operate on one hidden layer. In order to achieve a very high accuracy and approximation, this might not be necessarily the best performing choice considering the amount of COVID-19 data that we have gathered throughout the collection process. 
+
+Nevertheless, there are two very high-performance Matlab and Python implementations of ready-to-use toolboxes discussed in above articles. They promise automatic model structure selection as well as the application of regularization techniques. Furthermore, many approaches using self-written Python code have emerged online. 
+
+However, the main argument that seems to disqualify ELMs - from a user point of view - is that only one group member has even had any experience at all using them. Furthermore, even though the concepts of ELMs seem promising and effective, most of the ML experience was simply gained in Python using tensorflow and pytorch. The goal thus remains to find a time series modeling approach which exploits the vast availability of pre-built functions in these aforementioned frameworks.  
+
 # Gaussian Processes
 
 # Extreme Learning Machines
