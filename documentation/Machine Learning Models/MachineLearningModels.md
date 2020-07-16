@@ -22,8 +22,16 @@ ELMs are fast training methods for single layer feed-forward neural networks (SL
 
 In general, we can define an ELM model as follows. Consider a set of N distinct training samples (x_i, t_i) where i ranges between 1 and N. The SLFN output equation with L hidden neurons can then be denoted as
 
-![SLFN output equation](/documentation/Machine Learning Models/images/SLFN_output.png =100x20)
-<img src="/documentation/Machine Learning Models/images/SLFN_output.png" alt="SLFN output equation" width="200"/>
+<img src="/documentation/Machine Learning Models/images/SLFN_output.png" alt="SLFN Output Equation" width="200"/>
+
+with φ being the activation function (usually a sigmoid), w_i the input weights and b_i the biases and β_i the respective output weights. Consequently, the relation between the network inputs x_i, the target outputs t_i and the estimated outputs y_i is given by
+
+<img src="/documentation/Machine Learning Models/images/estimated_output.png" alt="Estimated Model Output" width="200"/>
+
+where ε denotes the noise comprised of randon noise and certain dependencies on hidden variables excluded from the inputs x_i. 
+
+**Hidden Neurons:**
+
 
 
 ## Computation
