@@ -73,14 +73,17 @@ In order to summarize, ELMs have very promising and efficient properties. They h
 * Speedy performance but low accuracy
 * Need of regularization options
 
-In particular, it has to be pointed out that ELMs only operate on one hidden layer. In order to achieve a very high accuracy and approximation, this might not be necessarily the best performing choice considering the amount of COVID-19 data that we have gathered throughout the collection process. 
+In particular, it has to be pointed out that ELMs only operate on one hidden layer in contrast to general DL approaches. In order to achieve a very high accuracy and approximation, this might not be necessarily the best performing choice considering the amount of COVID-19 data that we have gathered throughout the collection process. 
 
 Nevertheless, there are two very high-performance Matlab and Python implementations of ready-to-use toolboxes discussed in above articles. They promise automatic model structure selection as well as the application of regularization techniques. Furthermore, many approaches using self-written Python code have emerged online. 
 
 However, the main argument that seems to disqualify ELMs - from a user point of view - is that only one group member has even had any experience at all using them. Furthermore, even though the concepts of ELMs seem promising and effective, most of the ML experience was simply gained in Python using tensorflow and pytorch. The goal thus remains to find a time series modeling approach which exploits the vast availability of pre-built functions in these aforementioned frameworks.  
 
-# Gaussian Processes
+# Gaussian Processes (GP)
 
-# Extreme Learning Machines
+Another very promising approach which solves regressional time series problems is the use of Gaussian Processes (GP) for which a handful of implementations is already given in the scikit ML library. In particular, there have already been attempts to model and forecast CO2 emissions using GPs, see [here](https://stats.stackexchange.com/questions/377999/why-are-gaussian-processes-valid-statistical-models-for-time-series-forecasting).  
+
+
+# LSTM RNN 
 
 # Conclusion
