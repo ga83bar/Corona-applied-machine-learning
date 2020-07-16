@@ -90,11 +90,11 @@ A GP can thus be described as a functional mapping of random variables x_i
 
 with its respective mean function m(x)
 
-<img src="/documentation/Machine Learning Models/images/GP_mean.png" alt="GP Mean" width="200"/>
+<img src="/documentation/Machine Learning Models/images/GP_mean.png" alt="GP Mean" width="100"/>
 
 and covariance function k(x, x')
 
-<img src="/documentation/Machine Learning Models/images/GP_cov.png" alt="GP Covariance" width="200"/>
+<img src="/documentation/Machine Learning Models/images/GP_cov.png" alt="GP Covariance" width="240"/>
 
 ML algorithms that make use of GPs most often use lazy learning approaches in order to measure the similarity between evaluation points. To this, the so-called kernel function is examined which aids to predict the value for a future, e.g. time series point. The so obtained prediction is not just an estimation but also containes some uncertainty information which is embedded in the one-dimensional Gaussian distribution. The same holds for multidimensional predictions where the GP is multivariate and for which the respective multivariate Gaussian distributions are the corresponding marginal distributions at the current evaluation point. 
 
