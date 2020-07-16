@@ -26,7 +26,7 @@ In general, we can define an ELM model as follows. Consider a set of N distinct 
 
 with φ being the activation function (usually a sigmoid), w_i the input weights and b_i the biases and β_i the respective output weights. Consequently, the relation between the network inputs x_i, the target outputs t_i and the estimated outputs y_i is given by
 
-<img src="/documentation/Machine Learning Models/images/estimated_output.png" alt="Estimated Model Output" width="200"/>
+<img src="/documentation/Machine Learning Models/images/estimated_output.png" alt="Estimated Model Output" width="300"/>
 
 where ε denotes the noise comprised of randon noise and certain dependencies on hidden variables excluded from the inputs x_i. 
 
