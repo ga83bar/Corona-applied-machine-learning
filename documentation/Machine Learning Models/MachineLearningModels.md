@@ -33,7 +33,6 @@ where ε denotes the noise comprised of randon noise and certain dependencies on
 <img src="/documentation/Machine Learning Models/images/SLFN_process.png" alt="ELM SLFN Process" width="500"/>
 
 ## Computation
-
 Before discussing the simple computation technique behind ELMs, it is reasonable to first discuss the processes behind the respective hidden neurons as well as a compact matrix notation. 
 
 **Hidden Neurons:**
@@ -66,7 +65,6 @@ Nevertheless, a unique solution can be found using the pseudoinverse:
 <img src="/documentation/Machine Learning Models/images/H_solution.png" alt="Solution Computation" width="140"/>
 
 ## Conclusion
-
 In order to summarize, ELMs have very promising and efficient properties. They have been proven to be very useful for regression tasks as needed in our project. Nevertheless, there have been some reports on negative effects such as 
 
 * Bad initial randomization
@@ -84,6 +82,34 @@ However, the main argument that seems to disqualify ELMs - from a user point of 
 Another very promising approach which solves regressional time series problems is the use of Gaussian Processes (GP) for which a handful of implementations is given in the scikit ML library. In particular, there have already been attempts to model and forecast CO2 emissions using GPs, see [here](https://stats.stackexchange.com/questions/377999/why-are-gaussian-processes-valid-statistical-models-for-time-series-forecasting). This not only motivates to further investigate GPs for our project but also demonstrates a successful application, ultimately rendering this approach as highly plausible to achieve our specified project target. 
 
 ## GP Model
+GPs are a very generic class of supervised learning methods which are designed to solve regression but also probabilitsic classification problems. In general, a GP is a stochastic process and thus a collection of random variables in the time or space domain. Note that every such finite collection of random variables has a multivariate normal distribution, that is every finite linear combination of these random variables is strictly normally distributed. As such, every GP can be compactly described by the joint distribution of all those random variables and is thus strictly specified by its mean and covariance functionals.
+
+A GP can thus be described as a functional mapping of random variables x_i
+
+<img src="/documentation/Machine Learning Models/images/GP_mapping.png" alt="GP Mapping" width="200"/>
+
+with its respective mean function m(x)
+
+<img src="/documentation/Machine Learning Models/images/GP_mean.png" alt="GP Mean" width="200"/>
+
+and covariance function k(x, x')
+
+<img src="/documentation/Machine Learning Models/images/GP_cov.png" alt="GP Covariance" width="200"/>
+
+ML algorithms that make use of GPs most often use lazy learning approaches in order to measure the similarity between evaluation points. To this, the so-called kernel function is examined which aids to predict the value for a future, e.g. time series point. The so obtained prediction is not just an estimation but also containes some uncertainty information which is embedded in the one-dimensional Gaussian distribution. The same holds for multidimensional predictions where the GP is multivariate and for which the respective multivariate Gaussian distributions are the corresponding marginal distributions at the current evaluation point. 
+
+## Pros and Cons
+The advantages of GP models can mainly be summarized as:
+* Prediction interpolates between the observations for regular kernels
+* Prediction is probabilistic and allows for an analysis of confidence intervals which in turn aids to decide whether refitting is necessary. The latter one can thus be solved in an online fashion. 
+* Versatitlity due to the possibility to choose differently specified kernels. 
+
+However, some disadvantages of GP models are:
+* Non-sparsity: The models use the whole sample and feature information in order to perform a prediction
+* Low efficiency in high-dimensional spaces (especially when the number of features exceeds a few dozens)
+
+## Conclusion
+While GP models bring many different advantages and also are quite broady represented in the desired toolboxes to be used during the project, once again only few group members have actively dealt with both the theory and practical implementation of such models. As such, diving deeper in the more complex stochastic modeling will certainly take up more time than we initially desired to give for the ML core selection. As such, we decide that more time should be spent analyzing, optimizing and troubleshooting the model output which is frankly the more important part for a successful model application. To this, the more simple the model the better and since most of the group members have gained experience in DL modeling scenarios, GP models will not be further considered.  
 
 
 
