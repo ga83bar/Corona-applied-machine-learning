@@ -48,22 +48,22 @@ Note however, that other types of neurons have also found application in ELMs su
 **Compact Matrix Notation:**
 ELMs exhibit a closed form solution in which the hidden neurons are comprised in a matrix H. The network structure itself though is not noticable in practice meaning that there is only a single matrix that describes the projection between two - usually linear - spaces. The projections for the input (X⋅W) and the output (H⋅β) are connected through a nonlinear transformation as follows.
 
-<img src="/documentation/Machine Learning Models/images/nonlinear_trafo.png" alt="Nonlinear Transformation" width="200"/>
+<img src="/documentation/Machine Learning Models/images/nonlinear_trafo.png" alt="Nonlinear Transformation" width="100"/>
 
 The number of hidden neurons thus consequently regulates the size of the matrices W, H and β. However, the network neurons are never treated separately. With different types of hidden neurons, the first projection and transformation are performed independently for each type of neuron. Then the resulting sub-matrices H_1 are concatenated along the second dimension. For two types of hidden neurons it follows that 
 
-<img src="/documentation/Machine Learning Models/images/H_1.png" alt="H Notation" width="200"/>
+<img src="/documentation/Machine Learning Models/images/H_1.png" alt="H Notation" width="300"/>
 
 where linear neurons are added by simply copying the inputs into the hidden layer outpus
 
-<img src="/documentation/Machine Learning Models/images/H_2.png" alt="Extended H Notation" width="200"/>
+<img src="/documentation/Machine Learning Models/images/H_2.png" alt="Extended H Notation" width="300"/>
 
 **Solution Computation:**
 In general, ELM problems are usually over-determined (N>L) with the number of training data samples being much larger than the number of selected hidden neurons. In all other cases (N<=L), regularization should be used in order to obtain a better generalization performance. 
 
 Nevertheless, a unique solution can be found using the pseudoinverse: 
 
-<img src="/documentation/Machine Learning Models/images/H_solution.png" alt="Solution Computation" width="200"/>
+<img src="/documentation/Machine Learning Models/images/H_solution.png" alt="Solution Computation" width="100"/>
 
 ## Conclusion
 
