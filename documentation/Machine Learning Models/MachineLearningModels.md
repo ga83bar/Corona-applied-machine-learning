@@ -63,7 +63,7 @@ In general, ELM problems are usually over-determined (N>L) with the number of tr
 
 Nevertheless, a unique solution can be found using the pseudoinverse: 
 
-<img src="/documentation/Machine Learning Models/images/H_solution.png" alt="Solution Computation" width="100"/>
+<img src="/documentation/Machine Learning Models/images/H_solution.png" alt="Solution Computation" width="140"/>
 
 ## Conclusion
 
