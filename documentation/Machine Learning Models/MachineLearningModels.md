@@ -115,4 +115,50 @@ While GP models bring many different advantages and are also quite broady repres
 
 # LSTM RNN 
 
-# Conclusion
+What all above ML approaches have led to is a more or less pre-determined decision for a DL solution. In particular, there are many time-series modeling approaches using recurrent neural networks (RNNs). However, while these seem to achieve some very high accuracies, they also suffer from sever drawbacks which might also affect our project scope due to the vast amount of data that we have gathered. To be precise, one particularly dangerous disadvantage of conventional RNNs is their short-term memory capacity. In order to combat this drawback, long short-term memory (LSTM) RNNs have been introduced that incorporate a significantly greater (longer) memory capacity. 
+
+Unlike feed-forward neural networks, LSTMs have feedback connections and are not only able to process single data points but also entire sequences - a character trait especially needed for our project implementation! A huge proportion of LSTM associated model applications so far have been based on time series data. In particular, some models - as presented [here](https://www.curiousily.com/posts/time-series-forecasting-with-lstm-for-daily-coronavirus-cases/) - have been constructed that actively address the COVID-19 pandemic and use time-series data for accurate predictions. This once again motivates to further discuss LSTM RNNs as a valid approach for our project realization. 
+
+## LSTM core idea
+In general, all RNNs can be represented in a chain-like form of repeating modules which incorporate loops and interconnections. LSTMs in particular introduce a repeating module which has a more advanced structure containing several neural network layers. The general chain layout for the repeating module of such LSTMs is depicted below.
+
+<img src="/documentation/Machine Learning Models/images/LSTM_layout.png" alt="LSTM Repeating Module Layout" width="240"/>
+
+<img src="/documentation/Machine Learning Models/images/LSTM_tools.png" alt="LSTM Tools" width="240"/>
+
+The core of LSTM based RNNs is the cell state which is defined by the horizontal line on the top of the respective module:
+
+<img src="/documentation/Machine Learning Models/images/LSTM_cellState.png" alt="LSTM Cell State" width="240"/>
+
+In particular, the cell state interacts linearly with other elements throughout its way. The main feature of LSTMs is the ability to add or remove certain information w.r.t. the cell state, that is information can be added to and removed from it. This mechanism is regulated by so-called "gates" which will be examined in more detail in the following subsection. 
+
+## LSTM Information Gates
+The gate structures are usually composed of sigmoid neural net layers and pointwise multiplication operators. Depending on their function, we can classify them as forget, input and output gates.
+
+### Forget Gate
+The forget gate more or less describes the first decision that the network has to make: What information has to be thrown away from the cell state. It thus decides whether information will be deleted or not. In order to do so, the gate considers the previous h_(t-1) and current x_t value, passes both through the sigmoid layer and computes a value f_t between 0 and 1 for the current cell state C_t which describes the memory degree (0 = forget entirely, 1 = remember entirely).
+
+<img src="/documentation/Machine Learning Models/images/LSTM_forgetGate.png" alt="LSTM Forget Gate" width="240"/>
+
+### Input Gate 
+The next consequent step for the LSTM is decide what new information is going to be added to the current cell state. This is performed by the input gate which consists of two parts:
+* First, a sigmoid layer - the so-called input gate layer - decides which former values will be updated.
+* Second, a tanh layer creates a dedicated vector of new candidate values that could be added to the cell state. 
+
+<img src="/documentation/Machine Learning Models/images/LSTM_inputGate_1.png" alt="LSTM Input Gate (1)" width="240"/>
+
+Furthermore, the now old cell state C_(t-1) has to be updated to the new cell state C_t by multiplying the old state with f_t - forgetting the information we decided to forget in the forget gate - and by adding above multiplication of i_t with the candidate vector.
+
+<img src="/documentation/Machine Learning Models/images/LSTM_inputGate_2.png" alt="LSTM Input Gate (2)" width="240"/>
+
+### Output Gate 
+Last but not least, the LSTM has to decide what to output. This is highly dependent on the cell state and is essentially going to be a filtered version of it performed by the output gate:
+* First, a sigmoid layer is run for h_(t-1) and x_t analogously to above input gate.
+* Second, the current cell state is pushed through a tanh layer which confines a value space between -1 and 1. 
+* Third, we multiply each outcome and obtain the consecutive value for h_t which reflects all our previous decisions. 
+
+<img src="/documentation/Machine Learning Models/images/LSTM_outputGate.png" alt="LSTM Output Gate" width="240"/>
+
+## Conclusion
+
+# Decision
