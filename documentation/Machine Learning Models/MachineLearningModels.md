@@ -28,10 +28,17 @@ with φ being the activation function (usually a sigmoid), w_i the input weights
 
 <img src="/documentation/Machine Learning Models/images/estimated_output.png" alt="Estimated Model Output" width="300"/>
 
-where ε denotes the noise comprised of randon noise and certain dependencies on hidden variables excluded from the inputs x_i. 
+where ε denotes the noise comprised of randon noise and certain dependencies on hidden variables excluded from the inputs x_i. This process can be re-examined in below figure.
+
+<img src="/documentation/Machine Learning Models/images/SLFN_process.png" alt="ELM SLFN Process" width="500"/>
+
 
 **Hidden Neurons:**
+In general, the respective hidden neurons transform the underlying input data into a different representation. This is usually done in two steps:
+1) The data is projected into the hidden layer using the input layer weights and biases
+2) The projected data is transformed using a non-linear transformation function. 
 
+In particular, using above non-linear transformation, the learning capabilities of the ELM can be greatly increased. After transformation, the data in the hidden layer h can be used to find the output layer weights
 
 
 ## Computation
