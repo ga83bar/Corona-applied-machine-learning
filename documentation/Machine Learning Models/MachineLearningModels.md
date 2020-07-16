@@ -81,7 +81,10 @@ However, the main argument that seems to disqualify ELMs - from a user point of 
 
 # Gaussian Processes (GP)
 
-Another very promising approach which solves regressional time series problems is the use of Gaussian Processes (GP) for which a handful of implementations is already given in the scikit ML library. In particular, there have already been attempts to model and forecast CO2 emissions using GPs, see [here](https://stats.stackexchange.com/questions/377999/why-are-gaussian-processes-valid-statistical-models-for-time-series-forecasting).  
+Another very promising approach which solves regressional time series problems is the use of Gaussian Processes (GP) for which a handful of implementations is given in the scikit ML library. In particular, there have already been attempts to model and forecast CO2 emissions using GPs, see [here](https://stats.stackexchange.com/questions/377999/why-are-gaussian-processes-valid-statistical-models-for-time-series-forecasting). This not only motivates to further investigate GPs for our project but also demonstrates a successful application, ultimately rendering this approach as highly plausible to achieve our specified project target. 
+
+## GP Model
+
 
 
 # LSTM RNN 
