@@ -86,7 +86,7 @@ GPs are a very generic class of supervised learning methods which are designed t
 
 A GP can thus be described as a functional mapping of random variables x_i
 
-<img src="/documentation/Machine Learning Models/images/GP_mapping.png" alt="GP Mapping" width="200"/>
+<img src="/documentation/Machine Learning Models/images/GP_mapping.png" alt="GP Mapping" width="100"/>
 
 with its respective mean function m(x)
 
