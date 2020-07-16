@@ -22,7 +22,7 @@ ELMs are fast training methods for single layer feed-forward neural networks (SL
 
 In general, we can define an ELM model as follows. Consider a set of N distinct training samples (x_i, t_i) where i ranges between 1 and N. The SLFN output equation with L hidden neurons can then be denoted as
 
-![SLFN output equation](/documentation/Machine Learning Models/images/SLFN_output.png)
+![SLFN output equation](/documentation/Machine Learning Models/images/SLFN_output.png =250x)
 
 
 ## Computation
