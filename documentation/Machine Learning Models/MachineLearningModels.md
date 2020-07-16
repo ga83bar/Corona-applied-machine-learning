@@ -6,9 +6,16 @@ Predictive time series modeling is a more or less standard problem in the field 
 
 # Extreme Learning Machines (ELMs)
 
+One possible and very promising emerging approach to combat regression and classification problems is the utilization of Extreme Learning Machines (ELMs). While being not so prominent in traditional ML lectures, ELMs are widely known for a fairly good accuracy and extremely fast performance. The latter follows from the fact that the respective hidden neuron parameters do not need to be tuned during learning and are thus independent of the underlying training data set. More so, the hidden neurons are rather randomly generated which consequently implies a random initialization of its parameters such as input weights, biases, centers, etc. Still, the universal approximation capability holds, for which an arbitrary model accuracy - supposing that there are enough hidden neurons - can be achieved for the regression/classification task at hand.
 
+The probably most distinct property embedded in the ELM nature is the non-iterative linear solution for the respective output weights. This is mainly due to the independence between the input and output weights, unlike in a backpropagation scenario. This ultimately renders ELMs to be very fast compared to similar MLP and SVM solutions. 
 
-## Introduction
+Most of the discussed concepts below can be re-read in the following articles:
+[High-Performance Extreme Learning Machines:
+A Complete Toolbox for Big Data Applications](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7140733)
+[Extreme learning machine: Theory and applications](http://www.di.unito.it/~cancelli/retineu11_12/ELM-NC-2006.pdf)
+[tfelm: a TensorFlow Toolbox for the Investigation of ELMs and
+MLPs Performance](https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICA4128.pdf)
 
 ## ELM Model
 
