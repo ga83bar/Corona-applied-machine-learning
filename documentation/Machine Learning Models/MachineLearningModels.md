@@ -32,16 +32,38 @@ where ε denotes the noise comprised of randon noise and certain dependencies on
 
 <img src="/documentation/Machine Learning Models/images/SLFN_process.png" alt="ELM SLFN Process" width="500"/>
 
+## Computation
+
+Before discussing the simple computation technique behind ELMs, it is reasonable to first discuss the processes behind the respective hidden neurons as well as a compact matrix notation. 
 
 **Hidden Neurons:**
-In general, the respective hidden neurons transform the underlying input data into a different representation. This is usually done in two steps:
+In general, the hidden neurons transform the underlying input data into a different representation. This is usually done in two steps:
 1) The data is projected into the hidden layer using the input layer weights and biases
 2) The projected data is transformed using a non-linear transformation function. 
 
-In particular, using above non-linear transformation, the learning capabilities of the ELM can be greatly increased. After transformation, the data in the hidden layer h can be used to find the output layer weights
+In particular, using above non-linear transformation, the learning capabilities of the ELM can be greatly increased. After transformation, the data in the hidden layers h_I can be used to find the output layer weights. Another practical advantage is that the respective transformation functions are not constrained by type, that is they can be selected to be very different and even non-existent. Furthermore, since the neurons are linear, they consequently adapt and learn linear dependencies between data features and targets which happens directly without any nonlinear approximation at all. With that in mind, it becomes clear that the number of neurons must equal the number of data features. 
 
+Note however, that other types of neurons have also found application in ELMs such as RBF neurons with nonlinear projection functions. These can be used to compute predictions based on similar training data samples in order to solve tasks with some more complex dependencies between data features and targets.
 
-## Computation
+**Compact Matrix Notation:**
+ELMs exhibit a closed form solution in which the hidden neurons are comprised in a matrix H. The network structure itself though is not noticable in practice meaning that there is only a single matrix that describes the projection between two - usually linear - spaces. The projections for the input (X⋅W) and the output (H⋅β) are connected through a nonlinear transformation as follows.
+
+<img src="/documentation/Machine Learning Models/images/nonlinear_trafo.png" alt="Nonlinear Transformation" width="200"/>
+
+The number of hidden neurons thus consequently regulates the size of the matrices W, H and β. However, the network neurons are never treated separately. With different types of hidden neurons, the first projection and transformation are performed independently for each type of neuron. Then the resulting sub-matrices H_1 are concatenated along the second dimension. For two types of hidden neurons it follows that 
+
+<img src="/documentation/Machine Learning Models/images/H_1.png" alt="H Notation" width="200"/>
+
+where linear neurons are added by simply copying the inputs into the hidden layer outpus
+
+<img src="/documentation/Machine Learning Models/images/H_2.png" alt="Extended H Notation" width="200"/>
+
+**Solution Computation:**
+In general, ELM problems are usually over-determined (N>L) with the number of training data samples being much larger than the number of selected hidden neurons. In all other cases (N<=L), regularization should be used in order to obtain a better generalization performance. 
+
+Nevertheless, a unique solution can be found using the pseudoinverse: 
+
+<img src="/documentation/Machine Learning Models/images/H_solution.png" alt="Solution Computation" width="200"/>
 
 ## Conclusion
 
