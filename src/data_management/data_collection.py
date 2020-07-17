@@ -132,7 +132,6 @@ class SteamCollector(ICollector):
         frame_raw.columns = ['Date', 'Users', 'In-Game']
         frame_raw['Date'] = pd.to_datetime(frame_raw['Date'], utc=True)
 
-
         # drop rows with no entry
         frame_raw.dropna(subset=['Users', 'In-Game'], inplace=True)
         return frame_raw
@@ -199,7 +198,7 @@ class PornhubCollector(ICollector):
         '''
         frame_raw.columns = ['Date', 'Traffic_inc']
         frame_raw['Date'] = pd.to_datetime(frame_raw['Date'], utc=True)
-        
+
         # convert 10% to 0.1
         frame_raw['Traffic_inc'] = frame_raw['Traffic_inc'].str.rstrip('%').astype('float') / 100.0
         return frame_raw
@@ -239,7 +238,7 @@ def tests():
     co_c = CovidCollector()
     ps_c = PSCollector()
     st_c = SteamCollector()
-    # ph_c = PornhubCollector() 
+    # ph_c = PornhubCollector()
 
     frame_list = []
 

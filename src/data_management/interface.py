@@ -1,10 +1,12 @@
 """provides the interface for data_management"""
 import os
+from abc import ABCMeta, abstractmethod
+import joblib
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from abc import ABCMeta, abstractmethod
+
 
 class DatasetInterface():
     '''This interface defines the most important attributes and methods to load/get the raw dataset'''
@@ -36,10 +38,12 @@ class PreprocessDataInterface(metaclass=ABCMeta):
         @param scaling_algo : select one of the scaling algo`s 1, 2, 3. Default is 2
         '''
         self.scaling_algo = None
-        self.path_processed_data = None
+        path_to_res = os.path.join('.', 'res')
+        self.path_to_processed = os.path.join(path_to_res, str(name), 'processed')      # path to processed folder
+        self.path_processed_data = None                                                 # path to csv
         self.set_scalinging_algorithm(scaling_algo)
+        self._path_to_scaler = os.path.join(self.path_to_processed, 'scaler.save')
         self.frame = self._load_data(name)
-
 
     def _load_data(self, name):
         '''
@@ -48,22 +52,19 @@ class PreprocessDataInterface(metaclass=ABCMeta):
         '''
         # check if name object is string
         if isinstance(name, str):
-            path_to_res = os.path.join('.', 'res')
-            self.path_to_processed = os.path.join(path_to_res, str(name), 'processed')
-
             # we can be sure that every .csv has a different name so we iterate over the files in folder
             count = 0
             dirs = os.listdir(self.path_to_processed)
             for file in dirs:
                 if file.endswith('.csv'):
                     count += 1
-                    path = os.path.join(self.path_to_processed, file)
-                    frame = pd.read_csv(path)
+                    self.path_processed_data = os.path.join(self.path_to_processed, file)
+                    frame = pd.read_csv(self.path_processed_data)
 
             if count == 1:
                 return frame
             else:
-                raise Exception('There are too many .csv files in folder {}'.format(self.path_processed_data))
+                raise Exception('There are too many .csv files in folder {}'.format(self.path_to_processed))
 
         else:
             raise Exception('ICollector : get_paths name is no valid string')
@@ -83,6 +84,9 @@ class PreprocessDataInterface(metaclass=ABCMeta):
 
     def process(self, components=2):
         """feel free to replace them with something that actually makes sense"""
+        if os.path.exists(self._path_to_scaler):
+            os.remove(self._path_to_scaler)
+
         if self.scaling_algo == self.PCA:
             processed_data = self._pca(self.frame, components)
         elif self.scaling_algo == self.STANDART_SCALING:
@@ -92,8 +96,26 @@ class PreprocessDataInterface(metaclass=ABCMeta):
         else:
             raise Exception('Selected algorithem is not defined')
 
-        # handle preprocessed data
-        self.__handle_processed_data(processed_data)
+        # handle preprocessed data FIXME
+        # self.__handle_processed_data(processed_data)
+        return processed_data
+
+    def inverse_preprocess(self, data, cols_to_scale=None):
+        '''
+        Method for calculate the original values of processed data
+        '''
+        return_data = pd.DataFrame()
+
+        if os.path.exists(self._path_to_scaler):
+            scaler = joblib.load(self._path_to_scaler)
+        else:
+            raise Exception('Can not inverse Process data. There is no scaler!!')
+        if cols_to_scale is None:
+            return_data[data.columns] = scaler.inverse_transform(data[data.columns])
+        else:
+            return_data[cols_to_scale] = scaler.inverse_transform(data[cols_to_scale])
+
+        return return_data
 
     def plot_singular_values(self, data, colums_to_drop=None):
         '''
@@ -103,8 +125,8 @@ class PreprocessDataInterface(metaclass=ABCMeta):
         # first copy the frame and drop the date
         raw_data = data.copy()
 
-        if not colums_to_drop is None:
-            raw_data.drop(columns=colums_to_drop)
+        if colums_to_drop is not None:
+            raw_data = raw_data.drop(columns=colums_to_drop, axis=1)
 
         # calculate svd
         _, sing, _ = np.linalg.svd(raw_data, full_matrices=True)
@@ -115,7 +137,8 @@ class PreprocessDataInterface(metaclass=ABCMeta):
                     y=var_explained, color="limegreen")
         plt.xlabel('Singular values', fontsize=16)
         plt.ylabel('Singular values of Corona dataset (normalized)', fontsize=10)
-        plt.savefig('svd_scree_plot.png', dpi=400)
+        path = os.path.join(self.path_to_processed, 'singular_val.png')
+        plt.savefig(path, dpi=400)
 
     def __handle_processed_data(self, processed_data):
         '''
@@ -141,5 +164,3 @@ class PreprocessDataInterface(metaclass=ABCMeta):
     def _min_max_scaling(self, data):
         '''Abstract method. Implement z scaling'''
         raise NotImplementedError
-
-
