@@ -205,6 +205,22 @@ class DEIXPreprocessor(PreprocessDataInterface):
         print('Not implemented.')
 
 
+class TwitchPreprocessor(PreprocessDataInterface):
+    """dummy doc"""
+
+    def __init__(self):
+        """dummy doc"""
+        super().__init__('twitch', scaling_algo=2)
+
+    def process(self):
+        """dummy doc"""
+        pass
+
+    def inverse_preprocess(self):
+        """dummy doc"""
+        raise NotImplementedError
+
+
 # ##################################################
 # ###########       St functions         ###########
 # ##################################################
