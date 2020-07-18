@@ -28,13 +28,31 @@ def get_twitch_stats():
     return data_points, html.text
 
 
+def read_twitch_stats():
+    """!@brief Reads the HTML from the twitch stats raw folder and parses it.
+
+    Looks for all 'td' tags within the website, which contain the data for all stats available.
+    @return Returns both the data points and the html as a text file.
+    """
+    try:
+        with open(PurePath.joinpath(PATH, 'raw', 'twitch_stats.html'), 'r') as f:
+            html = json.load(f)
+        soup = BeautifulSoup(html, 'html.parser')
+        data_points = soup.find_all('td')
+    except FileNotFoundError as error:
+        print('Failed to execute data_management.twitch_processing.read_twitch_stats. No raw HTML saved in the folder.')
+        print('Error message was: {}'.format(error))
+        return None, None
+    return data_points, html
+
+
 def read_stats_to_pandas(data_points):
     """!@brief Reads the data points into a pandas data frame.
 
     @param data_points The unprocessed data points from the soup parsing.
     @return Returns a complete pandas data frame containing all stats.
     """
-    data_dict = {'Date': [pd.to_datetime(date.text) for date in data_points[0::5]],
+    data_dict = {'Date': [pd.to_datetime(date.text, utc=True) for date in data_points[0::5]],
                  'av_conc_viewers': [int(views.text) for views in data_points[1::5]],
                  'av_conc_channels': [int(channels.text) for channels in data_points[2::5]],
                  'time_watched': [(int(''.join(c for c in watch_time.text if c.isdigit())))
@@ -90,7 +108,11 @@ def main():
     """!@brief Requests, processes and saves the data from twitchtracker.com.
     """
     print('Getting stats..')
-    data_points, html = get_twitch_stats()
+    # data_points, html = get_twitch_stats()
+    data_points, html = read_twitch_stats()
+    if data_points is None:
+        print('Error with data extraction. Exiting...')
+        return
     print('Converting to data frame.')
     data_frame = read_stats_to_pandas(data_points)
     print('Saving data.')
