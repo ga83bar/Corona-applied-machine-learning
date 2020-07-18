@@ -17,7 +17,9 @@ The problem is approached via data driven analysis. At the start of the project,
 
 ## __Current Project D__
 
-**Last team session:** July 7
-[Meeting Summary](/documentation/meeting_transcripts/summary_milestone3_july_7.md)
+**Last team session:** July 14
 
-**Next team session:** July 14
+[Meeting Summary (July 7)](/documentation/meeting_transcripts/summary_milestone3_july_7.md) \
+[ML Model Overview](/documentation/Machine Learning Models/MachineLearningModels.md)
+
+**Next team session:** July 21
