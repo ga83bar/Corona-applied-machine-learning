@@ -9,6 +9,8 @@ documentation/reports/milestone_1/project.log
 documentation/reports/milestone_1/project.out
 documentation/reports/milestone_1/project.synctex.gz
 
+node_modules
+
 htmlcov/*
 .coverage*
 report.xml
