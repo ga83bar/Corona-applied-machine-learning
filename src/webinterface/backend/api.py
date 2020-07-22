@@ -9,10 +9,8 @@ CORS(app)
 
 api = Api(app)# Require a parser to parse our POST request.
 parser = reqparse.RequestParser()
-parser.add_argument("sepal_length")
-parser.add_argument("sepal_width")
-parser.add_argument("petal_length")
-parser.add_argument("petal_width")# Unpickle our model so we can use it!
+parser.add_argument("dataset_req")
+# Unpickle our model so we can use it!
 
 class Predict(Resource):
   def post(self):
@@ -20,17 +18,25 @@ class Predict(Resource):
     X = (
       np.array(
         [
-          args["sepal_length"],
-          args["sepal_width"],
-          args["petal_length"],
-          args["petal_width"]
+          args["dataset_req"],
+
         ]
       ).astype("float").reshape(1, -1)
-    ) 
+    )
+    
     print("request is processed")
+    print(X)
+    if (X[0]==1):
+      return {"class": 42, "chart_data": [5, 8, 2, 4, 6, 5, 8, 2, 4, 6]}
+    elif (X[0]==2):
+      return {"class": 42, "chart_data": [5, 2, 3, 5, 6, 1, 2, 3, 5, 6]}
+    else:
+      return {"class": 500, "chart_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+
+
     
-    return {"class": 42}
-    
+
+
 api.add_resource(Predict, "/predict")
 
 if __name__ == "__main__":
