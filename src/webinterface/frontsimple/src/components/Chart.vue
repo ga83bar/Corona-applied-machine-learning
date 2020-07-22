@@ -24,7 +24,7 @@
     methods: {
       fillData () {
         this.datacollection = {
-          labels: [0, 1,2, 3, 4],
+          labels: [0, 1, 2, 3, 4],
           datasets: [
             {
               label: 'Data One - test',
