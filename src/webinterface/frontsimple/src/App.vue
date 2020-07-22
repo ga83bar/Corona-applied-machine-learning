@@ -1,17 +1,20 @@
 <template>
   <div id="app">
+    <Chart />
     <HelloWorld />
     <StepperVertical />
   </div>
 </template>
 
 <script>
+import Chart from './components/Chart.vue'
 import HelloWorld from './components/HelloWorld.vue'
 import StepperVertical from './components/Stepper.vue'
 
 export default {
   name: 'App',
   components: {
+    Chart,
     HelloWorld,
     StepperVertical
   }
