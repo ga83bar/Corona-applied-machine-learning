@@ -47,7 +47,7 @@ As soon as the time window has been set, **all group members** are advised to ad
 # Data Pre-Processing
 After having agreed upon a common data and time basis, data pre-processing can be applied which involves elementary processing methods that **every member deems reasonable**.
 
-In particular, methods such as **PCA**, **c-scoring**, etc. shall be considered. Evidently, some data sets might not need any further processing.
+In particular, methods such as **PCA**, **z-scoring**, etc. shall be considered. Evidently, some data sets might not need any further processing.
 
 It is of greater importance to **rather quickly finish** the data pre-processing steps considering above requirements for the milestone three deliverable.
 
