@@ -10,6 +10,4 @@ Based on this model, its outcome and the respective error metric, a **future pos
 
 In summary, **two model approaches** are proposed where the first predicts a future **without corona** and the second one **with it**. In order to be able to precisely **highlight the impact of the pandemic** on the selected domains of our everyday lives, we decide to **realize the first model** in this project whose predicted output can then be compared to the accumulated real-world pandemic data in the form of an **error metric**. An example of how a **potential model output** would compare against the real data is depicted in below figure for the streaming domain which has seen a **surge during the pandemic** and especially after the lockdown.
 
-<p class="aligncenter">
-<img src="/documentation/Matlab Plots/ML Strategy/corona.jpg" alt="ML Strategy" width="1000"/>
-</p>
+<img src="/documentation/Matlab Plots/ML Strategy/corona.jpg" alt="ML Strategy" width="1100"/>
