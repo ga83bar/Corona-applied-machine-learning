@@ -1,5 +1,5 @@
 #  Adaptation of the Original Research Question
-[[TOC]]
+[[_TOC_]]
 
 # Problem Statement
 As discussed below, most of the collected candidate data sets **do not qualify** as valid ML model entries. This is mainly due to the fact that either the **amount** - and thus the **representative time window** - is insufficient or because of the observation that some of the respective data sets show **significant discontinuities** which cannot be explained by the model. The latter ones are particularly prevalent in the SocialCrawler YouTube reference data set which can be seen in below figure for the respective **subscriber count**. 
