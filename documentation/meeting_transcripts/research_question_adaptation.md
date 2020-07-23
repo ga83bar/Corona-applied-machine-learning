@@ -19,4 +19,4 @@ Consequently, we have decided to expand the horizon of the project by adding the
 We thus believe that above adaptation of the initial project proposal is only **reasonable** considering the **insufficiency of the obtained data sets**. Furthermore, it does not significantly change the main project idea and/or motivation but surely **expands its perspective** allowing for an even **more coherent** interpretation and conclusion. 
 
 
-**Adapted project proposal**: How does the corona pandemic impact our everyday lives? - An economic and online traffic analysis. 
+>**Adapted project proposal**: How does the corona pandemic impact our everyday lives? - An >economic and online traffic analysis. 
