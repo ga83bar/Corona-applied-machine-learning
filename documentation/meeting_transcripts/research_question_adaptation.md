@@ -4,7 +4,7 @@
 # Problem Statement
 As discussed below, most of the collected candidate data sets **do not qualify** as valid ML model entries. This is mainly due to the fact that either the **amount** - and thus the **representative time window** - is insufficient or because of the observation that some of the respective data sets show **significant discontinuities** which cannot be explained by the model. The latter ones are particularly prevalent in the SocialCrawler YouTube reference data set which can be seen in below figure for the respective **subscriber count**. 
 
-<img src="/documentation/graphs/socialblade/daily_weekly_subscribers.png" alt="Daily Weekly Subscribers" width="300"/>
+<img src="/documentation/graphs/socialblade/daily_weekly_subscribers.png" alt="Daily Weekly Subscribers" width="500"/>
 
 Considering these major drawbacks, the remaining data is **scarce** and thus **not informative enough** for a detailed investigation of above initial problem statement. In particular, the remaining **usable** data sets are:
 a) Internet Exchange Points
