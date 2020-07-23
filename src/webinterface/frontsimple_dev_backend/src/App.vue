@@ -8,11 +8,14 @@
           <line-chart :chart-data="datacollection"></line-chart>    
           <u1> Predicted Class is: {{ datacollection }}</u1>  
       </div>
-      <Dropdown :movie="dataset.movievalue" @getDatasetValue="select_set($event)"/>
+      <Dropdown :movie="movievalue" @getDatasetValue="select_set($event)"/>
       <StepperVertical />
       <h1 v-if="movievalue">Predicted Class is: {{ movievalue }}</h1>
       <h1 v-if="acceptedRequest">Predicted Class is: {{ acceptedRequest}}</h1>
-      <h1 v-if="chart_data">Predicted Class is: {{ chart_data}}</h1>
+      <h1 v-if="charst_data">Predicted Class is: {{ charts_data}}</h1>
+      <ul v-if="errors ">        
+        {{errors.message}}        
+      </ul>
     </div>
   </div>
 </template>
@@ -33,12 +36,10 @@ export default {
     LineChart
   },
    data() {
-   return {
-     dataset: {
-       movievalue: null,
-       chart_data: null,
-       datacollection: null, 
-       }
+   return {               
+      errors: [],
+      charts_data: null,
+      movievalue: null
     }
   },
   mounted () {
@@ -46,23 +47,27 @@ export default {
     },
   methods: {
    select_set(temp){
-     this.dataset.movievalue=temp,
+     this.movievalue=temp,
       axios.post('http://127.0.0.1:5000/predict', {
         dataset_req: temp
       })
-      .then((response) => {
+      .then(response => {
         this.acceptedRequest = response.data.class
-        this.dataset.chart_data = response.data.chart_data
+        this.charts_data = response.data.chart_data
         this.datacollection = {
           labels: [0, 1, 2, 3, 4 ,5 ,6 ,7,8, 9],
           datasets: [
             {
               label: 'Data One - test',
               backgroundColor: '#004c99',
-              data: this.dataset.chart_data
+              data: this.charts_data
             }
           ]
         }
+        return this.datacollection
+      })
+      .catch(e => {
+        this.errors.push(e)
       })
    }
   }
