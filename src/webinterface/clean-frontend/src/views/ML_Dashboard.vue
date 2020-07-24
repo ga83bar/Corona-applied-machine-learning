@@ -109,7 +109,7 @@ export default {
   bodyClass: "profile-page",
   data() {
     return {
-      model: null
+      model: '1'
     }
   },
 
@@ -126,7 +126,7 @@ export default {
       });
     },
       select_set(){
-      axios.post('http://127.0.0.1:5000/predict', {timeout :2 }, {
+      axios.post('http://127.0.0.1:5000/predict', {
         dataset_req: this.model
       })
       .then(response => {
