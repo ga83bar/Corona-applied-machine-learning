@@ -15,20 +15,13 @@ parser.add_argument("dataset_req")
 class Predict(Resource):
   def post(self):
     args = parser.parse_args()# Sklearn is VERY PICKY on how you put your values in...
-    X = (
-      np.array(
-        [
-          args["dataset_req"],
 
-        ]
-      ).astype("float").reshape(1, -1)
-    )
     
     print("request is processed")
-    print(X)
-    if (X[0]==1):
+    print(args["dataset_req"])
+    if (args["dataset_req"]=='1'):
       return {"class": 42, "chart_data": [5, 8, 2, 4, 6, 5, 8, 2, 4, 6]}
-    elif (X[0]==2):
+    elif (args["dataset_req"]=='2'):
       return {"class": 42, "chart_data": [5, 2, 3, 5, 6, 1, 2, 3, 5, 6]}
     else:
       return {"class": 500, "chart_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}

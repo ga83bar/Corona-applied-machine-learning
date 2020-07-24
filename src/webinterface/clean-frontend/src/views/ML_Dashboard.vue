@@ -12,7 +12,8 @@
         
         
         <div class="md-layout">
-       <img src="./../assets/img/js.png" class="chartjs">
+          <line-chart :chart-data="datacollection"></line-chart>    
+          <u1> Predicted Class is: {{ datacollection }}</u1> 
           
           <div class="md-layout-item md-size-66 mx-auto">
           
@@ -21,22 +22,26 @@
           <div class="controls">
             <div class="md-layout md-gutter">
               <div class="md-layout-item">
+                <form>
                 <md-field>
-                  <label for="movie">Model selection</label>
-                  <md-select v-model="movie" name="movie" id="movie">
-                    <md-option value="fight-club">Fight Club</md-option>
-                    <md-option value="godfather">Godfather</md-option>
-                    <md-option value="godfather-ii">Godfather II</md-option>
-                    <md-option value="godfather-iii">Godfather III</md-option>
-                    <md-option value="godfellas">Godfellas</md-option>
-                    <md-option value="pulp-fiction">Pulp Fiction</md-option>
-                    <md-option value="scarface">Scarface</md-option>
+                  <label for="model">Model selection</label>
+                  <md-select v-model="model" name="model" id="model">
+                    <md-option value="1">Fight Club</md-option>
+                    <md-option value="2">Godfather</md-option>
+                    <md-option value="3">Godfather II</md-option>
+                    <md-option value="4">Godfather III</md-option>
+                    <md-option value="5">Godfellas</md-option>
+                    <md-option value="6">Pulp Fiction</md-option>
+                    <md-option value="7">Scarface</md-option>
                   </md-select>
                 </md-field>
+              </form>
               </div>
                <div class="md-layout-item buttonbed">
-               <md-button class="md-success md-round run">Run Inference</md-button>
+               <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
+               
                </div>
+               <u1 v-if="model">Predicted Class is: {{ model }}</u1>
             </div>
             </div>
           <div class="hor-space">
@@ -93,18 +98,21 @@
 <script>
 //import { Tabs } from "@/components";
 import Tabs from "./components/TabsSection";
-
+import axios from 'axios'
+import LineChart from './components/LineChart.js'
 
 export default {
   components: {
-    Tabs
+    Tabs,
+    LineChart
   },
   bodyClass: "profile-page",
   data() {
     return {
-  
+      model: null
     }
   },
+
   methods: {
 
     notifyVue(verticalAlign, horizontalAlign, type_notification, notify_message) {
@@ -116,7 +124,29 @@ export default {
         verticalAlign: verticalAlign,
         type: type_notification
       });
-    }
+    },
+      select_set(){
+      axios.post('http://127.0.0.1:5000/predict', {timeout :2 }, {
+        dataset_req: this.model
+      })
+      .then(response => {
+        this.acceptedRequest = response.data.class
+        this.datacollection = {
+          labels: [0, 1, 2, 3, 4 ,5 ,6 ,7,8, 9],
+          datasets: [
+            {
+              label: 'Data One - test',
+              backgroundColor: '#004c99',
+              data: response.data.chart_data
+            }
+          ]
+        }
+        return this.datacollection
+      })
+      .catch(e => {
+        notifyVue('top', 'center', 'danger', 'Connection failed.')
+      })
+   }
 
   },
   props: {
