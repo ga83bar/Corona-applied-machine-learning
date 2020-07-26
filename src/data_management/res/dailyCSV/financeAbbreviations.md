@@ -1,6 +1,6 @@
 #  Stock Market Index Overview
 
-**Symbols are defined as Bloomberg Codes** 
+**Symbols are mostly defined as Bloomberg Codes** 
 
 Daily CSV files can be found [here](/src/data_management/res/dailyCSV)
 
@@ -17,7 +17,13 @@ Daily CSV files can be found [here](/src/data_management/res/dailyCSV)
 | JNJ | Johnson + Johnson | OK |
 | PFE | Pfizer | OK |
 | ABT | Abbott Laboratories | OK |
-| KMB | Kimberly Clark Corporation | Not OK |
+| KMB | Kimberly Clark Corporation | OK |
+| MDT | Medtronic PLC | OK |
+| PHG | Philips Healthcare | OK |
+| GE | General Electric (Healthcare) | OK |
+| BDX | Becton Dickinson | OK |
+| CAH | Cardinal Health | OK |
+| SYK | Stryker Corporation | OK |
 
 
 ## Banking
@@ -25,11 +31,18 @@ Daily CSV files can be found [here](/src/data_management/res/dailyCSV)
 | Symbol | Company | AlphaVantage Status |
 |----------|-------------|-------------------------|
 | DB | Deutsche Bank | OK |
+| ICK | Industrial and Commercial Bank of China | OK |
 | GS | Goldman Sachs | OK |
 | CMC | JPMorgan Chase | OK |
 | BRYN | Berkshire Hathaway Inc. | OK |
 | NCB | Bank of America | OK |
 | NWT | Wells Fargo & Company | OK |
+| JPHLF | Japan Post Holdings Co. Ltd. | OK |
+| CICHY | China Construction Bank Corporation | OK |
+| ACGBY | Agricultural Bank of China | OK |
+| CRARY | Credit Agricole SA | OK |
+| BACHF | Bank of China Ltd. | OK |
+| C | Citigroup Inc. | OK |
 
 
 ## Stock Index
@@ -51,6 +64,11 @@ Daily CSV files can be found [here](/src/data_management/res/dailyCSV)
 | SIEGY | Siemens AG | OK |
 | EOAN.DE | E.ON | OK |
 | RWE.DE | RWE AG | OK |
+| DUK | Duke Energy Corporation | OK |
+| ENGI.PA | Engie SA | OK |
+| NGG | National Grid PLC | OK |
+| NEE | NextEra Energy Inc. | OK |
+| EDF | Electricite de France SA | OK |
 
 
 ## Oil
@@ -61,6 +79,12 @@ Daily CSV files can be found [here](/src/data_management/res/dailyCSV)
 | XOM | ExxonMobil | OK |
 | PTR | PetroChina | OK |
 | RDS-A | Royal Dutch Shell | OK |
+| LUK | Lukoil | OK |
+| ROSN | ROSNEFT | OK |
+| TOT | Total SE | OK |
+| BP | BP Plc | OK |
+| SNP | China Petroleum & Chemical Corporation | OK |
+
 
 ## Steel
 
@@ -68,6 +92,11 @@ Daily CSV files can be found [here](/src/data_management/res/dailyCSV)
 |----------|-------------|-------------------------|
 | TKA.DE | ThyssenKrupp AG | OK |
 | MT | ArcelorMittal S.A. | OK |
+| NISTF | Nippon Steel & Sumitomo Metal Corporation | OK |
+| SHE:000709 | Hebei Iron and Steel Group | OK |
+| SHA:600019 | Baoshan Iron & Steel (Baosteel) Co. Ltd.  | OK |
+| PKX | Pohang Iron and Steel Company (Posco) | OK |
+| SHE:002075 | Jiangsu Shagang | OK |
 
 
 ## Automotive
@@ -96,6 +125,12 @@ Daily CSV files can be found [here](/src/data_management/res/dailyCSV)
 | T | AT&T Inc. | OK |
 | TMUS | T-Mobile US Inc. | OK |
 | VOD | Vodafone Group | OK |
+| CTM | China Mobile Ltd. | OK |
+| VZ | Verizon Communications | OK |
+| NTT.F | Nippon Telegraph & Tel | OK |
+| SFTBY | Softbank Group Corporation | OK |
+| AMOV | America Movil | OK |
+| CHA | China Telecom | OK |
 
 
 ## Tech
@@ -123,14 +158,5 @@ Daily CSV files can be found [here](/src/data_management/res/dailyCSV)
 | QCOM | Qualcomm Inc. | OK |
 
 
-
-
-
-
-
-
-
-
-
-
+## API Access
 https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=DBK&apikey=B47RKHB1ATHXLQRT&datatype=csv
