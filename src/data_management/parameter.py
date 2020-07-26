@@ -39,7 +39,8 @@ class Parameter:
         self.working_directory = os.path.dirname(os.path.abspath(__file__))
         self.logfile_path = os.path.join(self.working_directory, 'documentation', 'logfiles', 'aml_log.log')
         self.__start_date_data = dt.datetime(2017, 1, 1)
-        
+        self.__end_date_data = dt.datetime(2020, 7, 1)
+
         # TODO ALA
         self.__med_comp = []
         self.__oil_comp = ['CVX', 'XOM', 'PTR']
@@ -50,6 +51,9 @@ class Parameter:
         self.__finance_companies = (self.__med_comp + self.__oil_comp + self.__steel_comp +
                                     self.__automotive_comp + self.__telecom_comp +
                                     self.__tec_comp)
+
+        self.__folders = ['covid', 'finance', 'de-cix', 'playstation',  # TODO 'ix'
+                          'socialblade', 'steam', 'twitch']
 
     def __init__(self):
         """ Virtual private constructor."""
@@ -82,6 +86,19 @@ class Parameter:
             raise Exception('Your start date is no valid datetime object!')
 
     @property
+    def end_date_data(self):
+        '''Getter method for start date of data collection'''
+        return self.__end_date_data
+
+    @end_date_data.setter
+    def end_date_data(self, start_date):
+        '''Setter method for start date of data collection'''
+        if isinstance(start_date, dt):
+            self.__end_date_data = start_date
+        else:
+            raise Exception('Your start date is no valid datetime object!')
+
+    @property
     def stock_companies(self):
         '''Getter method for stock companies list'''
         return self.__finance_companies
@@ -89,4 +106,15 @@ class Parameter:
     @stock_companies.setter
     def stock_companies(self, companies_list):
         '''Setter method for stock companies list'''
+        print('I hope you know what you are doing, if not you`d better not do that')
         self.__finance_companies = companies_list
+
+    @property
+    def folders(self):
+        '''Getter method'''
+        return self.__folders
+
+    @folders.setter
+    def folders(self, folder_list):
+        '''Setter method'''
+        print('Access denied !!!!!')
