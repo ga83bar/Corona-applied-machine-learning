@@ -4,12 +4,18 @@ data collection APIS.
 """
 import os
 import json
+import time
 from abc import ABCMeta, abstractmethod
+import datetime as dt
 import pandas as pd
+
 
 from requests import get
 from matplotlib import pyplot as plot
 import matplotlib.dates as dates
+
+from alpha_vantage.timeseries import TimeSeries
+from parameter import Parameter
 
 
 class ICollector(metaclass=ABCMeta):
@@ -23,6 +29,7 @@ class ICollector(metaclass=ABCMeta):
         self.csv_name = None
         self.name = path_name
         _ = self.__get_paths(path_name)
+        self.params = Parameter.get_instance()
 
     def __get_paths(self, name):
         '''
@@ -53,11 +60,9 @@ class ICollector(metaclass=ABCMeta):
         '''
         # first we try to download the data
         # commented out since method wasn't implemented yet
-        # if not os.path.exists(self.path_to_raw):
-        #     self.download_data()
 
         if not os.path.exists(self.path_to_raw):
-            raise Exception('{} : load_data there is no raw data'.format(self.__class__.__name__))  # # noqa: F821
+            self.download_data()
 
         if os.path.exists(self.path_to_raw):
             frame = pd.read_csv(self.path_to_raw)
@@ -65,12 +70,16 @@ class ICollector(metaclass=ABCMeta):
             frame.to_csv(self.path_to_processed, index=False)
 
         else:
-            raise Exception('There is no{}'.format(self.path_to_raw))
+            raise Exception('There is no {}'.format(self.path_to_raw))
 
     def get_data(self):
         '''
         Method returns the processed frame saved in res/'name'/processed/???.csv
         '''
+        if ((not os.path.exists(self.path_to_processed)) and not os.path.exists(self.path_to_raw)):
+            frame = self.download_data()
+            frame.to_csv(self.path_to_raw)
+
         # first check if raw exist and processed not and handle this
         if ((not os.path.exists(self.path_to_processed)) and os.path.exists(self.path_to_raw)):
             self.__load_data()
@@ -97,6 +106,13 @@ class ICollector(metaclass=ABCMeta):
 
         else:
             raise Exception('plot frame is empty')
+
+    def download_data(self):
+        '''
+        Download data from API or somewhere else
+        '''
+        # raise Exception('{} : load_data there is no raw data'.format(self.__class__.__name__))  # # noqa: F821
+        return pd.DataFrame()
 
     @abstractmethod
     def process_data(self, frame_raw):
@@ -233,20 +249,97 @@ class PSCollector(ICollector):
         return frame_raw
 
 
+class FinanceCollector(ICollector):
+    # finance data https://github.com/RomelTorres/alpha_vantage
+    # https://www.alphavantage.co/support/#api-key
+    # https://www.analyticsvidhya.com/blog/2018/10/predicting-stock-price-machine-learningnd-deep-learning-techniques-python/
+    # https://github.com/huseinzol05/Stock-Prediction-Models
+    '''
+    This Colector handles the collection of Finance data.
+
+    Example usage :
+    fi = FinanceCollector()
+    fi_frame = PS.get_data()
+    fi.plot(fi_frame)
+    '''
+    def __init__(self):
+        ICollector.__init__(self, 'finance')
+        self.source = ''
+        self.csv_name = 'finance.csv'
+
+        self.path_to_raw = os.path.join(self.path_to_raw, self.csv_name)
+        self.path_to_processed = os.path.join(self.path_to_processed, self.csv_name)
+
+    def process_data(self, frame_raw):
+        '''
+        Processing the finance data.
+        Input is the raw data as pandas frame.
+        Returns the preprocessed dataset as pandas frame.
+        '''
+        frame_raw = frame_raw.dropna(axis=1)
+
+        return frame_raw
+
+    def download_data(self):
+        '''
+        Download finance data from alpha vantage api.
+        Code : https://github.com/RomelTorres/alpha_vantage/blob/
+        91a93e6c988ee716e1f20621078dd000f9808fd7/alpha_vantage/timeseries.py#L10
+        '''
+        companies = self.params.stock_companies
+
+        frame = pd.DataFrame()
+        time_series = TimeSeries(key='B47RKHB1ATHXLQRT', output_format='pandas')
+        start_date = self.params.start_date_data
+
+        # iterate over list and load data
+        for company in companies:
+            print('\rDownload {} stock data'.format(company), end="")
+            time.sleep(15)
+
+            # prepare the frame
+            loaded_data, _ = time_series.get_daily(company, outputsize='full')
+            loaded_data = pd.DataFrame(loaded_data)
+            loaded_data.reset_index(level=0, inplace=True)
+
+            # set names, date select dates bigger start date
+            loaded_data = loaded_data.loc[:, loaded_data.columns.intersection(['date', '1. open'])]
+            loaded_data.columns = ['Date', str(company)]
+            loaded_data = loaded_data[loaded_data['Date'] > start_date]
+
+            # merge data frames
+            if frame.empty:
+                frame = loaded_data
+            else:
+                frame = pd.merge(frame, loaded_data, how='left', on='Date')
+
+        # transform data ('date' --> 'Date' in utc format
+        frame['Date'] = pd.to_datetime(frame['Date'], utc=True)
+        return frame
+
+
 def tests():
     '''Dummy'''
     co_c = CovidCollector()
     ps_c = PSCollector()
     st_c = SteamCollector()
-    # ph_c = PornhubCollector()
+    fi_c = FinanceCollector()
 
     frame_list = []
 
-    col_list = [co_c, ps_c, st_c]
+    col_list = [co_c, ps_c, st_c, fi_c]
     for col in col_list:
         frame_list.append(col.get_data())
 
-    print('done')
+
+# download : https://www.alphavantage.co/query?function=TIME
+# _SERIES_DAILY&symbol=CVX&apikey=B47RKHB1ATHXLQRT&datatype=csv
+
+# finance data https://github.com/RomelTorres/alpha_vantage
+# https://www.alphavantage.co/support/#api-key
+# API key = B47RKHB1ATHXLQRT
+# https://www.analyticsvidhya.com/blog/2018/10/predicting-stock-price-machine-learningnd-deep-learning-techniques-python/
+# https://github.com/huseinzol05/Stock-Prediction-Models
 
 
 if __name__ == '__main__':

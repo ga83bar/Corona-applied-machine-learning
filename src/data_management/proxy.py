@@ -1,7 +1,6 @@
 """here goes the proxy"""
 
-from .preprocessing import DataPreprocessor
-
+import pandas as pd
 
 class Proxy():
     '''handles dataset access and makes the decision if we load the
