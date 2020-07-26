@@ -25,4 +25,7 @@ The problem is approached via data driven analysis. At the start of the project,
 [Matlab Script & Plot for General ML Strategy](/documentation/Matlab Plots/ML Strategy) \
 [Updated Project Proposal](/documentation/meeting_transcripts/research_question_adaptation.md)
 
+**New financial data in form of stock market indices has been defined:**
+[Index Overview](/src/data_management/res/dailyCSV/financeAbbreviations.md)
+
 **Next team session:** July 28
