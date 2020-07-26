@@ -2,7 +2,7 @@
 
 **Symbols are mostly defined as Bloomberg Codes** 
 
-**AlphaVantage Status OK = API Call was successful
+**AlphaVantage Status OK = API Call was successful \
 AlphaVantage Status Not OK = API Call was not successful**
 
 Daily CSV files can be found [here](/src/data_management/res/dailyCSV)
