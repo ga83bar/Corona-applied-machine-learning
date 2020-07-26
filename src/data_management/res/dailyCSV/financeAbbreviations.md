@@ -1,0 +1,136 @@
+#  Stock Market Index Overview
+
+**Symbols are defined as Bloomberg Codes** 
+
+Daily CSV files can be found [here](/src/data_management/res/dailyCSV)
+
+## Medical
+
+| Symbol | Company | AlphaVantage Status |
+|----------|-------------|-------------------------|
+| EVT | Evotec AG | OK |
+| SHL | Siemens Healthineers AG | OK |
+| BAS | BASF | OK |
+| BAYN | Bayer AG | OK |
+| FMS | Fresenius Medical Care AG | OK |
+| FRE.DE | Fresenius SE | OK |
+| JNJ | Johnson + Johnson | OK |
+| PFE | Pfizer | OK |
+| ABT | Abbott Laboratories | OK |
+| KMB | Kimberly Clark Corporation | Not OK |
+
+
+## Banking
+
+| Symbol | Company | AlphaVantage Status |
+|----------|-------------|-------------------------|
+| DB | Deutsche Bank | OK |
+| GS | Goldman Sachs | OK |
+| CMC | JPMorgan Chase | OK |
+| BRYN | Berkshire Hathaway Inc. | OK |
+| NCB | Bank of America | OK |
+| NWT | Wells Fargo & Company | OK |
+
+
+## Stock Index
+
+| Symbol | Index | AlphaVantage Status |
+|----------|-------------|-------------------------|
+| DAX | DAX | OK |
+| TDXP | Tech Dax | OK |
+| INDU | Dow Jones Industrial | OK |
+| SNP | S&P 500 | OK |
+| NDAQ | NASDAQ | OK |
+| NKY | Nikkei 225 | OK |
+
+
+## Energy
+
+| Symbol | Company | AlphaVantage Status |
+|----------|-------------|-------------------------|
+| SIEGY | Siemens AG | OK |
+| EOAN.DE | E.ON | OK |
+| RWE.DE | RWE AG | OK |
+
+
+## Oil
+
+| Symbol | Company | AlphaVantage Status |
+|----------|-------------|-------------------------|
+| CVX | Chevron Corporation | OK |
+| XOM | ExxonMobil | OK |
+| PTR | PetroChina | OK |
+| RDS-A | Royal Dutch Shell | OK |
+
+## Steel
+
+| Symbol | Company | AlphaVantage Status |
+|----------|-------------|-------------------------|
+| TKA.DE | ThyssenKrupp AG | OK |
+| MT | ArcelorMittal S.A. | OK |
+
+
+## Automotive
+
+| Symbol | Company | AlphaVantage Status |
+|----------|-------------|-------------------------|
+| TM | Toyota Motor Corporation | OK |
+| GM | General Motors Company | OK |
+| HYMTF | Hyundai Motor Company | OK |
+| BMW.DE | BMW AG | OK |
+| NSU | AUDI AG | OK |
+| VOW.DE | Volkswagen | OK |
+| DAI.DE | Daimler AG | OK |
+| CON | Continental AG | OK |
+| TSLA | Tesla Inc. | OK |
+
+
+## Telecom
+
+| Symbol | Company | AlphaVantage Status |
+|----------|-------------|-------------------------|
+| DTE | Deutsche Telekom AG | OK |
+| DRI | 1&1 Drillisch AG | OK |
+| TEF | Telefonica SA | OK |
+| O2D.DE | O2 Deutschland AG |  OK |
+| T | AT&T Inc. | OK |
+| TMUS | T-Mobile US Inc. | OK |
+| VOD | Vodafone Group | OK |
+
+
+## Tech
+
+| Symbol | Company | AlphaVantage Status |
+|----------|-------------|-------------------------|
+| AAPL | Apple Inc. | OK |
+| AMZN | Amazon.com Inc. | OK |
+| GOOGL | Aplhabet Inc.  | OK |
+| CCCMF | Cancom SE | OK |
+| IFX.DE | Infineon AG |  OK |
+| SAP | SAP SE | OK |
+| CSCO | Cisco Systems Inc. | OK |
+| IBM | IBM | OK |
+| INL | Intel Corporation (DE) | OK |
+| INTC | Intel Corporation | OK |
+| MSF | Microsoft Corporation | OK |
+| EBAY | eBay Inc. | OK |
+| EA | Electronic Arts Inc. | OK |
+| TWTR | Twitter Inc. | OK |
+| QCOM | Qualcomm Inc. | OK |
+| SNE | Sony Corporation | OK |
+| TXN | Texas Instruments Inc. | OK |
+| TWTR | Twitter Inc. | OK |
+| QCOM | Qualcomm Inc. | OK |
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=DBK&apikey=B47RKHB1ATHXLQRT&datatype=csv
