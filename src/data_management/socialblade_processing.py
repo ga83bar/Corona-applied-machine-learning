@@ -210,16 +210,17 @@ def concat_data_frames(df_list):
             data_frame.rename(columns={'Views': 'Weekly_average_change_views'}, inplace=True)
             data_frame.drop(['Accounts'], axis=1, inplace=True)
             change_data_frame = data_frame
-            print(change_data_frame.head(200))
+            change_data_frame.reset_index(drop=True, inplace=True)
+            print(data_frame.iloc[:3])
         elif data_frame.name == 'weekly-vidviews':
             data_frame['Views'] = data_frame['Views'] / data_frame['Accounts']
             data_frame.rename(columns={'Views': 'Weekly_average_views'}, inplace=True)
             data_frame.drop(['Date', 'Accounts'], axis=1, inplace=True)
             views_data_frame = data_frame
-            print(views_data_frame.head(200))
+            views_data_frame.reset_index(drop=True, inplace=True)
+            print(data_frame.iloc[:3])
     final_data_frame = change_data_frame
     final_data_frame.insert(2, 'Weekly_average_views', views_data_frame['Weekly_average_views'], True)
-    print(final_data_frame.head())
     return final_data_frame
 
 
