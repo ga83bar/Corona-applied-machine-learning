@@ -28,4 +28,4 @@ The problem is approached via data driven analysis. At the start of the project,
 **New financial data in form of stock market indices has been defined:**
 [Index Overview](/src/data_management/res/dailyCSV/financeAbbreviations.md)
 
-**Next team session:** July 28
+**Next team session:** TBA
