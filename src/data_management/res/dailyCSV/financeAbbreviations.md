@@ -159,6 +159,8 @@ AlphaVantage Status Not OK = API Call was not successful
 | TXN | Texas Instruments Inc. | OK |
 | TWTR | Twitter Inc. | OK |
 | QCOM | Qualcomm Inc. | OK |
+| NFC | Netflix Inc. | OK |
+| ZM | Zoom Video Communications Inc. | OK |
 
 
 ## API Access

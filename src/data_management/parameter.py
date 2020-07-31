@@ -51,7 +51,7 @@ class Parameter:
         self.__steel_comp = ['TKA.DE', 'MT', 'NISTF', 'PKX', 'SHE:000709', 'SHA:600019', 'SHE:002075']
         self.__automotive_comp = ['TM', 'GM', 'HYMTF', 'BMW.DE', 'NSU', 'VOW.DE', 'DAI.DE', 'CON', 'TSLA']
         self.__telecom_comp = ['DTE', 'DRI', 'TEF', 'O2D.DE', 'T', 'TMUS', 'VOD', 'CTM', 'VZ', 'NTT.F', 'SFTBY', 'AMOV', 'CHA']
-        self.__tec_comp = ['AAPL', 'AMZN', 'GOOGL', 'CCCMF', 'IFX.DE', 'SAP', 'CSCO', 'IBM', 'INL', 'INTC', 'MSF', 'EBAY', 'EA', 'TWRT', 'QCOM', 'TXN', 'SNE']
+        self.__tec_comp = ['AAPL', 'AMZN', 'GOOGL', 'CCCMF', 'IFX.DE', 'SAP', 'CSCO', 'IBM', 'INL', 'INTC', 'MSF', 'EBAY', 'EA', 'TWRT', 'QCOM', 'TXN', 'SNE', 'NFC', 'ZM']
         self.__finance_companies = (self.__med_comp + self.__energy_comp + self.__oil_comp + self.__steel_comp + self.__banking + self.__stockIndex + self.__automotive_comp + self.__telecom_comp + self.__tec_comp)
 
         self.__folders = ['covid', 'finance', 'de-cix', 'playstation',  # TODO 'ix'
