@@ -12,7 +12,7 @@
         
         
         <div class="md-layout">
-          <line-chart :chart-data="datacollection"></line-chart>    
+          <line-chart :chart-data="datacollection"/>    
           <u1> Predicted Class is: {{ datacollection }}</u1> 
           
           <div class="md-layout-item md-size-66 mx-auto">
@@ -109,7 +109,8 @@ export default {
   bodyClass: "profile-page",
   data() {
     return {
-      model: '1'
+      model: '1',
+      datacollection : null
     }
   },
 
@@ -141,11 +142,12 @@ export default {
             }
           ]
         }
-        return this.datacollection
+                
       })
       .catch(e => {
         notifyVue('top', 'center', 'danger', 'Connection failed.')
       })
+
    }
 
   },
