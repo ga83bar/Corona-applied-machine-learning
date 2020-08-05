@@ -38,13 +38,23 @@
 
                 <md-tab id="tab-posts" md-label="History">
                   <p>
-                    I think that’s a responsibility that I have, to push
-                    possibilities, to show people, this is the level that things
-                    could be at. I will be the leader of a company that ends up
-                    being worth billions of dollars, because I got the answers.
-                    I understand culture. I am the nucleus. I think that’s a
-                    responsibility that I have, to push possibilities, to show
-                    people, this is the level that things could be at.
+                    In the past, it has always been relatively easy to predict how 
+                    much traffic the Internet will have. Internet traffic is highly 
+                    seasonal, depending on time of day, day of the week and month. 
+                    It depends very much on the company that you get data over a long 
+                    period of time. If you look at data over several years, you can 
+                    see that there is a steady upward trend in addition to the seasonality.
+
+                    However, Corona and its political measures have led to these 
+                    patterns being broken and to an abrupt rise. This has pushed 
+                    many companies to their limits, which has reduced the quality 
+                    of some streaming services. 
+                    
+                    The model we have created is designed to help predict future 
+                    internet traffic during the Corona pandemic and possible future 
+                    pandemics.
+
+
                   </p>
                 </md-tab>
 

@@ -43,6 +43,21 @@
                </div>
                <u1 v-if="model">Predicted Class is: {{ model }}</u1>
             </div>
+            
+            <div class="block">
+              <h3>Start Date</h3>
+              <md-datepicker v-model="start_date" :md-disabled-dates="disabledDates"/>
+              <div class="value">value: {{start_date}}</div>
+            </div>
+            <md-divider />
+
+            <div class="block">
+              <h3>End Date</h3>
+              <md-datepicker v-model="end_date" :md-model-type="string"  /> 
+              <div class="value">value: {{end_date}}</div>
+            </div>
+            <md-divider />
+
             </div>
           <div class="hor-space">
           </div>
@@ -100,6 +115,7 @@
 import Tabs from "./components/TabsSection";
 import axios from 'axios'
 import LineChart from './components/LineChart.js'
+import format from 'date-fns/format'
 
 export default {
   components: {
@@ -108,12 +124,28 @@ export default {
   },
   bodyClass: "profile-page",
   data() {
+    let dateFormat = this.$material.locale.dateFormat || 'yyyy-MM-dd'
+    let now = new Date()
+
     return {
+      start_date: format(now, dateFormat),
+      end_date: format(now, dateFormat),
+      disabledDates: function(date) {
+        // compare if today is greater then the datepickers date
+        return new Date() >date
+      },
       model: '1',
       datacollection : null
     }
   },
+  computed:{
+    // eslint-disable-next-line
 
+      dateFormat () {
+        return this.$material.locale.dateFormat || 'yyyy-MM-dd'
+      }
+    },
+  
   methods: {
 
     notifyVue(verticalAlign, horizontalAlign, type_notification, notify_message) {
@@ -128,7 +160,9 @@ export default {
     },
       select_set(){
       axios.post('http://127.0.0.1:5000/predict', {
-        dataset_req: this.model
+        dataset_req: this.model,
+        start_date_req: this.start_date,
+        end_date_req: this.end_date
       })
       .then(response => {
         this.acceptedRequest = response.data.class
@@ -148,7 +182,31 @@ export default {
         notifyVue('top', 'center', 'danger', 'Connection failed.')
       })
 
-   }
+   },
+      toString () {
+        this.toDate()
+        this.dynamicByModel = this.dynamicByModel && format(this.dynamicByModel, this.dateFormat)
+      },
+      disableTo(val) {
+      if (typeof this.disabled.to === "undefined") {
+        this.disabledDates = {
+          to: null,
+          daysOfMonth: this.disabledDates.daysOfMonth,
+          from: this.disabled.from
+        };
+      }
+      this.disabledDates.to = val;
+    },
+    disableFrom(val) {
+      if (typeof this.disabledDates.from === "undefined") {
+        this.disabled = {
+          to: this.disabledDates.to,
+          daysOfMonth: this.disabled.daysOfMonth,
+          from: null
+        };
+      }
+      this.disabledDates.from = val;
+    },
 
   },
   props: {

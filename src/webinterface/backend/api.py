@@ -10,6 +10,8 @@ CORS(app)
 api = Api(app)# Require a parser to parse our POST request.
 parser = reqparse.RequestParser()
 parser.add_argument("dataset_req")
+parser.add_argument("start_date_req")
+parser.add_argument("end_date_req")
 # Unpickle our model so we can use it!
 
 class Predict(Resource):
@@ -19,6 +21,8 @@ class Predict(Resource):
     
     print("request is processed")
     print(args["dataset_req"])
+    print(args["start_date_req"])
+    print(args["end_date_req"])
     if (args["dataset_req"]=='1'):
       return {"class": 42, "chart_data": [5, 8, 2, 4, 6, 5, 8, 2, 4, 6]}
     elif (args["dataset_req"]=='2'):
