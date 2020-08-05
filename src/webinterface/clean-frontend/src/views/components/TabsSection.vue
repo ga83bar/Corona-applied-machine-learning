@@ -10,26 +10,30 @@
             <template slot="content">
               <md-tabs class="md-danger" md-alignment="left">
                 <md-tab id="tab-home" md-label="FAQ" md-icon="info">
-                  <h3>Überschrift</h3>
+                  <h3>Frequently Asked Questions and Answers</h3>
                   <p>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                    Our goal was to make this web interface as user-friendly and intuitive 
+                    as possible. If you are still in confusion, you can almost certainly 
+                    find an answer in the following tabs. 
                   </p>
                 </md-tab>
 
                 <md-tab id="tab-pages" md-label="How to use">
                   
                   <p>
-                    
-                    I will be the leader of a company that ends up being worth
-                    billions of dollars, because I got the answers. I understand
-                    culture. I am the nucleus. 
-                    
-                    I think that’s a responsibility
-                    that I have, to push possibilities, to show people, this is
-                    the level that things could be at. I think that’s a
-                    responsibility that I have, to push possibilities, to show
-                    people, this is the level that things could be at.
+                    The function of this machine learning projects is to predict the 
+                    increased usage of internet traffic depending on the corona cases.                    
                   </p>
+                  <p>
+                  1. Select a time frame in which the forecast should be made.
+                  </p>
+                  <p>
+                  2. Select a topic on which the prediction should be made.
+                  </p>
+                  <p>
+                  3. Click on the Button "Run inference" to run the prediction.
+                  </p>
+
                 </md-tab>
 
                 <md-tab id="tab-posts" md-label="History">
@@ -43,6 +47,14 @@
                     people, this is the level that things could be at.
                   </p>
                 </md-tab>
+
+                <md-tab id="tab-e-mail" md-label="Further Questions">
+                  <p>
+                    If you have any further questions, please feel free 
+                    to contact us at the following e-mail address: n.landerer@tum.de
+                  </p>
+                </md-tab>
+                
               </md-tabs>
             </template>
           </nav-tabs-card>

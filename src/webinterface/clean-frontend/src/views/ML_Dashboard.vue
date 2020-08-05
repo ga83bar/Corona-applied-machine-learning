@@ -26,13 +26,13 @@
                 <md-field>
                   <label for="model">Model selection</label>
                   <md-select v-model="model" name="model" id="model">
-                    <md-option value="1">Fight Club</md-option>
-                    <md-option value="2">Godfather</md-option>
-                    <md-option value="3">Godfather II</md-option>
-                    <md-option value="4">Godfather III</md-option>
-                    <md-option value="5">Godfellas</md-option>
-                    <md-option value="6">Pulp Fiction</md-option>
-                    <md-option value="7">Scarface</md-option>
+                    <md-option value="1">Internet Exchange Points</md-option>
+                    <md-option value="2">Playstation</md-option>
+                    <md-option value="3">Adult Websites</md-option>
+                    <md-option value="4">Google statistics</md-option>
+                    <md-option value="5">Twitch</md-option>
+                    <md-option value="6">Foo bar</md-option>
+                    <md-option value="7">Hello World</md-option>
                   </md-select>
                 </md-field>
               </form>
