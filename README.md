@@ -17,15 +17,15 @@ The problem is approached via data driven analysis. At the start of the project,
 
 ## __Current Project D__
 
-**Last team session:** July 21
+**ShareLaTeX:**
+[Click Here](https://sharelatex.tum.de/project/5f2d5db52dcb1012e4af42eb) 
 
-[Meeting Summary (July 7)](/documentation/meeting_transcripts/summary_milestone3_july_7.md) 
-[ML Model Overview](/documentation/Machine Learning Models/MachineLearningModels.md) \
-[General ML Strategy](/documentation/Machine Learning Models/GeneralStrategy.md) \
-[Matlab Script & Plot for General ML Strategy](/documentation/Matlab Plots/ML Strategy) \
-[Updated Project Proposal](/documentation/meeting_transcripts/research_question_adaptation.md)
-
-**New financial data in form of stock market indices has been defined:**
-[Index Overview](/src/data_management/res/dailyCSV/financeAbbreviations.md)
-
+**Last team session:** August 7
 **Next team session:** TBA
+
+[Meeting Summary & Milestone 3 Objectives](/documentation/meeting_transcripts/summary_milestone3_july_7.md) \
+[ML Candidate Model Overview](/documentation/Machine Learning Models/MachineLearningModels.md) \
+[General ML Strategy](/documentation/Machine Learning Models/GeneralStrategy.md) \
+[Updated Project Proposal](/documentation/meeting_transcripts/research_question_adaptation.md) 
+
+
