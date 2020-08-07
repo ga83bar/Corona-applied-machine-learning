@@ -173,7 +173,13 @@ export default {
               label: 'Data One - test',
               backgroundColor: '#004c99',
               data: response.data.chart_data
+            },
+            {
+              label: 'Data two - test',
+              backgroundColor: '#004c150',
+              data: response.data.chart_data
             }
+            
           ]
         }
                 
