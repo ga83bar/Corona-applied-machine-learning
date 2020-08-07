@@ -249,13 +249,9 @@ class PSCollector(ICollector):
 
 
 class FinanceCollector(ICollector):
-    # finance data https://github.com/RomelTorres/alpha_vantage
-    # https://www.alphavantage.co/support/#api-key
-    # https://www.analyticsvidhya.com/blog/2018/10/predicting-stock-price-machine-learningnd-deep-learning-techniques-python/
-    # https://github.com/huseinzol05/Stock-Prediction-Models
     '''
     This Colector handles the collection of Finance data.
-
+    We use alpha vantage API for data collection.
     Example usage :
     fi = FinanceCollector()
     fi_frame = PS.get_data()
@@ -291,20 +287,29 @@ class FinanceCollector(ICollector):
         time_series = TimeSeries(key='B47RKHB1ATHXLQRT', output_format='pandas')
         start_date = self.params.start_date_data
 
+        counter = 0
+
         # iterate over list and load data
         for company in companies:
-            print('\rDownload {} stock data'.format(company), end="")
-            time.sleep(15)
+            counter += 1
+            procent = int(100*(counter/len(companies)))
+            print('\rDownload {} stock data alreday finished {} %             '.format(company, procent), end="")
+            time.sleep(16)
 
-            # prepare the frame
-            loaded_data, _ = time_series.get_daily(company, outputsize='full')
-            loaded_data = pd.DataFrame(loaded_data)
-            loaded_data.reset_index(level=0, inplace=True)
+            try:
+                # prepare the frame
+                loaded_data, _ = time_series.get_daily(company, outputsize='full')
+                loaded_data = pd.DataFrame(loaded_data)
+                loaded_data.reset_index(level=0, inplace=True)
 
-            # set names, date select dates bigger start date
-            loaded_data = loaded_data.loc[:, loaded_data.columns.intersection(['date', '1. open'])]
-            loaded_data.columns = ['Date', str(company)]
-            loaded_data = loaded_data[loaded_data['Date'] > start_date]
+                # set names, date select dates bigger start date
+                loaded_data = loaded_data.loc[:, loaded_data.columns.intersection(['date', '1. open'])]
+                loaded_data.columns = ['Date', str(company)]
+                loaded_data = loaded_data[loaded_data['Date'] > start_date]
+
+            except Exception as inst:
+                print('Error during downloading stock data {}'.format(inst))
+                print('Problems downloading {}'.format(company))
 
             # merge data frames
             if frame.empty:
@@ -329,16 +334,6 @@ def tests():
     col_list = [co_c, ps_c, st_c, fi_c]
     for col in col_list:
         frame_list.append(col.get_data())
-
-
-# download : https://www.alphavantage.co/query?function=TIME
-# _SERIES_DAILY&symbol=CVX&apikey=B47RKHB1ATHXLQRT&datatype=csv
-
-# finance data https://github.com/RomelTorres/alpha_vantage
-# https://www.alphavantage.co/support/#api-key
-# API key = B47RKHB1ATHXLQRT
-# https://www.analyticsvidhya.com/blog/2018/10/predicting-stock-price-machine-learningnd-deep-learning-techniques-python/
-# https://github.com/huseinzol05/Stock-Prediction-Models
 
 
 if __name__ == '__main__':

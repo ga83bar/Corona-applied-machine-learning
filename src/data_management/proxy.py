@@ -85,9 +85,13 @@ class DataMerger(object):
             for file in dirs:
                 if file.endswith('.csv'):
                     path_processed_data = os.path.join(folder, file)
-                    df_tmp = pd.read_csv(path_processed_data)
-                    df_tmp['Date'] = pd.to_datetime(df_tmp['Date'], utc=True)
-                    self.frame = self.frame.merge(df_tmp, how='left')
+                    try:
+                        df_tmp = pd.read_csv(path_processed_data)
+                        df_tmp['Date'] = pd.to_datetime(df_tmp['Date'], utc=True)
+                        self.frame = self.frame.merge(df_tmp, how='left')
+                    except Exception as ex:
+                        print('Something is wrong with the data stored in {}'.format(path_processed_data))
+                        print(ex)
 
         if save_data:
             path = os.path.join('.', 'res', 'all_raw.csv')
