@@ -54,7 +54,7 @@ class Parameter:
         self.__tec_comp = ['AAPL', 'AMZN', 'GOOGL', 'CCCMF', 'IFX.DE', 'SAP', 'CSCO', 'IBM', 'INL', 'INTC', 'MSF', 'EBAY', 'EA', 'TWRT', 'QCOM', 'TXN', 'SNE', 'NFC', 'ZM']
         self.__finance_companies = (self.__med_comp + self.__energy_comp + self.__oil_comp + self.__steel_comp + self.__banking + self.__stockIndex + self.__automotive_comp + self.__telecom_comp + self.__tec_comp)
 
-        self.__folders = ['covid', 'finance', 'de-cix', 'playstation',  # TODO 'ix'
+        self.__folders = ['covid', 'finance', 'playstation', 'ix',#'de-cix'
                           'socialblade', 'steam', 'twitch']
 
     def __init__(self):
