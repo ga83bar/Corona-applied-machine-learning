@@ -79,7 +79,7 @@ class Parameter:
                                     self.__automotive_comp +
                                     self.__telecom_comp + self.__tec_comp)
 
-        self.__folders = ['covid', 'finance', 'de-cix', 'playstation', 'ix',
+        self.__folders = ['covid', 'finance', 'playstation', 'ix',  # 'de-cix',
                           'socialblade', 'steam', 'twitch']
 
     def __init__(self):
