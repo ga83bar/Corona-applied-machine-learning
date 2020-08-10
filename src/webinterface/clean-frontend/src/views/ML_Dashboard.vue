@@ -1,6 +1,7 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper"><div class="top-pinned">
   <notifications></notifications>
+  </div>
     <parallax
     class="section page-header header-filter"
     :style="headerStyle"
@@ -12,8 +13,10 @@
         
         
         <div class="md-layout">
-          <line-chart :chart-data="datacollection"/>    
-          <u1> Predicted Class is: {{ datacollection }}</u1> 
+          <div class="fsize-chart">
+          <line-chart :chart-data="chartdata" :options="options"/>  
+          </div>  
+          <u1> Predicted Class is: {{ chartdata }}</u1> 
           
           <div class="md-layout-item md-size-66 mx-auto">
           
@@ -135,7 +138,13 @@ export default {
         return new Date() >date
       },
       model: '1',
-      datacollection : null
+      chartdata : null,
+      chart: { 
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 2
+      }
+
     }
   },
   computed:{
@@ -165,19 +174,23 @@ export default {
         end_date_req: this.end_date
       })
       .then(response => {
-        this.acceptedRequest = response.data.class
-        this.datacollection = {
+        this.acceptedRequest = response.data.class,
+        this.chartdata = {
+          maintainAspectRatio: true,
+          aspectRatio: 2,
           labels: [0, 1, 2, 3, 4 ,5 ,6 ,7,8, 9],
           datasets: [
             {
               label: 'Data One - test',
-              backgroundColor: '#004c99',
-              data: response.data.chart_data
+              data: response.data.chart_data,
+					    borderColor: 'rgb(238, 76, 96)',
+              fill: false
             },
             {
               label: 'Data two - test',
-              backgroundColor: '#004c150',
-              data: response.data.chart_data
+              data: response.data.chart_data,
+              borderColor: 'rgb(76, 175, 80)',
+              fill: false
             }
             
           ]
@@ -274,6 +287,15 @@ position:relative;
 
 /* chart */
 
+.top-pinned
+{
+  position:fixed;
+  width:100%;
+  top: 0;
+  z-index: 9000;
+  background: transparent
+}
+
 .chartjs
 {
   max-width: 950px;
@@ -293,6 +315,11 @@ position:relative;
         }
     }
 
+}
+
+.fsize-chart 
+{
+  width:100%;
 }
 
 .hor-space{
