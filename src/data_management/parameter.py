@@ -43,6 +43,7 @@ class Parameter:
 
         # Financial Data
         # Corresponding Symbol Table -> /src/data_management/res/dailyCSV/financeAbbreviations.md
+
         self.__med_comp = ['EVT', 'SHL', 'BAS', 'BAYN', 'JNJ',
                            'PFE', 'FMS', 'FRE.DE', 'ABT', 'KMB',
                            'MDT', 'PHG', 'GE', 'BDX', 'CAH', 'SYK']
