@@ -33,6 +33,7 @@ class LoadIn():
             "twi": "twitch"
         }
         self.dataframes = {}
+        self.keys = {}
 
     def get_set(self, strs, typ="processed"):
         """ Get dataframes for each dataset, load them """
@@ -42,6 +43,40 @@ class LoadIn():
                 if file.endswith(".csv") and not self.dataframes[file]:
                     self.dataframes[file] = pd.read_csv(DATA_FILE.format(self.datasets[dset], typ, file))
                     dataframes[file] = pd.read_csv(DATA_FILE.format(self.datasets[dset], typ, file))
+                    self.keys[file] = dset
                 if self.dataframes[file]:
                     dataframes[file] = self.dataframes[file]
         return dataframes
+
+    def get_comp_sets(self):
+        """
+        Return all currently stored datasets
+        """
+        return self.dataframes
+
+    def get_keys(self):
+        """
+        Get all the current subset keys
+        """
+        return self.keys
+
+    def get_set_keys(self):
+        """
+        Get all the dataset keys
+        """
+        return self.datasets
+
+    def clear_all(self):
+        """
+        Use this setter to clear the object for reuse
+        """
+        self.dataframes = {}
+        self.keys = {}
+        return None
+
+    def clear_set(self, dset):
+        """
+        Setter removes a set from the object
+        """
+        del self.dataframes[dset]
+        raise NotImplementedError
