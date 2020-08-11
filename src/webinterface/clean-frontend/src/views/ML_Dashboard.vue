@@ -192,7 +192,7 @@ export default {
         this.chartdata = {
           maintainAspectRatio: true,
           aspectRatio: 2,
-          labels: [0, 1, 2, 3, 4 ,5 ,6 ,7,8, 9],
+          labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
           datasets: [
             {
               label: 'Data One - test',
