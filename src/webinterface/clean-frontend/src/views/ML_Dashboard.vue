@@ -19,8 +19,6 @@
           <u1> Predicted Class is: {{ chartdata }}</u1> 
           
           <div class="md-layout-item md-size-66 mx-auto">
-          
-
 
           <div class="controls">
             <div class="md-layout md-gutter">
@@ -28,21 +26,37 @@
                 <form>
                 <md-field>
                   <label for="model">Model selection</label>
-                  <md-select v-model="model" name="model" id="model">
-                    <md-option value="1">Internet Exchange Points</md-option>
-                    <md-option value="2">Playstation</md-option>
-                    <md-option value="3">Adult Websites</md-option>
-                    <md-option value="4">Google statistics</md-option>
-                    <md-option value="5">Twitch</md-option>
-                    <md-option value="6">Foo bar</md-option>
-                    <md-option value="7">Hello World</md-option>
+                  <md-select v-model="model" name="model" id="model" md-direction="bottom-end">
+                    <md-option @click='select_set()' value="1"> Internet Exchange Points</md-option>
+                    <md-option value="2"> Playstation</md-option>
+                    <md-option value="3"> Adult Websites</md-option>
+                    <md-option value="4"> Google statistics</md-option>
+                    <md-option value="5"> Twitch</md-option>
+                    <md-option value="6"> Foo bar</md-option>
+                    <md-option value="7"> Hello World</md-option>
                   </md-select>
                 </md-field>
               </form>
               </div>
                <div class="md-layout-item buttonbed">
-               <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
-               
+                  <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
+               </div>
+               <u1 v-if="model">Predicted Class is: {{ model }}</u1>
+            </div>
+
+            <div class="md-layout md-gutter">
+              <div class="md-layout-item">
+                <md-menu md-size="medium" md-align-trigger>
+                  <md-button md-menu-trigger>{{selectedDataset}}</md-button>
+                  <md-menu-content>
+                    <md-menu-item @click="model='1', select_set(), selectedDataset='Internet Exchange Points'">Internet Exchange Points</md-menu-item>
+                    <md-menu-item @click="model='2', select_set(), selectedDataset='Playstation'">Playstation</md-menu-item>
+                    <md-menu-item @click="model='3', select_set(), selectedDataset='Item 3'">My Item 3</md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </div>
+              <div class="md-layout-item buttonbed">
+                  <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
                </div>
                <u1 v-if="model">Predicted Class is: {{ model }}</u1>
             </div>
@@ -62,8 +76,7 @@
             <md-divider />
 
             </div>
-          <div class="hor-space">
-          </div>
+          <div class="hor-space"></div>
           
             <div class="md-layout md-gutter">
 
@@ -133,6 +146,7 @@ export default {
     return {
       start_date: format(now, dateFormat),
       end_date: format(now, dateFormat),
+      selectedDataset: 'Select dataset',
       disabledDates: function(date) {
         // compare if today is greater then the datepickers date
         return new Date() >date
@@ -182,13 +196,13 @@ export default {
           datasets: [
             {
               label: 'Data One - test',
-              data: response.data.chart_data,
+              data: response.data.chart_data_1,
 					    borderColor: 'rgb(238, 76, 96)',
               fill: false
             },
             {
               label: 'Data two - test',
-              data: response.data.chart_data,
+              data: response.data.chart_data_2,
               borderColor: 'rgb(76, 175, 80)',
               fill: false
             }
