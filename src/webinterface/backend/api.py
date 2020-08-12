@@ -33,10 +33,15 @@ def load_data(data_folder_name, csv_file_name, type):
     file_path = Path("{}/{}".format(data_folder_name, csv_file_name))
     # Join the two partial paths to a complete path to access the file
     complete_path = Path(data_path, file_path)
-    print("complete path: " + str(complete_path))
 
     # Open file as a pandas frame
     csv_file = pd.read_csv(complete_path)
+    # Convert the "Date" entries into datetime objects
+    csv_file["Date"] = pd.to_datetime(csv_file["Date"])
+    # Sort the pandas frame in the ascending date order
+    csv_file.sort_values(by=["Date"], inplace=True)
+    # Reconvert the datetime objects into Strings
+    csv_file["Date"] = csv_file["Date"].astype(str)
     # Extract data of specified type to a list
     data = csv_file[type].to_list()
 
