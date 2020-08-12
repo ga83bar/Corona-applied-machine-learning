@@ -16,13 +16,14 @@ from creme import datasets
 from creme import linear_model
 from creme import metrics
 from creme import preprocessing
+import pickle
 
 class OnlineFCN():
     """
     Class contains an online linear model and all of its pre and post
     training attributes.
     """
-    def __init__(self, dataframe):
+    def __init__(self, dataframe,dset):
         """
         Constructor
         """
@@ -32,6 +33,7 @@ class OnlineFCN():
         self.trained_model = None
         self.init_model = None
         self.metric = None
+        self.dset = dset
 
     def setup(self):
         """
@@ -57,7 +59,23 @@ class OnlineFCN():
         Train the model
         """
         for x, lbl in self.dataframe:
-            prediction = self.trained_model.predict_one()
+            prediction = self.trained_model.predict_one(x)
             metric = self.metric.update(lbl, prediction)
             self.trained_model = self.trained_model.fit_one(x, lbl)
         print(metric)
+
+    def save_model(self):
+        """
+        Saves a model
+        """
+        with open(f"onln_fcn_{self.dset}_{dt.time}.pkl", 'wb') as f:
+            pickle.dump(self.trained_model, f)
+            return self.trained_model
+
+    def load_model(self, time):
+        """
+        Loads a pretrained model
+        """
+        with open(f"onln_fcn_{self.dset}_{time}.pkl", 'rb') as f:
+            model = pickle.load(f)
+            return model
