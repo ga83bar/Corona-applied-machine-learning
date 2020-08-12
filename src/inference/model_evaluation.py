@@ -2,16 +2,14 @@
 File ...
 '''
 import os
-import pandas as pd
 import datetime as dt
 import numpy as np
-import keras
+import pandas as pd
 from keras import Sequential
 from keras.layers import Dense
-import keras.backend as K
-import tensorflow as tf
-from scipy.optimize import minimize
 from keras.datasets import boston_housing
+from scipy.optimize import minimize
+
 
 # TODO include in dependencies
 
