@@ -271,7 +271,7 @@ class FinanceCollector(ICollector):
         Input is the raw data as pandas frame.
         Returns the preprocessed dataset as pandas frame.
         '''
-        frame_raw = frame_raw.dropna(axis=1)
+        # frame_raw = frame_raw.dropna(axis=1)
 
         return frame_raw
 
