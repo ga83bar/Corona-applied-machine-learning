@@ -31,6 +31,6 @@ class GaussianModel():
         """
         Model setup
         """
-
         self.init_model = model
         return self.init_model
+        
