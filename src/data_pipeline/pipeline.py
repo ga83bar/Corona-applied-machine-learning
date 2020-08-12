@@ -60,7 +60,7 @@ def load_data_set(verbose=False):
 
     @param verbose Toggles verbose output over the terminal.
     """
-    root = Path.cwd().parent.parent
+    root = Path().absolute().parent.parent
     dataset_path = root.joinpath('res', 'all_raw.csv')
 
     df = pd.read_csv(dataset_path)
@@ -462,7 +462,7 @@ def save_df(scaled_pre_corona_df, scaled_corona_df, scaler):
     @param scaled_corona_df The during Corona data frame.
     @param scaler The fitted scaler for the data sets.
     """
-    root = Path.cwd().parent.parent
+    root = Path().absolute().parent.parent
 
     scaled_pre_corona_df_path = root.joinpath('res', 'pipeline', 'scaled_pre_corona_df.csv')
     scaled_corona_df_path = root.joinpath('res', 'pipeline', 'scaled_corona_df.csv')
