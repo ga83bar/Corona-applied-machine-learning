@@ -91,14 +91,11 @@ class Learning():
         """
         return frame
 
-    def get_algorithem(self):
-        '''
+    def get_algorithms(self):
+        """
         Getter method ML-Algorithem
-        '''
-        return self.__algorithem
-
-    # PROPERTIES
-    algorithem = property(get_algorithem, set_algorithem)
+        """
+        return self.__algorithmen
 
 # Extrem eLearning machine
 class ExtremeLearningMachine():
@@ -139,23 +136,6 @@ class ExtremeLearningMachine():
         return np.matmul(features, self.weights)
 
 
-
-# Helping functions
-def is_algo_valid(algo):
-    '''
-    No time - check if algo is valid
-    '''
-    if algo == Learning.NN:
-        return True
-    elif algo == Learning.LSTM:
-        return True
-    elif algo == Learning.ELM:
-        return True
-    elif algo == Learning.GP:
-        return True
-    else:
-        return False
-
 def split_before_after(frames, split_date=dt.datetime(2020, 1, 1)):
     """
     Splits data in two frames the one before and the one after corona.
@@ -170,20 +150,8 @@ def split_before_after(frames, split_date=dt.datetime(2020, 1, 1)):
         frames_post[frame] = (frame_post)
     return (frames_prior, frames_post)
 
-def get_prediction_err_and_std(y,y_hat):
-    squared_pred_errs = np.square(y.flatten()-y_hat.flatten())
-    return np.mean(squared_pred_errs), np.std(squared_pred_errs)
 
-
-# Example for elm
-
-if __name__=='__main__':
-    (trainX, trainY), (testX, testY) = boston_housing.load_data()
-    elm = ExtremeLearningMachine(2,200,"relu",(trainX.shape[1],))
-
-    elm.fit(trainX,trainY,elm.reg_fun)
-
-    pred = elm.predict(testX)
-
-    err, std = get_prediction_err_and_std(pred,testY)
-    print("Error: " + str(err) + " +- " + str(std))
+if __name__ == '__main__':
+    ALGORITHMS = {}
+    DATASETS = {}
+    evaluator = Learning(ALGORITHMS, DATASETS)
