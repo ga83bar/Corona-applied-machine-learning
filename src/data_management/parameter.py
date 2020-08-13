@@ -43,18 +43,44 @@ class Parameter:
 
         # Financial Data
         # Corresponding Symbol Table -> /src/data_management/res/dailyCSV/financeAbbreviations.md
-        self.__med_comp = ['EVT', 'SHL', 'BAS', 'BAYN', 'JNJ', 'PFE', 'FMS', 'FRE.DE', 'ABT', 'KMB', 'MDT', 'PHG', 'GE', 'BDX', 'CAH', 'SYK']
-        self.__banking = ['DB', 'CMC', 'NCB', 'GS', 'BRYN', 'WFC', 'JPHLF', 'CICHY', 'ACGBY', 'CRARY', 'BACHF', 'C']
-        self.__stockIndex = ['DAX', 'TDXP', 'INDU', 'SNP', 'NDAQ', 'NKY']
-        self.__energy_comp = ['SIEGY', 'EOAN.DE', 'RWE.DE', 'DUK', 'ENGI.PA', 'NGG', 'NEE', 'EDF']
-        self.__oil_comp = ['CVX', 'XOM', 'PTR', 'XONA', 'RDS-A', 'LUK', 'ROSN', 'TOT', 'BP', 'SNP']
-        self.__steel_comp = ['TKA.DE', 'MT', 'NISTF', 'PKX', 'SHE:000709', 'SHA:600019', 'SHE:002075']
-        self.__automotive_comp = ['TM', 'GM', 'HYMTF', 'BMW.DE', 'NSU', 'VOW.DE', 'DAI.DE', 'CON', 'TSLA']
-        self.__telecom_comp = ['DTE', 'DRI', 'TEF', 'O2D.DE', 'T', 'TMUS', 'VOD', 'CTM', 'VZ', 'NTT.F', 'SFTBY', 'AMOV', 'CHA']
-        self.__tec_comp = ['AAPL', 'AMZN', 'GOOGL', 'CCCMF', 'IFX.DE', 'SAP', 'CSCO', 'IBM', 'INL', 'INTC', 'MSF', 'EBAY', 'EA', 'TWRT', 'QCOM', 'TXN', 'SNE', 'NFC', 'ZM']
-        self.__finance_companies = (self.__med_comp + self.__energy_comp + self.__oil_comp + self.__steel_comp + self.__banking + self.__stockIndex + self.__automotive_comp + self.__telecom_comp + self.__tec_comp)
 
-        self.__folders = ['covid', 'finance', 'de-cix', 'playstation',  # TODO 'ix'
+        self.__med_comp = ['EVT', 'SHL', 'BAS', 'BAYN', 'JNJ',
+                           'PFE', 'FMS', 'FRE.DE', 'ABT', 'KMB',
+                           'MDT', 'PHG', 'GE', 'BDX', 'CAH', 'SYK']
+
+        self.__banking = ['DB', 'CMC', 'NCB', 'GS', 'BRYN', 'WFC',
+                          'JPHLF', 'CICHY', 'ACGBY', 'CRARY', 'BACHF', 'C']
+
+        self.__stock_index = ['DAX', 'TDXP', 'INDU', 'NDAQ', 'NKY'] # double SNP
+
+        self.__energy_comp = ['SIEGY', 'EOAN.DE', 'RWE.DE',
+                              'DUK', 'ENGI.PA', 'NGG', 'NEE', 'EDF']
+
+        self.__oil_comp = ['CVX', 'XOM', 'PTR', 'XONA', 'RDS-A',
+                           'LUK', 'ROSN', 'TOT', 'BP', 'SNP']
+
+        self.__steel_comp = ['TKA.DE', 'MT', 'NISTF', 'PKX',
+                             'SHE:000709', 'SHA:600019', 'SHE:002075']
+
+        self.__automotive_comp = ['TM', 'GM', 'HYMTF', 'BMW.DE',
+                                  'NSU', 'VOW.DE', 'DAI.DE', 'CON', 'TSLA']
+
+        self.__telecom_comp = ['DTE', 'DRI', 'TEF', 'O2D.DE', 'T',
+                               'TMUS', 'VOD', 'CTM', 'VZ', 'NTT.F',
+                               'SFTBY', 'AMOV', 'CHA']
+
+        self.__tec_comp = ['AAPL', 'AMZN', 'GOOGL', 'CCCMF',
+                           'IFX.DE', 'SAP', 'CSCO', 'IBM', 'INL',
+                           'INTC', 'MSF', 'EBAY', 'TWRT', 'QCOM',  # 'EA',
+                           'TXN', 'SNE']
+
+        self.__finance_companies = (self.__med_comp + self.__energy_comp +
+                                    self.__oil_comp + self.__steel_comp +
+                                    self.__banking + self.__stock_index +
+                                    self.__automotive_comp +
+                                    self.__telecom_comp + self.__tec_comp)
+
+        self.__folders = ['covid', 'finance', 'playstation', 'ix',  # 'de-cix',
                           'socialblade', 'steam', 'twitch']
 
     def __init__(self):
@@ -117,6 +143,6 @@ class Parameter:
         return self.__folders
 
     @folders.setter
-    def folders(self, folder_list):
+    def folders(self, _):
         '''Setter method'''
         print('Access denied !!!!!')
