@@ -1,6 +1,6 @@
-'''
-File ...
-'''
+"""
+This module serves as the hub for the model evaluation and training
+"""
 import os
 import datetime as dt
 import numpy as np
@@ -45,8 +45,6 @@ class Learning():
             frames["nn"] = self.nn_fit(frame)
         if "elm" in self.__algorithmen:
             frames["elm"] = self.elm_fit(frame)
-        if "lstm" in self.__algorithmen:
-            frames["lstm"] = self.lstm_fit(frame)
         if "linear" in self.__algorithmen:
             frames["linear"] = self.linear_fit(frame)
         return frames
@@ -59,12 +57,6 @@ class Learning():
         return frame
 
     def elm_fit(self, frame):
-        '''
-        Method that implements ...
-        '''
-        return frame
-
-    def lstm_fit(self, frame):
         '''
         Method that implements ...
         '''
