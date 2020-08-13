@@ -27,7 +27,7 @@ class Learning():
         self.frames_prior = None
         self.frames_post = None
         self.models = {}
-    
+
     def pipeline(self):
         """
         This function represents the pipeline for the ml portion
