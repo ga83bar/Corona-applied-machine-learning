@@ -54,6 +54,12 @@ class Learning():
             output_frames["gaussian"] = self.gaussian_fit(frame)
         return output_frames
 
+    def predict(self):
+        """
+        Predict values depending on
+        """
+        pass
+
     def nn_fit(self, frame):
         """
         Method fits the nn model
@@ -83,14 +89,6 @@ class Learning():
         Method fits the linear model
         """
         return frame
-
-    def predict(self):
-        '''
-        Predict values depending on
-        '''
-        pass
-        # load model
-
 
     # GETTER AND SETTER
     def set_algorithem(self, algorithem):

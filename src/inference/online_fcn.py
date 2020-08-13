@@ -49,7 +49,7 @@ class OnlineFCN():
         self.metric = metrics.Accuracy()
         return self.metric
 
-    def do_training(self):
+    def do_fitting(self):
         """
         Train the model
         """
