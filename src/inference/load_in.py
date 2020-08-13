@@ -5,6 +5,7 @@ task MUST go through here.
 """
 
 import os
+from pathlib import Path
 import pandas as pd
 
 DATA_FILE = "res/{}/{}/{}.csv"
@@ -34,14 +35,16 @@ class LoadIn():
         }
         self.dataframes = {}
         self.keys = {}
+        self.path = Path(__file__).resolve().parent.parent.parent
 
-    def get_set(self, strs, typ="processed"):
+    def load_set(self, strs, typ="processed"):
         """ Get dataframes for each dataset, load them """
         dataframes = {}
         for dset in strs:
             for file in os.listdir(DATA_DIRECTORY.format(self.datasets[dset], typ)):
                 if file.endswith(".csv") and not self.dataframes[file]:
-                    self.dataframes[file] = pd.read_csv(DATA_FILE.format(self.datasets[dset], typ, file))
+                    path = os.path.join(self.path, 'res', file)
+                    self.dataframes[file] = pd.read_csv(path)
                     dataframes[file] = self.dataframes[file]
                     self.keys[file] = dset
                 if self.dataframes[file]:
