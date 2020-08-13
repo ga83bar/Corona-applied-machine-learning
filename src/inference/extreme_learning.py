@@ -26,7 +26,7 @@ class ExtremeLearningMachine():
         self.model.add(Dense(neurons, activation=activation,
                              input_shape=input_shape,
                              bias_initializer='glorot_uniform'))
-        print('Hallo')
+
         for _ in range(1, layer):
             self.model.add(Dense(neurons, activation=activation,
                                  bias_initializer='glorot_uniform'))
