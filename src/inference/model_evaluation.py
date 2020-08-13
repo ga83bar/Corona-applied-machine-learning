@@ -26,6 +26,7 @@ class Learning():
         self.dataframes = None
         self.frames_prior = None
         self.frames_post = None
+        self.models = {}
     
     def pipeline(self):
         """
@@ -89,16 +90,6 @@ class Learning():
         Method fits the linear model
         """
         return frame
-
-    # GETTER AND SETTER
-    def set_algorithem(self, algorithem):
-        '''
-        Setter method ML-Algorithem
-        '''
-        if is_algo_valid(algorithem):
-            self.__algorithem = algorithem
-        else:
-            raise Exception('Select a valid Algorithem!!')
 
     def get_algorithem(self):
         '''
