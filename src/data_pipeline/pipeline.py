@@ -38,15 +38,16 @@ def pipeline(verbose=False, plot=False):
     df_processing(df, plot=plot)
     # Clean data frame and rename into a unified naming scheme.
     clean_df(df)
-
+    if verbose:
+        df.info()
     # Split data set into a pre corona data set and a corona data set. Scale both appropriately.
     scaled_pre_corona_df, scaled_corona_df, scaler = scale_split_df(df, end_index=end_index)
     if plot:
-        fig = plt.figure(figsize=(31, 31))
+        fig = plt.figure(figsize=(24, 24))
         ax = fig.add_axes([0, 0, 1, 1])
         pd.plotting.scatter_matrix(scaled_pre_corona_df, ax=ax)
         plt.show()
-        fig = plt.figure(figsize=(31, 31))
+        fig = plt.figure(figsize=(24, 24))
         ax = fig.add_axes([0, 0, 1, 1])
         pd.plotting.scatter_matrix(scaled_corona_df, ax=ax)
         plt.show()
@@ -290,9 +291,23 @@ def stock_processing(df, plot):
     @param df The data frame to process.
     @param plot Toggles the analysing plots. Plots can be time consuming to display. Switch off for better performance.
     """
+    # Some keys were saved wrong, other stock codes contain mostly dirty information. Rename wrong named ones and delete
+    # garbage information stocks determined by visual data inspection.
+    df['PTR'] = df['PTR_x']
+    df['EBAY'] = df['EBAY_x']
+    for key in ['EBAY_x', 'EBAY_y', 'PTR_x', 'PTR_y', 'SHL', 'BAYN', 'JPHLF', 'SHE:002075', 'CON', 'CCCMF', 'INL']:
+        if key in df.keys():
+            df.drop(key, axis=1, inplace=True)
+
+    # Interpolate stock data to avoid missing values due to NaN sums.
     for domain in sector_tuple_list:
+        for code in domain.stock_code_list:
+            if code in df.keys():
+                df[code].interpolate(inplace=True)
         df[domain.df_column_name] = sum([(df[stock] - df[stock].mean()) / df[stock].std() for stock in
                                          domain.stock_code_list if stock in df.keys()]) / len(domain.stock_code_list)
+        df[domain.df_column_name].replace(min(df[domain.df_column_name]), np.nan, inplace=True)
+        df[domain.df_column_name].interpolate(method='polynomial', order=3, inplace=True)
     if plot:
         stock_processing_plot(df)
 
@@ -404,7 +419,7 @@ def clean_df(df, verbose=False):
         if code in df.keys():
             df.drop(code, axis=1, inplace=True)
 
-    messy_key_list = ['PTR_x', 'PTR_y', 'SNP_x', 'WFC', 'SNP_y', 'EA_x', 'EA_y']
+    messy_key_list = ['TDXP', 'INDU', 'NKY']
     for key in messy_key_list:
         if key in df.keys():
             df.drop(key, axis=1, inplace=True)
@@ -433,14 +448,14 @@ def scale_split_df(df, end_index):
     """
     # Rearrange column order to make scaling easy.
     cols = df.columns.tolist()
-    cols = cols[8:25] + cols[1:7] + [cols[0]]
+    cols = cols[8:26] + cols[1:7] + [cols[0]]
     df = df[cols]
 
     pre_corona_df = df.truncate(after=end_index)
     corona_df = df.truncate(before=end_index)
 
     scaler = StandardScaler()
-    ct = ColumnTransformer([('scaler', scaler, np.arange(0, 23))], remainder='passthrough')
+    ct = ColumnTransformer([('scaler', scaler, np.arange(0, 24))], remainder='passthrough')
     scaled_pre_corona_data = ct.fit_transform(pre_corona_df)
     # Only transform, do not fit with corona data.
     scaled_corona_data = ct.transform(corona_df)
@@ -476,4 +491,4 @@ def save_df(scaled_pre_corona_df, scaled_corona_df, scaler):
 
 
 if __name__ == '__main__':
-    pipeline(verbose=False, plot=False)
+    pipeline(verbose=True, plot=False)

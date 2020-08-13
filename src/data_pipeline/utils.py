@@ -10,7 +10,7 @@ from collections import namedtuple
 
 med_codes = ['EVT', 'SHL', 'BAS', 'BAYN', 'FMS', 'FRE.DE', 'JNJ', 'PFE', 'ABT',
              'KMB', 'MDT', 'PHG', 'GE', 'BDX', 'CAH', 'SYK']
-bank_codes = ['DB', 'ICK', 'GS', 'CMC', 'BRYN', 'NCB', 'NWT', 'JPHLF', 'CICHY',
+bank_codes = ['DB', 'ICK', 'GS', 'CMC', 'BRYN', 'NCB', 'WFC', 'JPHLF', 'CICHY',
               'ACGBY', 'CRARY', 'BACHF', 'C']
 energy_codes = ['SIEGY', 'EOAN.DE', 'RWE.DE', 'DUK', 'ENGI.PA', 'NGG', 'NEE',
                 'EDF']
@@ -32,4 +32,3 @@ sector_tuple_list = [Domain('stock_med', med_codes), Domain('stock_bank', bank_c
                      Domain('stock_telecom', telecom_codes), Domain('stock_tech', tech_codes)]
 
 index_codes = ['DAX', 'NDAQ']
-
