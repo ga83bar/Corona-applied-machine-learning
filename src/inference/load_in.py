@@ -37,7 +37,7 @@ class LoadIn():
         self.keys = {}
         self.path = Path(__file__).resolve().parent.parent.parent
 
-    def load_set(self, strs, typ="processed"):
+    def load_sets(self, strs, typ="processed"):
         """ Get dataframes for each dataset, load them """
         dataframes = {}
         for dset in strs:

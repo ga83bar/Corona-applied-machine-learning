@@ -18,31 +18,41 @@ class Learning():
     """
     Initiate model fitting. Alternatively, display performance.
     """
-    def __init__(self, algorithmen):
+    def __init__(self, algorithmen, datasets):
         self.__algorithmen = algorithmen
         self.loader = LoadIn()
         self.models = {}
+        self.datasets = datasets
+        self.dataframes = None
+        self.frames_prior = None
+        self.frames_post = None
+    
+    def pipeline(self):
+        """
+        This function represents the pipeline for the ml portion
+        """
+        self.dataframes = self.loader.load_sets(self.datasets)
+        self.frames_prior, self.frames_post = split_before_after(self.dataframes)
+
 
     def fit(self, frame):
         """
-        Predict the future data
-        from    1.1.2020
-        to      1.6.2020
-        @param frame : Pandas frame containing the data till 31.12.2019
-        @return Pandas frame containing the predicted data
+        Fit models based on past data. This function takes one frame,
+        corresponding to one to-be-predicted dataset.
+        Iterate this function for each desired dataset.
         """
-        frames = {}
+        output_frames = {}
         if "nn" in self.__algorithmen:
-            frames["nn"] = self.nn_fit(frame)
+            output_frames["nn"] = self.nn_fit(frame)
         if "elm" in self.__algorithmen:
-            frames["elm"] = self.elm_fit(frame)
+            output_frames["elm"] = self.elm_fit(frame)
         if "linear" in self.__algorithmen:
-            frames["linear"] = self.linear_fit(frame)
+            output_frames["linear"] = self.linear_fit(frame)
         if "online_fcn" in self.__algorithmen:
-            frames["online_fcn"] = self.online_fcn_fit(frame)
+            output_frames["online_fcn"] = self.online_fcn_fit(frame)
         if "gaussian" in self.__algorithmen:
-            frames["gaussian"] = self.gaussian_fit(frame)
-        return frames
+            output_frames["gaussian"] = self.gaussian_fit(frame)
+        return output_frames
 
     def nn_fit(self, frame):
         """
@@ -73,21 +83,6 @@ class Learning():
         Method fits the linear model
         """
         return frame
-
-    def pipeline(self):
-        frame = self.load_data()
-        frame_before_corona, frame_after_corona = self.split_before_after(frame)
-        # make the prediction accoring to precorona data
-
-        self.fit(frame_before_corona)
-
-        # TODO
-        # frame_predict = self.predict(frame_before_corona)
-
-        # calculate the difference between real and prediction
-       #  diff_frame = self.calculate_difference(frame_predict, frame_after_corona)
-
-        # plot the diff or something like that
 
     def predict(self):
         '''
@@ -172,14 +167,19 @@ def is_algo_valid(algo):
     else:
         return False
 
-def split_before_after(frame, split_date=dt.datetime(2020, 1, 1)):
+def split_before_after(frames, split_date=dt.datetime(2020, 1, 1)):
     """
     Splits data in two frames the one before and the one after corona.
     We define after corona as after 1.1.2020.
     """
-    frame_prior = frame.loc[frame.Date < split_date]
-    frame_post = frame.loc[frame.Date >= split_date]
-    return (frame_prior, frame_post)
+    frames_prior = {}
+    frames_post = {}
+    for frame in frames:
+        frame_prior = frames[frame].loc[frame.Date < split_date]
+        frame_post = frames[frame].loc[frame.Date >= split_date]
+        frames_prior[frame] = (frame_prior)
+        frames_post[frame] = (frame_post)
+    return (frames_prior, frames_post)
 
 def get_prediction_err_and_std(y,y_hat):
     squared_pred_errs = np.square(y.flatten()-y_hat.flatten())
