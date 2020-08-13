@@ -18,25 +18,19 @@ class Learning():
     """
     Initiate model fitting. Alternatively, display performance.
     """
-    # Constructor
     def __init__(self, algorithmen):
         self.__algorithmen = algorithmen
         self.loader = LoadIn()
         self.models = {}
 
-    def split_before_after(self, frame, split_date=None):
+    def split_before_after(self, frame, split_date=dt.datetime(2020, 1, 1)):
         '''
         Splits data in two frames the one before and the one after corona.
         We define after corona as after 1.1.2020.
         '''
-        if split_date is None:
-            date = dt.datetime(2020, 1, 1)
-        else:
-            date = split_date
-
-        before = frame.loc[frame.Date < date]
-        after = frame.loc[frame.Date >= date]
-        return (before, after)
+        frame_prior = frame.loc[frame.Date < split_date]
+        frame_post = frame.loc[frame.Date >= split_date]
+        return (frame_prior, frame_post)
 
     def fit(self, frame):
         '''
