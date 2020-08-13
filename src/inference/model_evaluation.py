@@ -74,12 +74,6 @@ class Learning():
         """
         return frame
 
-    def calculate_difference(self, frame_predict, frame_real):
-        '''
-        Method calculating the difference between the real and the predicted data
-        '''
-        return frame_real - frame_predict
-
     def pipeline(self):
         frame = self.load_data()
         frame_before_corona, frame_after_corona = self.split_before_after(frame)
