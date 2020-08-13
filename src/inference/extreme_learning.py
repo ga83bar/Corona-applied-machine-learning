@@ -4,13 +4,11 @@ ELM is a machine Learning model key concept is that we ini a neural network rand
 After that we put the data in the network and make a regression.
 '''
 import os
-import datetime as dt
 from pathlib import Path
 import numpy as np
 import pandas as pd
 from keras import Sequential
 from keras.layers import Dense
-from keras.datasets import boston_housing
 
 
 class ExtremeLearningMachine():
@@ -40,6 +38,9 @@ class ExtremeLearningMachine():
         self.weights = None
 
     def load_data(self, file=None):
+        """
+        Loads data
+        """
         if file is None:
             path = Path(__file__).resolve().parent.parent.parent  # remove last one
             # path = os.path.join(path, 'data_management')
@@ -49,6 +50,9 @@ class ExtremeLearningMachine():
             self.resample()
 
     def resample(self):
+        """
+        Resample data
+        """
         # TODO
         data = self.dataframe['AMZN']
         my_frame = pd.DataFrame()
@@ -56,7 +60,7 @@ class ExtremeLearningMachine():
             my_frame.append(data[[j + i for j in range((self.input_shape) + 1)]])
             if (i + ((self.input_shape) + 1) == len(data)):
                 break
-        print(my_data.head())
+        print(my_frame.head())
 
     def fit(self, train_x, train_y):
         '''
@@ -68,17 +72,17 @@ class ExtremeLearningMachine():
         sol_eqs = np.linalg.lstsq(transformed_features, train_y, rcond=None)
         self.weights = sol_eqs[0]
 
-    def predict(self, X):
+    def predict(self, input):
         if self.weights is None:
             raise Exception("Need to call fit() before predict()")
         # put it in nn
-        features = self.model.predict(X)
+        features = self.model.predict(input)
         # calc linear combos
         return np.matmul(features, self.weights)
 
 
-def get_prediction_err_and_std(y, y_hat):
-    squared_pred_errs = np.square(y.flatten()-y_hat.flatten())
+def get_prediction_err_and_std(y_in, y_hat):
+    squared_pred_errs = np.square(y_in.flatten()-y_hat.flatten())
     return np.mean(squared_pred_errs), np.std(squared_pred_errs)
 
 # https://machinelearningmastery.com/time-series-forecasting/#:~:text=Making%20predictions%20about%20the%20future,handling%20of%20time%20series%20data.&text=Forecasting%20involves%20taking%20models%20fit,them%20to%20predict%20future%20observations.
@@ -96,5 +100,5 @@ if __name__ == '__main__':
     err, std = get_prediction_err_and_std(pred, testY)
     print("Error: " + str(err) + " +- " + str(std))
     '''
-    elm = ExtremeLearningMachine()
-    elm.load_data()
+    ELM = ExtremeLearningMachine()
+    ELM.load_data()
