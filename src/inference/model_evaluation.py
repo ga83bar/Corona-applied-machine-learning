@@ -9,46 +9,20 @@ from keras import Sequential
 from keras.layers import Dense
 from keras.datasets import boston_housing
 from scipy.optimize import minimize
+from load_in import LoadIn
 
 
 # TODO include in dependencies
 
 class Learning():
-    '''
-    No time - learning
-    '''
-    # ML algos
-    NN = 1
-    ELM = 2
-    LSTM = 3
-    LINEAR = 4
-    GP = 5
-
+    """
+    Initiate model fitting. Alternatively, display performance.
+    """
     # Constructor
-    def __init__(self, algorithem):
-        self.__algorithem = algorithem
-
-    # HEAVY STUFF!!
-    def load_data(self):
-        '''
-        Loads the preprocessed data from csv, or if this does not exist
-        we start the preprocess pipline.
-        '''
-        # TODO Martin ???
-        file_path = 'some path'
-
-        if os.path.exists(file_path):
-            frame = pd.read_csv(file_path)
-
-        else:
-            try:
-                # TODO Martin start pipline
-                frame = pd.DataFrame()
-            except Exception as ex_er:
-                print('Error occured during preprocess pipline')
-                print(ex_er)
-
-        return frame
+    def __init__(self, algorithmen):
+        self.__algorithmen = algorithmen
+        self.loader = LoadIn()
+        self.models = {}
 
     def split_before_after(self, frame, split_date=None):
         '''
@@ -72,16 +46,16 @@ class Learning():
         @param frame : Pandas frame containing the data till 31.12.2019
         @return Pandas frame containing the predicted data
         '''
-        if self.__algorithem == Learning.NN:
+        if "nn" in self.__algorithmen:
             frame = self.nn_fit(frame)
 
-        elif self.__algorithem == Learning.ELM:
+        elif "elm" in self.__algorithmen:
             frame = self.elm_fit(frame)
 
-        elif self.__algorithem == Learning.LSTM:
+        elif "lstm" in self.__algorithmen:
             frame = self.lstm_fit(frame)
 
-        elif self.__algorithem == Learning.LINEAR:
+        elif "linear" in self.__algorithmen:
             frame = self.linear_fit(frame)
 
         return frame
