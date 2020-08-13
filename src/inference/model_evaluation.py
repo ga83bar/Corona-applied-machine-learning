@@ -24,35 +24,32 @@ class Learning():
         self.models = {}
 
     def split_before_after(self, frame, split_date=dt.datetime(2020, 1, 1)):
-        '''
+        """
         Splits data in two frames the one before and the one after corona.
         We define after corona as after 1.1.2020.
-        '''
+        """
         frame_prior = frame.loc[frame.Date < split_date]
         frame_post = frame.loc[frame.Date >= split_date]
         return (frame_prior, frame_post)
 
     def fit(self, frame):
-        '''
-        Predict the futre data
+        """
+        Predict the future data
         from    1.1.2020
         to      1.6.2020
         @param frame : Pandas frame containing the data till 31.12.2019
         @return Pandas frame containing the predicted data
-        '''
+        """
+        frames = {}
         if "nn" in self.__algorithmen:
-            frame = self.nn_fit(frame)
-
-        elif "elm" in self.__algorithmen:
-            frame = self.elm_fit(frame)
-
-        elif "lstm" in self.__algorithmen:
-            frame = self.lstm_fit(frame)
-
-        elif "linear" in self.__algorithmen:
-            frame = self.linear_fit(frame)
-
-        return frame
+            frames["nn"] = self.nn_fit(frame)
+        if "elm" in self.__algorithmen:
+            frames["elm"] = self.elm_fit(frame)
+        if "lstm" in self.__algorithmen:
+            frames["lstm"] = self.lstm_fit(frame)
+        if "linear" in self.__algorithmen:
+            frames["linear"] = self.linear_fit(frame)
+        return frames
 
     # TODO section
     def nn_fit(self, frame):
