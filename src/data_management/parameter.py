@@ -51,7 +51,7 @@ class Parameter:
         self.__banking = ['DB', 'CMC', 'NCB', 'GS', 'BRYN', 'WFC',
                           'JPHLF', 'CICHY', 'ACGBY', 'CRARY', 'BACHF', 'C']
 
-        self.__stock_index = ['DAX', 'TDXP', 'INDU', 'SNP', 'NDAQ', 'NKY']
+        self.__stock_index = ['DAX', 'TDXP', 'INDU', 'NDAQ', 'NKY'] # double SNP
 
         self.__energy_comp = ['SIEGY', 'EOAN.DE', 'RWE.DE',
                               'DUK', 'ENGI.PA', 'NGG', 'NEE', 'EDF']
@@ -71,7 +71,7 @@ class Parameter:
 
         self.__tec_comp = ['AAPL', 'AMZN', 'GOOGL', 'CCCMF',
                            'IFX.DE', 'SAP', 'CSCO', 'IBM', 'INL',
-                           'INTC', 'MSF', 'EBAY', 'EA', 'TWRT', 'QCOM',
+                           'INTC', 'MSF', 'EBAY', 'TWRT', 'QCOM',  # 'EA',
                            'TXN', 'SNE']
 
         self.__finance_companies = (self.__med_comp + self.__energy_comp +
