@@ -33,6 +33,7 @@ class LoadIn():
             "ste": "steam",
             "twi": "twitch"
         }
+        self.dataframe = None
         self.dataframes = {}
         self.keys = {}
         self.path = Path(__file__).resolve().parent.parent.parent
@@ -50,6 +51,23 @@ class LoadIn():
                 if self.dataframes[file]:
                     dataframes[file] = self.dataframes[file]
         return dataframes
+
+    def load_all(self, typ="pre"):
+        """
+        Load compiled data sets
+        """
+        if typ is "pre":
+            path = os.path.join(self.path, "res", "scaled_pre_corona_df.csv")
+        else:
+            path = os.path.join(self.path, "res", "scaled_corona_df.csv")
+        self.dataframe = pd.read_csv(path)
+        return self.dataframe
+
+    def get_all(self):
+        """
+        Return the compiled dataset
+        """
+        return self.dataframe
 
     def get_comp_sets(self):
         """

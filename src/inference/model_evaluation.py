@@ -1,18 +1,14 @@
 """
 This module serves as the hub for the model evaluation and training
 """
-import os
 import datetime as dt
 import numpy as np
-import pandas as pd
 from keras import Sequential
 from keras.layers import Dense
-from keras.datasets import boston_housing
 from scipy.optimize import minimize
 from load_in import LoadIn
+from online_fcn import OnlineFCN
 
-
-# TODO include in dependencies
 
 class Learning():
     """
@@ -24,6 +20,7 @@ class Learning():
         self.models = {}
         self.datasets = datasets
         self.dataframes = None
+        self.dataframe = None
         self.frames_prior = None
         self.frames_post = None
         self.models = {}
@@ -32,9 +29,9 @@ class Learning():
         """
         This function represents the pipeline for the ml portion
         """
-        self.dataframes = self.loader.load_sets(self.datasets)
-        self.frames_prior, self.frames_post = split_before_after(self.dataframes)
-
+        self.dataframes = self.loader.load_all(self.datasets)
+        self.dataframe = self.loader.get_all()
+        self.fit(self.dataframe)
 
     def fit(self, frame):
         """
@@ -83,6 +80,7 @@ class Learning():
         """
         Method fits the elm model
         """
+        self.models["online_fcn"] = OnlineFCN
         return frame
 
     def gaussian_fit(self, frame):
@@ -152,6 +150,6 @@ def split_before_after(frames, split_date=dt.datetime(2020, 1, 1)):
 
 
 if __name__ == '__main__':
-    ALGORITHMS = {}
-    DATASETS = {}
+    ALGORITHMS = ["online_fcn"]
+    DATASETS = ["covid", ]
     evaluator = Learning(ALGORITHMS, DATASETS)
