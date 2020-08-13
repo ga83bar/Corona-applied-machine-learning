@@ -40,6 +40,7 @@ class Learning():
         Iterate this function for each desired dataset.
         """
         output_frames = {}
+        labels = ["stock_steel", "stock_automotive"]
         if "nn" in self.__algorithmen:
             output_frames["nn"] = self.nn_fit(frame)
         if "elm" in self.__algorithmen:
@@ -47,7 +48,7 @@ class Learning():
         if "linear" in self.__algorithmen:
             output_frames["linear"] = self.linear_fit(frame)
         if "online_fcn" in self.__algorithmen:
-            output_frames["online_fcn"] = self.online_fcn_fit(frame)
+            output_frames["online_fcn"] = self.online_fcn_fit(frame, labels)
         if "gaussian" in self.__algorithmen:
             output_frames["gaussian"] = self.gaussian_fit(frame)
         return output_frames
@@ -76,11 +77,19 @@ class Learning():
         """
         return frame
 
-    def online_fcn_fit(self, frame):
+    def online_fcn_fit(self, frame, labels):
         """
         Method fits the elm model
         """
-        self.models["online_fcn"] = OnlineFCN
+        corona_frame = self.dataframe[["corona_deaths",
+                                       "corona_confirmed",
+                                       "corona_recovered",
+                                       "corona_active",
+                                       "new_confirmed",
+                                       "corona_new_recovered"]].copy()
+        for lbl in labels:
+            labels = self.dataframe[[lbl]].values
+            self.models[f"online_fcn_{lbl}"] = OnlineFCN(corona_frame, labels, lbl)
         return frame
 
     def gaussian_fit(self, frame):
@@ -94,44 +103,6 @@ class Learning():
         Getter method ML-Algorithem
         """
         return self.__algorithmen
-
-# Extrem eLearning machine
-class ExtremeLearningMachine():
-    def __init__(self, layer, neurons, activation, input_shape):
-        self.model = Sequential()
-        self.model.add(Dense(neurons, activation=activation, input_shape=input_shape, bias_initializer='glorot_uniform'))
-        for i in range(1, layer):
-            self.model.add(Dense(neurons, activation=activation, bias_initializer='glorot_uniform'))
-        self.model.compile(loss='mean_squared_error',optimizer='adam')
-        self.model._make_predict_function()
-
-    # Definition of the regularization function (w are the weights of the readout - regularization on the hidden weights does not make sense as they are not trained)
-    def reg_fun(self, w):
-        # 2-Norm regularization just as an example
-        return np.linalg.norm(w, ord=2)
-
-    # Target function for the ELM training (Least-Squares Formula)
-    def lstsq_target(self, w):
-        return np.sum(np.square(np.matmul(self.transformed_features, w).flatten()-self.trainY.flatten()))
-
-    # Combination of Least-Squares loss and regularization function
-    def optim_fun(self, w):
-        return self.lstsq_target(w) + self.reg_fun(w)
-
-    def fit(self, trainX, trainY, regularization_fun):
-        # The transformed features and the trainY are stored as variables of the class such that the optimization functions have access to them without passing them as parameters to the function
-        self.transformed_features = self.model.predict(trainX)
-        self.trainY = trainY.copy()
-        # Use the scipy function for (numerical) optimization (using BFGS)
-        res = minimize(self.optim_fun, np.zeros((self.transformed_features.shape[1],)))
-        # Store the weights as usually
-        self.weights = res.x
-
-    def predict(self, X):
-        if not hasattr(self,"weights"):
-            raise Exception("Need to call fit() before predict()")
-        features = self.model.predict(X)
-        return np.matmul(features, self.weights)
 
 
 def split_before_after(frames, split_date=dt.datetime(2020, 1, 1)):
