@@ -32,7 +32,7 @@ class ExtremeLearningMachine():
                                  bias_initializer='glorot_uniform'))
 
         self.model.compile(loss='mean_squared_error', optimizer='adam')
-        self.model._make_predict_function()
+        self.model._make_predict_function()                                # Please fix this.
 
         # regression
         self.weights = None
@@ -56,9 +56,9 @@ class ExtremeLearningMachine():
         # TODO
         data = self.dataframe['AMZN']
         my_frame = pd.DataFrame()
-        for i in data:
-            my_frame.append(data[[j + i for j in range((self.input_shape) + 1)]])
-            if (i + ((self.input_shape) + 1) == len(data)):
+        for dat in data:
+            my_frame.append(data[[j + dat for j in range((self.input_shape) + 1)]])
+            if dat + ((self.input_shape) + 1) == len(data):
                 break
         print(my_frame.head())
 
@@ -96,15 +96,12 @@ def get_prediction_err_and_std(y_in, y_hat):
 
 # Example for elm
 if __name__ == '__main__':
-    '''
-    (trainX, trainY), (testX, testY) = boston_housing.load_data()
-    elm = ExtremeLearningMachine(2, 200,"relu", (trainX.shape[1],))
+    #(trainX, trainY), (testX, testY) = boston_housing.load_data()
+    #ELM = ExtremeLearningMachine(2, 200,"relu", (trainX.shape[1],))
+    #ELM.fit(trainX,trainY,ELM.reg_fun)
+    #pred = ELM.predict(testX)
+    #err, std = get_prediction_err_and_std(pred, testY)
+    #print("Error: " + str(err) + " +- " + str(std))
 
-    elm.fit(trainX,trainY,elm.reg_fun)
-
-    pred = elm.predict(testX)
-    err, std = get_prediction_err_and_std(pred, testY)
-    print("Error: " + str(err) + " +- " + str(std))
-    '''
     ELM = ExtremeLearningMachine()
     ELM.load_data()
