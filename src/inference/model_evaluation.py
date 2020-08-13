@@ -23,15 +23,6 @@ class Learning():
         self.loader = LoadIn()
         self.models = {}
 
-    def split_before_after(self, frame, split_date=dt.datetime(2020, 1, 1)):
-        """
-        Splits data in two frames the one before and the one after corona.
-        We define after corona as after 1.1.2020.
-        """
-        frame_prior = frame.loc[frame.Date < split_date]
-        frame_post = frame.loc[frame.Date >= split_date]
-        return (frame_prior, frame_post)
-
     def fit(self, frame):
         """
         Predict the future data
@@ -47,26 +38,40 @@ class Learning():
             frames["elm"] = self.elm_fit(frame)
         if "linear" in self.__algorithmen:
             frames["linear"] = self.linear_fit(frame)
+        if "online_fcn" in self.__algorithmen:
+            frames["online_fcn"] = self.online_fcn_fit(frame)
+        if "gaussian" in self.__algorithmen:
+            frames["gaussian"] = self.gaussian_fit(frame)
         return frames
 
-    # TODO section
     def nn_fit(self, frame):
-        '''
-        Method that implements ...
-        '''
+        """
+        Method fits the nn model
+        """
         return frame
 
     def elm_fit(self, frame):
-        '''
-        Method that implements ...
-        '''
+        """
+        Method fits the elm model
+        """
         return frame
 
     def linear_fit(self, frame):
-        '''
-        Method that implements ...
-        '''
-        # print or even return score or we write it in a file??!
+        """
+        Method fits the linear model
+        """
+        return frame
+
+    def online_fcn_fit(self, frame):
+        """
+        Method fits the elm model
+        """
+        return frame
+
+    def gaussian_fit(self, frame):
+        """
+        Method fits the linear model
+        """
         return frame
 
     def calculate_difference(self, frame_predict, frame_real):
@@ -173,6 +178,14 @@ def is_algo_valid(algo):
     else:
         return False
 
+def split_before_after(frame, split_date=dt.datetime(2020, 1, 1)):
+    """
+    Splits data in two frames the one before and the one after corona.
+    We define after corona as after 1.1.2020.
+    """
+    frame_prior = frame.loc[frame.Date < split_date]
+    frame_post = frame.loc[frame.Date >= split_date]
+    return (frame_prior, frame_post)
 
 def get_prediction_err_and_std(y,y_hat):
     squared_pred_errs = np.square(y.flatten()-y_hat.flatten())
