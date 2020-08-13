@@ -1,41 +1,36 @@
 """
 Implementation of an online fcn model for our dataset
 """
-import os
 import datetime as dt
-import numpy as np
-import pandas as pd
-from keras import Sequential
-from keras.layers import Dense
+import pickle
 import numpy as np
 from matplotlib import pyplot as plt
-from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
 from creme import compose
-from creme import datasets
 from creme import linear_model
 from creme import metrics
 from creme import preprocessing
-import pickle
+from creme import stream
+
 
 class OnlineFCN():
     """
     Class contains an online linear model and all of its pre and post
     training attributes.
     """
-    def __init__(self, dataframe,dset):
+    def __init__(self, dataframe, output, dset):
         """
         Constructor
         """
         self.dataframe = dataframe
         self.settings = {}
-        self.history = None
+        self.history = []
         self.trained_model = None
         self.init_model = None
-        self.metric = None
+        self.metric = self.set_metric()
         self.dset = dset
+        self.output = output
 
-    def setup(self):
+    def setup_model(self):
         """
         Model setup
         """
@@ -47,7 +42,7 @@ class OnlineFCN():
         self.trained_model = model
         return self.init_model
 
-    def set_metric(self, metric="Accuracy"):
+    def set_metric(self):
         """
         Set the desired performance metric
         """
@@ -58,11 +53,22 @@ class OnlineFCN():
         """
         Train the model
         """
-        for x, lbl in self.dataframe:
-            prediction = self.trained_model.predict_one(x)
+        for inp, lbl in stream.iter_pandas(self.dataframe, self.output):
+            prediction = self.trained_model.predict_one(inp)
             metric = self.metric.update(lbl, prediction)
-            self.trained_model = self.trained_model.fit_one(x, lbl)
+            self.trained_model = self.trained_model.fit_one(inp, lbl)
+            self.history.append(prediction)
         print(metric)
+        return self.trained_model
+
+    def plot(self):
+        """
+        Plot predictions against labels
+        """
+        x_ax = np.arange(0, len(self.history), 1)
+        plt.plot(x_ax, self.history, label="Predictions")
+        plt.plot(x_ax, self.output, label="Outputs")
+        plt.show()
 
     def save_model(self):
         """

@@ -42,7 +42,7 @@ class LoadIn():
             for file in os.listdir(DATA_DIRECTORY.format(self.datasets[dset], typ)):
                 if file.endswith(".csv") and not self.dataframes[file]:
                     self.dataframes[file] = pd.read_csv(DATA_FILE.format(self.datasets[dset], typ, file))
-                    dataframes[file] = pd.read_csv(DATA_FILE.format(self.datasets[dset], typ, file))
+                    dataframes[file] = self.dataframes[file]
                     self.keys[file] = dset
                 if self.dataframes[file]:
                     dataframes[file] = self.dataframes[file]
