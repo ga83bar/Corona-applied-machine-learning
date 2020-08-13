@@ -72,16 +72,22 @@ class ExtremeLearningMachine():
         sol_eqs = np.linalg.lstsq(transformed_features, train_y, rcond=None)
         self.weights = sol_eqs[0]
 
-    def predict(self, input):
+    def predict(self, inp):
+        """
+        Make predictions based on model
+        """
         if self.weights is None:
             raise Exception("Need to call fit() before predict()")
         # put it in nn
-        features = self.model.predict(input)
+        features = self.model.predict(inp)
         # calc linear combos
         return np.matmul(features, self.weights)
 
 
 def get_prediction_err_and_std(y_in, y_hat):
+    """
+    Calculate MSE
+    """
     squared_pred_errs = np.square(y_in.flatten()-y_hat.flatten())
     return np.mean(squared_pred_errs), np.std(squared_pred_errs)
 
