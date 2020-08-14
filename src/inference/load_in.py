@@ -56,10 +56,10 @@ class LoadIn():
         """
         Load compiled data sets
         """
-        if typ is "pre":
-            path = os.path.join(self.path, "res", "scaled_pre_corona_df.csv")
+        if typ == "pre":
+            path = os.path.join(self.path, "res\pipeline", "scaled_pre_corona_df.csv")
         else:
-            path = os.path.join(self.path, "res", "scaled_corona_df.csv")
+            path = os.path.join(self.path, "res\pipeline", "scaled_corona_df.csv")
         self.dataframe = pd.read_csv(path)
         return self.dataframe
 

@@ -5,11 +5,14 @@ import datetime as dt
 import pickle
 import numpy as np
 from matplotlib import pyplot as plt
-from creme import compose
 from creme import linear_model
 from creme import metrics
 from creme import preprocessing
 from creme import stream
+from creme import ensemble
+from creme import model_selection
+from creme import optim
+
 
 
 class OnlineFCN():
@@ -34,9 +37,11 @@ class OnlineFCN():
         """
         Model setup
         """
-        model = compose.Pipeline(
-            preprocessing.StandardScaler(),
-            linear_model.LogisticRegression()
+        model = preprocessing.StandardScaler()
+        model |= ensemble.BaggingRegressor(
+            model=linear_model.LinearRegression(intercept_lr=0.1),
+            n_models=30,
+            seed=42
         )
         self.init_model = model
         self.trained_model = model
@@ -46,7 +51,7 @@ class OnlineFCN():
         """
         Set the desired performance metric
         """
-        self.metric = metrics.Accuracy()
+        self.metric = metrics.MAE()
         return self.metric
 
     def do_fitting(self):
@@ -66,6 +71,8 @@ class OnlineFCN():
         Plot predictions against labels
         """
         x_ax = np.arange(0, len(self.history), 1)
+        plt.xlabel("Days since 01.01.2020")
+        plt.ylabel(self.dset)
         plt.plot(x_ax, self.history, label="Predictions")
         plt.plot(x_ax, self.output, label="Outputs")
         plt.show()
