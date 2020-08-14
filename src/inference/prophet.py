@@ -3,13 +3,16 @@ Strange method implemented by Facebook.
 With your personal data you support such cool tools.
 Thanks for this =)
 '''
-
+from pathlib import Path
 import pandas as pd
-from fbprophet import Prophet
 import matplotlib.pyplot as plt
 
+from fbprophet import Prophet
+import plotly.offline as py
+py.init_notebook_mode()
+
 class MyProphet:
-    ''' 
+    '''
     Prophet class for handling forecasts.
     '''
 
@@ -24,6 +27,7 @@ class MyProphet:
         Data must be a pd frame in the form Date | y
         '''
         name = data.columns[1]
+        data['Date'] = data['Date'].apply(lambda x: x[:-15])
         print('Predict ' + str(name))
         data.columns = self.cols
         model = Prophet()
@@ -38,3 +42,23 @@ class MyProphet:
             fig1 = model.plot(forecast)
             fig2 = model.plot_components(forecast)
             plt.show()
+            # fig = plot_plotly(model, forecast)  # This returns a plotly Figure
+            # py.iplot(fig)
+
+        return forecast['yhat']
+
+def test():
+    '''
+    Test function
+    '''
+    root = Path().absolute().parent.parent
+    dataset_path = root.joinpath('AML', 'group11', 'res', 'all_raw.csv')
+    loaded_data = pd.read_csv(dataset_path)
+    print(loaded_data.head())
+    attr = 'AMZN'
+
+    pro = MyProphet()
+    pro.fit(data=loaded_data[['Date', attr]], do_plot=True)
+
+if __name__ == '__main__':
+    test()
