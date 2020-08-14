@@ -4,6 +4,8 @@ This module serves as the hub for the model evaluation and training
 import datetime as dt
 from load_in import LoadIn
 from online_fcn import OnlineFCN
+from extreme_learning import ExtremeLearningMachine
+from prophet import MyProphet
 
 
 class Learning():
@@ -60,10 +62,21 @@ class Learning():
         """
         return frame
 
+    def prophet_fit(self, frame):
+        '''
+        Method fits prophet
+        '''
+        attribute = ''
+        proph = MyProphet()
+        #for attribute in frame:
+        proph.fit(frame['Date', attribute])
+
+
     def elm_fit(self, frame):
         """
         Method fits the elm model
         """
+        elm = ExtremeLearningMachine(self.dataset)
         return frame
 
     def linear_fit(self, frame):

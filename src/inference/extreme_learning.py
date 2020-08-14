@@ -1,107 +1,115 @@
-'''
-Extreme Learning Machine (ELM):
-ELM is a machine Learning model key concept is that we ini a neural network random.
-After that we put the data in the network and make a regression.
-'''
-import os
-from pathlib import Path
-import numpy as np
-import pandas as pd
+import keras
 from keras import Sequential
 from keras.layers import Dense
+from keras.datasets import boston_housing
+import numpy as np
 
-
+# Extreme Learning Class 
 class ExtremeLearningMachine():
     '''
-    Extreme Learning Machine (ELM):
-    The concept of an ELM is explained in detail in the documentation.
+    Implementation of extreme Learning machine.
+    As proposed in paper from Guang-Bin Huang.
     '''
-    def __init__(self, dataframe=None, input_shape=(30,), layer=1, neurons=200, activation='relu'):
-        # data
-        self.dataframe = dataframe
+
+    def __init__(self, data, layers=1, neurons=128, metric='mean_squared_error',
+                 activation='relu', input_shape=30):
+        '''
+        The params define the neural network!
+        @param data : the dataset in sequential form
+        @param layer : number of layers of the network
+        @param neurons : number of neurons
+        @param activation : activation function of the neurons
+        @param input_shape : number of inputs for the net
+        '''
         self.input_shape = input_shape
 
-        # neural network
+        # Init neural network
         self.model = Sequential()
-        self.model.add(Dense(neurons, activation=activation,
+        self.model.add(Dense(neurons,
+                             activation=activation,
                              input_shape=input_shape,
                              bias_initializer='glorot_uniform'))
+        for layer in range(1, layer):
+            self.model.add(Dense(neurons, activation=activation))
+        self.model.compile(loss=metric ,optimizer='adam')
+        self.model._make_predict_function()
 
-        for _ in range(1, layer):
-            self.model.add(Dense(neurons, activation=activation,
-                                 bias_initializer='glorot_uniform'))
-
-        self.model.compile(loss='mean_squared_error', optimizer='adam')
-        self.model._make_predict_function()                                # Please fix this.
-
-        # regression
+        # Regression part
         self.weights = None
 
-    def load_data(self, file=None):
-        """
-        Loads data
-        """
-        if file is None:
-            path = Path(__file__).resolve().parent.parent.parent  # remove last one
-            # path = os.path.join(path, 'data_management')
-            path = os.path.join(path, 'res', 'all_raw.csv')
-            print(path)
-            self.dataframe = pd.read_csv(path)
-            self.resample()
+        # dataset
+        self.x_train = None
+        self.y_train = None
 
-    def resample(self):
-        """
-        Resample data
-        """
-        # TODO
-        data = self.dataframe['AMZN']
-        my_frame = pd.DataFrame()
-        for dat in data:
-            my_frame.append(data[[j + dat for j in range((self.input_shape) + 1)]])
-            if dat + ((self.input_shape) + 1) == len(data):
-                break
-        print(my_frame.head())
+        self.x_test = None
+        self.y_test = None
 
-    def fit(self, train_x, train_y):
+    def prepare_data(self, data):
         '''
-        The transformed features and the trainY are stored as variables
-        of the class such that the optimization functions have access to
-        them without passing them as parameters to the function
+        Shifting method that generates a x and y like dataset
+        out of a time series.
         '''
+        try:
+            print('Hallo')
+        except expression as identifier:
+            pass
+
+    def fit(self, data):
+        '''
+        The weights of the Extreme Learning Readout
+        are calculated in the following method.
+        We fit a single data attribute! But with the same nn!
+        '''
+        train_x, train_y = self.prepare_data(data)
+
         transformed_features = self.model.predict(train_x)
-        sol_eqs = np.linalg.lstsq(transformed_features, train_y, rcond=None)
+        sol_eqs = np.linalg.lstsq(transformed_features,train_y,rcond=None)
         self.weights = sol_eqs[0]
 
-    def predict(self, inp):
-        """
-        Make predictions based on model
-        """
+    def predict(self,X):
+        '''
+        Predict method 
+        '''
+
         if self.weights is None:
             raise Exception("Need to call fit() before predict()")
-        # put it in nn
-        features = self.model.predict(inp)
-        # calc linear combos
-        return np.matmul(features, self.weights)
+        features = self.model.predict(X)
+        return np.matmul(features,self.weights)
 
-
-def get_prediction_err_and_std(y_in, y_hat):
-    """
-    Calculate MSE
-    """
-    squared_pred_errs = np.square(y_in.flatten()-y_hat.flatten())
+def get_prediction_err_and_std(y,y_hat):
+    '''
+    Calculate Error and std
+    '''
+    squared_pred_errs = np.square(y.flatten()-y_hat.flatten())
     return np.mean(squared_pred_errs), np.std(squared_pred_errs)
 
-# https://machinelearningmastery.com/time-series-forecasting/#:~:text=Making%20predictions%20about%20the%20future,handling%20of%20time%20series%20data.&text=Forecasting%20involves%20taking%20models%20fit,them%20to%20predict%20future%20observations.
+# Hyperparameters
+num_layers = 2
+num_neurons = 200
+activation = "relu"
+# ---
 
+# Load the data
+(x_train, y_train), (x_test, y_test) = boston_housing.load_data()
 
-# Example for elm
-if __name__ == '__main__':
-    #(trainX, trainY), (testX, testY) = boston_housing.load_data()
-    #ELM = ExtremeLearningMachine(2, 200,"relu", (trainX.shape[1],))
-    #ELM.fit(trainX,trainY,ELM.reg_fun)
-    #pred = ELM.predict(testX)
-    #err, std = get_prediction_err_and_std(pred, testY)
-    #print("Error: " + str(err) + " +- " + str(std))
+# Optional: Preprocess the data (e.g. using the StandardScaler or the MinMaxScaler from scikit-learn)
 
-    ELM = ExtremeLearningMachine()
-    ELM.load_data()
+# First approach: Using Extreme Learning Machines
+elm = ExtremeLearningMachine(num_layers,num_neurons,activation,(x_train.shape[1],))
+
+elm.fit(x_train,y_train)
+elm_mean_err, elm_std_err = get_prediction_err_and_std(y_test,elm.predict(x_test))
+print("Extreme Learning Test Error: " + str(elm_mean_err) + " +- " + str(elm_std_err))
+
+# Second: Train the neural network 
+nn = Sequential()
+nn.add(Dense(num_neurons,activation=activation,input_shape=(x_train.shape[1],),bias_initializer='glorot_uniform'))
+for i in range(1,num_layers):
+    nn.add(Dense(num_neurons,activation=activation))
+nn.add(Dense(1))
+# The loss you define in the next line is used for training - i.e. if you want to incorporate special losses, you'll need to define a new loss function
+# Alternatively you can use the keras regularizers: https://keras.io/regularizers/
+nn.compile(loss='mean_squared_error',optimizer='adam')
+nn.fit(x_train,y_train)
+nn_mean_err, nn_std_err = get_prediction_err_and_std(y_test,nn.predict(x_test))
+print("Neural Network Test Error: " + str(nn_mean_err) + " +- " + str(nn_std_err))
