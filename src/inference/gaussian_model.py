@@ -38,16 +38,17 @@ class GaussianModel():
         path = "GIT/group11/src/inference/all_raw.csv"
         self.dataframe = pd.read_csv(path)
         self.dataframe = self.dataframe.set_index("Date")
-        label_df = self.dataframe["NDAQ"]
+        label_df = self.dataframe["PS4"]
         input_df = self.dataframe["confirmed"]
         self.dataframe = pd.concat([label_df, input_df], axis=1).dropna() 
+        print(self.dataframe)
         # covid Data
         # Label Data
 
     def train(self):
         # create Kernel
         self.X = self.dataframe["confirmed"].to_numpy().reshape(-1, 1)
-        self.y = self.dataframe["NDAQ"].to_numpy().reshape(-1, 1)
+        self.y = self.dataframe["PS4"].to_numpy().reshape(-1, 1)
         self.gpr = GaussianProcessRegressor(kernel=self.gp_kernel)
         self.gpr.fit(self.X, self.y)
 
@@ -57,12 +58,13 @@ class GaussianModel():
 
     def plot(self):
         plt.figure(figsize=(10, 5))
+        date = self.dataframe.index.values
 
-        plt.scatter(self.X, self.y, c='k', label='data')
-        plt.plot(self.X, self.output_gpr)
+        plt.plot(range(len(date)), self.y, c='k', label='data')
+        plt.plot(range(len(date)), self.output_gpr, c="Orange")
        
-        plt.xlabel('data')
-        plt.ylabel('target')
+        plt.xlabel('Days since 21.01.2020')
+        plt.ylabel('Number of Users')
         plt.show()
         return 0
         
@@ -74,8 +76,9 @@ class GaussianModel():
             * RationalQuadratic(length_scale=1.2, alpha=0.78)
         k4 = 0.18**2 * RBF(length_scale=0.134) \
             + WhiteKernel(noise_level=0.19**2)  # noise terms
-        self.gp_kernel  = ExpSineSquared(1.0, 5.0) \
-    + WhiteKernel(1e-1)    
+
+        self.gp_kernel  = k1 + k2 + k3 + k4
+ 
 
 GM = GaussianModel()
 GM.create_kernel()
