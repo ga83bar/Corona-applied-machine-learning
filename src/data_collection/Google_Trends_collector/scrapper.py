@@ -1,4 +1,4 @@
-"""!@brief scrapper script. Seacrhes  for Keywords and gets the Google Trends Data .
+"""!@brief scrapper script. gets the Google Trends Data for certain keywords.
 @author HEnrique Frutuoso
 @date 24.6.2020
 """
@@ -13,7 +13,7 @@ cwd = os.getcwd()
 
 def get_keywords(keywords_file):
     """
-    !@brief Opens and extracts the keywords to search for in the keywirds.txt file and outputs thema as a list
+    !@brief Opens and extracts the keywords to search for in the keywords.txt
     @param name of the file to search for
     @return Returns the keywords as a list
     """
@@ -29,7 +29,8 @@ def get_keywords(keywords_file):
 
 def get_interest_over_time(kw_list):
     """
-    !@brief Uses the Pytrends library to search for the keywords and saves the in a csv file in pandas dataframe format
+    !@brief Uses the Pytrends library to search for the keywords
+    saves the in a csv file in pandas dataframe format
     @param  A list with all the keywords to search for
     @return Saves the data in csv file for each keyword
     """
@@ -40,13 +41,11 @@ def get_interest_over_time(kw_list):
     for keyword in kw_list:
         pytrend.build_payload(kw_list=[keyword])
         trends_df = pytrend.interest_over_time()
-        trends_df.index.names=["Date"]
+        trends_df.index.names = ["Date"]
         trends_df.drop("isPartial", 1, inplace=True)
-        trends_df.index = pd.to_datetime(trends_df.index, utc = True)
+        trends_df.index = pd.to_datetime(trends_df.index, utc=True)
         trends_df.to_csv("{}/Data/{}.csv".format(dir_path, keyword))
-        
         counter += 1
-      
 
 
 def get_data():
@@ -57,5 +56,3 @@ def get_data():
     """
     kw_list = get_keywords("{}/keywords.txt".format(dir_path))
     get_interest_over_time(kw_list)
-
-get_data()
