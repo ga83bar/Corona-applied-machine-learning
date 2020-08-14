@@ -5,6 +5,7 @@
 
 import os
 from pytrends.request import TrendReq
+import pandas as pd
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 cwd = os.getcwd()
@@ -39,9 +40,13 @@ def get_interest_over_time(kw_list):
     for keyword in kw_list:
         pytrend.build_payload(kw_list=[keyword])
         trends_df = pytrend.interest_over_time()
+        trends_df.index.names=["Date"]
         trends_df.drop("isPartial", 1, inplace=True)
+        trends_df.index = pd.to_datetime(trends_df.index, utc = True)
         trends_df.to_csv("{}/Data/{}.csv".format(dir_path, keyword))
+        
         counter += 1
+      
 
 
 def get_data():
@@ -52,3 +57,5 @@ def get_data():
     """
     kw_list = get_keywords("{}/keywords.txt".format(dir_path))
     get_interest_over_time(kw_list)
+
+get_data()
