@@ -4,8 +4,9 @@ This module serves as the hub for the model evaluation and training
 import datetime as dt
 from load_in import LoadIn
 from online_fcn import OnlineFCN
-from extreme_learning import ExtremeLearningMachine
-from prophet import MyProphet
+#from extreme_learning import ExtremeLearningMachine
+#from prophet import MyProphet
+import calendar
 
 
 class Learning():
@@ -27,8 +28,9 @@ class Learning():
         """
         This function represents the pipeline for the ml portion
         """
-        self.dataframes = self.loader.load_all(self.datasets)
+        self.dataframes = self.loader.load_all(typ="pre")
         self.dataframe = self.loader.get_all()
+        self.dataframe = month_and_day(self.dataframe)
         self.fit(self.dataframe)
 
     def fit(self, frame):
@@ -48,6 +50,8 @@ class Learning():
             output_frames["online_fcn"] = self.online_fcn_fit(frame, LABELS)
         if "gaussian" in self.__algorithmen:
             output_frames["gaussian"] = self.gaussian_fit(frame)
+        if "online_time_pred" in self.__algorithmen:
+            output_frames["online_time_pred"] = self.online_pred_fit(frame)
         return output_frames
 
     def predict(self):
@@ -55,6 +59,12 @@ class Learning():
         Predict values depending on
         """
         pass
+    
+    def online_pred_fit(self, frame):
+        """
+        Calc future trends based on past trends
+        """
+        return frame
 
     def nn_fit(self, frame):
         """
@@ -76,7 +86,7 @@ class Learning():
         """
         Method fits the elm model
         """
-        elm = ExtremeLearningMachine(self.dataset)
+        #elm = ExtremeLearningMachine(self.dataframe)
         return frame
 
     def linear_fit(self, frame):
@@ -134,6 +144,24 @@ def split_before_after(frames, split_date=dt.datetime(2020, 1, 1)):
     return (frames_prior, frames_post)
 
 
+def month_and_day(dataframe):
+    """
+    Get month and day from dates in dataframe.
+    Append to dataframe.
+    """
+    dates = dataframe[["Date"]].copy().pop("Date")
+    month = []
+    day = []
+    for date in dates:
+        date = dt.datetime.strptime(date, '%Y-%m-%d')
+        weekday = calendar.day_name[date.weekday()]
+        month.append(date.strftime('%B'))
+        day.append(weekday)
+    dataframe["month"] = month
+    dataframe["day"] = day
+    return dataframe
+
+
 if __name__ == '__main__':
     LABELS = ["ix_bitrate"]
     LABELS_1 = ["ix_bitrate",
@@ -154,7 +182,9 @@ if __name__ == '__main__':
               "stock_automotive",
               "stock_telecom",
               "stock_tech"]
-    ALGORITHMS = ["online_fcn"]
+    ALGORITHMS = ["online_time_pred"]
     DATASETS = ["covid"]
     EVALUATOR = Learning(ALGORITHMS, DATASETS)
     EVALUATOR.pipeline()
+
+

@@ -56,7 +56,7 @@ class LoadIn():
         """
         Load compiled data sets
         """
-        if typ is "pre":
+        if typ == "pre":
             path = os.path.join(self.path, "res\pipeline", "scaled_pre_corona_df.csv")
         else:
             path = os.path.join(self.path, "res\pipeline", "scaled_corona_df.csv")
