@@ -5,13 +5,13 @@ regression system.
 """
 
 import numpy as np
-from Creme import compose
-from Creme import linear_model
-from Creme import preprocessing
-from Creme import metrics
-from Creme import stream
-from Creme import stats
-from Creme import time_series
+from creme import compose
+from creme import linear_model
+from creme import preprocessing
+from creme import metrics
+from creme import stream
+from creme import stats
+from creme import time_series
 from creme import optim
 from matplotlib.pyplot import plot as plt
 
@@ -37,9 +37,6 @@ class OnTimePred():
         Initialize model
         """
         model = compose.Pipeline(
-            ('features', compose.TransformerUnion(
-                ('weekday', self.get_weekday()),
-                ('month', self.get_month()),)),
             ('scale', preprocessing.StandardScaler()),
             ('lin_reg', linear_model.LinearRegression(intercept_lr=0,
                                                       optimizer=optim.SGD(0.03)))
@@ -81,3 +78,12 @@ class OnTimePred():
         """
         weekdays = self.dataframe[["day"]].copy().pop("day")
         return weekdays
+
+def get_ordinal_date(frame):
+    return {'ordinal_date': x['month'].toordinal()}
+
+def get_month(x):
+    return {
+        calendar.month_name[month]: month == x['month'].month
+        for month in range(1, 13)
+    }

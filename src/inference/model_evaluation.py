@@ -4,6 +4,7 @@ This module serves as the hub for the model evaluation and training
 import datetime as dt
 from load_in import LoadIn
 from online_fcn import OnlineFCN
+from online_time_pred import OnTimePred
 #from extreme_learning import ExtremeLearningMachine
 #from prophet import MyProphet
 import calendar
@@ -28,7 +29,7 @@ class Learning():
         """
         This function represents the pipeline for the ml portion
         """
-        self.dataframes = self.loader.load_all(typ="pre")
+        self.dataframes = self.loader.load_all(typ="post")
         self.dataframe = self.loader.get_all()
         self.dataframe = month_and_day(self.dataframe)
         self.fit(self.dataframe)
@@ -51,7 +52,7 @@ class Learning():
         if "gaussian" in self.__algorithmen:
             output_frames["gaussian"] = self.gaussian_fit(frame)
         if "online_time_pred" in self.__algorithmen:
-            output_frames["online_time_pred"] = self.online_pred_fit(frame)
+            output_frames["online_time_pred"] = self.online_pred_fit(frame, LABELS)
         return output_frames
 
     def predict(self):
@@ -59,11 +60,21 @@ class Learning():
         Predict values depending on
         """
         pass
-    
-    def online_pred_fit(self, frame):
+
+    def online_pred_fit(self, frame, labels):
         """
         Calc future trends based on past trends
         """
+        for lbl in labels:
+            frame = frame[["month",
+                           "day"]].copy()
+            labels = self.dataframe[[lbl]].copy().pop(lbl)
+            print(labels)
+            predictor = OnTimePred(frame, labels, lbl)
+            predictor.init_model()
+            predictor.fit_model()
+            predictor.plot_model()
+            self.models[f"online_pred_{lbl}"] = predictor
         return frame
 
     def nn_fit(self, frame):
@@ -163,8 +174,8 @@ def month_and_day(dataframe):
 
 
 if __name__ == '__main__':
-    LABELS = ["ix_bitrate"]
-    LABELS_1 = ["ix_bitrate",
+    LABELS_1 = ["ix_bitrate"]
+    LABELS = ["ix_bitrate",
               "youtube_viewchange",
               "youtube_views",
               "steam_users",
@@ -182,7 +193,7 @@ if __name__ == '__main__':
               "stock_automotive",
               "stock_telecom",
               "stock_tech"]
-    ALGORITHMS = ["online_time_pred"]
+    ALGORITHMS = ["online_fcn"]
     DATASETS = ["covid"]
     EVALUATOR = Learning(ALGORITHMS, DATASETS)
     EVALUATOR.pipeline()
