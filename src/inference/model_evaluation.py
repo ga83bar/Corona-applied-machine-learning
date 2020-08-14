@@ -83,8 +83,14 @@ class Learning():
                                        "new_confirmed",
                                        "corona_new_recovered"]].copy()
         for lbl in labels:
-            labels = self.dataframe[[lbl]].values
-            self.models[f"online_fcn_{lbl}"] = OnlineFCN(corona_frame, labels, lbl)
+            labels = self.dataframe[[lbl]].copy().pop(lbl)
+            print(labels)
+            online_fcn = OnlineFCN(corona_frame, labels, lbl)
+            online_fcn.set_metric()
+            online_fcn.setup_model()
+            online_fcn.do_fitting()
+            online_fcn.plot()
+            self.models[f"online_fcn_{lbl}"] = online_fcn
         return frame
 
     def gaussian_fit(self, frame):
@@ -116,7 +122,26 @@ def split_before_after(frames, split_date=dt.datetime(2020, 1, 1)):
 
 
 if __name__ == '__main__':
-    LABELS = ["stock_steel", "stock_automotive"]
+    LABELS = ["ix_bitrate"]
+    LABELS_1 = ["ix_bitrate",
+              "youtube_viewchange",
+              "youtube_views",
+              "steam_users",
+              "steam_ingame",
+              "twitch_views",
+              "twitch_channels",
+              "twitch_viewtime",
+              "twitch_streams",
+              "ps_users",
+              "stock_med",
+              "stock_bank",
+              "stock_energy",
+              "stock_oil",
+              "stock_steel",
+              "stock_automotive",
+              "stock_telecom",
+              "stock_tech"]
     ALGORITHMS = ["online_fcn"]
-    DATASETS = ["covid", ]
-    evaluator = Learning(ALGORITHMS, DATASETS)
+    DATASETS = ["covid"]
+    EVALUATOR = Learning(ALGORITHMS, DATASETS)
+    EVALUATOR.pipeline()
