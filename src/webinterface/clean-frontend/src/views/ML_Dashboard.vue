@@ -14,7 +14,7 @@
         
         <div class="md-layout">
           <div class="fsize-chart">
-          <line-chart :chart-data="chartdata" :options="options"/>  
+          <line-chart :chart-data="chartdata" :chart-labels="chartlabels"/>  
           </div>  
           <u1> Predicted Class is: {{ chartdata }}</u1> 
           
@@ -130,7 +130,7 @@
 //import { Tabs } from "@/components";
 import Tabs from "./components/TabsSection";
 import axios from 'axios'
-import LineChart from './components/LineChart.js'
+import LineChart from './components/LineChart.vue'
 import format from 'date-fns/format'
 
 export default {
@@ -153,6 +153,7 @@ export default {
       },
       model: '1',
       chartdata : null,
+      chartlabels: null,
       chart: { 
         responsive: true,
         maintainAspectRatio: true,
@@ -189,11 +190,10 @@ export default {
       })
       .then(response => {
         this.acceptedRequest = response.data.class,
-        this.chartdata = {
-          maintainAspectRatio: true,
-          aspectRatio: 2,
-          labels: response.data.labels,
-          datasets: [
+        
+        this.chartlabels = response.data.labels
+        this.chartdata = 
+          [
             {
               label: 'Data One - test',
               data: response.data.chart_data_1,
@@ -208,7 +208,7 @@ export default {
             }
             
           ]
-        }
+        
                 
       })
       .catch(e => {
