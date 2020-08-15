@@ -1,5 +1,6 @@
 """
-compares the performance of simple regression models by performing cross-validation
+Compares the performance of simple regression models on a common dataset using cross-validation.
+Performance is judged based on the MSE of each model.
 """
 # from fbprophet import Prophet
 from pathlib import Path
