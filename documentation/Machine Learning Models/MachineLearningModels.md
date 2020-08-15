@@ -16,6 +16,16 @@ A Complete Toolbox for Big Data Applications](https://ieeexplore.ieee.org/stamp/
 * [tfelm: a TensorFlow Toolbox for the Investigation of ELMs and
 MLPs Performance](https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICA4128.pdf) 
 
+---------
+
+[High-Performance Extreme Learning Machines:
+A Complete Toolbox for Big Data Applications](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7140733) 
+
+[Extreme learning machine: Theory and applications](http://www.di.unito.it/~cancelli/retineu11_12/ELM-NC-2006.pdf) 
+
+[tfelm: a TensorFlow Toolbox for the Investigation of ELMs and
+MLPs Performance](https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICA4128.pdf) 
+
 ## ELM Model
 ELMs are **fast training methods** for **single layer feed-forward neural networks (SLFN)**. Once again, this is because input weights W and biases b are randomly set and never adjusted. Consequently, the respective output weights β are independent. Furthermore, the **randomness of the input layer weights** improves the generalization property w.r.t. the solution of a linear output layer. The so induced orthogonality leads to almost orthogonal and thus **weakly correlated** hidden layer features. 
 
@@ -159,7 +169,6 @@ To summarize, LSTM RNNs have a **very high and most importantly proven performan
 A sample realization of LSTM RNNs using Keras in Python is demonstrated [in this article](https://machinelearningmastery.com/time-series-prediction-lstm-recurrent-neural-networks-python-keras/), a time series weather forecasting guide using LSTMs in Python has been shown [in this approach](https://www.tensorflow.org/tutorials/structured_data/time_series) and above COVID-19 forecast using LSTMs can once again be found [here](https://www.curiousily.com/posts/time-series-forecasting-with-lstm-for-daily-coronavirus-cases/). 
 
 # Decision
-After having reviewed three candidate ML models that **certainly would all suffice** to achieve the project task at hand, a decision has been made for **LSTM-based RNNs**. In particular, the **matureness of LSTMs** compared to Extreme Learning and GP models is one of the main driving factors behind the decision for it. Furthermore, as RNNs are more or less **familiar to every group member**, an extension to LSTM-based RNNs is not hard to understand and can be quite easily implemented using the many available tools in the respective **frameworks in Python**. Last but not least and especially due to the increased experience of the group using DL, necessary obstacles such as **troubleshooting, hyperparameter optimizing and model verification** are considered to be also well understood for this specific model class.     
-
+  
 After having reviewed above candidate ML models that **certainly would all suffice** to achieve the project task at hand, a final decision is hard to make. **LSTM-based RNNs** in particular seem to be a very powerful solution to the problem. Furthermore, the **matureness of LSTMs** compared to Extreme Learning and GP models as well as their **familiarity to every group member** - as they can be seen as an extension to RNNs - are two of the main driving factors fueling the decision for it. However, one major drawback that has emerged throughout the **data collection phase** is that not all of our data sets are of a particularly high quality due to **noise** and other factors. Thus, we believe that performing predictions using LSTM-based RNNs **will not exploit above high-feature advantages** nor will the predictions be of a particularly high accuracy due to the **low-quality data** in some cases. Furthermore, we believe that above candidate approaches need to be compared to more **traditional regression approaches** such as linear regression and decision trees which are well-known to the group members. In particular, necessary obstacles such as **troubleshooting, hyperparameter optimizing and model verification** are well understood for these regression model classes. In conclusion, very powerful model architectures have been discussed and examined. However, the preliminary performance assessment will determine whether complex approaches **outperform** standard regression models. A **final decision** on the model architecture can certainly only be made **after the assessment**.
 
