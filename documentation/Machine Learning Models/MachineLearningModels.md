@@ -17,10 +17,16 @@ A Complete Toolbox for Big Data Applications](https://ieeexplore.ieee.org/stamp/
 MLPs Performance](https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICA4128.pdf) 
 
 ---------
-Another very promising approach which solves **regressional time series problems** is the use of **Gaussian Processes (GPs)** for which a handful of implementations is given in the **scikit ML library**. In particular, there have already been attempts to model and forecast CO2 emissions using GPs, as done [High-Performance Extreme Learning Machines:
-A Complete Toolbox for Big Data Applications](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7140733). This not only **motivates** to further investigate GPs for our project but also demonstrates a successful application, ultimately rendering this approach as **highly plausible** to achieve our specified project target. 
 
-----------
+
+Another very promising approach which solves **regressional time series problems** is the use of **Gaussian Processes (GPs)** for which a handful of implementations is given in the **scikit ML library**. In particular, there have already been attempts to model and forecast CO2 emissions using GPs, as done [Extreme learning machine: Theory and applications](http://www.di.unito.it/~cancelli/retineu11_12/ELM-NC-2006.pdf). This not only **motivates** to further investigate GPs for our project but also demonstrates a successful application, ultimately rendering this approach as **highly plausible** to achieve our specified project target. 
+
+-----
+
+Another very promising approach which solves **regressional time series problems** is the use of **Gaussian Processes (GPs)** for which a handful of implementations is given in the **scikit ML library**. In particular, there have already been attempts to model and forecast CO2 emissions using GPs, as done [tfelm: a TensorFlow Toolbox for the Investigation of ELMs and
+MLPs Performance](https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICA4128.pdf). This not only **motivates** to further investigate GPs for our project but also demonstrates a successful application, ultimately rendering this approach as **highly plausible** to achieve our specified project target. 
+
+----
 
 [High-Performance Extreme Learning Machines:
 A Complete Toolbox for Big Data Applications](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7140733) 
