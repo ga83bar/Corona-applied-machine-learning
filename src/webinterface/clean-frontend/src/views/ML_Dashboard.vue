@@ -14,7 +14,7 @@
         
         <div class="md-layout">
           <div class="fsize-chart">
-          <line-chart :chart-data="chartdata" :chart-labels="chartlabels"/>  
+          <line-chart :chartData="chartdata" :chartLabels="chartlabels"/>  
           </div>  
           <u1> Predicted Class is: {{ chartdata }}</u1> 
           
