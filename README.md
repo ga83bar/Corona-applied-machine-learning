@@ -15,26 +15,26 @@ This underlying document summarizes measures and ideas for the current ML modeli
 ## Status
 **Next Meeting:** Thursday, 20.8. @1.30pm
 
-**To Do**
+## To Do List
 
-*General*
+### General
 - [x] Create an ML Overview Document
 
-*Step 1*
+### Step 1
 - [ ] ELM model trained and validated
 - [ ] Creme model trained and validated
 - [ ] Prophet model trained and validated
 
-*Step 2*
+### Step 2
 - [ ] Defined what to do exactly
 - [ ] ...
 
-*Step 3*
+### Step 3
 - [ ] Cross-validation data set determined
 - [ ] Cross-validation data set created
 - [ ] ...
 
-*Step 4*
+### Step 4
 - [ ] Integration parameters defined
 - [ ] ...
 
@@ -49,18 +49,18 @@ The models are all trained and validated on the **four core data sets**:
 
 This way, we also intend to **compare** different approaches for different data sets, another aspect initially **expected in Milestone 3**.
 
-### ELMs
+### 1.1 ELMs
 * Responsibility: **Michael Brandner**
 * Modeling is pursued using Extreme Learning Machines: [General ELM Architecture](/documentation/Machine Learning Models/MachineLearningModels.md) 
 
-### Online Learning 
+### 1.2 Online Learning 
 * Responsibility: **Alexander Griessel**
 * Online modeling is pursued using [creme](https://creme-ml.github.io/).
 
 **What is creme?**
 >creme is a Python library for online machine learning. All the tools in the library can be updated with a single observation at a time, and can therefore be used to learn from streaming data. This is general-purpose library, and therefore caters to different machine learning problems, including regression, classification, and unsupervised learning.
 
-### Time-Series Forecasting 
+### 1.3 Time-Series Forecasting 
 * Responsibility: **Aron Endres**
 * Time-series modeling is pursued using [Prophet](https://facebook.github.io/prophet/)
 
