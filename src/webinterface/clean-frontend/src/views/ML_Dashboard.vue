@@ -12,13 +12,12 @@
 
         
         
-        <div class="md-layout">
+        <div class="md-layout mx-auto">
           <div class="fsize-chart">
           <line-chart :chartData="chartdata" :chartLabels="chartlabels"/>  
-          </div>  
-          <u1> Predicted Class is: {{ chartdata }}</u1> 
-          
-          <div class="md-layout-item md-size-66 mx-auto">
+          </div> 
+          <div v-if="chartdata"> Predicted Class is: {{ chartdata }}</div> 
+          <div class="md-layout-item ">
 
           <div class="controls">
             <div class="md-layout md-gutter">
@@ -42,7 +41,6 @@
                   <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
                </div>
                <u1 v-if="model">Predicted Class is: {{ model }}</u1>
-               <u1>bool: {{ datecheck_bool }}</u1>
             </div>
 
             <div class="md-layout md-gutter">
@@ -56,28 +54,28 @@
                   </md-menu-content>
                 </md-menu>
               </div>
-              <div class="md-layout-item buttonbed">
+              <div class="md-layout-item buttonbed" :class="`md-alignment-top-left`">
                   <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
                </div>
                <u1 v-if="model">Predicted Class is: {{ model }}</u1>
             </div>
             
             <div class="block">
-              <h3>Start Date</h3>
-              <md-datepicker v-model="start_date" :md-disabled-dates="disabledDates"/>
-              <div class="value">value: {{start_date}}</div>
+              <div class="md-layout md-gutter" :class="`md-alignment-top-left`">
+                <div class="md-layout-item md-size-35">
+                <h3>Start Date</h3>
+                <md-datepicker v-model="start_date" :md-disabled-dates="disabledDates"/>          
+                </div>
+                <div class="md-layout-item md-size-35">        
+                <h3>End Date</h3>
+                <md-datepicker v-model="end_date" :md-model-type="string"  /> 
+                </div>
+              </div>
             </div>
-            <md-divider />
+            
 
-            <div class="block">
-              <h3>End Date</h3>
-              <md-datepicker v-model="end_date" :md-model-type="string"  /> 
-              <div class="value">value: {{end_date}}</div>
-            </div>
-            <md-divider />
-
-            </div>
-          <div class="hor-space"></div>
+          </div>
+          <div class="hor-space mx-auto"></div>
           
             <div class="md-layout md-gutter">
 
@@ -104,18 +102,18 @@
           </div>
         </div>
        
-          <div class="profile-tabs">
-            <tabs
-              :tab-name="['Studio', 'Work', 'Favorite']"
-              :tab-icon="['camera', 'palette', 'favorite']"
-              plain
-              nav-pills-icons
-              color-button="success"
-            >
-          
-         
-            </tabs>
-          </div>
+        <div class="profile-tabs mx-auto">
+          <tabs
+            :tab-name="['Studio', 'Work', 'Favorite']"
+            :tab-icon="['camera', 'palette', 'favorite']"
+            plain
+            nav-pills-icons
+            color-button="success"
+          >
+        
+        
+          </tabs>
+        </div>
 
 
 
@@ -272,7 +270,7 @@ export default {
 
 .profile-tabs::v-deep {
   .md-card-tabs .md-list {
-    justify-content: center;
+    justify-content: left;
   }
 
   [class*="tab-pane-"] {
@@ -285,16 +283,22 @@ export default {
   }
 }
 
+.block{
+  max-height: relative;
+}
+
 .main-raised
 {
   max-width: 1200px;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
 }
 
 
 .controls{
   margin-top:40px;
+  margin-right: 10px;
+
 }
 
 .buttonbed{
