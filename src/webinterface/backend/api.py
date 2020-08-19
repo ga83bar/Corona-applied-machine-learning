@@ -6,6 +6,7 @@ import numpy as np
 from pathlib import Path
 import csv
 import pandas as pd
+import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -60,22 +61,33 @@ class Predict(Resource):
         covid_dates = load_data("covid/processed", "covid.csv", "Date")
         covid_deaths = load_data("covid/processed", "covid.csv", "deaths")
         covid_confirmed = load_data("covid/processed", "covid.csv", "confirmed")
-
-        if (args["dataset_req"] == '1'):
+        start_date=datetime.datetime.strptime(args["start_date_req"],'%Y-%m-%d')
+        end_date=datetime.datetime.strptime(args["end_date_req"],'%Y-%m-%d')
+        
+        if (start_date>end_date):
+            return {"class": 500,
+                    "chart_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    "chart_data_2": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    "datecheck":False}
+        elif (args["dataset_req"] == '1'):
             return {"class": 42,
                     "chart_data_1": covid_deaths,
                     "chart_data_2": covid_confirmed,
-                    "labels": covid_dates}
+                    "labels": covid_dates,
+                    "datecheck":True}
         elif (args["dataset_req"] == '2'):
             return {"class": 42,
                     "chart_data_1": [5, 2, 3, 5, 6, 1, 2, 3, 5, 6],
                     "chart_data_2": [5, 8, 2, 4, 6, 5, 8, 2, 4, 6],
-                    "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9]}
+                    "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    "datecheck":True}
         else:
             return {"class": 500,
                     "chart_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     "chart_data_2": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9]}
+                    "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    "datecheck":True}
 
 
 api.add_resource(Predict, "/predict")
