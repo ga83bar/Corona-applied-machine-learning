@@ -42,6 +42,7 @@
                   <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
                </div>
                <u1 v-if="model">Predicted Class is: {{ model }}</u1>
+               <u1>bool: {{ datecheck_bool }}</u1>
             </div>
 
             <div class="md-layout md-gutter">
@@ -149,16 +150,17 @@ export default {
       selectedDataset: 'Select dataset',
       disabledDates: function(date) {
         // compare if today is greater then the datepickers date
-        return new Date() >date
       },
       model: '1',
       chartdata : null,
       chartlabels: null,
+      datecheck_bool: null,
       chart: { 
         responsive: true,
         maintainAspectRatio: true,
         aspectRatio: 2
       }
+      
 
     }
   },
@@ -189,9 +191,8 @@ export default {
         end_date_req: this.end_date
       })
       .then(response => {
-        this.acceptedRequest = response.data.class,
-        
-        this.chartlabels = response.data.labels
+        this.acceptedRequest = response.data.class,        
+        this.chartlabels = response.data.labels,
         this.chartdata = 
           [
             {
@@ -206,13 +207,14 @@ export default {
               borderColor: 'rgb(76, 175, 80)',
               fill: false
             }
-            
           ]
-        
+        this.datecheck_bool = response.data.datecheck,
+        this.checkdate(this.datecheck_bool);
+          
                 
       })
       .catch(e => {
-        notifyVue('top', 'center', 'danger', 'Connection failed.')
+        this.notifyVue('top', 'center', 'danger', 'Connection failed.')
       })
 
    },
@@ -229,6 +231,11 @@ export default {
         };
       }
       this.disabledDates.to = val;
+    },
+    checkdate(bool){
+      if(bool== 1){        
+        this.notifyVue('top', 'center', 'danger', 'End-date > Start-date.');
+      }
     },
     disableFrom(val) {
       if (typeof this.disabledDates.from === "undefined") {

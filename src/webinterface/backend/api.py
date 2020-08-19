@@ -65,29 +65,33 @@ class Predict(Resource):
         end_date=datetime.datetime.strptime(args["end_date_req"],'%Y-%m-%d')
         
         if (start_date>end_date):
-            return {"class": 500,
+            return {"class": 42,
+                    "datecheck": 1,
                     "chart_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     "chart_data_2": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                    "datecheck":False}
-        elif (args["dataset_req"] == '1'):
+                    "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    }
+        if (args["dataset_req"] == '1'):
             return {"class": 42,
+                    "datecheck": 2,
                     "chart_data_1": covid_deaths,
                     "chart_data_2": covid_confirmed,
-                    "labels": covid_dates,
-                    "datecheck":True}
+                    "labels": covid_dates
+                    }
         elif (args["dataset_req"] == '2'):
             return {"class": 42,
+                    "datecheck": 2,
                     "chart_data_1": [5, 2, 3, 5, 6, 1, 2, 3, 5, 6],
                     "chart_data_2": [5, 8, 2, 4, 6, 5, 8, 2, 4, 6],
                     "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                    "datecheck":True}
+                    }
         else:
             return {"class": 500,
+                    "datecheck": 2,
                     "chart_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     "chart_data_2": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                    "datecheck":True}
+                    }
 
 
 api.add_resource(Predict, "/predict")
