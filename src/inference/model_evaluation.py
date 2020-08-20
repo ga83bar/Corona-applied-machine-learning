@@ -165,9 +165,8 @@ def month_and_day(dataframe):
     day = []
     for date in dates:
         date = dt.datetime.strptime(date, '%Y-%m-%d')
-        weekday = calendar.day_name[date.weekday()]
-        month.append(date.strftime('%B'))
-        day.append(weekday)
+        month.append(date.month)
+        day.append(date.weekday())
     dataframe["month"] = month
     dataframe["day"] = day
     return dataframe
