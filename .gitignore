@@ -34,3 +34,7 @@ paper/*
 .vscode/settings.json
 *.DS_STORE
 src/data_management/.ipynb_checkpoints/
+
+prophet.png
+prophet_components.png
+prophet_gridseachcv_values.csv
