@@ -1,8 +1,8 @@
-'''
+"""
 Strange method implemented by Facebook.
 With your personal data you support such cool tools.
 Thanks for this =)
-'''
+"""
 
 # import plotly.offline as py
 # import matplotlib.pyplot as plt
@@ -25,15 +25,16 @@ from fbprophet.diagnostics import performance_metrics
 from load_in import LoadIn
 # py.init_notebook_mode()
 
+
 class MyProphet(BaseEstimator, RegressorMixin):
-    '''
+    """
     Prophet class for handling forecasts.
-    '''
+    """
 
     def __init__(self):
-        '''
+        """
         Input data must be a dataframe containing a Date and a target value.
-        '''
+        """
         self.cols = ['ds', 'y']
         self.dset = None
         self.period = 183
@@ -42,105 +43,106 @@ class MyProphet(BaseEstimator, RegressorMixin):
         self.changepoint_prior_scale = 0.05
         self.interval_width = 0.8
         self.seasonality_mode = 'additive'
-        self.model = Prophet(growth=self.growth, changepoint_prior_scale=self.changepoint_prior_scale,\
-            interval_width=self.interval_width, seasonality_mode=self.seasonality_mode)
+        self.model = Prophet(growth=self.growth, changepoint_prior_scale=self.changepoint_prior_scale,
+                             interval_width=self.interval_width, seasonality_mode=self.seasonality_mode)
         self.cap = 1.5
         self.floor = -1.5
-        self.param = {'stock_med': {'growth': 'logistic', 'changepoint_prior_scale': 0.05,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},\
-            'stock_bank': {'growth': 'logistic', 'changepoint_prior_scale': 0.065,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},\
-            'stock_energy': {'growth': 'linear', 'changepoint_prior_scale': 0.055,\
-            'interval_width': 0.8, 'seasonality_mode': 'additive', 'cap': 1.5, 'floor':-1.5},\
-            'stock_oil': {'growth': 'logistic', 'changepoint_prior_scale': 0.185,\
-            'interval_width': 0.8, 'seasonality_mode': 'additive', 'cap': 1.5, 'floor':-1.5},\
-            'stock_steel': {'growth': 'logistic', 'changepoint_prior_scale': 0.05,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor':-1.5},\
-            'stock_automotive': {'growth': 'linear', 'changepoint_prior_scale': 0.085,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor':-1.5},\
-            'stock_telecom': {'growth': 'logistic', 'changepoint_prior_scale': 0.055,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor':-1.5},\
-            'stock_tech': {'growth': 'linear', 'changepoint_prior_scale': 0.03,\
-            'interval_width': 0.8, 'seasonality_mode': 'additive', 'cap': 1.5, 'floor':-1.5},\
-            'ix_bitrate': {'growth': 'logistic', 'changepoint_prior_scale': 0.195,\
-            'interval_width': 0.8, 'seasonality_mode': 'additive', 'cap': 1, 'floor':-1},\
-            'youtube_viewchange': {'growth': 'logistic', 'changepoint_prior_scale': 0.105,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 80000000, 'floor':0},\
-            'youtube_views': {'growth': 'linear', 'changepoint_prior_scale': 0.04,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 150000000, 'floor':0},\
-            'steam_users': {'growth': 'linear', 'changepoint_prior_scale': 0.135,\
-            'interval_width': 0.8, 'seasonality_mode': 'additive', 'cap': 150000000, 'floor':0},\
-            'steam_ingame': {'growth': 'linear', 'changepoint_prior_scale': 0.105,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 40000000, 'floor':0},\
-            'twitch_views': {'growth': 'linear', 'changepoint_prior_scale': 0.09,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 1500000, 'floor':0},\
-            'twitch_channels': {'growth': 'logistic', 'changepoint_prior_scale': 0.115,\
-            'interval_width': 0.8, 'seasonality_mode': 'additive', 'cap': 60000, 'floor':0},\
-            'twitch_viewtime': {'growth': 'logistic', 'changepoint_prior_scale': 0.13,\
-            'interval_width': 0.8, 'seasonality_mode': 'additive', 'cap': 1_010_000_000, 'floor':0},\
-            'twitch_streams': {'growth': 'linear', 'changepoint_prior_scale': 0.05,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap' : 5_000_000, 'floor':0},\
-            'ps_users': {'growth': 'linear', 'changepoint_prior_scale': 0.16,\
-            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 2_000_000, 'floor':0}}
+        self.param = {'stock_med': {'growth': 'logistic', 'changepoint_prior_scale': 0.05, 'interval_width': 0.8,
+                                    'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},
+                      'stock_bank': {'growth': 'logistic', 'changepoint_prior_scale': 0.065, 'interval_width': 0.8,
+                                     'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},
+                      'stock_energy': {'growth': 'linear', 'changepoint_prior_scale': 0.055, 'interval_width': 0.8,
+                                       'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5},
+                      'stock_oil': {'growth': 'logistic', 'changepoint_prior_scale': 0.185, 'interval_width': 0.8,
+                                    'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5},
+                      'stock_steel': {'growth': 'logistic', 'changepoint_prior_scale': 0.05, 'interval_width': 0.8,
+                                      'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},
+                      'stock_automotive': {'growth': 'linear', 'changepoint_prior_scale': 0.085, 'interval_width': 0.8,
+                                           'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},
+                      'stock_telecom': {'growth': 'logistic', 'changepoint_prior_scale': 0.055, 'interval_width': 0.8,
+                                        'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},
+                      'stock_tech': {'growth': 'linear', 'changepoint_prior_scale': 0.03, 'interval_width': 0.8,
+                                     'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5},
+                      'ix_bitrate': {'growth': 'logistic', 'changepoint_prior_scale': 0.195, 'interval_width': 0.8,
+                                     'seasonality_mode': 'additive', 'cap': 1, 'floor': -1},
+                      'youtube_viewchange': {'growth': 'logistic', 'changepoint_prior_scale': 0.105,
+                                             'interval_width': 0.8, 'seasonality_mode': 'multiplicative',
+                                             'cap': 80000000, 'floor': 0},
+                      'youtube_views': {'growth': 'linear', 'changepoint_prior_scale': 0.04, 'interval_width': 0.8,
+                                        'seasonality_mode': 'multiplicative', 'cap': 150000000, 'floor': 0},
+                      'steam_users': {'growth': 'linear', 'changepoint_prior_scale': 0.135, 'interval_width': 0.8,
+                                      'seasonality_mode': 'additive', 'cap': 150000000, 'floor': 0},
+                      'steam_ingame': {'growth': 'linear', 'changepoint_prior_scale': 0.105, 'interval_width': 0.8,
+                                       'seasonality_mode': 'multiplicative', 'cap': 40000000, 'floor': 0},
+                      'twitch_views': {'growth': 'linear', 'changepoint_prior_scale': 0.09, 'interval_width': 0.8,
+                                       'seasonality_mode': 'multiplicative', 'cap': 1500000, 'floor': 0},
+                      'twitch_channels': {'growth': 'logistic', 'changepoint_prior_scale': 0.115, 'interval_width': 0.8,
+                                          'seasonality_mode': 'additive', 'cap': 60000, 'floor': 0},
+                      'twitch_viewtime': {'growth': 'logistic', 'changepoint_prior_scale': 0.13, 'interval_width': 0.8,
+                                          'seasonality_mode': 'additive', 'cap': 1_010_000_000, 'floor': 0},
+                      'twitch_streams': {'growth': 'linear', 'changepoint_prior_scale': 0.05, 'interval_width': 0.8,
+                                         'seasonality_mode': 'multiplicative', 'cap': 5_000_000, 'floor': 0},
+                      'ps_users': {'growth': 'linear', 'changepoint_prior_scale': 0.16, 'interval_width': 0.8,
+                                   'seasonality_mode': 'multiplicative', 'cap': 2_000_000, 'floor': 0}}
 
     def set_dset(self, dset):
-        '''
+        """
         Sets dset
         @param dset: new dset
-        '''
+        """
         self.dset = dset
 
     def set_cap(self, cap=1):
-        '''
+        """
         sets the cap for max in logistic growth
         @param cap: max logistic growth
-        '''
+        """
         self.cap = cap
 
     def set_floor(self, floor=1):
-        '''
+        """
         sets the floor for min in logistic growth
-        @param floor_ min logistiv growth
-        '''
+        @param floor min logistic growth
+        """
         self.floor = floor
 
     def set_metric(self, metric='mse'):
-        '''
+        """
         sets the score unit
         @param metric: decide which metric for evaluation should be set avaiable is mse, rmse, mae, mape
-        '''
+        """
         self.metric = metric
 
-
-    def set_model(self, after_best=False, growth='linear', changepoint_prior_scale=0.05,\
-        interval_width=0.8, seasonality_mode='additive'):
-        '''
+    def set_model(self, after_best=False, growth='linear', changepoint_prior_scale=0.05, interval_width=0.8,
+                  seasonality_mode='additive'):
+        """
         Adapt the model
         @param growth: is the model linear or logistic in rising/falling
         @param changepoint_prior_scale: how flexibel ist the model greater more felxibel
         @param interval_width: the width of the uncertantiy
         @param seasonality_mode: additive or multiplicative if datapoint distirbution over time
         @param after_best: only used after gridsearchcv get model with best parameters
-        '''
+        """
         if after_best:
-            self.model = Prophet(growth=self.growth, changepoint_prior_scale=self.changepoint_prior_scale,\
-                interval_width=self.interval_width, seasonality_mode=self.seasonality_mode)
+            self.model = Prophet(growth=self.growth, changepoint_prior_scale=self.changepoint_prior_scale,
+                                 interval_width=self.interval_width, seasonality_mode=self.seasonality_mode)
         else:
-            self.model = Prophet(growth=growth, changepoint_prior_scale=changepoint_prior_scale,\
-                interval_width=interval_width, seasonality_mode=seasonality_mode)
+            self.model = Prophet(growth=growth, changepoint_prior_scale=changepoint_prior_scale,
+                                 interval_width=interval_width, seasonality_mode=seasonality_mode)
 
     def set_period(self, period):
-        '''
+        """
         set timespan to predict
         @param period: timespan of prediction
-        '''
+        """
         self.period = period
 
     def fit(self, x_date, y_data):
-        '''
+        """
         Data must be a pd frame in the form Date | y
-        @param data: data for training
-        '''
+        @param x_date: data for training
+        @param y_data The time series values to fit the prophet to.
+        """
         data = pd.concat([x_date, y_data], axis=1)
         data.columns = self.cols
         # for logistic growth
@@ -148,12 +150,11 @@ class MyProphet(BaseEstimator, RegressorMixin):
         data['floor'] = self.floor
         return self.model.fit(data)
 
-
     def predict(self, do_plot=False):
-        '''
+        """
         Predict the next values
         @param do_plot: Do a plot of the forcast and the seasonalities
-        '''
+        """
         # get the current timeline plus a future timeline specified in period
         future = self.model.make_future_dataframe(periods=self.period)
         future['cap'] = self.cap
@@ -169,52 +170,56 @@ class MyProphet(BaseEstimator, RegressorMixin):
         return forecast['yhat'][-self.period:]
 
     def plot(self, forecast):
-        '''
+        """
         Plot and save the predictions
-        '''
+        """
         fig1 = self.model.plot(forecast)
         fig2 = self.model.plot_components(forecast)
         fig1.savefig('prophet.png')
         fig2.savefig('prophet_components.png')
 
     def cross_validation(self):
-        '''
-        Corss evaluates the dataframes
-        '''
-        horizon = str(self.period)+' days'
+        """
+        Cross evaluates the data frames
+        """
+        horizon = str(self.period) + ' days'
         dataframe_cv = cross_validation(self.model, initial='400 days', period='100 days', horizon=horizon)
 
         return dataframe_cv
 
     def score_cross(self, dataframe_cv):
-        '''
-        Evaluates the Model by corssvalidation
-        @param dataframe_cv: dataframge from crossvalidation
-        '''
+        """
+        Evaluates the Model by cross validation
+        @param dataframe_cv: data frame from cross validation
+        """
         dataframe_metric = performance_metrics(dataframe_cv, rolling_window=0.1)
         # print(dataframe_metric.head())
         return np.float(dataframe_metric[self.metric][-1:])
 
     def gridsearchcv(self, parameters, dataframe, safe=False):
-        '''
-        Looking for the best parameters to fit the model
+        """
+        Custom grid search via cross validation. Necessary because of Prophets unique prediction interface.
+        Looking for the best parameters to fit the model.
         @param parameters: parameters that give the option where to look is a dict
-        '''
+        @param dataframe The data frame to predict for cross validation.
+        @param safe Option to save the resulting data frame.
+        """
         # init dataframe to locate maximum
-        data = {'growth':[], 'changepoint_prior_scale':[], 'interval_width':[], 'seasonality_mode': [], 'metric':[]}
+        data = {'growth': [], 'changepoint_prior_scale': [], 'interval_width': [], 'seasonality_mode': [], 'metric': []}
         df_metric = pd.DataFrame(data=data)
         # iterate through all possibilities
         for growth in parameters['growth']:
             for changepoint_prior_scale in parameters['changepoint_prior_scale']:
                 for interval_width in parameters['interval_width']:
                     for seasonality_mode in parameters['seasonality_mode']:
-                        self.set_model(growth=growth, changepoint_prior_scale=changepoint_prior_scale,\
-                            interval_width=interval_width, seasonality_mode=seasonality_mode)
+                        self.set_model(growth=growth, changepoint_prior_scale=changepoint_prior_scale,
+                                       interval_width=interval_width, seasonality_mode=seasonality_mode)
                         self.fit(x_date=dataframe['Date'], y_data=dataframe.iloc[:, 1])
                         dataframe_cv = self.cross_validation()
                         metric = self.score_cross(dataframe_cv)
-                        new_row = {'growth':growth, 'changepoint_prior_scale':changepoint_prior_scale,\
-                            'interval_width':interval_width, 'seasonality_mode':seasonality_mode, 'metric':metric}
+                        new_row = {'growth': growth, 'changepoint_prior_scale': changepoint_prior_scale,
+                                   'interval_width': interval_width, 'seasonality_mode': seasonality_mode,
+                                   'metric': metric}
                         df_metric = df_metric.append(new_row, ignore_index=True)
         if safe:
             save_path = Path(__file__).resolve().parent.parent.parent
@@ -233,28 +238,29 @@ class MyProphet(BaseEstimator, RegressorMixin):
         return best_parameters
 
     def load_best_param(self, label):
-        '''
+        """
         Loads the best parameters for the given dataset
         @param label: name of the dataset
-        '''
+        """
         self.set_dset(label)
         loaded_param = self.param[label]
-        self.set_model(growth=loaded_param['growth'], changepoint_prior_scale=loaded_param['changepoint_prior_scale'],\
-            interval_width=loaded_param['interval_width'], seasonality_mode=loaded_param['seasonality_mode'])
+        self.set_model(growth=loaded_param['growth'], changepoint_prior_scale=loaded_param['changepoint_prior_scale'],
+                       interval_width=loaded_param['interval_width'], seasonality_mode=loaded_param['seasonality_mode'])
         self.set_cap(loaded_param['cap'])
         self.set_floor(loaded_param['floor'])
 
-    def score(self, X, y, sample_weight=None):
-        '''
+    def score(self, x, y, sample_weight=None):
+        """
         Evalute the Models performance via MSE
-        @param X: dates to predict
+        @param x: dates to predict
         @param y: true values to that time
-        '''
+        @param sample_weight Possible interface for future sample weighting mechanisms.
+        """
         y_true = y.copy()
         # Reset index for looking for nan to get the correct index to delete
         y_true = y_true.reset_index(drop=True)
         # get to predicting timestamps
-        date = {'ds': X.iloc[:]}
+        date = {'ds': x.iloc[:]}
         future = pd.DataFrame(data=date)
         # for logistic growth
         future['cap'] = self.cap
@@ -272,9 +278,9 @@ class MyProphet(BaseEstimator, RegressorMixin):
         return r2_score(y_true, y_pred)
 
     def save_model(self):
-        '''
+        """
         Saves a model
-        '''
+        """
         with open(f"prophet{self.dset}_{dt.time}.pkl", 'wb') as f:
             pickle.dump(self.model, f)
 
@@ -284,7 +290,6 @@ class MyProphet(BaseEstimator, RegressorMixin):
         """
         with open(f"prophet{dset}_{time}.pkl", 'rb') as f:
             self.model = pickle.load(f)
-
 
     def set_params(self, **parameters):
         # set default values
@@ -302,26 +307,27 @@ class MyProphet(BaseEstimator, RegressorMixin):
             if parameter == 'seasonality_mode':
                 seasonality_mode = value
 
-        self.set_model(growth=growth, changepoint_prior_scale=changepoint_prior_scale,\
-            interval_width=interval_width, seasonality_mode=seasonality_mode)
+        self.set_model(growth=growth, changepoint_prior_scale=changepoint_prior_scale, interval_width=interval_width,
+                       seasonality_mode=seasonality_mode)
         return self
 
 
 def best_param(dataframe):
-    '''
+    """
     get the parameters which result in the best results
     @param dataframe: select best parameters given dataframe
-    '''
+    """
     idx = dataframe['metric'].idxmin()
-    param = {'growth':dataframe['growth'][idx], 'changepoint_prior_scale':dataframe['changepoint_prior_scale'][idx],\
-        'interval_width':dataframe['interval_width'][idx], 'seasonality_mode':dataframe['seasonality_mode'][idx],\
-        'metric':dataframe['metric'][idx]}
+    param = {'growth': dataframe['growth'][idx], 'changepoint_prior_scale': dataframe['changepoint_prior_scale'][idx],
+             'interval_width': dataframe['interval_width'][idx], 'seasonality_mode': dataframe['seasonality_mode'][idx],
+             'metric': dataframe['metric'][idx]}
     return param
 
+
 def skleran_gridsearch():
-    '''
+    """
     Test data on sklearn Gridsearchcv
-    '''
+    """
     attr = 'ps_users'
     dataframes = LoadIn().load_all(typ='pre')
     dataframes = dataframes.dropna()
@@ -344,10 +350,10 @@ def skleran_gridsearch():
     pro.interval_width = best_parameters['interval_width']
     pro.seasonality_mode = best_parameters['seasonality_mode']
     metric = grid.best_score_
-    print('growth:', best_parameters['growth'], '\n'\
-          'changepoint_prior_scale:', best_parameters['changepoint_prior_scale'], '\n'\
-          'interval_width:', best_parameters['interval_width'], '\n'\
-          'seasonality_mode:', best_parameters['seasonality_mode'], '\n'\
+    print('growth:', best_parameters['growth'], '\n',
+          'changepoint_prior_scale:', best_parameters['changepoint_prior_scale'], '\n',
+          'interval_width:', best_parameters['interval_width'], '\n',
+          'seasonality_mode:', best_parameters['seasonality_mode'], '\n',
           'Best metric:', metric, '\n')
 
     print('Test_scroes: ', grid.cv_results_['mean_test_score'])
@@ -357,10 +363,11 @@ def skleran_gridsearch():
     pro.fit(x_date=dataframes['Date'], y_data=dataframes[attr])
     pro.predict(do_plot=True)
 
+
 def fbprophet_gridsearch():
-    '''
+    """
     Test data on fbprophet Gridsearchcv
-    '''
+    """
     attr = 'steam_users'
     dataframes = LoadIn().load_all(typ='pre')
     print(dataframes[['Date', attr]].head())
@@ -374,10 +381,10 @@ def fbprophet_gridsearch():
                   'seasonality_mode': ['additive', 'multiplicative']}
 
     best_parameters = pro.gridsearchcv(parameters, dataframe=dataframes[['Date', attr]], safe=True)
-    print('growth:', best_parameters['growth'], '\n'\
-          'changepoint_prior_scale:', best_parameters['changepoint_prior_scale'], '\n'\
-          'interval_width:', best_parameters['interval_width'], '\n'\
-          'seasonality_mode:', best_parameters['seasonality_mode'], '\n'\
+    print('growth:', best_parameters['growth'], '\n',
+          'changepoint_prior_scale:', best_parameters['changepoint_prior_scale'], '\n',
+          'interval_width:', best_parameters['interval_width'], '\n',
+          'seasonality_mode:', best_parameters['seasonality_mode'], '\n',
           'metric:', best_parameters['metric'], '\n')
 
     # plot best
@@ -387,9 +394,9 @@ def fbprophet_gridsearch():
 
 
 def test():
-    '''
+    """
     Test function
-    '''
+    """
     # attr = 'steam_users'
     # dataframes = LoadIn().load_all(typ='pre')
     # print(dataframes[['Date', attr]].head())
@@ -408,12 +415,12 @@ def test():
     # print(pro.metric, ': ', metric)
 
     #########################################################
-    ## Gridseachcv with sklearn
+    # Gridseachcv with sklearn
 
     skleran_gridsearch()
 
     ##########################################################
-    ## Gridsearchcv with fb crossval
+    # Gridsearchcv with fb crossval
 
     # fbprophet_gridsearch()
 

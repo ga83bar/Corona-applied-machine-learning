@@ -491,4 +491,4 @@ def save_df(scaled_pre_corona_df, scaled_corona_df, scaler):
 
 
 if __name__ == '__main__':
-    pipeline(verbose=True, plot=False)
+    pipeline(verbose=False, plot=True)
