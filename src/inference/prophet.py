@@ -44,8 +44,8 @@ class MyProphet(BaseEstimator, RegressorMixin):
         self.seasonality_mode = 'additive'
         self.model = Prophet(growth=self.growth, changepoint_prior_scale=self.changepoint_prior_scale,\
             interval_width=self.interval_width, seasonality_mode=self.seasonality_mode)
-        self.cap = 1_010_000_000 #60000
-        self.floor = 0
+        self.cap = 1.5
+        self.floor = -1.5
         self.param = {'stock_med': {'growth': 'logistic', 'changepoint_prior_scale': 0.05,\
             'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},\
             'stock_bank': {'growth': 'logistic', 'changepoint_prior_scale': 0.065,\
@@ -77,9 +77,11 @@ class MyProphet(BaseEstimator, RegressorMixin):
             'twitch_channels': {'growth': 'logistic', 'changepoint_prior_scale': 0.115,\
             'interval_width': 0.8, 'seasonality_mode': 'additive', 'cap': 60000, 'floor':0},\
             'twitch_viewtime': {'growth': 'logistic', 'changepoint_prior_scale': 0.13,\
-            'interval_width': 0.8, 'seasonality_mode': 'additive', 'cap': 1_010_000_000, 'floor':0}}
-        # '': {'growth': '', 'changepoint_prior_scale': ,\
-        #     'interval_width': 0.8, 'seasonality_mode': '', 'cap': , 'floor':}
+            'interval_width': 0.8, 'seasonality_mode': 'additive', 'cap': 1_010_000_000, 'floor':0},\
+            'twitch_streams': {'growth': 'linear', 'changepoint_prior_scale': 0.05,\
+            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap' : 5_000_000, 'floor':0},\
+            'ps_users': {'growth': 'linear', 'changepoint_prior_scale': 0.16,\
+            'interval_width': 0.8, 'seasonality_mode': 'multiplicative', 'cap': 2_000_000, 'floor':0}}
 
     def set_dset(self, dset):
         '''
@@ -320,7 +322,7 @@ def skleran_gridsearch():
     '''
     Test data on sklearn Gridsearchcv
     '''
-    attr = 'twitch_viewtime'
+    attr = 'ps_users'
     dataframes = LoadIn().load_all(typ='pre')
     dataframes = dataframes.dropna()
     print(dataframes[['Date', attr]].head())
