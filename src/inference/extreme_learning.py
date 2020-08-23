@@ -15,6 +15,7 @@ from keras.layers import Dense
 import pandas as pd
 import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin
+from sklearn import linear_model
 
 # For scikitlearn cross validation
 from sklearn.model_selection import cross_val_score
@@ -24,6 +25,7 @@ from sklearn.model_selection import train_test_split
 # Constants
 TRAIN_WINDOW = 30
 
+
 # Extreme Learning Class
 class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
     '''
@@ -32,7 +34,7 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
     Can be used like any scikit learn predictor.
     '''
 
-    def __init__(self, neurons=128, lambd=0.01):
+    def __init__(self, neurons=128, lambd=0.01, regu='L1'):
         '''
         The params define the neural network!
         @param data : the dataset in sequential form
@@ -44,6 +46,7 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         '''
         self.lambd = lambd
         self.neurons = neurons
+        self.regu = regu
 
     def fit(self, x_train, y_train):
         '''
@@ -54,10 +57,29 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         # To be scikit learn comp we build the model outside the init method
         self.build_network()
         self.__measure = 'mse'
+        error_tol = 0.01
 
         transformed_features = self.model.predict(x_train)
-        sol_eqs = np.linalg.lstsq(transformed_features, y_train, rcond=None)
-        self.weights = sol_eqs[0]
+
+        # Simple way without Regularization
+        if self.regu == 'no':
+            sol_eqs = np.linalg.lstsq(transformed_features, y_train, rcond=None)
+            self.weights = sol_eqs[0]
+        
+        # Lasso regularization
+        elif self.regu == 'L1':
+            lasso = linear_model.Lasso(alpha=self.lambd, fit_intercept=False, tol=error_tol)
+            lasso.fit(transformed_features, y_train)
+            self.weights = np.array(lasso.coef_)
+
+        # Ridge regression
+        elif self.regu == 'L2':
+            ridge = linear_model.Ridge(alpha=self.lambd, fit_intercept=False, tol=error_tol)
+            ridge.fit(transformed_features, y_train)
+            self.weights = np.array(ridge.coef_)
+
+        else:
+            raise Exception('No valid regularization selected')
 
     def score(self, x_test, y_test):
         '''
@@ -67,6 +89,10 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
 
         if self.__measure == 'mse':
             error = self.mse(y_predict, y_test)
+
+        elif self.__measure == 'mae':
+            error = self.mae(y_predict, y_test)
+
         # Default value == MSE
         else:
             error = self.mse(y_predict, y_test)
@@ -115,11 +141,12 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
             x_train_test.append(x_vals)
             y_train_test.append(data[iterator])
 
-        # cast this stuff to numpy
+        # Cast this stuff to numpy
         x_train_test = np.array(x_train_test)
         y_train_test = np.array(y_train_test)
 
         return x_train_test, y_train_test
+
     # Error measure dependent things
     def get_error_measure(self):
         '''
@@ -148,23 +175,40 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         '''
         Calculate mean squared error
         '''
-        difference_array = np. subtract(y_real, y_predict)
-        squared_array = np. square(difference_array)
-        mse = squared_array. mean()
+        difference_array = np.subtract(y_real, y_predict)
+        squared_array = np.square(difference_array)
+        mse = squared_array.mean()
         return mse
 
     def mae(self, y_real, y_predict):
         '''
         Calculate the Mean Absolute error
         '''
-        error = np.sum(y_real -y_predict)
+        difference_array = np.subtract(y_real, y_predict)
+        abs_array = np.abs(difference_array)
+        error = abs_array.mean()
         return error
+
+    # Model dependent things
+    def save_model(self, data, error):
+        '''
+        Method for saving the actual model (if it is better than
+        the stored one) and also the most important
+        parameters and infos (like error, on which data)
+        '''
+        pass
+
+    def predict_best(self, x_test, data):
+        '''
+        Method predicts the values by choosing the best model
+        '''
+        pass
 
     # Prpoerties
     error_measure = property(get_error_measure, set_error_measure)
 
 
-def test():
+def test_cv():
     ''' Test running sckikit learn cross validation'''
     root = Path().absolute().parent.parent
     dataset_path = root.joinpath('AML', 'group11', 'res', 'pipeline', 'scaled_corona_df.csv')
@@ -179,6 +223,7 @@ def test():
         scores = cross_val_score(elm, x_train_test, y_train_test, cv=5)
         print('scores ELM:')
         print(scores)
+
 
 def test_grid_search():
     ''' Test running sckikit learn cross validation'''
@@ -195,14 +240,15 @@ def test_grid_search():
         # First step prepare dat
         x_train_test, y_train_test = elm.prepare_data(loaded_data[attr])
         # Set the parameters by cross-validation
-        tuned_parameters = {'neurons': [1, 10, 20],
-                            'lambd' : [0, 0.0001, 0.001, 0.01]},
-        clf = GridSearchCV(
-        ExtremeLearningMachine(), tuned_parameters)
+        tuned_parameters = {'neurons': [10, 20],
+                            'lambd': [0.001, 0.01],
+                            'regu': ['no', 'L1', 'L2']},
+        clf = GridSearchCV(ExtremeLearningMachine(),
+                           tuned_parameters)
         clf.fit(x_train_test, y_train_test)
         print(clf.best_params_)
 
 
 if __name__ == '__main__':
-    # test()
+    test_cv()
     test_grid_search()
