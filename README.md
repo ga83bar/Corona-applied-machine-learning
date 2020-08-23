@@ -61,7 +61,7 @@ This way, we also intend to **compare** different approaches for different data 
 >creme is a Python library for online machine learning. All the tools in the library can be updated with a single observation at a time, and can therefore be used to learn from streaming data. This is general-purpose library, and therefore caters to different machine learning problems, including regression, classification, and unsupervised learning.
 
 ### 1.3 Time-Series Forecasting 
-* Responsibility: **Aron Endres**
+* Responsibility: **Martin Schuck, Aron Endres**
 * Time-series modeling is pursued using [Prophet](https://facebook.github.io/prophet/)
 
 **What is Prophet?**
