@@ -467,7 +467,7 @@ def scale_split_df(df, end_index):
         if not key == 'Date':
             scaled_pre_corona_df[key] = pd.to_numeric(scaled_pre_corona_df[key], downcast="float")
             scaled_corona_df[key] = pd.to_numeric(scaled_corona_df[key], downcast="float")
-    return pre_corona_df, corona_df, scaler
+    return scaled_pre_corona_df, scaled_corona_df, scaler
 
 
 def save_df(scaled_pre_corona_df, scaled_corona_df, scaler):

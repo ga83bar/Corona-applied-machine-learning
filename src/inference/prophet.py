@@ -37,11 +37,11 @@ class MyProphet(BaseEstimator, RegressorMixin):
         """
         self.cols = ['ds', 'y']
         self.dset = None
-        self.period = 183
+        self.period = 183  # Predict 6 months in advance.
         self.metric = 'mse'
         self.growth = 'linear'
-        self.changepoint_prior_scale = 0.05
-        self.interval_width = 0.8
+        self.changepoint_prior_scale = 0.05  # Sensitivity to data variance.
+        self.interval_width = 0.8  # Necessary accumulated confidence for the returned interval.
         self.seasonality_mode = 'additive'
         self.model = Prophet(growth=self.growth, changepoint_prior_scale=self.changepoint_prior_scale,
                              interval_width=self.interval_width, seasonality_mode=self.seasonality_mode)
