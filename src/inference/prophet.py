@@ -1,7 +1,7 @@
 """
-Strange method implemented by Facebook.
-With your personal data you support such cool tools.
-Thanks for this =)
+@author: Aron Endres
+@date: 18.08.20
+@brief: Facebooks Prophet prediction embedded in an scikit
 """
 
 # import plotly.offline as py
@@ -67,23 +67,23 @@ class MyProphet(BaseEstimator, RegressorMixin):
                                      'seasonality_mode': 'additive', 'cap': 1, 'floor': -1},
                       'youtube_viewchange': {'growth': 'logistic', 'changepoint_prior_scale': 0.105,
                                              'interval_width': 0.8, 'seasonality_mode': 'multiplicative',
-                                             'cap': 80000000, 'floor': 0},
+                                             'cap': 1.5, 'floor': -1.5}, #80000000
                       'youtube_views': {'growth': 'linear', 'changepoint_prior_scale': 0.04, 'interval_width': 0.8,
-                                        'seasonality_mode': 'multiplicative', 'cap': 150000000, 'floor': 0},
+                                        'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5}, #150000000
                       'steam_users': {'growth': 'linear', 'changepoint_prior_scale': 0.135, 'interval_width': 0.8,
-                                      'seasonality_mode': 'additive', 'cap': 150000000, 'floor': 0},
+                                      'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5}, #150000000
                       'steam_ingame': {'growth': 'linear', 'changepoint_prior_scale': 0.105, 'interval_width': 0.8,
-                                       'seasonality_mode': 'multiplicative', 'cap': 40000000, 'floor': 0},
+                                       'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},#40000000
                       'twitch_views': {'growth': 'linear', 'changepoint_prior_scale': 0.09, 'interval_width': 0.8,
-                                       'seasonality_mode': 'multiplicative', 'cap': 1500000, 'floor': 0},
+                                       'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},#1500000
                       'twitch_channels': {'growth': 'logistic', 'changepoint_prior_scale': 0.115, 'interval_width': 0.8,
-                                          'seasonality_mode': 'additive', 'cap': 60000, 'floor': 0},
+                                          'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5},#60000
                       'twitch_viewtime': {'growth': 'logistic', 'changepoint_prior_scale': 0.13, 'interval_width': 0.8,
-                                          'seasonality_mode': 'additive', 'cap': 1_010_000_000, 'floor': 0},
+                                          'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5},#1_010_000_000
                       'twitch_streams': {'growth': 'linear', 'changepoint_prior_scale': 0.05, 'interval_width': 0.8,
-                                         'seasonality_mode': 'multiplicative', 'cap': 5_000_000, 'floor': 0},
+                                         'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},#5_000_000
                       'ps_users': {'growth': 'linear', 'changepoint_prior_scale': 0.16, 'interval_width': 0.8,
-                                   'seasonality_mode': 'multiplicative', 'cap': 2_000_000, 'floor': 0}}
+                                   'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5}}#2_000_000
 
     def set_dset(self, dset):
         """
@@ -328,7 +328,7 @@ def skleran_gridsearch():
     """
     Test data on sklearn Gridsearchcv
     """
-    attr = 'ps_users'
+    attr = 'youtube_viewchange'
     dataframes = LoadIn().load_all(typ='pre')
     dataframes = dataframes.dropna()
     print(dataframes[['Date', attr]].head())
