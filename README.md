@@ -21,17 +21,16 @@ This underlying document summarizes measures and ideas for the current ML modeli
 - [x] Create an ML Overview Document
 
 ### Step 1
-- [ ] ELM model trained and validated
-- [ ] Creme model trained and validated
-- [ ] Prophet model trained and validated
+- [x] ELM model ready for pipeline
+- [ ] Creme model ready for pipeline
+- [x] Prophet model ready for pipeline
 
 ### Step 2
-- [ ] Defined what to do exactly
-- [ ] ...
+- [ ] Found best overall model for all data sets
+- [ ] Found best model for each individual category (stock, internet traffic, etc.) 
 
 ### Step 3
 - [ ] Cross-validation data set determined
-- [ ] Cross-validation data set created
 - [ ] ...
 
 ### Step 4
@@ -69,13 +68,13 @@ This way, we also intend to **compare** different approaches for different data 
 >
 >Prophet is open source software released by Facebook’s Core Data Science team. It is available for download on CRAN and PyPI.
 
-## 2 Data Processing
-Essential data processing & preparation regarding things like **time window size**, etc. has to be undergone before any of above models are applied. This way, a somewhat unitary data base is used for comparison. 
+## 2 Model Comparison: Data Processing and Parameter Optimization
+Essential data processing & preparation regarding things like **time window size**, etc. has to be undergone before any of above models are compared. This way, a somewhat unitary data base is used for comparison. Consequently, model comparison, i.e. parameter optimization, is conducted in order to find the respective best ELM, Online and Prophet models.
 
 * Responsibility: **Henrique Frutuoso**
 * The main files to be considered in this step are already pushed, see */res/inference*
 
-## 3 Cross-Validation
+## 3 Model Comparison: Cross-Validation
 Estimated model outputs need to be cross-validated. The main strategy is still **undetermined and tba**, though every model analyst in *Step 1* is recquired to firstly cross-validate on their own. In *Step 3* we want to **compare** the respective models on a unified cross-validation data set. This way, we can imply - as mentioned above - which model architecture would perform **better (or worse)** for Stock Market, IX, Twitch and Playstation data sets. 
 
 * Responsibility: **Henrique Frutuoso, Aladin Djuhera**
@@ -84,3 +83,8 @@ Estimated model outputs need to be cross-validated. The main strategy is still *
 In order to **seamlessly integrate** the mathematical models to the web-interface, integration needs to be defined beforehand, i.e. essential parameters such as time windows, etc. need to be communicated. In other words, front- and back-end need to be properly defined and connected. 
 
 * Responsibility: **Niklas Landerer**
+
+## 5 Video
+The group project ends with a **promotional video** which introduces the research question, problem set and solution. 
+
+* Responsibility: **Niklas Landerer, Aladin Djuhera**
