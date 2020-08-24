@@ -2,20 +2,23 @@
 Implementation of online models for our dataset
 """
 import numpy as np
+import pandas as pd
+import datetime as dt
 from matplotlib import pyplot as plt
+from datetime import timedelta
 from keras.layers import concatenate
 from keras.layers import Dense
 from keras.layers import Input
 from keras.models import Model
 
-
+SETTINGS = {}
 
 class OnlineDense():
     """
     Class contains an online linear model and all of its pre and post
     training attributes.
     """
-    def __init__(self, dataframe, output, dset, settings):
+    def __init__(self, dataframe, output, dset, settings=SETTINGS):
         """
         Constructor
         """
@@ -26,25 +29,35 @@ class OnlineDense():
         self.dset = dset
         self.output = output
         self.metrics = ['mse']
-        self.data_length = None
+        self.data_length = len(self.dataframe)
+        self.last_day = dataframe["Date"][dataframe.index[-1]]
 
-    def setup_model(self):
+    def inc_dataframe(self, dataframe):
+        """
+        Fill in missing dataframe
+        """
+
+    def init_model(self):
         """
         Model setup
         """
         neurons = self.settings["neurons"]
+        layer_number = self.settings["layers"]
         input_a = Input(shape=(1,))
-        input_b = Input(shape=(self.settings["in_dim"],))
+        input_b = Input(shape=(2,))
         inp_a = Dense(4, activation="linear")(input_a)
         inp_b = Dense(12, activation=self.settings["lay_activ"])(input_b)
-        for layer in range(1, self.settings["layers"]):
+        for layer in range(1, layer_number):
             inp_b = Dense(neurons[layer], activation=self.settings["lay_activ"])(inp_b)
         inp_b = Dense(1, activation=self.settings["out_activ"])(inp_b)
+        inp_a = Model(inputs=input_a, outputs=inp_a)
+        inp_b = Model(inputs=input_b, outputs=inp_b)
         combined = concatenate([inp_a.output, inp_b.output])
         out = Dense(2, activation="relu")(combined)
         out = Dense(1, activation="linear")(out)
         self.model = Model(inputs=[inp_a.input, inp_b.input], outputs=out)
         self.model.compile(loss=self.settings["loss"], optimizer='adam', metrics=self.metrics)
+        self.model.summary()
         return self.model
 
     def set_metric(self, metrics):
@@ -55,40 +68,53 @@ class OnlineDense():
         return self.metrics
 
 
-    def do_fitting(self):
+    def fit_model(self):
         """
         Train the model
         """
         window = self.settings["window"]
-        for itr in range(0, 1000):
+        for itr in range(0, 300):
+            print(f"This is iteration: {itr}, with max nat. points: {self.data_length}")
             inp_a, inp_b, out = self.data_transform(itr + 1, itr + window)
-            inp = np.hstack(inp_a, inp_b)
-            self.model.fit(inp, out, epochs=1, batch_size=window)
-            if itr == 0:
-                self.predictions = self.model.predict()
+            self.model.fit([inp_a, inp_b], out, epochs=12, batch_size=12)
             last = inp_b[-1]
-            future_step = [(last[1]%12) + 1, (last[2]%7) +1]
-            prediction = self.model.predict(future_step)
-            self.predictions.append(prediction)
-            if itr >= self.data_length:
-                self.dataframe.append(future_step[1], future_step[2])
-                self.output.append(prediction)
-        return self.predictions
+            if itr == 0:
+                self.predictions = np.array(self.output[0:window+1]).tolist()
+            if itr > 0:
+                passed = itr + window
+                month = self.get_pred_month(passed)
+                day = self.get_pred_week(passed)
+                inp = self.dataframe[["month", "day"]].copy().to_numpy()
+                if itr >= window-1:
+                    self.dataframe = self.dataframe.append([{"month": month, "day": day, "Date": "none"}])
+                inp = inp[-1, :]
+                prediction = self.model.predict([np.arange(passed, passed + 1, 1).reshape((1,1)), inp.reshape((1,2))])
+                if passed >= self.data_length - 1:
+                    self.output = self.output.append(pd.Series([prediction[0][0]]))
+                self.predictions.append(prediction)
+        #return self.predictions
 
     def data_transform(self, start, end):
         """
-        Pandas to Numpy
+        Pandas to Numpy python
         """
-        inp_a = range(start, end)
+        inp_a = np.arange(start=start, stop=end+1, step=1)
         inpt_b = self.dataframe[["month", "day"]].copy().to_numpy()
-        inp_b = inpt_b[start:end, :]
-        out = self.output[start:end]
+        inp_b = inpt_b[start:end+1, :]
+        out = np.array(self.output[start:end+1])
         return inp_a, inp_b, out
 
-    def plot(self):
+    def plot_model(self):
         """
         Plot predictions against labels
         """
+        x_ax = np.arange(0, len(self.predictions), 1)
+        y_ax = np.arange(0, len(self.output), 1)
+        plt.xlabel("Days since 01.01.2020")
+        plt.ylabel(self.dset)
+        plt.plot(x_ax, self.predictions, label="Predictions")
+        plt.plot(y_ax, self.output, label="Outputs")
+        plt.show()
 
     def save_model(self):
         """
@@ -105,13 +131,29 @@ class OnlineDense():
         Initialize settings
         """
         self.settings = {"in_dim":2,
-                         "layers:":2,
-                         "lay_activ":"relu",
+                         "layers":3,
+                         "lay_activ":"linear",
                          "out_activ":"linear",
-                         "neurons":[10, 8],
+                         "neurons":[20, 30, 20],
                          "loss":"mean_squared_error",
-                         "window":365,
+                         "window":45,
                          "end":1000}
         for setter in settings:
             self.settings[setter] = settings[setter]
         return self.settings
+
+    def get_pred_month(self, days):
+        """
+        Get month of predicted day
+        """
+        date = dt.datetime.strptime(self.last_day, '%Y-%m-%d')
+        new_day = date + timedelta(days=days)
+        return new_day.month
+
+    def get_pred_week(self, days):
+        """
+        Get weekday of predicted day
+        """
+        date = dt.datetime.strptime(self.last_day, '%Y-%m-%d')
+        new_day = date + timedelta(days=days)
+        return new_day.weekday()

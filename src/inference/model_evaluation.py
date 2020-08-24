@@ -5,6 +5,7 @@ import datetime as dt
 from load_in import LoadIn
 from online_fcn import OnlineFCN
 from online_time_pred import OnTimePred
+from online_models import OnlineDense
 #from extreme_learning import ExtremeLearningMachine
 #from prophet import MyProphet
 import calendar
@@ -53,6 +54,8 @@ class Learning():
             output_frames["gaussian"] = self.gaussian_fit(frame)
         if "online_time_pred" in self.__algorithmen:
             output_frames["online_time_pred"] = self.online_pred_fit(frame, LABELS)
+        if "online_dense" in self.__algorithmen:
+            output_frames["online_dense"] = self.online_dense_fit(frame, LABELS)
         return output_frames
 
     def predict(self):
@@ -60,6 +63,21 @@ class Learning():
         Predict values depending on
         """
         pass
+
+    def online_dense_fit(self, frame, labels):
+        """
+        Calc future trends based on past trends
+        """
+        for lbl in labels:
+            dfr = frame[["month",
+                           "day",
+                           "Date"]].copy()
+            lbls = self.dataframe[[lbl]].copy().pop(lbl)
+            model = OnlineDense(dfr, lbls, lbl)
+            model.init_model()
+            model.fit_model()
+            model.plot_model()
+            self.models[f"online_dense_{lbl}"] = model
 
     def online_pred_fit(self, frame, labels):
         """
@@ -192,7 +210,7 @@ if __name__ == '__main__':
               "stock_automotive",
               "stock_telecom",
               "stock_tech"]
-    ALGORITHMS = ["online_fcn"]
+    ALGORITHMS = ["online_dense"]
     DATASETS = ["covid"]
     EVALUATOR = Learning(ALGORITHMS, DATASETS)
     EVALUATOR.pipeline()
