@@ -7,8 +7,10 @@
     mixins: [Printable],
     props: {
       chartData: {
-        type: Array | Object,
-        required: false
+        type: Array,
+        required: true
+
+
       },
       chartLabels: {
         type: Array,
@@ -66,14 +68,14 @@
               }
             }
           },
-          legend: {
-            display: false
-          },
           responsive: true,
           maintainAspectRatio: false
         }
       }
     },
+
+
+
     mounted () {
       this.gradient = this.$refs.canvas
         .getContext('2d')
@@ -81,6 +83,8 @@
       this.gradient.addColorStop(0, 'rgba(52, 217, 221, 0.6)')
       this.gradient.addColorStop(0.5, 'rgba(52, 217, 221, 0.25)')
       this.gradient.addColorStop(1, 'rgba(52, 217, 221, 0)')
+
+      this.$forceUpdate();
       this.renderChart({
         labels: this.chartLabels,
         datasets: this.chartData
@@ -89,6 +93,7 @@
         this.download()
       }, 500)
     },
+    
     methods: {
       formatNumber (num) {
         let numString = Math.round(num).toString()

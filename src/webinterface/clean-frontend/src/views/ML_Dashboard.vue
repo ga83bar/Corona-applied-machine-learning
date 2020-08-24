@@ -14,12 +14,27 @@
         
         <div class="md-layout mx-auto">
           <div class="fsize-chart">
-          <line-chart :chartData="chartdata" :chartLabels="chartlabels"/>  
+          <line-chart v-if="loaded" ref="charty" :chartData="chartdata" :chartLabels="chartlabels" />  
           </div> 
-          <div v-if="chartdata"> Predicted Class is: {{ chartdata }}</div> 
+         <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
           <div class="md-layout-item ">
 
           <div class="controls">
+
+           <div class="block">
+              <div class="md-layout md-gutter" :class="`md-alignment-top-left`">
+                <div class="md-layout-item md-size-35">
+                <h3>Start Date</h3>
+                <md-datepicker v-model="start_date" :md-disabled-dates="disabledDates"/>          
+                </div>
+                <div class="md-layout-item md-size-35">        
+                <h3>End Date</h3>
+                <md-datepicker v-model="end_date" :md-model-type="string" /> 
+                </div>
+              </div>
+            </div>
+            
+
             <div class="md-layout md-gutter">
               <div class="md-layout-item">
                 <form>
@@ -60,19 +75,7 @@
                <u1 v-if="model">Predicted Class is: {{ model }}</u1>
             </div>
             
-            <div class="block">
-              <div class="md-layout md-gutter" :class="`md-alignment-top-left`">
-                <div class="md-layout-item md-size-35">
-                <h3>Start Date</h3>
-                <md-datepicker v-model="start_date" :md-disabled-dates="disabledDates"/>          
-                </div>
-                <div class="md-layout-item md-size-35">        
-                <h3>End Date</h3>
-                <md-datepicker v-model="end_date" :md-model-type="string"  /> 
-                </div>
-              </div>
-            </div>
-            
+           
 
           </div>
           <div class="hor-space mx-auto"></div>
@@ -143,6 +146,8 @@ export default {
     let now = new Date()
 
     return {
+      loaded: false,
+      connection: false,
       start_date: format(now, dateFormat),
       end_date: format(now, dateFormat),
       selectedDataset: 'Select dataset',
@@ -157,7 +162,58 @@ export default {
         responsive: true,
         maintainAspectRatio: true,
         aspectRatio: 2
-      }
+      }, 
+      options: {
+          showScale: true,
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false,
+                callback: (value, index, values) => {
+                  return this.formatNumber(value)
+                }
+              },
+              gridLines: {
+                display: true,
+                color: '#EEF0F4',
+                borderDash: [5, 15]
+              }
+            }],
+            xAxes: [ {
+              gridLines: {
+                display: true,
+                color: '#EEF0F4',
+                borderDash: [5, 15]
+              }
+            }]
+          },
+          tooltips: {
+            backgroundColor: '#4F5565',
+            titleFontStyle: 'normal',
+            titleFontSize: 18,
+            bodyFontFamily: "'Proxima Nova', sans-serif",
+            cornerRadius: 3,
+            bodyFontColor: '#20C4C8',
+            bodyFontSize: 14,
+            xPadding: 14,
+            yPadding: 14,
+            displayColors: false,
+            mode: 'index',
+            intersect: false,
+            callbacks: {
+              title: tooltipItem => {
+                return `🗓 ${tooltipItem[0].xLabel}`
+              },
+              label: (tooltipItem, data) => {
+                let dataset = data.datasets[tooltipItem.datasetIndex]
+                let currentValue = dataset.data[tooltipItem.index]
+                return `📦 ${currentValue.toLocaleString()}`
+              }
+            }
+          },
+          responsive: true,
+          maintainAspectRatio: false
+        }
       
 
     }
@@ -169,8 +225,33 @@ export default {
         return this.$material.locale.dateFormat || 'yyyy-MM-dd'
       }
     },
-  
+
   methods: {
+
+    ping_server(){
+      axios.post('http://127.0.0.1:5000/predict', {
+        ping: 1
+      })
+      .then(response => {
+        
+        if (response.data.alive === 1){
+          this.connection = true;
+          this.notifyVue('top', 'center', 'success', 'Connection to backend established.');
+
+        }
+        else{
+          this.connection = false;
+          this.notifyVue('top', 'center', 'danger', 'Backend is not configured properly.');
+        } 
+    
+      })
+            .catch(e => {
+        this.notifyVue('top', 'center', 'danger', 'Connection failed. Backend is not responding.');
+
+      })
+    },
+
+
 
     notifyVue(verticalAlign, horizontalAlign, type_notification, notify_message) {
       var color = Math.floor(Math.random() * 4 + 1);
@@ -183,12 +264,15 @@ export default {
       });
     },
       select_set(){
+
+      this.loaded = false;
       axios.post('http://127.0.0.1:5000/predict', {
         dataset_req: this.model,
         start_date_req: this.start_date,
         end_date_req: this.end_date
       })
       .then(response => {
+        
         this.acceptedRequest = response.data.class,        
         this.chartlabels = response.data.labels,
         this.chartdata = 
@@ -207,12 +291,14 @@ export default {
             }
           ]
         this.datecheck_bool = response.data.datecheck,
+        this.loaded = true,
         this.checkdate(this.datecheck_bool);
-          
-                
+
+       
+    
       })
       .catch(e => {
-        this.notifyVue('top', 'center', 'danger', 'Connection failed.')
+        this.notifyVue('top', 'center', 'danger', 'Connection failed.');
       })
 
    },
@@ -244,9 +330,17 @@ export default {
         };
       }
       this.disabledDates.from = val;
-    },
+    }
+ 
+   
 
   },
+      mounted() {
+
+        this.ping_server();
+      
+    },
+  
   props: {
     header: {
       type: String,
@@ -344,6 +438,7 @@ position:relative;
 
 .fsize-chart 
 {
+  margin-top: 35px;
   width:100%;
 }
 
