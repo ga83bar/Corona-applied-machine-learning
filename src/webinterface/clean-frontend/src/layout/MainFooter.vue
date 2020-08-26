@@ -23,7 +23,7 @@
       <div class="copyright">
         
         Developed within the scope of the Applied Machine Intelligence 2020 project at TUM.
-        <p>UI created by using Vue Material Kit by <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a></p>
+        <p>Frontend created by using <a href="https://vuejs.org/" target="_blank">Vue</a>, <a href="https://www.chartjs.org/" target="_blank">ChartJS</a> and the Vue Material Kit by <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a></p>
         
        
       </div>
