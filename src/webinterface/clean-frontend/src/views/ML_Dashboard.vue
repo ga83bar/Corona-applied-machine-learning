@@ -6,48 +6,70 @@
     <parallax class="section page-header header-filter" :style="headerStyle"></parallax>
     <div class="main main-raised">
         <div class="section profile-content">
-            <div class="container">
 
-                <h2 class="title">Stock Predictions</h2>
-                <div class="md-layout mx-auto">
+            <div class="container" id="stock">
+                <h3 class="title">Stock Predictions</h3>
+                <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
                         <line-chart v-if="loaded" ref="charty" :chartData="chartdata" :chartLabels="chartlabels" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
-                    <div class="md-layout-item ">
-
-                        <div class="controls">
-
-                            <div class="md-layout md-gutter">
-                                <div class="md-layout-item">
-                                    <md-menu md-size="medium" md-align-trigger>
-                                        <md-button md-menu-trigger>{{selectedDataset}}</md-button>
-                                        <md-menu-content>
-                                            <md-menu-item @click="model='1', select_set(), selectedDataset='Internet Exchange Points'">Internet Exchange Points</md-menu-item>
-                                            <md-menu-item @click="model='2', select_set(), selectedDataset='Playstation'">Playstation</md-menu-item>
-                                            <md-menu-item @click="model='3', select_set(), selectedDataset='Item 3'">My Item 3</md-menu-item>
-                                        </md-menu-content>
-                                    </md-menu>
-                                </div>
-                                <div class="md-layout-item buttonbed" :class="`md-alignment-top-left`">
-                                    <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
-                                </div>
-                                <u1 v-if="model">Predicted Class is: {{ model }}</u1>
-                            </div>
-
-                        </div>
-
-                    </div>
                 </div>
+                <div class="md-layout mx-auto controls">
+                    <md-menu md-size="medium" md-align-trigger class="menuu">
+                        <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset}}</md-button>
+                        <md-menu-content>
+                            <md-menu-item @click="model='1', selectedDataset='Stock A'">Stock A</md-menu-item>
+                            <md-menu-item @click="model='2', selectedDataset='Stock B'">Stock B</md-menu-item>
+                            <md-menu-item @click="model='3', selectedDataset='Stock C'">Stock C</md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                    <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
+                </div>
+                <p>
+                </p>
+            </div>
 
-                <div class="profile-tabs mx-auto">
-                    <tabs :tab-name="['Studio', 'Work', 'Favorite']" :tab-icon="['camera', 'palette', 'favorite']" plain nav-pills-icons color-button="success">
+            <div class="code">
+                <h4 class="title incode">Quick and Simple Description</h4>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </div>
 
-                    </tabs>
+            <div class="container" id="web">
+                <h3 class="title">Web Traffic Analysis</h3>
+                <div class="md-layout mx-auto fullwidth">
+                    <div class="fsize-chart">
+                        <line-chart v-if="loaded" ref="charty" :chartData="chartdata" :chartLabels="chartlabels" />
+                    </div>
+                    <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
+                </div>
+                <div class="md-layout mx-auto controls">
+                    <md-menu md-size="medium" md-align-trigger class="menuu">
+                        <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset}}</md-button>
+                        <md-menu-content>
+                            <md-menu-item @click="model='1', selectedDataset='Stock A'">Stock A</md-menu-item>
+                            <md-menu-item @click="model='2', selectedDataset='Stock B'">Stock B</md-menu-item>
+                            <md-menu-item @click="model='3', selectedDataset='Stock C'">Stock C</md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                    <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
                 </div>
 
             </div>
+
+            <div class="code">
+                <h4 class="title incode">Corona has taken porn consumption to a new level </h4>
+                Obviously, this is placeholder content. Also, I am fluent in Latin.<br />Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </div>
+            <div class="container" id="faq">
+                <div class="profile-tabs mx-auto">
+                    <tabs plain nav-pills-icons color-button="success">
+                    </tabs>
+
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 </template>
@@ -152,7 +174,7 @@ export default {
     methods: {
 
         ping_server() {
-            axios.post('http://127.0.0.1:5000/predict', {
+            axios.post('http://217.230.215.5:5000/predict', {
                     ping: 1
                 })
                 .then(response => {
@@ -186,7 +208,7 @@ export default {
         select_set() {
 
             this.loaded = false;
-            axios.post('http://127.0.0.1:5000/predict', {
+            axios.post('http://217.230.215.5:5000/predict', {
                     dataset_req: this.model,
                     start_date_req: this.start_date,
                     end_date_req: this.end_date
@@ -250,8 +272,9 @@ export default {
 
     },
     mounted() {
-
+        //executed after page is loaded -> see vue component lifeciycle
         this.ping_server();
+        this.select_set();
 
     },
 
@@ -291,8 +314,25 @@ export default {
     }
 }
 
-.block {
-    max-height: relative;
+.menuu {
+    margin-right: 5em;
+    margin-top: 0.15em;
+}
+
+.code {
+    background: rgb(40, 44, 52);
+    color: #fff;
+    margin: 2em;
+    padding: 2em;
+    border-radius: 0.4em;
+    webkit-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.39);
+    -moz-box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.39);
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.39);
+}
+
+.incode {
+    color: #fff;
+    margin-top: 0;
 }
 
 .main-raised {
@@ -302,18 +342,9 @@ export default {
 }
 
 .controls {
-    margin-top: 40px;
-    margin-right: 10px;
+    margin-top: 50px;
+    margin-bottom: 10px;
 
-}
-
-.buttonbed {
-    position: relative;
-}
-
-.run {
-    position: absolute;
-    left: 25%;
 }
 
 /* chart */
@@ -324,13 +355,6 @@ export default {
     top: 0;
     z-index: 9000;
     background: transparent
-}
-
-.chartjs {
-    max-width: 950px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
 }
 
 /* page */
@@ -351,4 +375,11 @@ export default {
     width: 100%;
 }
 
+.fullwidth {
+    width: 100%
+}
+
+.fixed-width-button {
+    width: 12em;
+}
 </style>
