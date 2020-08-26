@@ -1,10 +1,7 @@
-import os
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS
-import numpy as np
 from pathlib import Path
-import csv
 import pandas as pd
 import datetime
 
@@ -67,10 +64,10 @@ class Predict(Resource):
             covid_dates = load_data("covid/processed", "covid.csv", "Date")
             covid_deaths = load_data("covid/processed", "covid.csv", "deaths")
             covid_confirmed = load_data("covid/processed", "covid.csv", "confirmed")
-            start_date=datetime.datetime.strptime(args["start_date_req"],'%Y-%m-%d')
-            end_date=datetime.datetime.strptime(args["end_date_req"],'%Y-%m-%d')
+            start_date = datetime.datetime.strptime(args["start_date_req"], '%Y-%m-%d')
+            end_date = datetime.datetime.strptime(args["end_date_req"], '%Y-%m-%d')
             
-            if (start_date>end_date):
+            if (start_date > end_date):
                 return {"class": 42,
                         "datecheck": 1,
                         "chart_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
