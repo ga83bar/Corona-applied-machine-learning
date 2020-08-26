@@ -52,7 +52,7 @@
                         </li>
                         <li>
                           <a
-                            href="https://demos.creative-tim.com/vue-material-kit/documentation/"
+                            href="https://gitlab.ldv.ei.tum.de/ami2020/group11"
                           >
                             <i class="material-icons">language</i>
                             <p>Web Traffic</p>
@@ -68,7 +68,7 @@
 
 
               <md-list-item
-                href="https://twitter.com/CreativeTim"
+                href="https://gitlab.ldv.ei.tum.de/ami2020/group11"
                 target="_blank"
               >
                 <i class="fab fa-gitlab"></i>
