@@ -150,7 +150,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
         data['floor'] = self.floor
         return self.model.fit(data)
 
-    def predict(self, do_plot=False):
+    def predict(self, label , do_plot=False):
         """
         Predict the next values
         @param do_plot: Do a plot of the forcast and the seasonalities
@@ -163,20 +163,20 @@ class MyProphet(BaseEstimator, RegressorMixin):
         forecast = self.model.predict(future)
 
         if do_plot:
-            self.plot(forecast)
+            self.plot(forecast, label)
             # fig = plot_plotly(model, forecast)  # This returns a plotly Figure
             # py.iplot(fig)
 
         return forecast['yhat'][-self.period:]
 
-    def plot(self, forecast):
+    def plot(self, forecast, label):
         """
         Plot and save the predictions
         """
         fig1 = self.model.plot(forecast)
         fig2 = self.model.plot_components(forecast)
-        fig1.savefig('prophet.png')
-        fig2.savefig('prophet_components.png')
+        fig1.savefig(f'prophet plots/prophet_{label}.png')
+        fig2.savefig(f'prophet plots/prophet_components{label}.png')
 
     def cross_validation(self):
         """
@@ -281,15 +281,15 @@ class MyProphet(BaseEstimator, RegressorMixin):
         """
         Saves a model
         """
-        with open(f"prophet{self.dset}_{dt.time}.pkl", 'wb') as f:
-            pickle.dump(self.model, f)
+        #with open(f"prophet{self.dset}_{dt.time}.pkl", 'wb') as f:
+        #   pickle.dump(self.model, f)
 
     def load_model(self, dset, time):
         """
         Loads a pretrained model
         """
-        with open(f"prophet{dset}_{time}.pkl", 'rb') as f:
-            self.model = pickle.load(f)
+        #with open(f"prophet{dset}_{time}.pkl", 'rb') as f:
+         #   self.model = pickle.load(f)
 
     def set_params(self, **parameters):
         # set default values
