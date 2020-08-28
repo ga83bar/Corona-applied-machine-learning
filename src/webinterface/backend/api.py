@@ -52,16 +52,14 @@ class Predict(Resource):
     def post(self):
         args = parser.parse_args()  # Sklearn is VERY PICKY on how you put your values in...
 
-        print(args)
+        print("\n---New request is processed---")
+        print("Args: {}".format(args))
         if (args["ping"] == "1"):
             print("answered keep-alive")
             return {"alive": 1}
         else:
-            print("\nrequest is processed")
-            print(args["dataset_req"])
-            print(args["start_date_req"])
-            print(args["end_date_req"])
-            print(args["selected_graph"])
+            #Print for checking parameter during development
+            print("Received 'selected_graph' paramter: {}".format(args["selected_graph"]))
 
             covid_dates = load_data("covid/processed", "covid.csv", "Date")
             covid_deaths = load_data("covid/processed", "covid.csv", "deaths")
