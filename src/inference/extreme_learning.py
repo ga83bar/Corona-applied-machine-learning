@@ -122,7 +122,7 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         for _ in range(1, layers):
             self.model.add(Dense(neurons, activation=activation))
         self.model.compile(loss=metric, optimizer='adam')
-        self.model._make_predict_function()
+        # self.model._make_predict_function()
 
         # Regression part
         self.weights = None
@@ -160,8 +160,8 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         @param error_measure : error measure e.g mse, mae
         @return : boolean value indicates if we seted the value or not
         '''
-        if isinstance(__measure, str):
-            if (__measure == 'mse' or __measure == 'mae'):
+        if isinstance(self.__measure, str):
+            if (self.__measure == 'mse' or self.__measure == 'mae'):
                 self.__measure = error_measure
                 return True
             else:
@@ -220,7 +220,7 @@ def test_cv():
     for attr in my_train_attr:
         # First step prepare dat
         x_train_test, y_train_test = elm.prepare_data(loaded_data[attr])
-        scores = cross_val_score(elm, x_train_test, y_train_test, cv=5)
+        scores = cross_val_score(elm, x_train_test, y_train_test, cv=5, scoring='r2')
         print('scores ELM:')
         print(scores)
 

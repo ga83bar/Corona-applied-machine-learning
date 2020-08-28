@@ -13,7 +13,7 @@ The following members are on vacation and thus not present:
 This underlying document summarizes measures and ideas for the current ML modeling process which were agreed upon in the first meeting. In particular, it highlightens the **four main categories** as well as the respective **responsible group members**.
 
 ## Status
-**Next Meeting:** Monday, 24.8. @5pm
+**Next Meeting:** Wednesday, 26.8. @5pm
 
 ## To Do List
 
