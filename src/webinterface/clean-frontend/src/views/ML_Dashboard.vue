@@ -11,7 +11,7 @@
                 <h3 class="title">Stock Predictions</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
-                        <line-chart v-if="loaded" ref="charty" :chartData="chartdata" :chartLabels="chartlabels" />
+                        <line-chart v-if="loaded" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
                 </div>
@@ -24,7 +24,7 @@
                             <md-menu-item @click="model='3', selectedDataset='Stock C'">Stock C</md-menu-item>
                         </md-menu-content>
                     </md-menu>
-                    <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
+                    <md-button class="md-success md-round run" @click='select_set(1)'>Run Inference</md-button>
                 </div>
                 <p>
                 </p>
@@ -39,7 +39,7 @@
                 <h3 class="title">Web Traffic Analysis</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
-                        <line-chart v-if="loaded" ref="charty" :chartData="chartdata" :chartLabels="chartlabels" />
+                        <line-chart v-if="loaded" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
                 </div>
@@ -52,7 +52,7 @@
                             <md-menu-item @click="model='3', selectedDataset='Stock C'">Stock C</md-menu-item>
                         </md-menu-content>
                     </md-menu>
-                    <md-button class="md-success md-round run" @click='select_set()'>Run Inference</md-button>
+                    <md-button class="md-success md-round run" @click='select_set(2)'>Run Inference</md-button>
                 </div>
 
             </div>
@@ -174,7 +174,7 @@ export default {
     methods: {
 
         ping_server() {
-            axios.post('http://217.230.215.5:5000/predict', {
+            axios.post('http://localhost:5000/predict', {
                     ping: 1
                 })
                 .then(response => {
@@ -205,35 +205,58 @@ export default {
                 type: type_notification
             });
         },
-        select_set() {
+        select_set(selected_graph) {
 
             this.loaded = false;
-            axios.post('http://217.230.215.5:5000/predict', {
+            axios.post('http://localhost:5000/predict', {
                     dataset_req: this.model,
                     start_date_req: this.start_date,
-                    end_date_req: this.end_date
+                    end_date_req: this.end_date,
+                    selected_graph: selected_graph
                 })
                 .then(response => {
 
-                    this.acceptedRequest = response.data.class,
-                        this.chartlabels = response.data.labels,
-                        this.chartdata = [{
-                                label: 'deaths',
-                                data: response.data.chart_data_1,
-                                borderColor: 'rgb(238, 76, 96)',
-                                fill: false
-                            },
-                            {
-                                label: 'cases',
-                                data: response.data.chart_data_2,
-                                borderColor: 'rgb(76, 175, 80)',
-                                fill: false
-                            }
-                        ]
-                    this.datecheck_bool = response.data.datecheck,
-                        this.loaded = true,
-                        this.checkdate(this.datecheck_bool);
+                    
+                        this.acceptedRequest = response.data.class;
+                        if( response.data.selected_graph == 1)
+                        {
+                            this.chartlabels_graph1 = response.data.labels,
+                            this.chartdata_graph1 = [{
+                                    label: 'deaths',
+                                    data: response.data.chart_data_1,
+                                    borderColor: 'rgb(238, 76, 96)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'cases',
+                                    data: response.data.chart_data_2,
+                                    borderColor: 'rgb(76, 175, 80)',
+                                    fill: false
+                                }
+                            ]
+                        }
 
+                        else if( response.data.selected_graph == 2)
+                        {
+                            this.chartlabels_graph2 = response.data.labels,
+                            this.chartdata_graph2 = [{
+                                    label: 'test1',
+                                    data: response.data.chart_data_1,
+                                    borderColor: 'rgb(238, 76, 96)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'cases',
+                                    data: response.data.chart_data_2,
+                                    borderColor: 'rgb(76, 175, 80)',
+                                    fill: false
+                                }
+                            ]
+                        }
+                        
+                        this.datecheck_bool = response.data.datecheck,
+                            this.loaded = true,
+                            this.checkdate(this.datecheck_bool);
                 })
                 .catch(e => {
                     this.notifyVue('top', 'center', 'danger', 'Connection failed.');

@@ -14,6 +14,7 @@ parser.add_argument("dataset_req")
 parser.add_argument("start_date_req")
 parser.add_argument("end_date_req")
 parser.add_argument("ping")
+parser.add_argument("selected_graph")
 # Unpickle our model so we can use it!
 
 
@@ -60,13 +61,14 @@ class Predict(Resource):
             print(args["dataset_req"])
             print(args["start_date_req"])
             print(args["end_date_req"])
+            print(args["selected_graph"])
 
             covid_dates = load_data("covid/processed", "covid.csv", "Date")
             covid_deaths = load_data("covid/processed", "covid.csv", "deaths")
             covid_confirmed = load_data("covid/processed", "covid.csv", "confirmed")
             start_date = datetime.datetime.strptime(args["start_date_req"], '%Y-%m-%d')
             end_date = datetime.datetime.strptime(args["end_date_req"], '%Y-%m-%d')
-            
+
             if (start_date > end_date):
                 return {"class": 42,
                         "datecheck": 1,
@@ -79,14 +81,16 @@ class Predict(Resource):
                         "datecheck": 2,
                         "chart_data_1": covid_deaths,
                         "chart_data_2": covid_confirmed,
-                        "labels": covid_dates
+                        "labels": covid_dates,
+                        "selected_graph": args["selected_graph"]
                         }
             elif (args["dataset_req"] == '2'):
                 return {"class": 42,
                         "datecheck": 2,
-                        "chart_data_1": [5, 2, 3, 5, 6, 1, 2, 3, 5, 6],
+                        "chart_data_1": [0, 0, 0, 5, 6, 1, 2, 3, 5, 6],
                         "chart_data_2": [5, 8, 2, 4, 6, 5, 8, 2, 4, 6],
                         "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                        "selected_graph": args["selected_graph"]
                         }
             else:
                 return {"class": 500,
