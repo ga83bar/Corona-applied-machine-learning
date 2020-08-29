@@ -9,6 +9,7 @@ How to use this class:
     As you get (for every attribute) from :
     x_train_test, y_train_test = elm.prepare_data(loaded_data['stock_automotive'])
 '''
+import datetime
 from pathlib import Path
 from keras import Sequential
 from keras.layers import Dense
@@ -20,7 +21,7 @@ from sklearn import linear_model
 # For scikitlearn cross validation
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 
 # Constants
 TRAIN_WINDOW = 30
@@ -65,7 +66,7 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         if self.regu == 'no':
             sol_eqs = np.linalg.lstsq(transformed_features, y_train, rcond=None)
             self.weights = sol_eqs[0]
-        
+
         # Lasso regularization
         elif self.regu == 'L1':
             lasso = linear_model.Lasso(alpha=self.lambd, fit_intercept=False, tol=error_tol)
@@ -105,8 +106,68 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         '''
         if self.weights is None:
             raise Exception("Need to call fit() before predict()")
+
+        # I really do not know why this is needed
+        if x_vals.shape == (self.train_window,):
+            x_vals = x_vals.reshape(1, -1)
         features = self.model.predict(x_vals)
         return np.matmul(features, self.weights)
+
+    def predict_next_days(self, regu, lambd, num_neurons, train_win,
+                          do_plot=False, data=None, days=None, date=None):
+        '''
+        Method that predicts the next days. You can also hand a model (ELM) to this method.
+        @param days : Number of days you want to predict.
+        @param date : Optional you can select a date till you cant to predict.
+        @param data : Data on which we w<nt to train the model and start predictions
+        @param model :
+        '''
+        if data is None:
+            raise Exception('Extreme learning machine.predict_next_days : No valid data!')
+
+        if (days is None and date is None):
+            raise Exception('Extreme Learning Machine predict_next_days : days and date is None')
+
+        elif (days is None):
+            today = datetime.date.today()
+            days = date - today
+
+        # Set params
+        self.lambd = lambd
+        self.neurons = num_neurons
+        self.regu = regu
+        self.train_window = train_win
+
+        # At this point we can be sur that days is defined
+        # last_elements = data[-(self.train_window):len(data)].copy()
+
+        # build and train network
+        x_train, y_train = self.prepare_data(data)
+        self.fit(x_train, y_train)
+        last_elements = x_train[-1]
+
+        # First predict
+        predictions = []
+
+        # predict using last data points
+        for i in range(days):
+            value = self.predict(last_elements)
+            predictions = np.append(predictions, value)
+
+            # Insert prediction and delet first element
+            last_elements = np.delete(last_elements, 0)
+            last_elements = np.append(last_elements, value)
+
+        if do_plot:
+            num_x = len(data) + days
+            x_values = range(num_x)
+            plt.title(data.name)
+            plt.plot(x_values[0:len(data)], data, label='Data')
+            plt.plot(x_values[len(data):], predictions, label='Prediction')
+            plt.show()
+
+
+        return predictions
 
     def build_network(self, neurons=128, layers=1, train_window=TRAIN_WINDOW,
                       activation='relu', metric='mean_squared_error'):
@@ -114,6 +175,7 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         Method that builds and compiles the model (network)
         '''
         # Init neural network
+        self.train_window = train_window
         self.model = Sequential()
         self.model.add(Dense(neurons,
                              activation=activation,
@@ -189,24 +251,8 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         error = abs_array.mean()
         return error
 
-    # Model dependent things
-    def save_model(self, data, error):
-        '''
-        Method for saving the actual model (if it is better than
-        the stored one) and also the most important
-        parameters and infos (like error, on which data)
-        '''
-        pass
-
-    def predict_best(self, x_test, data):
-        '''
-        Method predicts the values by choosing the best model
-        '''
-        pass
-
     # Prpoerties
     error_measure = property(get_error_measure, set_error_measure)
-
 
 def test_cv():
     ''' Test running sckikit learn cross validation'''
@@ -241,7 +287,7 @@ def test_grid_search():
         x_train_test, y_train_test = elm.prepare_data(loaded_data[attr])
         # Set the parameters by cross-validation
         tuned_parameters = {'neurons': [10, 20],
-                            'lambd': [0.001, 0.01],
+                            'lambd': [0.001, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5],
                             'regu': ['no', 'L1', 'L2']},
         clf = GridSearchCV(ExtremeLearningMachine(),
                            tuned_parameters)
@@ -249,6 +295,34 @@ def test_grid_search():
         print(clf.best_params_)
 
 
+def test():
+    ''' Test running sckikit learn cross validation'''
+    root = Path().absolute().parent.parent
+    dataset_path = root.joinpath('AML', 'group11', 'res', 'pipeline', 'scaled_corona_df.csv')
+    loaded_data = pd.read_csv(dataset_path)
+
+    days_to_predict = 60
+    elm = ExtremeLearningMachine()
+
+    my_train_attr = ['stock_automotive', 'stock_energy']
+    for attr in my_train_attr:
+        train_size = len(loaded_data) - days_to_predict
+        train_data = loaded_data[attr][:train_size]
+        test_data = loaded_data[attr][train_size:]
+        predictions = elm.predict_next_days(regu='no', train_win=TRAIN_WINDOW, do_plot=False,
+                                            lambd=0.01, num_neurons=128, days=days_to_predict,
+                                            data=train_data)
+        
+        x_values = range(len(loaded_data))
+        plt.title('No name')
+        plt.plot(x_values[:train_size], train_data, label='Train data')
+        plt.plot(x_values[train_size:], predictions, label='Prediction')
+        plt.plot(x_values[train_size:], test_data, label='Test data')
+        plt.legend()
+        plt.show()
+
+
 if __name__ == '__main__':
-    test_cv()
-    test_grid_search()
+    test()
+    # test_cv()
+    # test_grid_search()
