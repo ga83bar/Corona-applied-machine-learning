@@ -17,18 +17,18 @@
                 </div>
                 <div class="md-layout mx-auto controls">
                     <md-menu md-size="medium" md-align-trigger class="menuu">
-                        <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset}}</md-button>
+                        <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset_graph1}}</md-button>
                         <md-menu-content>
-                            <md-menu-item @click="dataset_id='0', selectedDataset='ix_bitrate'">ix_bitrate</md-menu-item>
-                            <md-menu-item @click="dataset_id='1', selectedDataset='youtube_viewchange'">youtube_viewchange</md-menu-item>
-                            <md-menu-item @click="dataset_id='2', selectedDataset='youtube_views'">youtube_views</md-menu-item>
-                            <md-menu-item @click="dataset_id='3', selectedDataset='steam_users'">steam_users</md-menu-item>
-                            <md-menu-item @click="dataset_id='4', selectedDataset='steam_ingame'">steam_ingame</md-menu-item>
-                            <md-menu-item @click="dataset_id='5', selectedDataset='twitch_views'">twitch_views</md-menu-item>
-                            <md-menu-item @click="dataset_id='6', selectedDataset='twitch_channels'">twitch_channels</md-menu-item>
-                            <md-menu-item @click="dataset_id='7', selectedDataset='twitch_viewtime'">twitch_viewtime</md-menu-item>
-                            <md-menu-item @click="dataset_id='8', selectedDataset='twitch_streams'">twitch_streams</md-menu-item>
-                            <md-menu-item @click="dataset_id='9', selectedDataset='ps_users'">ps_users</md-menu-item>
+                            <md-menu-item @click="dataset_id='0', selectedDataset_graph1='ix_bitrate'">ix_bitrate</md-menu-item>
+                            <md-menu-item @click="dataset_id='1', selectedDataset_graph1='youtube_viewchange'">youtube_viewchange</md-menu-item>
+                            <md-menu-item @click="dataset_id='2', selectedDataset_graph1='youtube_views'">youtube_views</md-menu-item>
+                            <md-menu-item @click="dataset_id='3', selectedDataset_graph1='steam_users'">steam_users</md-menu-item>
+                            <md-menu-item @click="dataset_id='4', selectedDataset_graph1='steam_ingame'">steam_ingame</md-menu-item>
+                            <md-menu-item @click="dataset_id='5', selectedDataset_graph1='twitch_views'">twitch_views</md-menu-item>
+                            <md-menu-item @click="dataset_id='6', selectedDataset_graph1='twitch_channels'">twitch_channels</md-menu-item>
+                            <md-menu-item @click="dataset_id='7', selectedDataset_graph1='twitch_viewtime'">twitch_viewtime</md-menu-item>
+                            <md-menu-item @click="dataset_id='8', selectedDataset_graph1='twitch_streams'">twitch_streams</md-menu-item>
+                            <md-menu-item @click="dataset_id='9', selectedDataset_graph1='ps_users'">ps_users</md-menu-item>
                         </md-menu-content>
                     </md-menu>
                     <md-button class="md-success md-round run" @click='select_set(1)'>Run Inference</md-button>
@@ -52,16 +52,16 @@
                 </div>
                 <div class="md-layout mx-auto controls">
                     <md-menu md-size="medium" md-align-trigger class="menuu">
-                        <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset}}</md-button>
+                        <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset_graph2}}</md-button>
                         <md-menu-content>
-                            <md-menu-item @click="dataset_id='10', selectedDataset='stock_med'">stock_med</md-menu-item>
-                            <md-menu-item @click="dataset_id='11', selectedDataset='stock_bank'">stock_bank</md-menu-item>
-                            <md-menu-item @click="dataset_id='12', selectedDataset='stock_energy'">stock_energy</md-menu-item>
-                            <md-menu-item @click="dataset_id='13', selectedDataset='stock_oil'">stock_oil</md-menu-item>
-                            <md-menu-item @click="dataset_id='14', selectedDataset='stock_steel'">stock_steel</md-menu-item>
-                            <md-menu-item @click="dataset_id='15', selectedDataset='stock_automotive'">stock_automotive</md-menu-item>
-                            <md-menu-item @click="dataset_id='16', selectedDataset='stock_telecom'">stock_telecom</md-menu-item>
-                            <md-menu-item @click="dataset_id='17', selectedDataset='stock_tech'">stock_tech</md-menu-item>
+                            <md-menu-item @click="dataset_id='10', selectedDataset_graph2='stock_med'">stock_med</md-menu-item>
+                            <md-menu-item @click="dataset_id='11', selectedDataset_graph2='stock_bank'">stock_bank</md-menu-item>
+                            <md-menu-item @click="dataset_id='12', selectedDataset_graph2='stock_energy'">stock_energy</md-menu-item>
+                            <md-menu-item @click="dataset_id='13', selectedDataset_graph2='stock_oil'">stock_oil</md-menu-item>
+                            <md-menu-item @click="dataset_id='14', selectedDataset_graph2='stock_steel'">stock_steel</md-menu-item>
+                            <md-menu-item @click="dataset_id='15', selectedDataset_graph2='stock_automotive'">stock_automotive</md-menu-item>
+                            <md-menu-item @click="dataset_id='16', selectedDataset_graph2='stock_telecom'">stock_telecom</md-menu-item>
+                            <md-menu-item @click="dataset_id='17', selectedDataset_graph2='stock_tech'">stock_tech</md-menu-item>
                         </md-menu-content>
                     </md-menu>
                     <md-button class="md-success md-round run" @click='select_set(2)'>Run Inference</md-button>
@@ -108,7 +108,8 @@ export default {
             connection: false,
             start_date: format(now, dateFormat),
             end_date: format(now, dateFormat),
-            selectedDataset: 'Select dataset',
+            selectedDataset_graph1: 'Select dataset',
+            selectedDataset_graph2: 'Select dataset',
             disabledDates: function (date) {
                 // compare if today is greater then the datepickers date
             },
