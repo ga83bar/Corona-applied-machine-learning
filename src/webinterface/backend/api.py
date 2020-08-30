@@ -11,7 +11,7 @@ CORS(app)
 
 api = Api(app)  # Require a parser to parse our POST request.
 parser = reqparse.RequestParser()
-parser.add_argument("dataset_req")
+parser.add_argument("dataset_id_req")
 parser.add_argument("start_date_req")
 parser.add_argument("end_date_req")
 parser.add_argument("ping")
@@ -108,7 +108,7 @@ class Predict(Resource):
                         "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9]
                         }
             # TODO: In switch integrieren oder eigene fkt.?
-            if (args["dataset_req"] == '1'):
+            if (args["dataset_id_req"] == '1'):
                 return {"class": 42,
                         "datecheck": 2,
                         "chart_data_1": covid_deaths,
@@ -116,7 +116,7 @@ class Predict(Resource):
                         "labels": covid_dates,
                         "selected_graph": args["selected_graph"]
                         }
-            elif (args["dataset_req"] == '2'):
+            elif (args["dataset_id_req"] == '2'):
                 return {"class": 42,
                         "datecheck": 2,
                         "chart_data_1": [0, 0, 0, 5, 6, 1, 2, 3, 5, 6],
