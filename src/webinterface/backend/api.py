@@ -4,6 +4,7 @@ from flask_cors import CORS
 from pathlib import Path
 import pandas as pd
 import datetime
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -27,12 +28,22 @@ def load_data(data_folder_name, csv_file_name, type):
     @return extracted data in form of a list
     """
 
+    # TODO: Remove test
+    # filePath = __file__
+    # print("This script file path is ", filePath)
+    # absFilePath = os.path.abspath(__file__)
+    # print("This script absolute path is ", absFilePath)
+
     # Path to data directory
     data_path = Path("../../../res/")
     # Path to open CSV-file from
     file_path = Path("{}/{}".format(data_folder_name, csv_file_name))
     # Join the two partial paths to a complete path to access the file
     complete_path = Path(data_path, file_path)
+
+    # TODO: remove Test
+    # complete_path = Path(filePath, data_path, file_path)
+    print(complete_path)
 
     # Open file as a pandas frame
     csv_file = pd.read_csv(complete_path)
@@ -46,6 +57,20 @@ def load_data(data_folder_name, csv_file_name, type):
     data = csv_file[type].to_list()
 
     return data
+
+
+class switcher():
+    def dataset_switch(self, dataset_id):
+        default = "incorrect dataset"
+        # getattr returns function from within the class, matching to 'dataset_id'
+        # lambda gets returned, if not matching class was found
+        return getattr(self, 'dataset_' + str(dataset_id), lambda: default)()
+
+    def dataset_0(self):
+        return "test0"
+
+    def dataset_1(self):
+        return "test1"
 
 
 class Predict(Resource):
@@ -63,6 +88,11 @@ class Predict(Resource):
             print("Received 'selected_graph' paramter: {}".format(args["selected_graph"]))
 
             # TODO: Switch
+            # Switch statement depending on the requested dataset.
+            # The allocation from the id to the lable (name) can be found in /.../allocation_datasets_id.CSV
+            switch = switcher()
+            print(switch.dataset_switch(0))
+
             covid_dates = load_data("covid/processed", "covid.csv", "Date")
             covid_deaths = load_data("covid/processed", "covid.csv", "deaths")
             covid_confirmed = load_data("covid/processed", "covid.csv", "confirmed")
