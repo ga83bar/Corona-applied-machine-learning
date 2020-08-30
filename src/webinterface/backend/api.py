@@ -54,19 +54,22 @@ class Predict(Resource):
 
         print("\n---New request is processed---")
         print("Args: {}".format(args))
+
         if (args["ping"] == "1"):
             print("answered keep-alive")
             return {"alive": 1}
         else:
-            #Print for checking parameter during development
+            # Print for checking parameter during development
             print("Received 'selected_graph' paramter: {}".format(args["selected_graph"]))
 
+            # TODO: Switch
             covid_dates = load_data("covid/processed", "covid.csv", "Date")
             covid_deaths = load_data("covid/processed", "covid.csv", "deaths")
             covid_confirmed = load_data("covid/processed", "covid.csv", "confirmed")
             start_date = datetime.datetime.strptime(args["start_date_req"], '%Y-%m-%d')
             end_date = datetime.datetime.strptime(args["end_date_req"], '%Y-%m-%d')
 
+            # TODO: Date noch notwendig oder inzwischen unnötig?
             if (start_date > end_date):
                 return {"class": 42,
                         "datecheck": 1,
@@ -74,6 +77,7 @@ class Predict(Resource):
                         "chart_data_2": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                         "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9]
                         }
+            # TODO: In switch integrieren oder eigene fkt.?
             if (args["dataset_req"] == '1'):
                 return {"class": 42,
                         "datecheck": 2,
