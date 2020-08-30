@@ -19,9 +19,9 @@
                     <md-menu md-size="medium" md-align-trigger class="menuu">
                         <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset}}</md-button>
                         <md-menu-content>
-                            <md-menu-item @click="model='1', selectedDataset='Stock A'">Stock A</md-menu-item>
-                            <md-menu-item @click="model='2', selectedDataset='Stock B'">Stock B</md-menu-item>
-                            <md-menu-item @click="model='3', selectedDataset='Stock C'">Stock C</md-menu-item>
+                            <md-menu-item @click="dataset_id='1', selectedDataset='Stock A'">Stock A</md-menu-item>
+                            <md-menu-item @click="dataset_id='2', selectedDataset='Stock B'">Stock B</md-menu-item>
+                            <md-menu-item @click="dataset_id='3', selectedDataset='Stock C'">Stock C</md-menu-item>
                         </md-menu-content>
                     </md-menu>
                     <md-button class="md-success md-round run" @click='select_set(1)'>Run Inference</md-button>
@@ -47,9 +47,9 @@
                     <md-menu md-size="medium" md-align-trigger class="menuu">
                         <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset}}</md-button>
                         <md-menu-content>
-                            <md-menu-item @click="model='1', selectedDataset='Stock A'">Stock A</md-menu-item>
-                            <md-menu-item @click="model='2', selectedDataset='Stock B'">Stock B</md-menu-item>
-                            <md-menu-item @click="model='3', selectedDataset='Stock C'">Stock C</md-menu-item>
+                            <md-menu-item @click="dataset_id='1', selectedDataset='Stock A'">Stock A</md-menu-item>
+                            <md-menu-item @click="dataset_id='2', selectedDataset='Stock B'">Stock B</md-menu-item>
+                            <md-menu-item @click="dataset_id='3', selectedDataset='Stock C'">Stock C</md-menu-item>
                         </md-menu-content>
                     </md-menu>
                     <md-button class="md-success md-round run" @click='select_set(2)'>Run Inference</md-button>
@@ -100,7 +100,7 @@ export default {
             disabledDates: function (date) {
                 // compare if today is greater then the datepickers date
             },
-            model: '1',
+            dataset_id: '1',
             chartdata: null,
             chartlabels: null,
             datecheck_bool: null,
@@ -209,7 +209,7 @@ export default {
 
             this.loaded = false;
             axios.post('http://localhost:5000/predict', {
-                    dataset_id_req: this.model,
+                    dataset_id_req: this.dataset_id,
                     selected_graph: selected_graph
                 })
                 .then(response => {
