@@ -210,8 +210,6 @@ export default {
             this.loaded = false;
             axios.post('http://localhost:5000/predict', {
                     dataset_id_req: this.model,
-                    start_date_req: this.start_date,
-                    end_date_req: this.end_date,
                     selected_graph: selected_graph
                 })
                 .then(response => {
