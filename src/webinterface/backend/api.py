@@ -43,7 +43,7 @@ def load_data(data_folder_name, csv_file_name, type):
 
     # TODO: remove Test
     # complete_path = Path(filePath, data_path, file_path)
-    print(complete_path)
+    # print(complete_path)
 
     # Open file as a pandas frame
     csv_file = pd.read_csv(complete_path)
@@ -91,7 +91,7 @@ class Predict(Resource):
             # Switch statement depending on the requested dataset.
             # The allocation from the id to the lable (name) can be found in /.../allocation_datasets_id.CSV
             switch = switcher()
-            print(switch.dataset_switch(0))
+            # print(switch.dataset_switch(0))
 
             covid_dates = load_data("covid/processed", "covid.csv", "Date")
             covid_deaths = load_data("covid/processed", "covid.csv", "deaths")
