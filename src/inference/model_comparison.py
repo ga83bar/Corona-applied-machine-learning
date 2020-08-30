@@ -228,12 +228,12 @@ def compare_models(model_dict, dataframe, plotting = True):
 
 
 if __name__ == '__main__':
-    PATH = Path().absolute().joinpath('GIT','group11','res', 'pipeline', 'scaled_pre_corona_df.csv')
-    df = pd.read_csv(PATH)
-    start_time = time.time()
-    get_params(df)
-    length = time.time()-start_time
-    print(length)
+    #PATH = Path().absolute().joinpath('GIT','group11','res', 'pipeline', 'scaled_pre_corona_df.csv')
+    #df = pd.read_csv(PATH)
+    #start_time = time.time()
+    #get_params(df)
+    #length = time.time()-start_time
+    #print(length)
     #print(param_lst)
     
     """model_lst = load_models()
