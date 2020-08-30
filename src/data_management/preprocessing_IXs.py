@@ -1,13 +1,13 @@
 """everythin related to preprocessing - might be extended to a whole package if required"""
 
 import os
-from datetime import datetime
+# from datetime import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-sns.set(rc={'figure.figsize' : (11, 4)})
+sns.set(rc={'figure.figsize': (11, 4)})
 RESOURC_PATH = '../../res/ix'
 
 
@@ -22,11 +22,11 @@ def main():
     """
     data = read_dataset(RESOURC_PATH, 'all')
 
-
     fig, axs = plt.subplots(2, 1, constrained_layout=True)
     axs[0].plot(data["Date"], data["bitrate"], 'o', )
     plt.show()
     print('done')
+
 
 if __name__ == "__main__":
     main()
