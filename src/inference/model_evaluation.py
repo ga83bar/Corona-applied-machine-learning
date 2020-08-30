@@ -1,238 +1,218 @@
-'''
-File ...
-'''
-import os
-import pandas as pd
+"""
+This module serves as the hub for the model evaluation and training
+"""
 import datetime as dt
-import numpy as np
-import keras
-from keras import Sequential
-from keras.layers import Dense
-import keras.backend as K
-import tensorflow as tf
-from scipy.optimize import minimize
-from keras.datasets import boston_housing
+from load_in import LoadIn
+from online_fcn import OnlineFCN
+from online_time_pred import OnTimePred
+from online_models import OnlineDense
+#from extreme_learning import ExtremeLearningMachine
+#from prophet import MyProphet
+import calendar
 
-# TODO include in dependencies
 
 class Learning():
-    '''
-    No time - learning
-    '''
-    # ML algos
-    NN = 1
-    ELM = 2
-    LSTM = 3
-    LINEAR = 4
-    GP = 5
+    """
+    Initiate model fitting. Alternatively, display performance.
+    """
+    def __init__(self, algorithmen, datasets):
+        self.__algorithmen = algorithmen
+        self.loader = LoadIn()
+        self.models = {}
+        self.datasets = datasets
+        self.dataframes = None
+        self.dataframe = None
+        self.frames_prior = None
+        self.frames_post = None
+        self.models = {}
 
-    # Constructor
-    def __init__(self, algorithem):
-        self.__algorithem = algorithem
-
-    # HEAVY STUFF!!
-    def load_data(self):
-        '''
-        Loads the preprocessed data from csv, or if this does not exist
-        we start the preprocess pipline.
-        '''
-        # TODO Martin ???
-        file_path = 'some path'
-
-        if os.path.exists(file_path):
-            frame = pd.read_csv(file_path)
-
-        else:
-            try:
-                # TODO Martin start pipline
-                frame = pd.DataFrame()
-            except Exception as ex_er:
-                print('Error occured during preprocess pipline')
-                print(ex_er)
-
-        return frame
-
-    def split_before_after(self, frame, split_date=None):
-        '''
-        Splits data in two frames the one before and the one after corona.
-        We define after corona as after 1.1.2020.
-        '''
-        if split_date is None:
-            date = dt.datetime(2020, 1, 1)
-        else:
-            date = split_date
-
-        before = frame.loc[frame.Date < date]
-        after = frame.loc[frame.Date >= date]
-        return (before, after)
+    def pipeline(self):
+        """
+        This function represents the pipeline for the ml portion
+        """
+        self.dataframes = self.loader.load_all(typ="post")
+        self.dataframe = self.loader.get_all()
+        self.dataframe = month_and_day(self.dataframe)
+        self.fit(self.dataframe)
 
     def fit(self, frame):
-        '''
-        Predict the futre data
-        from    1.1.2020
-        to      1.6.2020
-        @param frame : Pandas frame containing the data till 31.12.2019
-        @return Pandas frame containing the predicted data
-        '''
-        if self.__algorithem == Learning.NN:
-            frame = self.nn_fit(frame)
+        """
+        Fit models based on past data. This function takes one frame,
+        corresponding to one to-be-predicted dataset.
+        Iterate this function for each desired dataset.
+        """
+        output_frames = {}
+        if "nn" in self.__algorithmen:
+            output_frames["nn"] = self.nn_fit(frame)
+        if "elm" in self.__algorithmen:
+            output_frames["elm"] = self.elm_fit(frame)
+        if "linear" in self.__algorithmen:
+            output_frames["linear"] = self.linear_fit(frame)
+        if "online_fcn" in self.__algorithmen:
+            output_frames["online_fcn"] = self.online_fcn_fit(frame, LABELS)
+        if "gaussian" in self.__algorithmen:
+            output_frames["gaussian"] = self.gaussian_fit(frame)
+        if "online_time_pred" in self.__algorithmen:
+            output_frames["online_time_pred"] = self.online_pred_fit(frame, LABELS)
+        if "online_dense" in self.__algorithmen:
+            output_frames["online_dense"] = self.online_dense_fit(frame, LABELS)
+        return output_frames
 
-        elif self.__algorithem == Learning.ELM:
-            frame = self.elm_fit(frame)
+    def predict(self):
+        """
+        Predict values depending on
+        """
+        pass
 
-        elif self.__algorithem == Learning.LSTM:
-            frame = self.lstm_fit(frame)
+    def online_dense_fit(self, frame, labels):
+        """
+        Calc future trends based on past trends
+        """
+        for lbl in labels:
+            dfr = frame[["month",
+                           "day",
+                           "Date"]].copy()
+            lbls = self.dataframe[[lbl]].copy().pop(lbl)
+            model = OnlineDense(dfr, lbls, lbl)
+            model.init_model()
+            model.fit_model()
+            model.plot_model()
+            self.models[f"online_dense_{lbl}"] = model
 
-        elif self.__algorithem == Learning.LINEAR:
-            frame = self.linear_fit(frame)
-
+    def online_pred_fit(self, frame, labels):
+        """
+        Calc future trends based on past trends
+        """
+        for lbl in labels:
+            frame = frame[["month",
+                           "day"]].copy()
+            labels = self.dataframe[[lbl]].copy().pop(lbl)
+            print(labels)
+            predictor = OnTimePred(frame, labels, lbl)
+            predictor.init_model()
+            predictor.fit_model()
+            predictor.plot_model()
+            self.models[f"online_pred_{lbl}"] = predictor
         return frame
 
-    # TODO section
     def nn_fit(self, frame):
-        '''
-        Method that implements ...
-        '''
+        """
+        Method fits the nn model
+        """
         return frame
+
+    def prophet_fit(self, frame):
+        '''
+        Method fits prophet
+        '''
+        attribute = ''
+        proph = MyProphet()
+        #for attribute in frame:
+        proph.fit(frame['Date', attribute])
+
 
     def elm_fit(self, frame):
-        '''
-        Method that implements ...
-        '''
-        return frame
-
-    def lstm_fit(self, frame):
-        '''
-        Method that implements ...
-        '''
+        """
+        Method fits the elm model
+        """
+        #elm = ExtremeLearningMachine(self.dataframe)
         return frame
 
     def linear_fit(self, frame):
-        '''
-        Method that implements ...
-        '''
-        # print or even return score or we write it in a file??!
+        """
+        Method fits the linear model
+        """
         return frame
 
-    def calculate_difference(self, frame_predict, frame_real):
-        '''
-        Method calculating the difference between the real and the predicted data
-        '''
-        return frame_real - frame_predict
+    def online_fcn_fit(self, frame, labels):
+        """
+        Method fits the elm model
+        """
+        corona_frame = self.dataframe[["corona_deaths",
+                                       "corona_confirmed",
+                                       "corona_recovered",
+                                       "corona_active",
+                                       "new_confirmed",
+                                       "corona_new_recovered"]].copy()
+        for lbl in labels:
+            labels = self.dataframe[[lbl]].copy().pop(lbl)
+            print(labels)
+            online_fcn = OnlineFCN(corona_frame, labels, lbl)
+            online_fcn.set_metric()
+            online_fcn.setup_model()
+            online_fcn.do_fitting()
+            online_fcn.plot()
+            self.models[f"online_fcn_{lbl}"] = online_fcn
+        return frame
 
-    def pipeline(self):
-        frame = self.load_data()
-        frame_before_corona, frame_after_corona = self.split_before_after(frame)
-        # make the prediction accoring to precorona data
+    def gaussian_fit(self, frame):
+        """
+        Method fits the linear model
+        """
+        return frame
 
-        self.fit(frame_before_corona)
-
-        # TODO
-        # frame_predict = self.predict(frame_before_corona)
-
-        # calculate the difference between real and prediction
-       #  diff_frame = self.calculate_difference(frame_predict, frame_after_corona)
-
-        # plot the diff or something like that
-
-    def predict(self):
-        '''
-        Predict values depending on
-        '''
-        pass
-        # load model
-
-
-    # GETTER AND SETTER
-    def set_algorithem(self, algorithem):
-        '''
-        Setter method ML-Algorithem
-        '''
-        if is_algo_valid(algorithem):
-            self.__algorithem = algorithem
-        else:
-            raise Exception('Select a valid Algorithem!!')
-
-    def get_algorithem(self):
-        '''
+    def get_algorithms(self):
+        """
         Getter method ML-Algorithem
-        '''
-        return self.__algorithem
-
-    # PROPERTIES
-    algorithem = property(get_algorithem, set_algorithem)
-
-# Extrem eLearning machine
-class ExtremeLearningMachine():
-    def __init__(self, layer, neurons, activation, input_shape):
-        self.model = Sequential()
-        self.model.add(Dense(neurons, activation=activation, input_shape=input_shape, bias_initializer='glorot_uniform'))
-        for i in range(1, layer):
-            self.model.add(Dense(neurons, activation=activation, bias_initializer='glorot_uniform'))
-        self.model.compile(loss='mean_squared_error',optimizer='adam')
-        self.model._make_predict_function()
-
-    # Definition of the regularization function (w are the weights of the readout - regularization on the hidden weights does not make sense as they are not trained)
-    def reg_fun(self, w):
-        # 2-Norm regularization just as an example
-        return np.linalg.norm(w, ord=2)
-
-    # Target function for the ELM training (Least-Squares Formula)
-    def lstsq_target(self, w):
-        return np.sum(np.square(np.matmul(self.transformed_features, w).flatten()-self.trainY.flatten()))
-
-    # Combination of Least-Squares loss and regularization function
-    def optim_fun(self, w):
-        return self.lstsq_target(w) + self.reg_fun(w)
-
-    def fit(self, trainX, trainY, regularization_fun):
-        # The transformed features and the trainY are stored as variables of the class such that the optimization functions have access to them without passing them as parameters to the function
-        self.transformed_features = self.model.predict(trainX)
-        self.trainY = trainY.copy()
-        # Use the scipy function for (numerical) optimization (using BFGS)
-        res = minimize(self.optim_fun, np.zeros((self.transformed_features.shape[1],)))
-        # Store the weights as usually
-        self.weights = res.x
-
-    def predict(self, X):
-        if not hasattr(self,"weights"):
-            raise Exception("Need to call fit() before predict()")
-        features = self.model.predict(X)
-        return np.matmul(features, self.weights)
+        """
+        return self.__algorithmen
 
 
-
-# Helping functions
-def is_algo_valid(algo):
-    '''
-    No time - check if algo is valid
-    '''
-    if algo == Learning.NN:
-        return True
-    elif algo == Learning.LSTM:
-        return True
-    elif algo == Learning.ELM:
-        return True
-    elif algo == Learning.GP:
-        return True
-    else:
-        return False
+def split_before_after(frames, split_date=dt.datetime(2020, 1, 1)):
+    """
+    Splits data in two frames the one before and the one after corona.
+    We define after corona as after 1.1.2020.
+    """
+    frames_prior = {}
+    frames_post = {}
+    for frame in frames:
+        frame_prior = frames[frame].loc[frame.Date < split_date]
+        frame_post = frames[frame].loc[frame.Date >= split_date]
+        frames_prior[frame] = (frame_prior)
+        frames_post[frame] = (frame_post)
+    return (frames_prior, frames_post)
 
 
-def get_prediction_err_and_std(y,y_hat):
-    squared_pred_errs = np.square(y.flatten()-y_hat.flatten())
-    return np.mean(squared_pred_errs), np.std(squared_pred_errs)
+def month_and_day(dataframe):
+    """
+    Get month and day from dates in dataframe.
+    Append to dataframe.
+    """
+    dates = dataframe[["Date"]].copy().pop("Date")
+    month = []
+    day = []
+    for date in dates:
+        date = dt.datetime.strptime(date, '%Y-%m-%d')
+        month.append(date.month)
+        day.append(date.weekday())
+    dataframe["month"] = month
+    dataframe["day"] = day
+    return dataframe
 
 
-# Example for elm
+if __name__ == '__main__':
+    LABELS_1 = ["ix_bitrate"]
+    LABELS = ["ix_bitrate",
+              "youtube_viewchange",
+              "youtube_views",
+              "steam_users",
+              "steam_ingame",
+              "twitch_views",
+              "twitch_channels",
+              "twitch_viewtime",
+              "twitch_streams",
+              "ps_users",
+              "stock_med",
+              "stock_bank",
+              "stock_energy",
+              "stock_oil",
+              "stock_steel",
+              "stock_automotive",
+              "stock_telecom",
+              "stock_tech"]
+    ALGORITHMS = ["online_dense"]
+    DATASETS = ["covid"]
+    EVALUATOR = Learning(ALGORITHMS, DATASETS)
+    EVALUATOR.pipeline()
 
-if __name__=='__main__':
-    (trainX, trainY), (testX, testY) = boston_housing.load_data()
-    elm = ExtremeLearningMachine(2,200,"relu",(trainX.shape[1],))
 
-    elm.fit(trainX,trainY,elm.reg_fun)
-
-    pred = elm.predict(testX)
-
-    err, std = get_prediction_err_and_std(pred,testY)
-    print("Error: " + str(err) + " +- " + str(std))

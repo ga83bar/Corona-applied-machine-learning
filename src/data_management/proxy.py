@@ -88,7 +88,7 @@ class DataMerger(object):
                     try:
                         df_tmp = pd.read_csv(path_processed_data)
                         df_tmp['Date'] = pd.to_datetime(df_tmp['Date'], utc=True)
-                        self.frame = self.frame.merge(df_tmp, how='left')
+                        self.frame = self.frame.merge(df_tmp, how='left', on='Date')
                     except Exception as ex:
                         print('Something is wrong with the data stored in {}'.format(path_processed_data))
                         print(ex)

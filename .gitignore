@@ -35,3 +35,7 @@ paper/*
 *.DS_STORE
 src/data_management/.ipynb_checkpoints/
 src/webinterface/frontend/node_modules
+
+prophet.png
+prophet_components.png
+prophet_gridseachcv_values.csv
