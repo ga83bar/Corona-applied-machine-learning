@@ -235,6 +235,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
         self.interval_width = best_parameters['interval_width']
         self.seasonality_mode = best_parameters['seasonality_mode']
 
+        print(best_parameters)
         return best_parameters
 
     def load_best_param(self, label):
