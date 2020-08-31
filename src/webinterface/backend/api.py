@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS
-from pathlib import Path
 import pandas as pd
 from src.inference.model_comparison import get_predict_data as predictor
 
