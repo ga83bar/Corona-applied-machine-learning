@@ -27,8 +27,6 @@ from src.inference import model_evaluation as eva
 from src.inference.load_in import LoadIn
 
 
-
-
 def get_model_list():
     """returns a list containing available regressors for model comparison"""
     model_list = [('DecisionTree', DecisionTreeRegressor()), ('NeuralNetwork', MLPRegressor(shuffle=False)),

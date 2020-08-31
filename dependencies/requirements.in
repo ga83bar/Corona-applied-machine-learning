@@ -19,3 +19,6 @@ pytrends
 alpha_vantage
 collections
 joblib
+fbprophet
+keras
+tensorflow

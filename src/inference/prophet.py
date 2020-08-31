@@ -22,7 +22,7 @@ from fbprophet import Prophet
 from fbprophet.diagnostics import cross_validation
 from fbprophet.diagnostics import performance_metrics
 
-from load_in import LoadIn
+from src.inference.load_in import LoadIn
 # py.init_notebook_mode()
 
 
