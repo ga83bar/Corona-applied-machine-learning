@@ -4,62 +4,75 @@
 #
 #    pip-compile requirements.in
 #
+aiohttp==3.6.2            # via alpha-vantage
+alpha-vantage==2.2.0      # via -r requirements.in
 astroid==2.4.1            # via pylint
-attrs==19.3.0             # via pytest
+async-timeout==3.0.1      # via aiohttp
+attrs==19.3.0             # via aiohttp, pytest
 beautifulsoup4==4.9.1     # via -r requirements.in, bs4
 bs4==0.0.1                # via -r requirements.in
 certifi==2020.4.5.2       # via requests
-chardet==3.0.4            # via requests
+chardet==3.0.4            # via aiohttp, requests
 cloudscraper==1.2.40      # via -r requirements.in
+cmdstanpy==0.4            # via fbprophet
+convertdate==2.2.1        # via fbprophet, holidays
 coverage==5.1             # via pytest-cov
 cycler==0.10.0            # via matplotlib
+cython==0.29.21           # via fbprophet, pystan
 docker==4.2.1             # via -r requirements.in
+ephem==3.7.7.1            # via lunarcalendar
+fbprophet==0.6            # via -r requirements.in
 flake8==3.8.2             # via pytest-flake8
-idna==2.9                 # via requests
-importlib-metadata==1.6.0  # via flake8, pluggy, pytest
+holidays==0.10.3          # via fbprophet
+idna==2.9                 # via requests, yarl
 isort==4.3.21             # via pylint
-joblib==0.15.1            # via scikit-learn
+joblib==0.15.1            # via -r requirements.in, scikit-learn
 js2xml==0.3.1             # via -r requirements.in
 kiwisolver==1.2.0         # via matplotlib
+korean-lunar-calendar==0.2.1  # via holidays
 lazy-object-proxy==1.4.3  # via astroid
+lunarcalendar==0.0.9      # via fbprophet
 lxml==4.5.1               # via js2xml, pytrends
-matplotlib==3.2.1         # via -r requirements.in, seaborn
+matplotlib==3.2.1         # via -r requirements.in, fbprophet, seaborn
 mccabe==0.6.1             # via flake8, pylint
 more-itertools==8.3.0     # via pytest
-numpy==1.18.4             # via -r requirements.in, matplotlib, pandas, scikit-learn, scipy, seaborn
+multidict==4.7.6          # via aiohttp, yarl
+numpy==1.18.4             # via -r requirements.in, cmdstanpy, fbprophet, matplotlib, pandas, pystan, scikit-learn, scipy, seaborn
 packaging==20.4           # via pytest
-pandas==1.0.3             # via -r requirements.in, pytrends, seaborn
+pandas==1.0.3             # via -r requirements.in, cmdstanpy, fbprophet, pytrends, seaborn
 pluggy==0.13.1            # via pytest
 ply==3.11                 # via slimit
 py==1.8.1                 # via pytest
 pycodestyle==2.6.0        # via flake8
 pyflakes==2.2.0           # via flake8
 pylint==2.5.2             # via pytest-pylint
+pymeeus==0.3.7            # via convertdate
 pyparsing==2.4.7          # via cloudscraper, matplotlib, packaging
+pystan==2.19.1.1          # via fbprophet
 pytest-cov==2.9.0         # via -r requirements.in
 pytest-flake8==1.0.6      # via -r requirements.in
 pytest-mock==3.1.0        # via -r requirements.in
 pytest-pylint==0.17.0     # via -r requirements.in
 pytest==5.4.2             # via -r requirements.in, pytest-cov, pytest-flake8, pytest-mock, pytest-pylint
-python-dateutil==2.8.1    # via matplotlib, pandas
+python-dateutil==2.8.1    # via fbprophet, holidays, lunarcalendar, matplotlib, pandas
 pytrends==4.7.3           # via -r requirements.in
-pytz==2020.1              # via pandas
+pytz==2020.1              # via convertdate, lunarcalendar, pandas
 requests-toolbelt==0.9.1  # via cloudscraper
-requests==2.24.0          # via -r requirements.in, cloudscraper, docker, pytrends, requests-toolbelt
+requests==2.24.0          # via -r requirements.in, alpha-vantage, cloudscraper, docker, pytrends, requests-toolbelt
 scikit-learn==0.23.1      # via -r requirements.in
 scipy==1.4.1              # via scikit-learn, seaborn
 seaborn==0.10.1           # via -r requirements.in
-six==1.15.0               # via astroid, cycler, docker, js2xml, packaging, python-dateutil, websocket-client
+setuptools-git==1.2       # via fbprophet
+six==1.15.0               # via astroid, cycler, docker, holidays, js2xml, packaging, python-dateutil, websocket-client
 slimit==0.8.1             # via js2xml
 soupsieve==2.0.1          # via beautifulsoup4
 threadpoolctl==2.0.0      # via scikit-learn
 toml==0.10.1              # via pylint, pytest-pylint
-typed-ast==1.4.1          # via astroid
 urllib3==1.25.9           # via requests
 wcwidth==0.1.9            # via pytest
 websocket-client==0.57.0  # via docker
 wrapt==1.12.1             # via astroid
-zipp==3.1.0               # via importlib-metadata
+yarl==1.5.1               # via aiohttp
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

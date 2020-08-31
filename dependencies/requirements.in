@@ -17,5 +17,5 @@ beautifulsoup4
 setuptools
 pytrends
 alpha_vantage
-collections
 joblib
+fbprophet
