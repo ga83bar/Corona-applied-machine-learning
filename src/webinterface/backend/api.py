@@ -3,11 +3,6 @@ from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS
 from pathlib import Path
 import pandas as pd
-import datetime
-import os
-import sys
-# sys.path.insert(0, '../../inference/')
-# from model_comparison import get_predict_data as predictor
 from src.inference.model_comparison import get_predict_data as predictor
 
 app = Flask(__name__)
@@ -21,44 +16,40 @@ parser.add_argument("selected_graph")
 # Unpickle our model so we can use it!
 
 
-def load_data(data_folder_name, csv_file_name, type):
-    """
-    !@brief Opens a csv file starting from the folder 'res' and the input subfolders and extracts the data for the specified type
-    @param folder structure starting from the directory 'res' to the csv-file,
-    the name of the csv-file, 
-    type of the data to be extracted (name of column in csv)
-    @return extracted data in form of a list
-    """
+# def load_data(data_folder_name, csv_file_name, type):
+#     """
+#     !@brief Opens a csv file starting from the folder 'res' and the input subfolders and extracts the data for the specified type
+#     @param folder structure starting from the directory 'res' to the csv-file,
+#     the name of the csv-file, 
+#     type of the data to be extracted (name of column in csv)
+#     @return extracted data in form of a list
+#     """
 
-    # TODO: Remove test
-    # filePath = __file__
-    # print("This script file path is ", filePath)
-    # absFilePath = os.path.abspath(__file__)
-    # print("This script absolute path is ", absFilePath)
+#     # TODO: Remove test
+#     # filePath = __file__
+#     # print("This script file path is ", filePath)
+#     # absFilePath = os.path.abspath(__file__)
+#     # print("This script absolute path is ", absFilePath)
 
-    # Path to data directory
-    data_path = Path("../../../res/")
-    # Path to open CSV-file from
-    file_path = Path("{}/{}".format(data_folder_name, csv_file_name))
-    # Join the two partial paths to a complete path to access the file
-    complete_path = Path(data_path, file_path)
+#     # Path to data directory
+#     data_path = Path("../../../res/")
+#     # Path to open CSV-file from
+#     file_path = Path("{}/{}".format(data_folder_name, csv_file_name))
+#     # Join the two partial paths to a complete path to access the file
+#     complete_path = Path(data_path, file_path)
 
-    # TODO: remove Test
-    # complete_path = Path(filePath, data_path, file_path)
-    # print(complete_path)
+#     # Open file as a pandas frame
+#     csv_file = pd.read_csv(complete_path)
+#     # Convert the "Date" entries into datetime objects
+#     csv_file["Date"] = pd.to_datetime(csv_file["Date"])
+#     # Sort the pandas frame in the ascending date order
+#     csv_file.sort_values(by=["Date"], inplace=True)
+#     # Reconvert the datetime objects into Strings
+#     csv_file["Date"] = csv_file["Date"].astype(str)
+#     # Extract data of specified type to a list
+#     data = csv_file[type].to_list()
 
-    # Open file as a pandas frame
-    csv_file = pd.read_csv(complete_path)
-    # Convert the "Date" entries into datetime objects
-    csv_file["Date"] = pd.to_datetime(csv_file["Date"])
-    # Sort the pandas frame in the ascending date order
-    csv_file.sort_values(by=["Date"], inplace=True)
-    # Reconvert the datetime objects into Strings
-    csv_file["Date"] = csv_file["Date"].astype(str)
-    # Extract data of specified type to a list
-    data = csv_file[type].to_list()
-
-    return data
+#     return data
 
 
 class switcher():
@@ -121,31 +112,8 @@ class Predict(Resource):
                     "labels": result_dates,
                     "selected_graph": args["selected_graph"]
                     }
-    
-       
-            # return {"class": 42,
-            #             "datecheck": 2,
-            #             "chart_data_1": covid_deaths,
-            #             "chart_data_2": covid_confirmed,
-            #             "labels": covid_dates,
-            #             "selected_graph": args["selected_graph"]
-            #             }
-            # if (args["dataset_id_req"] == '1'):
-            #     return {"class": 42,
-            #             "datecheck": 2,
-            #             "chart_data_1": covid_deaths,
-            #             "chart_data_2": covid_confirmed,
-            #             "labels": covid_dates,
-            #             "selected_graph": args["selected_graph"]
-            #             }
-            # elif (args["dataset_id_req"] == '2'):
-            #     return {"class": 42,
-            #             "datecheck": 2,
-            #             "chart_data_1": [0, 0, 0, 5, 6, 1, 2, 3, 5, 6],
-            #             "chart_data_2": [5, 8, 2, 4, 6, 5, 8, 2, 4, 6],
-            #             "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            #             "selected_graph": args["selected_graph"]
-            #             }
+
+            # TODO: Catch case when no data returned?
             # else:
             #     return {"class": 500,
             #             "datecheck": 2,
