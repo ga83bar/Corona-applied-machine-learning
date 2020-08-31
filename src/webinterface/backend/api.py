@@ -92,18 +92,37 @@ class Predict(Resource):
             # Print for checking parameter during development
             print("Received 'selected_graph' paramter: {}".format(args["selected_graph"]))
 
-            # TODO: Switch
             # Switch statement depending on the requested dataset.
             # The allocation from the id to the lable (name) can be found in /.../allocation_datasets_id.CSV
             switch = switcher()
-            # print(switch.dataset_switch(0))
-            # TODO: !! Change 0 to dataset_id_req !!
-            dataset_lable = switch.dataset_switch(0)
+            dataset_lable = switch.dataset_switch(args["dataset_id_req"])
 
             # Use function to predict values and get raw and predicted data returned
-            dataset_data = predictor.get_predict_data(dataset_lable)
-            print(dataset_data)
-            
+            predicted_df, prophet_attr_df_post,  prophet_attr_df_pre,  prophet_dataframes_pre, prophet_dataframes_post = predictor(dataset_lable)
+
+            # TODO: Expand comments
+            # Unperdicted data
+            datasets_unpredicted = [prophet_attr_df_pre, prophet_attr_df_post]
+            result_unpredicted = pd.concat(datasets_unpredicted)
+            result_unpredicted.reset_index(inplace=True)
+            # Predicted data
+            datasets_predicted = [prophet_attr_df_pre[dataset_lable], predicted_df]
+            result_predicted = pd.concat(datasets_predicted)
+
+            # Generate lists out of dataframes to send to frontend
+            result_unpredicted_data = result_unpredicted[dataset_lable].to_list()
+            result_predicted = result_predicted.to_list()
+            result_dates = result_unpredicted["Date"].to_list()
+
+            return {"class": 42,
+                    "datecheck": 2,
+                    "chart_data_1": result_unpredicted_data,
+                    "chart_data_2": result_predicted,
+                    "labels": result_dates,
+                    "selected_graph": args["selected_graph"]
+                    }
+    
+       
             # return {"class": 42,
             #             "datecheck": 2,
             #             "chart_data_1": covid_deaths,
