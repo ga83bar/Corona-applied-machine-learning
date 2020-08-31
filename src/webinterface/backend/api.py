@@ -5,6 +5,10 @@ from pathlib import Path
 import pandas as pd
 import datetime
 import os
+import sys
+# sys.path.insert(0, '../../inference/')
+# from model_comparison import get_predict_data as predictor
+from src.inference.model_comparison import get_predict_data as predictor
 
 app = Flask(__name__)
 CORS(app)
@@ -65,10 +69,13 @@ class switcher():
         return getattr(self, 'dataset_' + str(dataset_id), lambda: default)()
 
     def dataset_0(self):
-        return "test0"
+        return "ix_bitrate"
 
     def dataset_1(self):
         return "test1"
+
+    def dataset_2(self):
+        return "test2"
 
 
 class Predict(Resource):
@@ -90,35 +97,43 @@ class Predict(Resource):
             # The allocation from the id to the lable (name) can be found in /.../allocation_datasets_id.CSV
             switch = switcher()
             # print(switch.dataset_switch(0))
+            # TODO: !! Change 0 to dataset_id_req !!
+            dataset_lable = switch.dataset_switch(0)
 
-            covid_dates = load_data("covid/processed", "covid.csv", "Date")
-            covid_deaths = load_data("covid/processed", "covid.csv", "deaths")
-            covid_confirmed = load_data("covid/processed", "covid.csv", "confirmed")
-
-            # TODO: In switch integrieren oder eigene fkt.?
-            if (args["dataset_id_req"] == '1'):
-                return {"class": 42,
-                        "datecheck": 2,
-                        "chart_data_1": covid_deaths,
-                        "chart_data_2": covid_confirmed,
-                        "labels": covid_dates,
-                        "selected_graph": args["selected_graph"]
-                        }
-            elif (args["dataset_id_req"] == '2'):
-                return {"class": 42,
-                        "datecheck": 2,
-                        "chart_data_1": [0, 0, 0, 5, 6, 1, 2, 3, 5, 6],
-                        "chart_data_2": [5, 8, 2, 4, 6, 5, 8, 2, 4, 6],
-                        "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                        "selected_graph": args["selected_graph"]
-                        }
-            else:
-                return {"class": 500,
-                        "datecheck": 2,
-                        "chart_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        "chart_data_2": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                        }
+            # Use function to predict values and get raw and predicted data returned
+            dataset_data = predictor.get_predict_data(dataset_lable)
+            print(dataset_data)
+            
+            # return {"class": 42,
+            #             "datecheck": 2,
+            #             "chart_data_1": covid_deaths,
+            #             "chart_data_2": covid_confirmed,
+            #             "labels": covid_dates,
+            #             "selected_graph": args["selected_graph"]
+            #             }
+            # if (args["dataset_id_req"] == '1'):
+            #     return {"class": 42,
+            #             "datecheck": 2,
+            #             "chart_data_1": covid_deaths,
+            #             "chart_data_2": covid_confirmed,
+            #             "labels": covid_dates,
+            #             "selected_graph": args["selected_graph"]
+            #             }
+            # elif (args["dataset_id_req"] == '2'):
+            #     return {"class": 42,
+            #             "datecheck": 2,
+            #             "chart_data_1": [0, 0, 0, 5, 6, 1, 2, 3, 5, 6],
+            #             "chart_data_2": [5, 8, 2, 4, 6, 5, 8, 2, 4, 6],
+            #             "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            #             "selected_graph": args["selected_graph"]
+            #             }
+            # else:
+            #     return {"class": 500,
+            #             "datecheck": 2,
+            #             "chart_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            #             "chart_data_2": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            #             "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            #             }
 
 
 api.add_resource(Predict, "/predict")
