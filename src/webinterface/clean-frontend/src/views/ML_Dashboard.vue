@@ -8,7 +8,7 @@
         <div class="section profile-content">
 
             <div class="container" id="stock">
-                <h3 class="title">Stock Predictions</h3>
+                <h3 class="title">Web Traffic Analysis</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
                         <line-chart v-if="loaded" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" />
@@ -43,7 +43,7 @@
             </div>
 
             <div class="container" id="web">
-                <h3 class="title">Web Traffic Analysis</h3>
+                <h3 class="title">Stock Predictions</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
                         <line-chart v-if="loaded" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" />
@@ -233,13 +233,13 @@ export default {
                         {
                             this.chartlabels_graph1 = response.data.labels,
                             this.chartdata_graph1 = [{
-                                    label: 'deaths',
+                                    label: 'real data',
                                     data: response.data.chart_data_1,
                                     borderColor: 'rgb(238, 76, 96)',
                                     fill: false
                                 },
                                 {
-                                    label: 'cases',
+                                    label: 'prediction',
                                     data: response.data.chart_data_2,
                                     borderColor: 'rgb(76, 175, 80)',
                                     fill: false
@@ -251,13 +251,13 @@ export default {
                         {
                             this.chartlabels_graph2 = response.data.labels,
                             this.chartdata_graph2 = [{
-                                    label: 'test1',
+                                    label: 'real data',
                                     data: response.data.chart_data_1,
                                     borderColor: 'rgb(238, 76, 96)',
                                     fill: false
                                 },
                                 {
-                                    label: 'cases',
+                                    label: 'prediction',
                                     data: response.data.chart_data_2,
                                     borderColor: 'rgb(76, 175, 80)',
                                     fill: false
