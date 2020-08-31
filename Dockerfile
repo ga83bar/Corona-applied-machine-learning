@@ -8,6 +8,6 @@ RUN apt-get update && apt-get install python3-pip -y
 
 RUN pip3 install --upgrade setuptools
 COPY dependencies/requirements.txt /usr/bin
-RUN pip3 install -R /usr/bin/requirements.txt
+RUN pip3 install -r /usr/bin/requirements.txt
 
 ENTRYPOINT python3 asdf.py
