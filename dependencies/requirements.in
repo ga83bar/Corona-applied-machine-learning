@@ -18,3 +18,4 @@ setuptools
 pytrends
 alpha_vantage
 joblib
+fbprophet
