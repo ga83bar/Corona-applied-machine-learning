@@ -13,6 +13,7 @@ from sklearn.model_selection import cross_validate
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
+from sklearn.preprocessing import StandardScaler
 
 import numpy as np
 import pandas as pd
@@ -24,6 +25,9 @@ import prophet as pro
 import online_models as onl
 import model_evaluation as eva
 from load_in import LoadIn
+import joblib
+
+
 
 
 
@@ -121,7 +125,35 @@ def get_predict_data(label):
     prophet.fit(prophet_attr_df_pre['Date'], prophet_attr_df_pre[label])
     predicted_df = prophet.predict(do_plot=False, label=label)
 
-    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre,  prophet_dataframes_pre, prophet_dataframes_post
+    scaler_path = f"GIT/group11/res/pipeline/scaler_{label}.save"
+    ix_mean_var_path = "GIT/group11/res/pipeline/ix_mean_var.csv"
+
+    scaler = joblib.load(scaler_path)
+    print(scaler)
+    print(predicted_df)
+    predicted_df = scaler.inverse_transform(predicted_df)
+    prophet_attr_df_post[label] = scaler.inverse_transform(prophet_attr_df_post[label])
+    prophet_attr_df_pre[label] = scaler.inverse_transform(prophet_attr_df_pre[label])
+
+    print(predicted_df)
+    
+    if label == "ix_bitrate":
+        print("a")
+        mean = 4.9480691905299454e-09
+        var = 60390.34854295953
+        predicted_df = predicted_df * var
+        predicted_df =predicted_df * mean
+
+        prophet_attr_df_post[label] = prophet_attr_df_post[label] *var
+        prophet_attr_df_post[label] = prophet_attr_df_pre[label] *var
+
+        prophet_attr_df_post[label] = prophet_attr_df_post[label] *mean
+        prophet_attr_df_pre[label] = prophet_attr_df_pre[label] *mean
+
+
+    print(predicted_df)
+    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre
+
 def compare_models(model_dict, dataframe, plotting = True):
     """compares the performance of given models using the provided dataframe by performing cross validation"""
     prophet_dataframes = LoadIn().load_all(typ='pre')
@@ -239,7 +271,7 @@ if __name__ == '__main__':
     """model_lst = load_models()
     score_lst, best_model_dict = compare_models(model_lst, df)
     print(best_model_dict)"""
-    #get_predict_data("stock_bank")
+    get_predict_data("ix_bitrate")
   
     
   
