@@ -62,10 +62,55 @@ class switcher():
         return "ix_bitrate"
 
     def dataset_1(self):
-        return "test1"
+        return "youtube_viewchange"
 
     def dataset_2(self):
-        return "test2"
+        return "youtube_views"
+
+    def dataset_3(self):
+        return "steam_users"
+
+    def dataset_4(self):
+        return "steam_ingame"
+
+    def dataset_5(self):
+        return "twitch_views"
+
+    def dataset_6(self):
+        return "twitch_channels"
+
+    def dataset_7(self):
+        return "twitch_viewtime"
+
+    def dataset_8(self):
+        return "twitch_streams"
+
+    def dataset_9(self):
+        return "ps_users"
+
+    def dataset_10(self):
+        return "stock_med"
+
+    def dataset_11(self):
+        return "stock_bank"
+
+    def dataset_12(self):
+        return "stock_energy"
+
+    def dataset_13(self):
+        return "stock_oil"
+
+    def dataset_14(self):
+        return "stock_steel"
+
+    def dataset_15(self):
+        return "stock_automotive"
+
+    def dataset_16(self):
+        return "stock_telecom"
+
+    def dataset_17(self):
+        return "stock_tech"
 
 
 class Predict(Resource):
