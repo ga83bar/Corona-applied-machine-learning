@@ -124,7 +124,7 @@ def get_predict_data(label):
 
     # TODO: PLEASE FIX THE SCALING, CHECK FOR CORRECT DATA TYPE!
 
-    pipeline_path = Path.cwd().joinpath('res', 'pipeline')
+    pipeline_path = Path(__file__).parent.parent.parent.joinpath('res', 'pipeline')
     scaler_path = pipeline_path.joinpath('scaler_'+label+'.save')
     ix_mean_var_path = pipeline_path.joinpath('ix_mean_var.csv')
 
