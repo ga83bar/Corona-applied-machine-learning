@@ -17,7 +17,8 @@ parser.add_argument("selected_graph")
 
 # def load_data(data_folder_name, csv_file_name, type):
 #     """
-#     !@brief Opens a csv file starting from the folder 'res' and the input subfolders and extracts the data for the specified type
+#     !@brief Opens a csv file starting from the folder 'res' and the input subfolders and
+#     extracts the data for the specified type
 #     @param folder structure starting from the directory 'res' to the csv-file,
 #     the name of the csv-file,
 #     type of the data to be extracted (name of column in csv)
@@ -54,8 +55,10 @@ parser.add_argument("selected_graph")
 class switcher():
     """
     !@brief Implemets a switch-case function in python to select the right dataset name for a specified ID
-    @param Generate an insstance of the switcher class and use the id of an dataset as an in in the dataset_switch function
-    @return For the specified integer ID in the dataset_swicht function, the name of the according dataset gets returned as a string
+    @param Generate an instance of the switcher class and use the id of an dataset
+    as an id in the dataset_switch function
+    @return For the specified integer ID in the dataset_swicht function,
+    the name of the according dataset gets returned as a string
     """
     def dataset_switch(self, dataset_id):
         default = "incorrect dataset"
