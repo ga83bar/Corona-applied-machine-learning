@@ -136,37 +136,24 @@ class Predict(Resource):
             predicted_df, prophet_attr_df_post,  prophet_attr_df_pre = predictor(dataset_lable)
 
             # TODO: Expand comments
-            # Unperdicted data
+            # Unpredicted data
             datasets_unpredicted = [prophet_attr_df_pre, prophet_attr_df_post]
             result_unpredicted = pd.concat(datasets_unpredicted)
             result_unpredicted.reset_index(inplace=True)
             # Predicted data
-            print("prophet_attr_df_pre[dataset_lable]:")
-            print(type(prophet_attr_df_pre[dataset_lable]))
-            print(prophet_attr_df_pre[dataset_lable])
 
-            predicted_df = pd.Series(predicted_df)
-            print("predicted_df: ")
-            print(type(predicted_df))
-            print(predicted_df)
-            datasets_predicted = [prophet_attr_df_pre[dataset_lable], predicted_df]
-            result_predicted = pd.concat(datasets_predicted)
-            print("result_predicted:")
-            print(result_predicted)
+            # Change data type into pandas series
+            result_predicted = pd.Series(predicted_df)
 
             # Generate lists out of dataframes to send to frontend
-            result_unpredicted_data = result_unpredicted[dataset_lable].to_list()
-            result_predicted = result_predicted.to_list()
+            complete_unpredicted_data = result_unpredicted[dataset_lable].to_list()
+            complete_predicted_data = result_predicted.to_list()
             result_dates = result_unpredicted["Date"].to_list()
-
-            result_predicted = predicted_df.to_list()
-            print("result_predicted:")
-            print(result_predicted)
 
             return {"class": 42,
                     "datecheck": 2,
-                    "chart_data_1": result_unpredicted_data,
-                    "chart_data_2": result_predicted,
+                    "chart_data_1": complete_unpredicted_data,
+                    "chart_data_2": complete_predicted_data,
                     "labels": result_dates,
                     "selected_graph": args["selected_graph"]
                     }
