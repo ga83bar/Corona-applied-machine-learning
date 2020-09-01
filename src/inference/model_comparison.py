@@ -157,7 +157,7 @@ def get_predict_data(label):
         prophet_attr_df_pre[label] = prophet_attr_df_pre[label] *factor
 
 
-    print(predicted_df)
+    # print(predicted_df)
     return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre
 
 def compare_models(model_dict, dataframe, plotting = True):

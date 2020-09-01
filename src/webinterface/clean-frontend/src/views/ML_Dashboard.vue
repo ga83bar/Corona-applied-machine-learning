@@ -276,13 +276,19 @@ export default {
                             this.chartdata_graph1 = [{
                                     label: 'real data',
                                     data: response.data.chart_data_1,
-                                    borderColor: 'rgb(238, 76, 96)',
+                                    borderColor: 'rgb(0, 0, 0)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'model data',
+                                    data: response.data.chart_data_2,
+                                    borderColor: 'rgb(112, 112, 112)',
                                     fill: false
                                 },
                                 {
                                     label: 'prediction',
-                                    data: response.data.chart_data_2,
-                                    borderColor: 'rgb(76, 175, 80)',
+                                    data: response.data.chart_data_3,
+                                    borderColor: 'rgb(255, 0, 0)',
                                     fill: false
                                 }
                             ]
@@ -294,13 +300,19 @@ export default {
                             this.chartdata_graph2 = [{
                                     label: 'real data',
                                     data: response.data.chart_data_1,
-                                    borderColor: 'rgb(238, 76, 96)',
+                                    borderColor: 'rgb(0, 0, 0)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'model data',
+                                    data: response.data.chart_data_2,
+                                    borderColor: 'rgb(112, 112, 112)',
                                     fill: false
                                 },
                                 {
                                     label: 'prediction',
-                                    data: response.data.chart_data_2,
-                                    borderColor: 'rgb(76, 175, 80)',
+                                    data: response.data.chart_data_3,
+                                    borderColor: 'rgb(255, 0, 0)',
                                     fill: false
                                 }
                             ]

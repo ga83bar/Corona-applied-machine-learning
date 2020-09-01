@@ -19,7 +19,7 @@ parser.add_argument("selected_graph")
 #     """
 #     !@brief Opens a csv file starting from the folder 'res' and the input subfolders and extracts the data for the specified type
 #     @param folder structure starting from the directory 'res' to the csv-file,
-#     the name of the csv-file, 
+#     the name of the csv-file,
 #     type of the data to be extracted (name of column in csv)
 #     @return extracted data in form of a list
 #     """
@@ -121,8 +121,8 @@ class switcher():
 class Predict(Resource):
     def post(self):
         """
-        !@brief Is getting called, when a http request has been received. 
-        The content gets extracted and either a ping-return is sent or a ML-Model is loaded 
+        !@brief Is getting called, when a http request has been received.
+        The content gets extracted and either a ping-return is sent or a ML-Model is loaded
         and predicts data for a requested dataset, which will be returned.
         """
 
@@ -148,9 +148,14 @@ class Predict(Resource):
 
             # Unpredicted data is processed
             # Received data is merged together with data up to and after the 1.1.2020.
+            # Drop last row to not use it twice
+            prophet_attr_df_pre = prophet_attr_df_pre.drop(prophet_attr_df_pre.index[-1])
             datasets_unpredicted = [prophet_attr_df_pre, prophet_attr_df_post]
             result_unpredicted = pd.concat(datasets_unpredicted)
             result_unpredicted.reset_index(inplace=True)
+
+            # Get the index of the 2020-01-01 (where the rpediction starts)
+            index_prediction_start = result_unpredicted.loc[result_unpredicted["Date"] == "2020-01-01"].index.item()
 
             # Predicted data processed
             # Change data type into pandas series
@@ -158,14 +163,22 @@ class Predict(Resource):
 
             # Generate lists out of dataframes to send to frontend
             complete_unpredicted_data = result_unpredicted[dataset_lable].to_list()
+            complete_model_data = result_predicted.to_list()
             complete_predicted_data = result_predicted.to_list()
             result_dates = result_unpredicted["Date"].to_list()
+
+            for i in range(index_prediction_start, len(complete_model_data)):
+                complete_model_data[i] = None
+
+            for i in range(0, index_prediction_start - 1):
+                complete_predicted_data[i] = None
 
             # The return statement will be sent to the frontend.
             return {"class": 42,
                     "datecheck": 2,
                     "chart_data_1": complete_unpredicted_data,
-                    "chart_data_2": complete_predicted_data,
+                    "chart_data_2": complete_model_data,
+                    "chart_data_3": complete_predicted_data,
                     "labels": result_dates,
                     "selected_graph": args["selected_graph"]
                     }
