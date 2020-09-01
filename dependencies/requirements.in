@@ -18,6 +18,10 @@ setuptools
 pytrends
 alpha_vantage
 joblib
-fbprophet
 keras
 tensorflow
+flask
+flask_restful
+flask_cors
+fbprophet
+creme
