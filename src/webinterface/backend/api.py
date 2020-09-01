@@ -133,7 +133,7 @@ class Predict(Resource):
             dataset_lable = switch.dataset_switch(args["dataset_id_req"])
 
             # Use function to predict values and get raw and predicted data returned
-            predicted_df, prophet_attr_df_post,  prophet_attr_df_pre,  prophet_dataframes_pre, prophet_dataframes_post = predictor(dataset_lable)
+            predicted_df, prophet_attr_df_post,  prophet_attr_df_pre = predictor(dataset_lable)
 
             # TODO: Expand comments
             # Unperdicted data
@@ -141,13 +141,27 @@ class Predict(Resource):
             result_unpredicted = pd.concat(datasets_unpredicted)
             result_unpredicted.reset_index(inplace=True)
             # Predicted data
+            print("prophet_attr_df_pre[dataset_lable]:")
+            print(type(prophet_attr_df_pre[dataset_lable]))
+            print(prophet_attr_df_pre[dataset_lable])
+
+            predicted_df = pd.Series(predicted_df)
+            print("predicted_df: ")
+            print(type(predicted_df))
+            print(predicted_df)
             datasets_predicted = [prophet_attr_df_pre[dataset_lable], predicted_df]
             result_predicted = pd.concat(datasets_predicted)
+            print("result_predicted:")
+            print(result_predicted)
 
             # Generate lists out of dataframes to send to frontend
             result_unpredicted_data = result_unpredicted[dataset_lable].to_list()
             result_predicted = result_predicted.to_list()
             result_dates = result_unpredicted["Date"].to_list()
+
+            result_predicted = predicted_df.to_list()
+            print("result_predicted:")
+            print(result_predicted)
 
             return {"class": 42,
                     "datecheck": 2,

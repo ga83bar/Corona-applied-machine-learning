@@ -121,8 +121,6 @@ def get_predict_data(label):
     prophet = pro.MyProphet()    
     prophet.fit(prophet_attr_df_pre['Date'], prophet_attr_df_pre[label])
     predicted_df = prophet.predict(do_plot=False, label=label)
- 
-    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre, prophet_dataframes_pre, prophet_dataframes_post
 
     # TODO: PLEASE FIX THE SCALING, CHECK FOR CORRECT DATA TYPE!
 
@@ -160,7 +158,7 @@ def get_predict_data(label):
 
 
     print(predicted_df)
-    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre, prophet_dataframes_pre, prophet_dataframes_post
+    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre
 
 def compare_models(model_dict, dataframe, plotting = True):
     """compares the performance of given models using the provided dataframe by performing cross validation"""
