@@ -150,7 +150,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
         data['floor'] = self.floor
         return self.model.fit(data)
 
-    def predict(self, label , do_plot=False):
+    def predict(self, label, do_plot=False):
         """
         Predict the next values
         @param do_plot: Do a plot of the forcast and the seasonalities
@@ -332,6 +332,7 @@ def skleran_gridsearch():
     attr = 'youtube_viewchange'
     dataframes = LoadIn().load_all(typ='pre')
     dataframes = dataframes.dropna()
+
     print(dataframes[['Date', attr]].head())
 
     pro = MyProphet()

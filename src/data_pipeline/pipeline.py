@@ -51,7 +51,7 @@ def pipeline(verbose=False, plot=False):
         ax = fig.add_axes([0, 0, 1, 1])
         pd.plotting.scatter_matrix(scaled_corona_df, ax=ax)
         plt.show()
-
+    save_individual_scalers(scaled_pre_corona_df)
     # Save data frame.
     save_df(scaled_pre_corona_df, scaled_corona_df, scaler)
 
@@ -124,6 +124,9 @@ def ix_processing(df, plot):
     @param plot Toggles the analysing plots. Plots can be time consuming to display. Switch off for better performance.
     """
     df['bitrate'] = df['bitrate'].rolling(7, win_type='triang', min_periods=1).sum()
+    # Drop outliers at the very beginning.
+    for i in range(181, 184):
+        df.at[i, 'bitrate'] = np.nan
     if plot:
         ix_processing_plot(df)
 
@@ -157,6 +160,13 @@ def playstation_processing(df, plot):
         df['PS'] = df['PS'].rolling(7, win_type='triang', min_periods=1).sum()
     else:
         print('Warning: Keys not present in playstation_processing in src/data_pipeline/pipeline.py')
+        return
+    # Drop outliers at the data frame edges.
+    for i in range(0, 5):
+        df.at[i, 'PS'] = np.nan
+    for i in range(1215, 1225):
+        df.at[i, 'PS'] = np.nan
+
     if plot:
         playstation_processing_plot(df)
 
@@ -182,6 +192,13 @@ def steam_processing(df, plot):
     """
     df['Users'] = df['Users'].rolling(14, win_type='triang', min_periods=1).sum()
     df['In-Game'] = df['In-Game'].rolling(14, win_type='triang', min_periods=1).sum()
+    # Drop outliers at the edges of the data frame.
+    for i in range(315, 327):
+        df.at[i, 'Users'] = np.nan
+        df.at[i, 'In-Game'] = np.nan
+    for i in range(1261, 1272):
+        df.at[i, 'Users'] = np.nan
+        df.at[i, 'In-Game'] = np.nan
     if plot:
         steam_processing_plot(df)
 
@@ -205,6 +222,9 @@ def twitch_processing(df, plot):
     @param df The data frame to process.
     @param plot Toggles the analysing plots. Plots can be time consuming to display. Switch off for better performance.
     """
+    # Drop outliers at the end of the data frame.
+    df.at[1247, 'time_watched'] = np.nan
+    df.at[1247, 'active_streamers'] = np.nan
     df['av_conc_viewers'].interpolate(method='polynomial', order=3, inplace=True)
     df['av_conc_channels'].interpolate(method='polynomial', order=3, inplace=True)
     df['time_watched'].interpolate(method='polynomial', order=3, inplace=True)
@@ -467,7 +487,7 @@ def scale_split_df(df, end_index):
         if not key == 'Date':
             scaled_pre_corona_df[key] = pd.to_numeric(scaled_pre_corona_df[key], downcast="float")
             scaled_corona_df[key] = pd.to_numeric(scaled_corona_df[key], downcast="float")
-    return scaled_pre_corona_df, scaled_corona_df, scaler
+    return scaled_pre_corona_df, scaled_corona_df, ct
 
 
 def save_df(scaled_pre_corona_df, scaled_corona_df, scaler):
@@ -490,5 +510,18 @@ def save_df(scaled_pre_corona_df, scaled_corona_df, scaler):
     print('Data sets saved.')
 
 
+def save_individual_scalers(scaled_pre_corona_df):
+    root = Path().absolute().parent.parent
+    for column in scaled_pre_corona_df:
+        if not column == 'Date':
+            print(root.joinpath('res', 'pipeline', f'scaler_{column}.save'))
+            st_scaler = StandardScaler()
+            st_scaler.fit(scaled_pre_corona_df[column].values.reshape(-1, 1))
+
+            # Save the scaler.
+            joblib.dump(st_scaler, root.joinpath('res', 'pipeline', f'scaler_{column}.save'))
+    print('Scalers saved.')
+
+
 if __name__ == '__main__':
-    pipeline(verbose=False, plot=True)
+    pipeline(verbose=False, plot=False)
