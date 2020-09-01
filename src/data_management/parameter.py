@@ -32,10 +32,9 @@ class Parameter:
         return Parameter.__instance
 
     def __singelton_init(self):
-        # INIT YOUR VARS HERE !!!!!
-        '''
+        """
         This is the singelton init function if you want to init attributes do it here
-        '''
+        """
         self.working_directory = os.path.dirname(os.path.abspath(__file__))
         self.logfile_path = os.path.join(self.working_directory, 'documentation', 'logfiles', 'aml_log.log')
         self.__start_date_data = dt.datetime(2017, 1, 1)
@@ -51,7 +50,7 @@ class Parameter:
         self.__banking = ['DB', 'CMC', 'NCB', 'GS', 'BRYN', 'WFC',
                           'JPHLF', 'CICHY', 'ACGBY', 'CRARY', 'BACHF', 'C']
 
-        self.__stock_index = ['DAX', 'TDXP', 'INDU', 'NDAQ', 'NKY'] # double SNP
+        self.__stock_index = ['DAX', 'TDXP', 'INDU', 'NDAQ', 'NKY']  # double SNP
 
         self.__energy_comp = ['SIEGY', 'EOAN.DE', 'RWE.DE',
                               'DUK', 'ENGI.PA', 'NGG', 'NEE', 'EDF']
@@ -102,12 +101,12 @@ class Parameter:
 
     @property
     def start_date_data(self):
-        '''Getter method for start date of data collection'''
+        """Getter method for start date of data collection"""
         return self.__start_date_data
 
     @start_date_data.setter
     def start_date_data(self, start_date):
-        '''Setter method for start date of data collection'''
+        """Setter method for start date of data collection"""
         if isinstance(start_date, dt):
             self.__start_date_data = start_date
         else:
@@ -115,12 +114,12 @@ class Parameter:
 
     @property
     def end_date_data(self):
-        '''Getter method for start date of data collection'''
+        """Getter method for start date of data collection"""
         return self.__end_date_data
 
     @end_date_data.setter
     def end_date_data(self, start_date):
-        '''Setter method for start date of data collection'''
+        """Setter method for start date of data collection"""
         if isinstance(start_date, dt):
             self.__end_date_data = start_date
         else:
@@ -128,21 +127,21 @@ class Parameter:
 
     @property
     def stock_companies(self):
-        '''Getter method for stock companies list'''
+        """Getter method for stock companies list"""
         return self.__finance_companies
 
     @stock_companies.setter
     def stock_companies(self, companies_list):
-        '''Setter method for stock companies list'''
+        """Setter method for stock companies list"""
         print('I hope you know what you are doing, if not you`d better not do that')
         self.__finance_companies = companies_list
 
     @property
     def folders(self):
-        '''Getter method'''
+        """Getter method"""
         return self.__folders
 
     @folders.setter
     def folders(self, _):
-        '''Setter method'''
+        """Setter method"""
         print('Access denied !!!!!')
