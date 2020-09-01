@@ -122,9 +122,9 @@ def get_predict_data(label):
     prophet.fit(prophet_attr_df_pre['Date'], prophet_attr_df_pre[label])
     predicted_df = prophet.predict(do_plot=False, label=label)
 
-    print(Path().absolute().parent.parent)
-    scaler_path = f"GIT/group11/res/pipeline/scaler_{label}.save"
-    ix_mean_var_path = "GIT/group11/res/pipeline/ix_mean_var.csv"
+    pipeline_path = Path().absolute().parent.parent.joinpath('res', 'pipeline')
+    scaler_path = pipeline_path.jointpath('scaler_'+label+'.save')
+    ix_mean_var_path = pipeline_path.joinpath('ix_mean_var.csv')
 
     scaler = joblib.load(scaler_path)
     print(scaler)
