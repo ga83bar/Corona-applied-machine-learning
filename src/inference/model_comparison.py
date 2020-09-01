@@ -121,9 +121,13 @@ def get_predict_data(label):
     prophet = pro.MyProphet()    
     prophet.fit(prophet_attr_df_pre['Date'], prophet_attr_df_pre[label])
     predicted_df = prophet.predict(do_plot=False, label=label)
+ 
+    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre, prophet_dataframes_pre, prophet_dataframes_post
 
-    pipeline_path = Path().absolute().parent.parent.joinpath('res', 'pipeline')
-    scaler_path = pipeline_path.jointpath('scaler_'+label+'.save')
+    # TODO: PLEASE FIX THE SCALING, CHECK FOR CORRECT DATA TYPE!
+
+    pipeline_path = Path.cwd().joinpath('res', 'pipeline')
+    scaler_path = pipeline_path.joinpath('scaler_'+label+'.save')
     ix_mean_var_path = pipeline_path.joinpath('ix_mean_var.csv')
 
     scaler = joblib.load(scaler_path)
@@ -156,7 +160,7 @@ def get_predict_data(label):
 
 
     print(predicted_df)
-    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre
+    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre, prophet_dataframes_pre, prophet_dataframes_post
 
 def compare_models(model_dict, dataframe, plotting = True):
     """compares the performance of given models using the provided dataframe by performing cross validation"""
