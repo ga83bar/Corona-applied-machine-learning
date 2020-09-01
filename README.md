@@ -7,13 +7,18 @@ README for group 11 of the 2020 Applied Machine Intelligence lecture at TUM.
 This project aims to quantify the impact that the Covid-19 pandemic has on the global economy, utilising machine learning. One of the main limitations in machine learning is the modelling of unsampled regions in the feature space. Furthermore, models learned during the training process are only valid in the context of unchanged underlying data generation processes. Since the Covid-19 pandemic fundamentally changed the way our society operates, and we don't have any samples of a global pandemic of smaller and/or greater size, it is impossible to directly model the impact of the virus on different branches of the economy. Instead, we aim to model the economy without the pandemic ensuing from January 2020 on. The impact of the pandemic can then be measured as the difference of the predicted courses without Covid-19, and the actual, observed outcomes. The models and its predictions are made accessible with an interactive web interface.
 
 
+## Requirements
+
+In order to run the project, you need to have Docker and docker-compose installed on your machine. Running the project with Docker takes care of installing the correct project dependencies and environments. 
+
 ## How to use
 
-After cloning the directory, you can start the project by building and running the [Dockerfile](/Dockerfile) provided in the root directory. 
-> **_NOTE:_** Docker will throw an error during building. This is expected as the installation of one particular dependency is not trivial. The build process should recover and succeed on its own without any intervention.
+After cloning the directory, you can start the project by running the [docker-compose](/docker-compose.yml) file. This starts both the front- and the backend of our web server. Both docker containers for the front- and backend will build and start up automatically. You can now access the webpage using any browser of your liking at http://localhost:8080/#/.
 
-The container then starts a web server that hosts our webinterface.
-
+> **_NOTE:_** Start the docker-compose from the root directory of the project using:
+> ```sh
+> docker-compose up
+> ```
 
 ## File structure
 
