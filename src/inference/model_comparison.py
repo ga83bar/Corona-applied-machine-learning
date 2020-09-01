@@ -129,16 +129,16 @@ def get_predict_data(label):
     ix_mean_var_path = pipeline_path.joinpath('ix_mean_var.csv')
 
     scaler = joblib.load(scaler_path)
-    print(scaler)
-    print(predicted_df)
+    # print(scaler)
+    # print(predicted_df)
     predicted_df = scaler.inverse_transform(predicted_df)
     prophet_attr_df_post[label] = scaler.inverse_transform(prophet_attr_df_post[label])
     prophet_attr_df_pre[label] = scaler.inverse_transform(prophet_attr_df_pre[label])
 
-    print(predicted_df)
+    # print(predicted_df)
     
     if label == "ix_bitrate":
-        print("a")
+        # print("a")
         
         mean = 976.122858594206
         var = 16558.93738199964
