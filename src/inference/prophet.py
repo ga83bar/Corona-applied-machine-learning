@@ -167,7 +167,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
             # fig = plot_plotly(model, forecast)  # This returns a plotly Figure
             # py.iplot(fig)
 
-        return forecast['yhat'][-self.period:]
+        return forecast['yhat']
 
     def plot(self, forecast, label):
         """
