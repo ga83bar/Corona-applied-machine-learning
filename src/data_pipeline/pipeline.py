@@ -238,7 +238,7 @@ def twitch_processing_plot(data_frame):
 
     @param data_frame The data frame to use for plotting.
     """
-    fig, axes = plt.subplots(2, 2, sharex=False, sharey=False, figsize=(10, 10))
+    _, axes = plt.subplots(2, 2, sharex=False, sharey=False, figsize=(10, 10))
 
     twitch_df0 = data_frame.melt('Date', value_vars=['av_conc_viewers'], var_name='cols', value_name='vals')
     twitch_df1 = data_frame.melt('Date', value_vars=['av_conc_channels'], var_name='cols', value_name='vals')
@@ -292,7 +292,7 @@ def socialblade_processing_plot(data_frame):
 
     @param data_frame The data frame to use for plotting.
     """
-    fig, axes = plt.subplots(1, 2, sharex=False, sharey=False, figsize=(15, 15))
+    _, axes = plt.subplots(1, 2, sharex=False, sharey=False, figsize=(15, 15))
     socialblade_df0 = data_frame.melt('Date', value_vars=['Weekly_average_change_views'],
                                       var_name='cols', value_name='vals')
     socialblade_df1 = data_frame.melt('Date', value_vars=['Weekly_average_views'], var_name='cols', value_name='vals')
@@ -337,7 +337,7 @@ def stock_processing(data_frame, plot):
         stock_processing_plot(data_frame)
 
 
-def stock_processing_plot(data_frame):
+def stock_processing_plot(data_frame):  # pylint: disable-msg=too-many-locals
     """!@brief Plots the results from the stock processing.
 
     @param data_frame The data frame to use for plotting.
