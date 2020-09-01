@@ -19,17 +19,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import time
-
-import extreme_learning as EM
-import prophet as pro
-import online_models as onl
-import model_evaluation as eva
-from load_in import LoadIn
 import joblib
 
-
-
-
+# import . extreme_learning as EM
+from src.inference import extreme_learning as EM
+from src.inference import prophet as pro
+from src.inference import online_models as onl
+from src.inference import model_evaluation as eva
+from src.inference.load_in import LoadIn
 
 
 def get_model_list():
@@ -124,9 +121,14 @@ def get_predict_data(label):
     prophet = pro.MyProphet()    
     prophet.fit(prophet_attr_df_pre['Date'], prophet_attr_df_pre[label])
     predicted_df = prophet.predict(do_plot=False, label=label)
+ 
+    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre, prophet_dataframes_pre, prophet_dataframes_post
 
-    scaler_path = f"GIT/group11/res/pipeline/scaler_{label}.save"
-    ix_mean_var_path = "GIT/group11/res/pipeline/ix_mean_var.csv"
+    # TODO: PLEASE FIX THE SCALING, CHECK FOR CORRECT DATA TYPE!
+
+    pipeline_path = Path.cwd().joinpath('res', 'pipeline')
+    scaler_path = pipeline_path.joinpath('scaler_'+label+'.save')
+    ix_mean_var_path = pipeline_path.joinpath('ix_mean_var.csv')
 
     scaler = joblib.load(scaler_path)
     print(scaler)
@@ -139,20 +141,26 @@ def get_predict_data(label):
     
     if label == "ix_bitrate":
         print("a")
-        mean = 4.9480691905299454e-09
-        var = 60390.34854295953
+        
+        mean = 976.122858594206
+        var = 16558.93738199964
+        factor = 1000000000.0
+
         predicted_df = predicted_df * var
         predicted_df =predicted_df * mean
-
+        predicted_df = predicted_df * factor
+        
         prophet_attr_df_post[label] = prophet_attr_df_post[label] *var
         prophet_attr_df_post[label] = prophet_attr_df_pre[label] *var
+        prophet_attr_df_post[label] = prophet_attr_df_post[label] * factor
 
         prophet_attr_df_post[label] = prophet_attr_df_post[label] *mean
         prophet_attr_df_pre[label] = prophet_attr_df_pre[label] *mean
+        prophet_attr_df_pre[label] = prophet_attr_df_pre[label] *factor
 
 
     print(predicted_df)
-    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre
+    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre, prophet_dataframes_pre, prophet_dataframes_post
 
 def compare_models(model_dict, dataframe, plotting = True):
     """compares the performance of given models using the provided dataframe by performing cross validation"""
@@ -260,18 +268,4 @@ def compare_models(model_dict, dataframe, plotting = True):
 
 
 if __name__ == '__main__':
-    #PATH = Path().absolute().joinpath('GIT','group11','res', 'pipeline', 'scaled_pre_corona_df.csv')
-    #df = pd.read_csv(PATH)
-    #start_time = time.time()
-    #get_params(df)
-    #length = time.time()-start_time
-    #print(length)
-    #print(param_lst)
-    
-    """model_lst = load_models()
-    score_lst, best_model_dict = compare_models(model_lst, df)
-    print(best_model_dict)"""
-    get_predict_data("ix_bitrate")
-  
-    
-  
+    get_predict_data("twitch_streams")
