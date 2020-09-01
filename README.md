@@ -17,7 +17,7 @@ After cloning the directory, you can start the project by running the [docker-co
 
 > **_NOTE:_** Start the docker-compose from the root directory of the project using:
 > ```sh
-> docker-compose up
+> <user>:~$ docker-compose up
 > ```
 
 ## File structure
