@@ -44,12 +44,12 @@ def pipeline(verbose=False, plot=False):
     scaled_pre_corona_df, scaled_corona_df, scaler = scale_split_df(data_frame, end_index=end_index)
     if plot:
         fig = plt.figure(figsize=(24, 24))
-        ax = fig.add_axes([0, 0, 1, 1])
-        pd.plotting.scatter_matrix(scaled_pre_corona_df, ax=ax)
+        axis = fig.add_axes([0, 0, 1, 1])
+        pd.plotting.scatter_matrix(scaled_pre_corona_df, ax=axis)
         plt.show()
         fig = plt.figure(figsize=(24, 24))
-        ax = fig.add_axes([0, 0, 1, 1])
-        pd.plotting.scatter_matrix(scaled_corona_df, ax=ax)
+        axis = fig.add_axes([0, 0, 1, 1])
+        pd.plotting.scatter_matrix(scaled_corona_df, ax=axis)
         plt.show()
     save_individual_scalers(scaled_pre_corona_df)
     # Save data frame.
@@ -111,9 +111,9 @@ def corona_processing_plot(data_frame):
     covid_df = data_frame.melt('Date', value_vars=['deaths', 'recovered', 'active', 'confirmed', 'new_confirmed',
                                                    'new_recovered', 'new_deaths'],
                                var_name='cols', value_name='vals')
-    g = sns.lineplot(x="Date", y="vals", hue='cols', data=covid_df)
-    g.set_xticks(np.arange(0, len(data_frame['Date']), 300))
-    g.plot()
+    graph = sns.lineplot(x="Date", y="vals", hue='cols', data=covid_df)
+    graph.set_xticks(np.arange(0, len(data_frame['Date']), 300))
+    graph.plot()
     plt.show()
 
 
@@ -125,8 +125,8 @@ def ix_processing(data_frame, plot):
     """
     data_frame['bitrate'] = data_frame['bitrate'].rolling(7, win_type='triang', min_periods=1).sum()
     # Drop outliers at the very beginning.
-    for i in range(181, 184):
-        data_frame.at[i, 'bitrate'] = np.nan
+    for idx in range(181, 184):
+        data_frame.at[idx, 'bitrate'] = np.nan
     if plot:
         ix_processing_plot(data_frame)
 
@@ -138,9 +138,9 @@ def ix_processing_plot(data_frame):
     """
     ix_df = data_frame.melt('Date', value_vars=['bitrate'], var_name='cols', value_name='vals')
 
-    g = sns.lineplot(x="Date", y="vals", hue='cols', data=ix_df)
-    g.set_xticks(np.arange(0, len(data_frame['bitrate']), 300))
-    g.plot()
+    graph = sns.lineplot(x="Date", y="vals", hue='cols', data=ix_df)
+    graph.set_xticks(np.arange(0, len(data_frame['bitrate']), 300))
+    graph.plot()
     plt.show()
 
 
@@ -162,10 +162,10 @@ def playstation_processing(data_frame, plot):
         print('Warning: Keys not present in playstation_processing in src/data_pipeline/pipeline.py')
         return
     # Drop outliers at the data frame edges.
-    for i in range(0, 5):
-        data_frame.at[i, 'PS'] = np.nan
-    for i in range(1215, 1225):
-        data_frame.at[i, 'PS'] = np.nan
+    for idx in range(0, 5):
+        data_frame.at[idx, 'PS'] = np.nan
+    for idx in range(1215, 1225):
+        data_frame.at[idx, 'PS'] = np.nan
 
     if plot:
         playstation_processing_plot(data_frame)
@@ -178,9 +178,9 @@ def playstation_processing_plot(data_frame):
     """
     ps_df = data_frame.melt('Date', value_vars=['PS'], var_name='cols', value_name='vals')
 
-    g = sns.lineplot(x="Date", y="vals", hue='cols', data=ps_df)
-    g.set_xticks([0, 600, 1200])
-    g.plot()
+    graph = sns.lineplot(x="Date", y="vals", hue='cols', data=ps_df)
+    graph.set_xticks([0, 600, 1200])
+    graph.plot()
     plt.show()
 
 
@@ -193,12 +193,12 @@ def steam_processing(data_frame, plot):
     data_frame['Users'] = data_frame['Users'].rolling(14, win_type='triang', min_periods=1).sum()
     data_frame['In-Game'] = data_frame['In-Game'].rolling(14, win_type='triang', min_periods=1).sum()
     # Drop outliers at the edges of the data frame.
-    for i in range(315, 327):
-        data_frame.at[i, 'Users'] = np.nan
-        data_frame.at[i, 'In-Game'] = np.nan
-    for i in range(1261, 1272):
-        data_frame.at[i, 'Users'] = np.nan
-        data_frame.at[i, 'In-Game'] = np.nan
+    for idx in range(315, 327):
+        data_frame.at[idx, 'Users'] = np.nan
+        data_frame.at[idx, 'In-Game'] = np.nan
+    for idx in range(1261, 1272):
+        data_frame.at[idx, 'Users'] = np.nan
+        data_frame.at[idx, 'In-Game'] = np.nan
     if plot:
         steam_processing_plot(data_frame)
 
@@ -210,9 +210,9 @@ def steam_processing_plot(data_frame):
     """
     steam_df = data_frame.melt('Date', value_vars=['Users', 'In-Game'], var_name='cols', value_name='vals')
 
-    g = sns.lineplot(x="Date", y="vals", hue='cols', data=steam_df)
-    g.set_xticks(np.arange(0, len(data_frame['Users']), 300))
-    g.plot()
+    graph = sns.lineplot(x="Date", y="vals", hue='cols', data=steam_df)
+    graph.set_xticks(np.arange(0, len(data_frame['Users']), 300))
+    graph.plot()
     plt.show()
 
 
@@ -245,18 +245,18 @@ def twitch_processing_plot(data_frame):
     twitch_df2 = data_frame.melt('Date', value_vars=['time_watched'], var_name='cols', value_name='vals')
     twitch_df3 = data_frame.melt('Date', value_vars=['active_streamers'], var_name='cols', value_name='vals')
 
-    g0 = sns.lineplot(x="Date", y="vals", hue='cols', data=twitch_df0, ax=axes[0, 0])
-    g1 = sns.lineplot(x="Date", y="vals", hue='cols', data=twitch_df1, ax=axes[0, 1])
-    g2 = sns.lineplot(x="Date", y="vals", hue='cols', data=twitch_df2, ax=axes[1, 0])
-    g3 = sns.lineplot(x="Date", y="vals", hue='cols', data=twitch_df3, ax=axes[1, 1])
-    g0.set_xticks(np.arange(0, len(data_frame['av_conc_viewers']), 400))
-    g1.set_xticks(np.arange(0, len(data_frame['av_conc_channels']), 400))
-    g2.set_xticks(np.arange(0, len(data_frame['time_watched']), 400))
-    g3.set_xticks(np.arange(0, len(data_frame['active_streamers']), 400))
-    g0.plot()
-    g1.plot()
-    g2.plot()
-    g3.plot()
+    graph0 = sns.lineplot(x="Date", y="vals", hue='cols', data=twitch_df0, ax=axes[0, 0])
+    graph1 = sns.lineplot(x="Date", y="vals", hue='cols', data=twitch_df1, ax=axes[0, 1])
+    graph2 = sns.lineplot(x="Date", y="vals", hue='cols', data=twitch_df2, ax=axes[1, 0])
+    graph3 = sns.lineplot(x="Date", y="vals", hue='cols', data=twitch_df3, ax=axes[1, 1])
+    graph0.set_xticks(np.arange(0, len(data_frame['av_conc_viewers']), 400))
+    graph1.set_xticks(np.arange(0, len(data_frame['av_conc_channels']), 400))
+    graph2.set_xticks(np.arange(0, len(data_frame['time_watched']), 400))
+    graph3.set_xticks(np.arange(0, len(data_frame['active_streamers']), 400))
+    graph0.plot()
+    graph1.plot()
+    graph2.plot()
+    graph3.plot()
     plt.show()
 
 
@@ -296,16 +296,16 @@ def socialblade_processing_plot(data_frame):
     socialblade_df0 = data_frame.melt('Date', value_vars=['Weekly_average_change_views'],
                                       var_name='cols', value_name='vals')
     socialblade_df1 = data_frame.melt('Date', value_vars=['Weekly_average_views'], var_name='cols', value_name='vals')
-    g0 = sns.lineplot(x="Date", y="vals", hue='cols', data=socialblade_df0, ax=axes[0])
-    g1 = sns.lineplot(x="Date", y="vals", hue='cols', data=socialblade_df1, ax=axes[1])
+    graph0 = sns.lineplot(x="Date", y="vals", hue='cols', data=socialblade_df0, ax=axes[0])
+    graph1 = sns.lineplot(x="Date", y="vals", hue='cols', data=socialblade_df1, ax=axes[1])
 
-    g0.set_xticks(np.arange(0, len(data_frame['Weekly_average_change_views']), 300))
-    g0.set_title('Weekly_average_change_views')
-    g1.set_xticks(np.arange(0, len(data_frame['Weekly_average_views']), 300))
-    g1.set_title('Weekly_average_views')
+    graph0.set_xticks(np.arange(0, len(data_frame['Weekly_average_change_views']), 300))
+    graph0.set_title('Weekly_average_change_views')
+    graph1.set_xticks(np.arange(0, len(data_frame['Weekly_average_views']), 300))
+    graph1.set_title('Weekly_average_views')
 
-    g0.plot()
-    g1.plot()
+    graph0.plot()
+    graph1.plot()
     plt.show()
 
 
@@ -352,40 +352,40 @@ def stock_processing_plot(data_frame):
     tech_df = data_frame.melt('Date', value_vars=['stock_tech'], var_name='cols', value_name='vals')
 
     fig, axes = plt.subplots(4, 2, sharex=False, sharey=False, figsize=(15, 15))
-    g0 = sns.lineplot(x="Date", y="vals", hue='cols', data=med_df, ax=axes[0, 0])
-    g1 = sns.lineplot(x="Date", y="vals", hue='cols', data=bank_df, ax=axes[0, 1])
-    g2 = sns.lineplot(x="Date", y="vals", hue='cols', data=energy_df, ax=axes[1, 0])
-    g3 = sns.lineplot(x="Date", y="vals", hue='cols', data=oil_df, ax=axes[1, 1])
-    g4 = sns.lineplot(x="Date", y="vals", hue='cols', data=steel_df, ax=axes[2, 0])
-    g5 = sns.lineplot(x="Date", y="vals", hue='cols', data=automotive_df, ax=axes[2, 1])
-    g6 = sns.lineplot(x="Date", y="vals", hue='cols', data=telecom_df, ax=axes[3, 0])
-    g7 = sns.lineplot(x="Date", y="vals", hue='cols', data=tech_df, ax=axes[3, 1])
+    graph0 = sns.lineplot(x="Date", y="vals", hue='cols', data=med_df, ax=axes[0, 0])
+    graph1 = sns.lineplot(x="Date", y="vals", hue='cols', data=bank_df, ax=axes[0, 1])
+    graph2 = sns.lineplot(x="Date", y="vals", hue='cols', data=energy_df, ax=axes[1, 0])
+    graph3 = sns.lineplot(x="Date", y="vals", hue='cols', data=oil_df, ax=axes[1, 1])
+    graph4 = sns.lineplot(x="Date", y="vals", hue='cols', data=steel_df, ax=axes[2, 0])
+    graph5 = sns.lineplot(x="Date", y="vals", hue='cols', data=automotive_df, ax=axes[2, 1])
+    graph6 = sns.lineplot(x="Date", y="vals", hue='cols', data=telecom_df, ax=axes[3, 0])
+    graph7 = sns.lineplot(x="Date", y="vals", hue='cols', data=tech_df, ax=axes[3, 1])
 
-    g0.set_xticks(np.arange(0, 801, 200))
-    g0.set_title('Average medical stock performance')
-    g1.set_xticks(np.arange(0, 801, 200))
-    g1.set_title('Average finance stock performance')
-    g2.set_xticks(np.arange(0, 801, 200))
-    g2.set_title('Average energy stock performance')
-    g3.set_xticks(np.arange(0, 801, 200))
-    g3.set_title('Average oil stock performance')
-    g4.set_xticks(np.arange(0, 801, 200))
-    g4.set_title('Average steel stock performance')
-    g5.set_xticks(np.arange(0, 801, 200))
-    g5.set_title('Average automotive stock performance')
-    g6.set_xticks(np.arange(0, 801, 200))
-    g6.set_title('Average telecom stock performance')
-    g7.set_xticks(np.arange(0, 801, 200))
-    g7.set_title('Average tech stock performance')
+    graph0.set_xticks(np.arange(0, 801, 200))
+    graph0.set_title('Average medical stock performance')
+    graph1.set_xticks(np.arange(0, 801, 200))
+    graph1.set_title('Average finance stock performance')
+    graph2.set_xticks(np.arange(0, 801, 200))
+    graph2.set_title('Average energy stock performance')
+    graph3.set_xticks(np.arange(0, 801, 200))
+    graph3.set_title('Average oil stock performance')
+    graph4.set_xticks(np.arange(0, 801, 200))
+    graph4.set_title('Average steel stock performance')
+    graph5.set_xticks(np.arange(0, 801, 200))
+    graph5.set_title('Average automotive stock performance')
+    graph6.set_xticks(np.arange(0, 801, 200))
+    graph6.set_title('Average telecom stock performance')
+    graph7.set_xticks(np.arange(0, 801, 200))
+    graph7.set_title('Average tech stock performance')
 
-    g0.plot()
-    g1.plot()
-    g2.plot()
-    g3.plot()
-    g4.plot()
-    g5.plot()
-    g6.plot()
-    g7.plot()
+    graph0.plot()
+    graph1.plot()
+    graph2.plot()
+    graph3.plot()
+    graph4.plot()
+    graph5.plot()
+    graph6.plot()
+    graph7.plot()
 
     fig.tight_layout()
     plt.show()
@@ -412,16 +412,16 @@ def index_processing_plot(data_frame):
     ndaq_df = data_frame.melt('Date', value_vars=['NDAQ'], var_name='cols', value_name='vals')
 
     fig, axes = plt.subplots(1, 2, sharex=False, sharey=False, figsize=(15, 4))
-    g0 = sns.lineplot(x="Date", y="vals", hue='cols', data=dax_df, ax=axes[0])
-    g1 = sns.lineplot(x="Date", y="vals", hue='cols', data=ndaq_df, ax=axes[1])
+    graph0 = sns.lineplot(x="Date", y="vals", hue='cols', data=dax_df, ax=axes[0])
+    graph1 = sns.lineplot(x="Date", y="vals", hue='cols', data=ndaq_df, ax=axes[1])
 
-    g0.set_xticks(np.arange(0, 801, 200))
-    g0.set_title('DAX performance')
-    g1.set_xticks(np.arange(0, 801, 200))
-    g1.set_title('NDAQ performance')
+    graph0.set_xticks(np.arange(0, 801, 200))
+    graph0.set_title('DAX performance')
+    graph1.set_xticks(np.arange(0, 801, 200))
+    graph1.set_title('NDAQ performance')
 
-    g0.plot()
-    g1.plot()
+    graph0.plot()
+    graph1.plot()
 
     fig.tight_layout()
     plt.show()
@@ -450,14 +450,14 @@ def clean_df(data_frame, verbose=False):
             data_frame.drop(key, axis=1, inplace=True)
 
     # Unify naming scheme.
-    data_frame.rename(columns={'deaths': 'corona_deaths', 'confirmed': 'corona_confirmed', 'recovered': 'corona_recovered',
-                       'active': 'corona_active', 'new_recovered': 'corona_new_recovered',
-                       'new_deaths': 'corona_new_deaths',
-                       'bitrate': 'ix_bitrate', 'Weekly_average_change_views': 'youtube_viewchange',
-                       'Weekly_average_views': 'youtube_views', 'Users': 'steam_users', 'In-Game': 'steam_ingame',
-                       'av_conc_viewers': 'twitch_views', 'av_conc_channels': 'twitch_channels',
-                       'time_watched': 'twitch_viewtime',
-                       'active_streamers': 'twitch_streams', 'PS': 'ps_users'}, inplace=True)
+    data_frame.rename(columns={'deaths': 'corona_deaths', 'confirmed': 'corona_confirmed',
+                               'recovered': 'corona_recovered', 'active': 'corona_active',
+                               'new_recovered': 'corona_new_recovered', 'new_deaths': 'corona_new_deaths',
+                               'bitrate': 'ix_bitrate', 'Weekly_average_change_views': 'youtube_viewchange',
+                               'Weekly_average_views': 'youtube_views', 'Users': 'steam_users',
+                               'In-Game': 'steam_ingame', 'av_conc_viewers': 'twitch_views',
+                               'av_conc_channels': 'twitch_channels', 'time_watched': 'twitch_viewtime',
+                               'active_streamers': 'twitch_streams', 'PS': 'ps_users'}, inplace=True)
     if verbose:
         data_frame.info()
 
@@ -480,10 +480,10 @@ def scale_split_df(data_frame, end_index):
     corona_df = data_frame.truncate(before=end_index)
 
     scaler = StandardScaler()
-    ct = ColumnTransformer([('scaler', scaler, np.arange(0, 24))], remainder='passthrough')
-    scaled_pre_corona_data = ct.fit_transform(pre_corona_df)
+    column_transformer = ColumnTransformer([('scaler', scaler, np.arange(0, 24))], remainder='passthrough')
+    scaled_pre_corona_data = column_transformer.fit_transform(pre_corona_df)
     # Only transform, do not fit with corona data.
-    scaled_corona_data = ct.transform(corona_df)
+    scaled_corona_data = column_transformer.transform(corona_df)
 
     scaled_pre_corona_df = pd.DataFrame(columns=pre_corona_df.columns, data=scaled_pre_corona_data.copy())
     scaled_corona_df = pd.DataFrame(columns=corona_df.columns, data=scaled_corona_data.copy())
@@ -492,7 +492,7 @@ def scale_split_df(data_frame, end_index):
         if not key == 'Date':
             scaled_pre_corona_df[key] = pd.to_numeric(scaled_pre_corona_df[key], downcast="float")
             scaled_corona_df[key] = pd.to_numeric(scaled_corona_df[key], downcast="float")
-    return scaled_pre_corona_df, scaled_corona_df, ct
+    return scaled_pre_corona_df, scaled_corona_df, column_transformer
 
 
 def save_df(scaled_pre_corona_df, scaled_corona_df, scaler):
