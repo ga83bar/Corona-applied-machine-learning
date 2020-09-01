@@ -247,7 +247,7 @@ def main():
         data_frame.name = str(key)
         df_list.append(data_frame)
     print('Cleaning data frames.')
-    for idx, data_frame in enumerate(df_list):
+    for _, data_frame in enumerate(df_list):
         clean_df(data_frame)
     if do_plot:
         print('Plotting data frames for inspection.')
