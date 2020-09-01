@@ -125,6 +125,7 @@ def get_predict_data(label):
     prophet.fit(prophet_attr_df_pre['Date'], prophet_attr_df_pre[label])
     predicted_df = prophet.predict(do_plot=False, label=label)
 
+    print(Path().absolute().parent.parent)
     scaler_path = f"GIT/group11/res/pipeline/scaler_{label}.save"
     ix_mean_var_path = "GIT/group11/res/pipeline/ix_mean_var.csv"
 
@@ -266,18 +267,4 @@ def compare_models(model_dict, dataframe, plotting = True):
 
 
 if __name__ == '__main__':
-    #PATH = Path().absolute().joinpath('GIT','group11','res', 'pipeline', 'scaled_pre_corona_df.csv')
-    #df = pd.read_csv(PATH)
-    #start_time = time.time()
-    #get_params(df)
-    #length = time.time()-start_time
-    #print(length)
-    #print(param_lst)
-    
-    """model_lst = load_models()
-    score_lst, best_model_dict = compare_models(model_lst, df)
-    print(best_model_dict)"""
     get_predict_data("twitch_streams")
-  
-    
-  
