@@ -1,34 +1,33 @@
-"""Entrypoint"""
-import logging
-import numpy as np
-import pandas as pd
-import matplotlib as plt
-import seaborn as sea
-import sklearn as sk
+import os
+from pathlib import Path
+import threading
+import src.webinterface.backend.api as backend
 
 
-from src.data_management.preprocessing import DataPreprocessor
-from src.parameter import Parameter
+def start_frontend():
+    relative_path = Path.cwd()
+    print(relative_path)
 
-logging.basicConfig(level=logging.INFO)
-PARAMS = Parameter.get_instance()
+    # Start the npm server for the frontend
+
+    path_to_frontend = Path("/src/webinterface/clean-frontend")
+    print(str(relative_path) + str(path_to_frontend))
+    total_path = Path(str(relative_path) + str(path_to_frontend))
+    cmd = 'cmd /k "cd {} && npm run serve"'.format(total_path)
+    print(cmd)
+    os.system(cmd)
 
 
 def main():
     '''Main function'''
-    # test
-    data = [
-        1, 2,
-        3, 4
-    ]
-    test = DataPreprocessor()
-    test.scale_data(data)
 
-    logging.debug('numpy version %s', np.__version__)
-    logging.debug('pandas version %s', pd.__version__)
-    logging.debug('seaborn version %s', sea.__version__)
-    logging.debug('matplotlib version %s', plt.__version__)
-    logging.debug('scikit-learn version %s', sk.__version__)
+    print("\n---Starting frontend---")
+    frontend_thread = threading.Thread(target= start_frontend)
+    frontend_thread.start()
+    # Start the backend
+    # TODO: Start it in a seperate thread
+    print("\n---Starting backend---")
+    backend.main()
 
 
 if __name__ == '__main__':
