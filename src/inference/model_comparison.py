@@ -139,16 +139,22 @@ def get_predict_data(label):
     
     if label == "ix_bitrate":
         print("a")
-        mean = 4.9480691905299454e-09
-        var = 60390.34854295953
+        
+        mean = 976.122858594206
+        var = 16558.93738199964
+        factor = 1000000000.0
+
         predicted_df = predicted_df * var
         predicted_df =predicted_df * mean
-
+        predicted_df = predicted_df * factor
+        
         prophet_attr_df_post[label] = prophet_attr_df_post[label] *var
         prophet_attr_df_post[label] = prophet_attr_df_pre[label] *var
+        prophet_attr_df_post[label] = prophet_attr_df_post[label] * factor
 
         prophet_attr_df_post[label] = prophet_attr_df_post[label] *mean
         prophet_attr_df_pre[label] = prophet_attr_df_pre[label] *mean
+        prophet_attr_df_pre[label] = prophet_attr_df_pre[label] *factor
 
 
     print(predicted_df)
@@ -271,7 +277,7 @@ if __name__ == '__main__':
     """model_lst = load_models()
     score_lst, best_model_dict = compare_models(model_lst, df)
     print(best_model_dict)"""
-    get_predict_data("ix_bitrate")
+    get_predict_data("twitch_streams")
   
     
   
