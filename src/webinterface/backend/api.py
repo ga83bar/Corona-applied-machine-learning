@@ -52,6 +52,11 @@ parser.add_argument("selected_graph")
 
 
 class switcher():
+    """
+    !@brief Implemets a switch-case function in python to select the right dataset name for a specified ID
+    @param Generate an insstance of the switcher class and use the id of an dataset as an in in the dataset_switch function
+    @return For the specified integer ID in the dataset_swicht function, the name of the according dataset gets returned as a string
+    """
     def dataset_switch(self, dataset_id):
         default = "incorrect dataset"
         # getattr returns function from within the class, matching to 'dataset_id'
@@ -115,6 +120,12 @@ class switcher():
 
 class Predict(Resource):
     def post(self):
+        """
+        !@brief Is getting called, when a http request has been received. 
+        The content gets extracted and either a ping-return is sent or a ML-Model is loaded 
+        and predicts data for a requested dataset, which will be returned.
+        """
+
         args = parser.parse_args()  # Sklearn is VERY PICKY on how you put your values in...
 
         print("\n---New request is processed---")
@@ -127,7 +138,7 @@ class Predict(Resource):
             # Print for checking parameter during development
             print("Received 'selected_graph' paramter: {}".format(args["selected_graph"]))
 
-            # Switch statement depending on the requested dataset.
+            # Switch statement depending on the requested dataset to reiceive the dataset name out of it´s ID.
             # The allocation from the id to the lable (name) can be found in /.../allocation_datasets_id.CSV
             switch = switcher()
             dataset_lable = switch.dataset_switch(args["dataset_id_req"])
@@ -135,13 +146,13 @@ class Predict(Resource):
             # Use function to predict values and get raw and predicted data returned
             predicted_df, prophet_attr_df_post,  prophet_attr_df_pre = predictor(dataset_lable)
 
-            # TODO: Expand comments
-            # Unpredicted data
+            # Unpredicted data is processed
+            # Received data is merged together with data up to and after the 1.1.2020.
             datasets_unpredicted = [prophet_attr_df_pre, prophet_attr_df_post]
             result_unpredicted = pd.concat(datasets_unpredicted)
             result_unpredicted.reset_index(inplace=True)
-            # Predicted data
 
+            # Predicted data processed
             # Change data type into pandas series
             result_predicted = pd.Series(predicted_df)
 
@@ -150,6 +161,7 @@ class Predict(Resource):
             complete_predicted_data = result_predicted.to_list()
             result_dates = result_unpredicted["Date"].to_list()
 
+            # The return statement will be sent to the frontend.
             return {"class": 42,
                     "datecheck": 2,
                     "chart_data_1": complete_unpredicted_data,
