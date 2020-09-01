@@ -19,17 +19,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import time
-
-import extreme_learning as EM
-import prophet as pro
-import online_models as onl
-import model_evaluation as eva
-from load_in import LoadIn
 import joblib
 
-
-
-
+# import . extreme_learning as EM
+from src.inference import extreme_learning as EM
+from src.inference import prophet as pro
+from src.inference import online_models as onl
+from src.inference import model_evaluation as eva
+from src.inference.load_in import LoadIn
 
 
 def get_model_list():
