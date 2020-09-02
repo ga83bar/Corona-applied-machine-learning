@@ -28,13 +28,8 @@
                         <md-menu-content>
                             <md-menu-item @click="dataset_id='0', selectedDataset_graph1='Internet Exchange Points'">Internet Exchange Points</md-menu-item>
                             <md-menu-item @click="dataset_id='1', selectedDataset_graph1='YouTube Viewchange'">YouTube Viewchange</md-menu-item>
-                            <md-menu-item @click="dataset_id='2', selectedDataset_graph1='YouTube Views'">YouTube Views</md-menu-item>
                             <md-menu-item @click="dataset_id='3', selectedDataset_graph1='Steam Users'">Steam Users</md-menu-item>
-                            <md-menu-item @click="dataset_id='4', selectedDataset_graph1='Steam Ingame'">Steam Ingame</md-menu-item>
                             <md-menu-item @click="dataset_id='5', selectedDataset_graph1='Twitch Views'">Twitch Views</md-menu-item>
-                            <md-menu-item @click="dataset_id='6', selectedDataset_graph1='Twitch Channels'">Twitch Channels</md-menu-item>
-                            <md-menu-item @click="dataset_id='7', selectedDataset_graph1='Twitch Viewtime'">Twitch Viewtime</md-menu-item>
-                            <md-menu-item @click="dataset_id='8', selectedDataset_graph1='Twitch Streams'">Twitch Streams</md-menu-item>
                             <md-menu-item @click="dataset_id='9', selectedDataset_graph1='PlayStation Network Users'">PlayStation Network Users</md-menu-item>
                         </md-menu-content>
                     </md-menu>
@@ -45,73 +40,54 @@
             </div>
 
             <div class="code">
-            <div v-if="selectedDataset_graph1=='Internet Exchange Points'">
-                <h4 class="title incode">Internet Exchange Points</h4>
-                In order to accurately depict the trend of an in- or decreasing internet traffic, data from worldwide exchange points are most representative and given in bitrates per time. <br />
-                 <br>
-                 These internet exchange points are the physical infrastructure nodes through which Internet Service Providers (ISPs) such as Deutsche Telekom or Vodafone as well as Content Delivery Networks (CDNs) exchange their internet traffic. As such, every package worldwide is sent through one of such exchange points. <br />
-                 <br />
-                 The underlying data set comprises exchange points from Frankfurt, ...
-            </div>
-        
-            <div v-else-if="selectedDataset_graph1=='YouTube Viewchange'">
-                <h4 class="title incode">YouTube Viewchange</h4>
-                No text
-            </div>
-            <div v-else-if="selectedDataset_graph1=='YouTube Views'">
-                <h4 class="title incode">YouTube Views</h4>
-                No text
-            </div>
-            <div v-else-if="selectedDataset_graph1=='Steam Users'">
-                <h4 class="title incode">Steam Network Users</h4>
-                 Online gaming has seen a surge during the COVID-19 pandemic on several platforms. <br />
-                 <br />
-                The underlying "Steam Network Users" data set describes the network activity (i.e. currently active users) on the Steam gaming platform for the respective timeline. 
+                <div v-if="selectedDataset_graph1=='Internet Exchange Points'">
+                    <h4 class="title incode">Internet Exchange Points</h4>
+                    In order to accurately depict the trend of an in- or decreasing internet traffic, 
+                    data from worldwide exchange points are most representative and given in bitrates per time. <br />
+                    <br>
+                    These internet exchange points are the physical infrastructure nodes through which Internet Service Providers (ISPs) 
+                    such as Deutsche Telekom or Vodafone as well as Content Delivery Networks (CDNs) exchange their internet traffic. As such, 
+                    every package worldwide is sent through one of such exchange points. <br />
+                    <br />
+                    The underlying data set comprises exchange points from Frankfurt, ...
                 </div>
-            <div v-else-if="selectedDataset_graph1=='Steam Ingame'">
-                <h4 class="title incode">Steam Ingame</h4>
-                No text
-            </div>
-                        <div v-else-if="selectedDataset_graph1=='Twitch Views'">
-                <h4 class="title incode">Twitch Viewtime</h4>
-                During the COVID-19 pandemic, internet streaming has greatly increased.
-                The currently most popular streaming platform Twitch thus suffices to
-                provide data for a time-series forecast.<br><br>
-
-                The underlying ”Twitch Views” data set describes the viewcount for the
-                respective streams on the platform. The data was obtained by scraping
-                through Twitch analytics using a custom build Twitch scraper.
+            
+                <div v-else-if="selectedDataset_graph1=='YouTube Views'">
+                    <h4 class="title incode">YouTube Views</h4>
+                    No text
                 </div>
-            <div v-else-if="selectedDataset_graph1=='Twitch Channels'">
-                <h4 class="title incode">Twitch Channels</h4>
-                During the COVID-19 pandemic, internet streaming has greatly increased.
-                The currently most popular streaming platform Twitch thus suffices to
-                provide data for a time-series forecast.<br><br>
 
-                The underlying ”Twitch Channels” data set describes the channel count
-                (i.e. new channels added or existing terminated). The data was obtained
-                by scraping through Twitch analytics using a custom build Twitch scraper.
-            </div>
-            <div v-else-if="selectedDataset_graph1=='Twitch Viewtime'">
-                <h4 class="title incode">Twitch Viewtime</h4>
-                No text
-            </div>
-            <div v-else-if="selectedDataset_graph1=='Twitch Streams'">
-                <h4 class="title incode">Twitch Streams</h4>
-                No text.
-            </div>
-            <div v-else-if="selectedDataset_graph1=='PlayStation Network Users'">
-                <h4 class="title incode">PlayStation Network Users</h4>
-                Online gaming has seen a surge during the COVID-19 pandemic on several
-                platforms.<br><br>
-                The underlying ”PlayStation Network Users” data set describes the network activity (i.e. currently active users) on Sony PlayStation consoles
-                for the respective timeline.
-            </div>
-            <div v-else>
-                <h4 class="title incode">nothing selected</h4>
-                No dataset selected. 
-            </div>
+                <div v-else-if="selectedDataset_graph1=='Steam Users'">
+                    <h4 class="title incode">Steam Network Users</h4>
+                    Online gaming has seen a surge during the COVID-19 pandemic on several platforms. <br />
+                    <br />
+                    The underlying "Steam Network Users" data set describes the network activity (i.e. currently active users) 
+                    on the Steam gaming platform for the respective timeline. 
+                </div>
 
+                <div v-else-if="selectedDataset_graph1=='Twitch Views'">
+                    <h4 class="title incode">Twitch Viewtime</h4>
+                    During the COVID-19 pandemic, internet streaming has greatly increased.
+                    The currently most popular streaming platform Twitch thus suffices to
+                    provide data for a time-series forecast.<br><br>
+
+                    The underlying ”Twitch Views” data set describes the viewcount for the
+                    respective streams on the platform. The data was obtained by scraping
+                    through Twitch analytics using a custom build Twitch scraper.
+                </div>
+
+                <div v-else-if="selectedDataset_graph1=='PlayStation Network Users'">
+                    <h4 class="title incode">PlayStation Network Users</h4>
+                    Online gaming has seen a surge during the COVID-19 pandemic on several
+                    platforms.<br><br>
+                    The underlying ”PlayStation Network Users” data set describes the network activity (i.e. currently active users) on Sony PlayStation consoles
+                    for the respective timeline.
+                </div>
+                
+                <div v-else>
+                    <h4 class="title incode">nothing selected</h4>
+                    No dataset selected. 
+                </div>
             </div>
 
             <div class="container" id="stock">
