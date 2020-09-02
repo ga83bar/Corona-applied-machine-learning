@@ -109,7 +109,7 @@
             </div>
             <div v-else>
                 <h4 class="title incode">nothing selected</h4>
-                No text
+                No dataset selected. 
             </div>
 
             </div>
@@ -142,8 +142,116 @@
             </div>
 
             <div class="code">
-                <h4 class="title incode">Corona has taken porn consumption to a new level </h4>
-                Obviously, this is placeholder content. Also, I am fluent in Latin.<br />Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                <div v-if="selectedDataset_graph2=='Medical Stock'">
+                    <h4 class="title incode">Medical Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+
+                    The underlying ”Medical Stock” data set comprises a feature set of the
+                    currently most important medical tech companies. In particular, these are<br><br>
+
+                    (a) Evotec AG<br>
+                    (b) Siemens Healthineers AG<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Banking Stock'">
+                    <h4 class="title incode">Banking Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+
+                    The underlying ”Banking Stock” data set comprises a feature set of the
+                    currently most important financial institutions listed in the worldwide
+                    stock indexes. In particular, these are<br><br>
+
+                    (a) Deutsche Bank<br>
+                    (b) Goldman Sachs<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Energy Stock'">
+                    <h4 class="title incode">Energy Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Energy Stock” data set comprises a feature set of the
+                    currently most important companies with a focus in energy and electricity
+                    operation listed in the worldwide stock indexes. In particular, these are<br><br>
+
+                    (a) Siemens AG<br>
+                    (b) Duke Energy Corporation<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Oil Stock'">
+                    <h4 class="title incode">Oil Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Oil Stock” data set comprises a feature set of the currently most important companies operating in the field of oil production.
+                    In particular, these are<br><br>
+
+                    (a) Shell<br>
+                    (b) ExxonMobil<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Steel Stock'">
+                    <h4 class="title incode">Steel Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Steel Stock” data set comprises a feature set of the currently most important companies operating in the field of steel production.
+                    In particular, these are<br><br>
+
+                    (a) ThyssenKrupp AG<br>
+                    (b) ArcelorMittal S.A.<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Automotive Stock'">
+                    <h4 class="title incode">Automotive Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Automotive Stock” data set comprises a feature set of
+                    the currently most important automitive companies. In particular, these
+                    are<br><br>
+
+                    (a) BMW<br>
+                    (b) Toyota<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Telecom Stock'">
+                    <h4 class="title incode">Telecom Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Telecom Stock” data set comprises a feature set of the
+                    currently most important telecom companies. In particular, these are<br><br>
+
+                    (a) ATT<br>
+                    (b) Verizon<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Tech Stock'">
+                    <h4 class="title incode">Tech Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Tech Stock” data set comprises a feature set of the currently most important tech companies. In particular, these are<br><br>
+
+                    (a) Apple<br>
+                    (b) Huawei<br>
+                    (c) ...
+                </div>
+
+                <div v-else>
+                    <h4 class="title incode">nothing selected</h4>
+                    No dataset selected. 
+                </div>
             </div>
             
         </div>
