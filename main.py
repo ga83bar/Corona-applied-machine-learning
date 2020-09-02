@@ -1,3 +1,5 @@
+""" !@brief Main file to start backend from root of project """
+
 import src.webinterface.backend.api as backend
 
 
