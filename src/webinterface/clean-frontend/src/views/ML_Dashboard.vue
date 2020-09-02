@@ -85,8 +85,7 @@
                 </div>
                 
                 <div v-else>
-                    <h4 class="title incode">nothing selected</h4>
-                    No dataset selected. 
+                    <h4 class="title incode">No dataset selected yet</h4>
                 </div>
             </div>
 
@@ -225,8 +224,7 @@
                 </div>
 
                 <div v-else>
-                    <h4 class="title incode">nothing selected</h4>
-                    No dataset selected. 
+                    <h4 class="title incode">No dataset selected yet</h4>
                 </div>
             </div>
             
