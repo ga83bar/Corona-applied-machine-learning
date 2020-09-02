@@ -7,7 +7,14 @@
     <div class="main main-raised">
         <div class="section profile-content">
 
-            <div class="container" id="stock">
+            <div class="container" id="faq">
+                <div class="profile-tabs mx-auto">
+                    <tabs plain nav-pills-icons color-button="success">
+                    </tabs>
+                </div>
+            </div>
+
+            <div class="container" id="web">
                 <h3 class="title">Web Traffic Analysis</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
@@ -83,7 +90,7 @@
 
             </div>
 
-            <div class="container" id="web">
+            <div class="container" id="stock">
                 <h3 class="title">Stock Predictions</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
@@ -114,13 +121,7 @@
                 <h4 class="title incode">Corona has taken porn consumption to a new level </h4>
                 Obviously, this is placeholder content. Also, I am fluent in Latin.<br />Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
             </div>
-            <div class="container" id="faq">
-                <div class="profile-tabs mx-auto">
-                    <tabs plain nav-pills-icons color-button="success">
-                    </tabs>
-
-                </div>
-            </div>
+            
         </div>
 
     </div>
