@@ -48,44 +48,68 @@
             <div v-if="selectedDataset_graph1=='Internet Exchange Points'">
                 <h4 class="title incode">Internet Exchange Points</h4>
                 In order to accurately depict the trend of an in- or decreasing internet traffic, data from worldwide exchange points are most representative and given in bitrates per time. <br />
-                 <br />
+                 <br>
                  These internet exchange points are the physical infrastructure nodes through which Internet Service Providers (ISPs) such as Deutsche Telekom or Vodafone as well as Content Delivery Networks (CDNs) exchange their internet traffic. As such, every package worldwide is sent through one of such exchange points. <br />
                  <br />
                  The underlying data set comprises exchange points from Frankfurt, ...
             </div>
         
-            <div v-else-if="selectedDataset_graph1=='youtube_viewchange'">
-                <h4 class="title incode">1</h4>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            <div v-else-if="selectedDataset_graph1=='YouTube Viewchange'">
+                <h4 class="title incode">YouTube Viewchange</h4>
+                No text
             </div>
-            <div v-else-if="selectedDataset_graph1=='youtube_views'">
-                <h4 class="title incode">2</h4>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            <div v-else-if="selectedDataset_graph1=='YouTube Views'">
+                <h4 class="title incode">YouTube Views</h4>
+                No text
             </div>
-            <div v-else-if="selectedDataset_graph1=='steam_users'">
+            <div v-else-if="selectedDataset_graph1=='Steam Users'">
                 <h4 class="title incode">Steam Network Users</h4>
                  Online gaming has seen a surge during the COVID-19 pandemic on several platforms. <br />
                  <br />
                 The underlying "Steam Network Users" data set describes the network activity (i.e. currently active users) on the Steam gaming platform for the respective timeline. 
                 </div>
-                        <div v-else-if="selectedDataset_graph1=='steam_ingame'">
-                <h4 class="title incode">Q4</h4>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            <div v-else-if="selectedDataset_graph1=='Steam Ingame'">
+                <h4 class="title incode">Steam Ingame</h4>
+                No text
             </div>
-                        <div v-else-if="selectedDataset_graph1=='twitch_views'">
+                        <div v-else-if="selectedDataset_graph1=='Twitch Views'">
                 <h4 class="title incode">Twitch Viewtime</h4>
-                During the COVID-19 pandemic, internet streaming has greatly increased. The currently most popular streaming platform Twitch thus suffices to provide data for a time-series forecast. <br />
-                <br />
-                The underlying "Twitch Viewtime" data set describes the actual time spend watching streams. The data was obtained by scraping through Twitch analytics using a custom build Twitch scraper. </div>
-                        <div v-else-if="selectedDataset_graph1=='twitch_channels'">
-                <h4 class="title incode">Twitch Channels</h4>
-                During the COVID-19 pandemic, internet streaming has greatly increased. The currently most popular streaming platform Twitch thus suffices to provide data for a time-series forecast. <br />
-                <br />
-                The underlying "Twitch Channels" data set describes the channel count (i.e. new channels added or existing terminated). The data was obtained by scraping through Twitch analytics using a custom build Twitch scraper. 
+                During the COVID-19 pandemic, internet streaming has greatly increased.
+                The currently most popular streaming platform Twitch thus suffices to
+                provide data for a time-series forecast.<br><br>
+
+                The underlying ”Twitch Views” data set describes the viewcount for the
+                respective streams on the platform. The data was obtained by scraping
+                through Twitch analytics using a custom build Twitch scraper.
                 </div>
+            <div v-else-if="selectedDataset_graph1=='Twitch Channels'">
+                <h4 class="title incode">Twitch Channels</h4>
+                During the COVID-19 pandemic, internet streaming has greatly increased.
+                The currently most popular streaming platform Twitch thus suffices to
+                provide data for a time-series forecast.<br><br>
+
+                The underlying ”Twitch Channels” data set describes the channel count
+                (i.e. new channels added or existing terminated). The data was obtained
+                by scraping through Twitch analytics using a custom build Twitch scraper.
+            </div>
+            <div v-else-if="selectedDataset_graph1=='Twitch Viewtime'">
+                <h4 class="title incode">Twitch Viewtime</h4>
+                No text
+            </div>
+            <div v-else-if="selectedDataset_graph1=='Twitch Streams'">
+                <h4 class="title incode">Twitch Streams</h4>
+                No text.
+            </div>
+            <div v-else-if="selectedDataset_graph1=='PlayStation Network Users'">
+                <h4 class="title incode">PlayStation Network Users</h4>
+                Online gaming has seen a surge during the COVID-19 pandemic on several
+                platforms.<br><br>
+                The underlying ”PlayStation Network Users” data set describes the network activity (i.e. currently active users) on Sony PlayStation consoles
+                for the respective timeline.
+            </div>
             <div v-else>
                 <h4 class="title incode">nothing selected</h4>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                No text
             </div>
 
             </div>
