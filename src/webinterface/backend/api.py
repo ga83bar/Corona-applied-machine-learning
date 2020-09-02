@@ -193,15 +193,6 @@ class Predict(Resource):
                 "selected_graph": args["selected_graph"]
                 }
 
-        # TODO: Catch case when no data returned?
-        # else:
-        #     return {"class": 500,
-        #             "datecheck": 2,
-        #             "chart_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #             "chart_data_2": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #             "labels": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-        #             }
-
 
 API.add_resource(Predict, "/predict")
 
