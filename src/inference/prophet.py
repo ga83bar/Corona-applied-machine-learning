@@ -4,17 +4,13 @@
 @brief: Facebooks Prophet prediction embedded in an scikit
 """
 
-# import plotly.offline as py
-# import matplotlib.pyplot as plt
 import os
 from pathlib import Path
-import datetime as dt
 import pickle
+import datetime as dt
 import numpy as np
 import pandas as pd
-# from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
-from sklearn.model_selection import cross_val_score
 from sklearn.base import BaseEstimator, RegressorMixin
 from sklearn.model_selection import GridSearchCV
 
@@ -23,7 +19,6 @@ from fbprophet.diagnostics import cross_validation
 from fbprophet.diagnostics import performance_metrics
 
 from src.inference.load_in import LoadIn
-# py.init_notebook_mode()
 
 
 class MyProphet(BaseEstimator, RegressorMixin):
@@ -67,23 +62,23 @@ class MyProphet(BaseEstimator, RegressorMixin):
                                      'seasonality_mode': 'additive', 'cap': 1, 'floor': -1},
                       'youtube_viewchange': {'growth': 'logistic', 'changepoint_prior_scale': 0.105,
                                              'interval_width': 0.8, 'seasonality_mode': 'multiplicative',
-                                             'cap': 1.5, 'floor': -1.5}, #80000000
+                                             'cap': 1.5, 'floor': -1.5},
                       'youtube_views': {'growth': 'linear', 'changepoint_prior_scale': 0.04, 'interval_width': 0.8,
-                                        'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5}, #150000000
+                                        'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},
                       'steam_users': {'growth': 'linear', 'changepoint_prior_scale': 0.135, 'interval_width': 0.8,
-                                      'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5}, #150000000
+                                      'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5},
                       'steam_ingame': {'growth': 'linear', 'changepoint_prior_scale': 0.105, 'interval_width': 0.8,
-                                       'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},#40000000
+                                       'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},
                       'twitch_views': {'growth': 'linear', 'changepoint_prior_scale': 0.09, 'interval_width': 0.8,
-                                       'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},#1500000
+                                       'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},
                       'twitch_channels': {'growth': 'logistic', 'changepoint_prior_scale': 0.115, 'interval_width': 0.8,
-                                          'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5},#60000
+                                          'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5},
                       'twitch_viewtime': {'growth': 'logistic', 'changepoint_prior_scale': 0.13, 'interval_width': 0.8,
-                                          'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5},#1_010_000_000
+                                          'seasonality_mode': 'additive', 'cap': 1.5, 'floor': -1.5},
                       'twitch_streams': {'growth': 'linear', 'changepoint_prior_scale': 0.05, 'interval_width': 0.8,
-                                         'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},#5_000_000
+                                         'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5},
                       'ps_users': {'growth': 'linear', 'changepoint_prior_scale': 0.16, 'interval_width': 0.8,
-                                   'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5}}#2_000_000
+                                   'seasonality_mode': 'multiplicative', 'cap': 1.5, 'floor': -1.5}}
 
     def set_dset(self, dset):
         """
@@ -114,7 +109,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
         self.metric = metric
 
     def set_model(self, after_best=False, growth='linear', changepoint_prior_scale=0.05, interval_width=0.8,
-                  seasonality_mode='additive'):
+                  seasonality_mode='additive'): #pylint disable=too-many-arguments
         """
         Adapt the model
         @param growth: is the model linear or logistic in rising/falling
@@ -250,7 +245,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
         self.set_cap(loaded_param['cap'])
         self.set_floor(loaded_param['floor'])
 
-    def score(self, x, y, sample_weight=None):
+    def score(self, x, y, sample_weight=None): # pylint: disable=arguments-differ
         """
         Evalute the Models performance via MSE
         @param x: dates to predict
@@ -282,17 +277,21 @@ class MyProphet(BaseEstimator, RegressorMixin):
         """
         Saves a model
         """
-        #with open(f"prophet{self.dset}_{dt.time}.pkl", 'wb') as f:
-        #   pickle.dump(self.model, f)
+        with open(f"prophet{self.dset}_{dt.time}.pkl", 'wb') as f:
+            pickle.dump(self.model, f)
 
     def load_model(self, dset, time):
         """
         Loads a pretrained model
         """
-        #with open(f"prophet{dset}_{time}.pkl", 'rb') as f:
-         #   self.model = pickle.load(f)
+        with open(f"prophet{dset}_{time}.pkl", 'rb') as f:
+            self.model = pickle.load(f)
 
     def set_params(self, **parameters):
+        '''
+        sets all the parameters that are given
+        @param parameters: pointer to the location of the parameters
+        '''
         # set default values
         growth = 'linear'
         changepoint_prior_scale = 0.05
@@ -363,7 +362,7 @@ def skleran_gridsearch():
     # plot best
     pro.set_model(after_best=True)
     pro.fit(x_date=dataframes['Date'], y_data=dataframes[attr])
-    pro.predict(do_plot=True)
+    pro.predict(do_plot=True, label=attr)
 
 
 def fbprophet_gridsearch():
@@ -392,7 +391,7 @@ def fbprophet_gridsearch():
     # plot best
     pro.set_model(after_best=True)
     pro.fit(x_date=dataframes['Date'], y_data=dataframes[attr])
-    pro.predict(do_plot=True)
+    pro.predict(do_plot=True, label=attr)
 
 
 def test():
