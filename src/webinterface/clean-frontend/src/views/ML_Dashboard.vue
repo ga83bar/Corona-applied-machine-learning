@@ -11,7 +11,7 @@
                 <h3 class="title">Web Traffic Analysis</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
-                        <line-chart v-if="loaded" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" />
+                        <line-chart v-if="loaded_graph1" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
                 </div>
@@ -19,7 +19,7 @@
                     <md-menu md-size="medium" md-align-trigger class="menuu">
                         <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset_graph1}}</md-button>
                         <md-menu-content>
-                            <md-menu-item @click="dataset_id='0', selectedDataset_graph1='ix_bitrate'">ix_bitrate</md-menu-item>
+                            <md-menu-item @click="dataset_id='0', selectedDataset_graph1='Internet Exchange Points'">Internet Exchange Points</md-menu-item>
                             <md-menu-item @click="dataset_id='1', selectedDataset_graph1='youtube_viewchange'">youtube_viewchange</md-menu-item>
                             <md-menu-item @click="dataset_id='2', selectedDataset_graph1='youtube_views'">youtube_views</md-menu-item>
                             <md-menu-item @click="dataset_id='3', selectedDataset_graph1='steam_users'">steam_users</md-menu-item>
@@ -45,17 +45,17 @@
                  These internet exchange points are the physical infrastructure nodes through which Internet Service Providers (ISPs) such as Deutsche Telekom or Vodafone as well as Content Delivery Networks (CDNs) exchange their internet traffic. As such, every package worldwide is sent through one of such exchange points. <br />
                  <br />
                  The underlying data set comprises exchange points from Frankfurt, ...
-                 </div>
+            </div>
         
-                <div v-else-if="selectedDataset_graph1=='youtube_viewchange'">
+            <div v-else-if="selectedDataset_graph1=='youtube_viewchange'">
                 <h4 class="title incode">1</h4>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
             </div>
-                        <div v-else-if="selectedDataset_graph1=='youtube_views'">
+            <div v-else-if="selectedDataset_graph1=='youtube_views'">
                 <h4 class="title incode">2</h4>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
             </div>
-                        <div v-else-if="selectedDataset_graph1=='steam_users'">
+            <div v-else-if="selectedDataset_graph1=='steam_users'">
                 <h4 class="title incode">Steam Network Users</h4>
                  Online gaming has seen a surge during the COVID-19 pandemic on several platforms. <br />
                  <br />
@@ -87,7 +87,7 @@
                 <h3 class="title">Stock Predictions</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
-                        <line-chart v-if="loaded" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" />
+                        <line-chart v-if="loaded_graph2" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
                 </div>
@@ -145,7 +145,8 @@ export default {
         let now = new Date()
 
         return {
-            loaded: false,
+            loaded_graph1: false,
+            loaded_graph2: false,
             connection: false,
             start_date: format(now, dateFormat),
             end_date: format(now, dateFormat),
@@ -261,7 +262,13 @@ export default {
         },
         select_set(selected_graph) {
 
-            this.loaded = false;
+            if(selected_graph == 1){
+                this.loaded_graph1 = false;
+            }
+            else{
+                this.loaded_graph2 = false;
+            }
+            
             axios.post('http://localhost:5000/predict', {
                     dataset_id_req: this.dataset_id,
                     selected_graph: selected_graph
@@ -318,9 +325,14 @@ export default {
                             ]
                         }
                         
-                        this.datecheck_bool = response.data.datecheck,
-                            this.loaded = true,
-                            this.checkdate(this.datecheck_bool);
+                        this.datecheck_bool = response.data.datecheck;
+                        if(selected_graph == 1){
+                            this.loaded_graph1 = true;
+                        }
+                        else{
+                            this.loaded_graph2 = true;
+                        }
+                        this.checkdate(this.datecheck_bool);
                 })
                 .catch(e => {
                     this.notifyVue('top', 'center', 'danger', 'Connection failed.');
