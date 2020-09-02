@@ -11,7 +11,7 @@
                 <h3 class="title">Web Traffic Analysis</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
-                        <line-chart v-if="loaded" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" />
+                        <line-chart v-if="loaded_graph1" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
                 </div>
@@ -19,7 +19,7 @@
                     <md-menu md-size="medium" md-align-trigger class="menuu">
                         <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset_graph1}}</md-button>
                         <md-menu-content>
-                            <md-menu-item @click="dataset_id='0', selectedDataset_graph1='ix_bitrate'">ix_bitrate</md-menu-item>
+                            <md-menu-item @click="dataset_id='0', selectedDataset_graph1='Internet Exchange Points'">Internet Exchange Points</md-menu-item>
                             <md-menu-item @click="dataset_id='1', selectedDataset_graph1='youtube_viewchange'">youtube_viewchange</md-menu-item>
                             <md-menu-item @click="dataset_id='2', selectedDataset_graph1='youtube_views'">youtube_views</md-menu-item>
                             <md-menu-item @click="dataset_id='3', selectedDataset_graph1='steam_users'">steam_users</md-menu-item>
@@ -38,15 +38,56 @@
             </div>
 
             <div class="code">
-                <h4 class="title incode">Quick and Simple Description</h4>
+            <div v-if="selectedDataset_graph1=='Internet Exchange Points'">
+                <h4 class="title incode">Internet Exchange Points</h4>
+                In order to accurately depict the trend of an in- or decreasing internet traffic, data from worldwide exchange points are most representative and given in bitrates per time. <br />
+                 <br />
+                 These internet exchange points are the physical infrastructure nodes through which Internet Service Providers (ISPs) such as Deutsche Telekom or Vodafone as well as Content Delivery Networks (CDNs) exchange their internet traffic. As such, every package worldwide is sent through one of such exchange points. <br />
+                 <br />
+                 The underlying data set comprises exchange points from Frankfurt, ...
+            </div>
+        
+            <div v-else-if="selectedDataset_graph1=='youtube_viewchange'">
+                <h4 class="title incode">1</h4>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </div>
+            <div v-else-if="selectedDataset_graph1=='youtube_views'">
+                <h4 class="title incode">2</h4>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </div>
+            <div v-else-if="selectedDataset_graph1=='steam_users'">
+                <h4 class="title incode">Steam Network Users</h4>
+                 Online gaming has seen a surge during the COVID-19 pandemic on several platforms. <br />
+                 <br />
+                The underlying "Steam Network Users" data set describes the network activity (i.e. currently active users) on the Steam gaming platform for the respective timeline. 
+                </div>
+                        <div v-else-if="selectedDataset_graph1=='steam_ingame'">
+                <h4 class="title incode">Q4</h4>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </div>
+                        <div v-else-if="selectedDataset_graph1=='twitch_views'">
+                <h4 class="title incode">Twitch Viewtime</h4>
+                During the COVID-19 pandemic, internet streaming has greatly increased. The currently most popular streaming platform Twitch thus suffices to provide data for a time-series forecast. <br />
+                <br />
+                The underlying "Twitch Viewtime" data set describes the actual time spend watching streams. The data was obtained by scraping through Twitch analytics using a custom build Twitch scraper. </div>
+                        <div v-else-if="selectedDataset_graph1=='twitch_channels'">
+                <h4 class="title incode">Twitch Channels</h4>
+                During the COVID-19 pandemic, internet streaming has greatly increased. The currently most popular streaming platform Twitch thus suffices to provide data for a time-series forecast. <br />
+                <br />
+                The underlying "Twitch Channels" data set describes the channel count (i.e. new channels added or existing terminated). The data was obtained by scraping through Twitch analytics using a custom build Twitch scraper. 
+                </div>
+            <div v-else>
+                <h4 class="title incode">nothing selected</h4>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </div>
+
             </div>
 
             <div class="container" id="web">
                 <h3 class="title">Stock Predictions</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
-                        <line-chart v-if="loaded" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" />
+                        <line-chart v-if="loaded_graph2" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
                 </div>
@@ -104,7 +145,8 @@ export default {
         let now = new Date()
 
         return {
-            loaded: false,
+            loaded_graph1: false,
+            loaded_graph2: false,
             connection: false,
             start_date: format(now, dateFormat),
             end_date: format(now, dateFormat),
@@ -220,7 +262,13 @@ export default {
         },
         select_set(selected_graph) {
 
-            this.loaded = false;
+            if(selected_graph == 1){
+                this.loaded_graph1 = false;
+            }
+            else{
+                this.loaded_graph2 = false;
+            }
+            
             axios.post('http://localhost:5000/predict', {
                     dataset_id_req: this.dataset_id,
                     selected_graph: selected_graph
@@ -235,13 +283,19 @@ export default {
                             this.chartdata_graph1 = [{
                                     label: 'real data',
                                     data: response.data.chart_data_1,
-                                    borderColor: 'rgb(238, 76, 96)',
+                                    borderColor: 'rgb(0, 0, 0)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'model data',
+                                    data: response.data.chart_data_2,
+                                    borderColor: 'rgb(112, 112, 112)',
                                     fill: false
                                 },
                                 {
                                     label: 'prediction',
-                                    data: response.data.chart_data_2,
-                                    borderColor: 'rgb(76, 175, 80)',
+                                    data: response.data.chart_data_3,
+                                    borderColor: 'rgb(255, 0, 0)',
                                     fill: false
                                 }
                             ]
@@ -253,21 +307,32 @@ export default {
                             this.chartdata_graph2 = [{
                                     label: 'real data',
                                     data: response.data.chart_data_1,
-                                    borderColor: 'rgb(238, 76, 96)',
+                                    borderColor: 'rgb(0, 0, 0)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'model data',
+                                    data: response.data.chart_data_2,
+                                    borderColor: 'rgb(112, 112, 112)',
                                     fill: false
                                 },
                                 {
                                     label: 'prediction',
-                                    data: response.data.chart_data_2,
-                                    borderColor: 'rgb(76, 175, 80)',
+                                    data: response.data.chart_data_3,
+                                    borderColor: 'rgb(255, 0, 0)',
                                     fill: false
                                 }
                             ]
                         }
                         
-                        this.datecheck_bool = response.data.datecheck,
-                            this.loaded = true,
-                            this.checkdate(this.datecheck_bool);
+                        this.datecheck_bool = response.data.datecheck;
+                        if(selected_graph == 1){
+                            this.loaded_graph1 = true;
+                        }
+                        else{
+                            this.loaded_graph2 = true;
+                        }
+                        this.checkdate(this.datecheck_bool);
                 })
                 .catch(e => {
                     this.notifyVue('top', 'center', 'danger', 'Connection failed.');

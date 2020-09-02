@@ -18,21 +18,23 @@ from sklearn.preprocessing import StandardScaler
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import time
+
 import joblib
 
-# import . extreme_learning as EM
+
 from src.inference import extreme_learning as EM
 from src.inference import prophet as pro
-from src.inference import online_models as onl
-from src.inference import model_evaluation as eva
 from src.inference.load_in import LoadIn
+
 
 
 def get_model_list():
     """returns a list containing available regressors for model comparison"""
-    model_list = [('DecisionTree', DecisionTreeRegressor()), ('NeuralNetwork', MLPRegressor(shuffle=False)),
-                  ('LinearModel', LinearRegression()), ('PolyLinearModel', LinearRegression())]  
+    model_list = [('DecisionTree', DecisionTreeRegressor()), 
+    ('NeuralNetwork', MLPRegressor(shuffle=False)),
+    ('LinearModel', LinearRegression()),
+    ('PolyLinearModel', LinearRegression())]  
+
     return model_list
 
 
@@ -44,41 +46,40 @@ def load_models():
     return model_dict
 
 
-def get_params(df, ELM= False):
+def get_params(df, ELM= False, prophet = False):
     """
     performs grid search
     {'growth': 'linear', 'changepoint_prior_scale': 0.10499999999999995, 'interval_width': 0.8, 'seasonality_mode': 'additive', 'metric': 0.0011843675774291197}
     """
-    param_dict ={}
-    prophet_dataframes_pre = LoadIn().load_all(typ='pre')
-    for label in prophet_dataframes_pre:
-        
-        if label == "Unnamed: 0":
-            continue
-        if label == 'corona_deaths':
-            break
-        print(label)
-        prophet_attr_df_pre = prophet_dataframes_pre[["Date", label]]
-        prophet_attr_df_pre = prophet_attr_df_pre.dropna()
-        prophet = pro.MyProphet()
-        #prophet.load_best_param(attr)
-        changepoint_prior_scale = np.arange(0.03, 0.2, 0.005)
-        parameters = {'growth': ['linear', 'logistic'],
-                'changepoint_prior_scale': changepoint_prior_scale,
-                'interval_width': [0.8],
-                'seasonality_mode': ['additive', 'multiplicative']}
-        best_params = prophet.gridsearchcv(parameters, dataframe =  prophet_attr_df_pre, safe=True )
-        param_dict[label] = best_params
-        print(best_params)
-        print(param_dict)
-    print(param_dict)
+    if prophet == True:
+        param_dict ={}
+        prophet_dataframes_pre = LoadIn().load_all(typ='pre')
+        for label in prophet_dataframes_pre:
+            
+            if label == "Unnamed: 0":
+                continue
+            if label == 'corona_deaths':
+                break
+            print(label)
+            prophet_attr_df_pre = prophet_dataframes_pre[["Date", label]]
+            prophet_attr_df_pre = prophet_attr_df_pre.dropna()
+            prophet = pro.MyProphet()
+            
+            changepoint_prior_scale = np.arange(0.03, 0.2, 0.005)
+            parameters = {'growth': ['linear', 'logistic'],
+                    'changepoint_prior_scale': changepoint_prior_scale,
+                    'interval_width': [0.8],
+                    'seasonality_mode': ['additive', 'multiplicative']}
+            best_params = prophet.gridsearchcv(parameters, dataframe= prophet_attr_df_pre, safe=True)
+            param_dict[label] = best_params
+            
     
     if ELM == True:
         # ELM 
         param_dict = {}
         lambdalst = []
-        lambdalst = [0.001,0.005, 0.01,0.025, 0.05,0.075, 0.1, 0.25, 0.5, 0.75,1]
-        neuronlst = [20,40,60,80,100,120,140,150]
+        lambdalst = [0.001, 0.005, 0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1]
+        neuronlst = [20, 40, 60, 80, 100, 120, 140, 150]
         lmbd = 0
         neuron = 20
         
@@ -121,48 +122,39 @@ def get_predict_data(label):
     prophet = pro.MyProphet()    
     prophet.fit(prophet_attr_df_pre['Date'], prophet_attr_df_pre[label])
     predicted_df = prophet.predict(do_plot=False, label=label)
- 
-    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre, prophet_dataframes_pre, prophet_dataframes_post
 
-    # TODO: PLEASE FIX THE SCALING, CHECK FOR CORRECT DATA TYPE!
-
-    pipeline_path = Path.cwd().joinpath('res', 'pipeline')
+    pipeline_path = Path(__file__).parent.parent.parent.joinpath('res', 'pipeline')
     scaler_path = pipeline_path.joinpath('scaler_'+label+'.save')
-    ix_mean_var_path = pipeline_path.joinpath('ix_mean_var.csv')
 
     scaler = joblib.load(scaler_path)
-    print(scaler)
-    print(predicted_df)
+   
     predicted_df = scaler.inverse_transform(predicted_df)
     prophet_attr_df_post[label] = scaler.inverse_transform(prophet_attr_df_post[label])
     prophet_attr_df_pre[label] = scaler.inverse_transform(prophet_attr_df_pre[label])
 
-    print(predicted_df)
-    
     if label == "ix_bitrate":
-        print("a")
-        
+        # factor for ix  dataset inverse transform
         mean = 976.122858594206
         var = 16558.93738199964
         factor = 1000000000.0
 
         predicted_df = predicted_df * var
-        predicted_df =predicted_df * mean
+        predicted_df = predicted_df + mean
         predicted_df = predicted_df * factor
         
-        prophet_attr_df_post[label] = prophet_attr_df_post[label] *var
-        prophet_attr_df_post[label] = prophet_attr_df_pre[label] *var
+        prophet_attr_df_post[label] = prophet_attr_df_post[label] * var
+        prophet_attr_df_post[label] = prophet_attr_df_post[label] + mean
         prophet_attr_df_post[label] = prophet_attr_df_post[label] * factor
 
-        prophet_attr_df_post[label] = prophet_attr_df_post[label] *mean
-        prophet_attr_df_pre[label] = prophet_attr_df_pre[label] *mean
-        prophet_attr_df_pre[label] = prophet_attr_df_pre[label] *factor
+        prophet_attr_df_pre[label] = prophet_attr_df_pre[label] * var
+        prophet_attr_df_pre[label] = prophet_attr_df_pre[label] + mean
+        prophet_attr_df_pre[label] = prophet_attr_df_pre[label] * factor
+
+    
+    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre
 
 
-    print(predicted_df)
-    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre, prophet_dataframes_pre, prophet_dataframes_post
-
-def compare_models(model_dict, dataframe, plotting = True):
+def compare_models(model_dict, dataframe, plotting=False):
     """compares the performance of given models using the provided dataframe by performing cross validation"""
     prophet_dataframes = LoadIn().load_all(typ='pre')
     ELM_dataframe = dataframe
@@ -238,7 +230,7 @@ def compare_models(model_dict, dataframe, plotting = True):
             plt.savefig("ELM predictions")
             
             
-            """
+            
             prophet = pro.MyProphet()
             #prophet.load_best_param(attr)
             changepoint_prior_scale = np.arange(0.03, 0.2, 0.005)
@@ -254,18 +246,9 @@ def compare_models(model_dict, dataframe, plotting = True):
             prophet.fit(prophet_attr_df['Date'], prophet_attr_df[attr])
             y_pred = prophet.predict(do_plot=True, label=attr)
             print(y_pred)
-            """
-            
 
-            
-            #mse = mean_squared_error(test_dataframes[attr].values, y_pred.values)
-        
-
-        
-        
     return score_dict, best_model_dict
 
 
-
 if __name__ == '__main__':
-    get_predict_data("twitch_streams")
+    a,b,c = get_predict_data("ix_bitrate")
