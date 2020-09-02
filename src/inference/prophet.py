@@ -108,7 +108,8 @@ class MyProphet(BaseEstimator, RegressorMixin):
         """
         self.metric = metric
 
-    def set_model(self, after_best=False, growth='linear', changepoint_prior_scale=0.05, interval_width=0.8,  # pylint: disable=too-many-arguments
+    def set_model(self, after_best=False, growth='linear',  # pylint: disable=too-many-arguments
+                  changepoint_prior_scale=0.05, interval_width=0.8,\
                   seasonality_mode='additive'):
         """
         Adapt the model
