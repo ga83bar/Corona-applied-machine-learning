@@ -108,8 +108,8 @@ class MyProphet(BaseEstimator, RegressorMixin):
         """
         self.metric = metric
 
-    def set_model(self, after_best=False, growth='linear', changepoint_prior_scale=0.05, interval_width=0.8,
-                  seasonality_mode='additive'): #pylint disable=too-many-arguments
+    def set_model(self, after_best=False, growth='linear', changepoint_prior_scale=0.05, interval_width=0.8,  # pylint: disable=too-many-arguments
+                  seasonality_mode='additive'):
         """
         Adapt the model
         @param growth: is the model linear or logistic in rising/falling
@@ -245,7 +245,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
         self.set_cap(loaded_param['cap'])
         self.set_floor(loaded_param['floor'])
 
-    def score(self, x, y, sample_weight=None): # pylint: disable=arguments-differ
+    def score(self, x, y, sample_weight=None):  # pylint: disable=arguments-differ
         """
         Evalute the Models performance via MSE
         @param x: dates to predict
@@ -324,7 +324,7 @@ def best_param(dataframe):
     return param
 
 
-def skleran_gridsearch():
+def sklearn_gridsearch():
     """
     Test data on sklearn Gridsearchcv
     """
@@ -398,27 +398,10 @@ def test():
     """
     Test function
     """
-    # attr = 'steam_users'
-    # dataframes = LoadIn().load_all(typ='pre')
-    # print(dataframes[['Date', attr]].head())
-
-    # pro = MyProphet()
-
-    # scores = cross_val_score(estimator=pro, X=dataframes['Date'], y=dataframes[attr])
-    # print('Scores: ', scores)
-
-    # pro.set_model(growth='logistic', changepoint_prior_scale=0.06, seasonality_mode='additive')
-    # pro.fit(x_date=dataframes['Date'], y_data=dataframes[attr])
-    # pro.predict(do_plot=True)
-
-    # dataframe_cv = pro.cross_validation()
-    # metric = pro.score_cross(dataframe_cv)
-    # print(pro.metric, ': ', metric)
-
     #########################################################
     # Gridseachcv with sklearn
 
-    skleran_gridsearch()
+    sklearn_gridsearch()
 
     ##########################################################
     # Gridsearchcv with fb crossval
