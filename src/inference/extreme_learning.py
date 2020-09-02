@@ -35,7 +35,9 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
     Can be used like any scikit learn predictor.
     '''
 
-    def __init__(self, neurons=128, lambd=0.01, regu='L1'):
+    def __init__(self, neurons=128, lambd=0.01, regu='L1',
+                 __measure='mse', weights=None, train_window=None,
+                 model=None):
         '''
         The params define the neural network!
         @param data : the dataset in sequential form
@@ -48,6 +50,11 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         self.lambd = lambd
         self.neurons = neurons
         self.regu = regu
+
+        self.__measure = __measure
+        self.weights = weights
+        self.train_window = train_window
+        self.model = model
 
     def fit(self, x_train, y_train):
         '''
@@ -82,7 +89,7 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         else:
             raise Exception('No valid regularization selected')
 
-    def score(self, x_test, y_test):
+    def score(self, x_test, y_test):  # pylint: disable=arguments-differ
         '''
         Scoring method returns test error
         '''
@@ -128,7 +135,7 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         if (days is None and date is None):
             raise Exception('Extreme Learning Machine predict_next_days : days and date is None')
 
-        elif (days is None):
+        elif days is None:
             today = datetime.date.today()
             days = date - today
 
@@ -150,7 +157,7 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         predictions = []
 
         # predict using last data points
-        for i in range(days):
+        for _ in range(days):
             value = self.predict(last_elements)
             predictions = np.append(predictions, value)
 
@@ -312,7 +319,7 @@ def test():
         predictions = elm.predict_next_days(regu='no', train_win=TRAIN_WINDOW, do_plot=False,
                                             lambd=0.01, num_neurons=128, days=days_to_predict,
                                             data=train_data)
-        
+
         x_values = range(len(loaded_data))
         plt.title('No name')
         plt.plot(x_values[:train_size], train_data, label='Train data')
