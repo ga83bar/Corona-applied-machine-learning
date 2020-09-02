@@ -7,7 +7,14 @@
     <div class="main main-raised">
         <div class="section profile-content">
 
-            <div class="container" id="stock">
+            <div class="container" id="faq">
+                <div class="profile-tabs mx-auto">
+                    <tabs plain nav-pills-icons color-button="success">
+                    </tabs>
+                </div>
+            </div>
+
+            <div class="container" id="web">
                 <h3 class="title">Web Traffic Analysis</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
@@ -20,15 +27,10 @@
                         <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset_graph1}}</md-button>
                         <md-menu-content>
                             <md-menu-item @click="dataset_id='0', selectedDataset_graph1='Internet Exchange Points'">Internet Exchange Points</md-menu-item>
-                            <md-menu-item @click="dataset_id='1', selectedDataset_graph1='youtube_viewchange'">youtube_viewchange</md-menu-item>
-                            <md-menu-item @click="dataset_id='2', selectedDataset_graph1='youtube_views'">youtube_views</md-menu-item>
-                            <md-menu-item @click="dataset_id='3', selectedDataset_graph1='steam_users'">steam_users</md-menu-item>
-                            <md-menu-item @click="dataset_id='4', selectedDataset_graph1='steam_ingame'">steam_ingame</md-menu-item>
-                            <md-menu-item @click="dataset_id='5', selectedDataset_graph1='twitch_views'">twitch_views</md-menu-item>
-                            <md-menu-item @click="dataset_id='6', selectedDataset_graph1='twitch_channels'">twitch_channels</md-menu-item>
-                            <md-menu-item @click="dataset_id='7', selectedDataset_graph1='twitch_viewtime'">twitch_viewtime</md-menu-item>
-                            <md-menu-item @click="dataset_id='8', selectedDataset_graph1='twitch_streams'">twitch_streams</md-menu-item>
-                            <md-menu-item @click="dataset_id='9', selectedDataset_graph1='ps_users'">ps_users</md-menu-item>
+                            <md-menu-item @click="dataset_id='1', selectedDataset_graph1='YouTube Viewchange'">YouTube Viewchange</md-menu-item>
+                            <md-menu-item @click="dataset_id='3', selectedDataset_graph1='Steam Users'">Steam Users</md-menu-item>
+                            <md-menu-item @click="dataset_id='5', selectedDataset_graph1='Twitch Views'">Twitch Views</md-menu-item>
+                            <md-menu-item @click="dataset_id='9', selectedDataset_graph1='PlayStation Network Users'">PlayStation Network Users</md-menu-item>
                         </md-menu-content>
                     </md-menu>
                     <md-button class="md-success md-round run" @click='select_set(1)'>Run Inference</md-button>
@@ -38,52 +40,56 @@
             </div>
 
             <div class="code">
-            <div v-if="selectedDataset_graph1=='Internet Exchange Points'">
-                <h4 class="title incode">Internet Exchange Points</h4>
-                In order to accurately depict the trend of an in- or decreasing internet traffic, data from worldwide exchange points are most representative and given in bitrates per time. <br />
-                 <br />
-                 These internet exchange points are the physical infrastructure nodes through which Internet Service Providers (ISPs) such as Deutsche Telekom or Vodafone as well as Content Delivery Networks (CDNs) exchange their internet traffic. As such, every package worldwide is sent through one of such exchange points. <br />
-                 <br />
-                 The underlying data set comprises exchange points from Frankfurt, ...
-            </div>
-        
-            <div v-else-if="selectedDataset_graph1=='youtube_viewchange'">
-                <h4 class="title incode">1</h4>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </div>
-            <div v-else-if="selectedDataset_graph1=='youtube_views'">
-                <h4 class="title incode">2</h4>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </div>
-            <div v-else-if="selectedDataset_graph1=='steam_users'">
-                <h4 class="title incode">Steam Network Users</h4>
-                 Online gaming has seen a surge during the COVID-19 pandemic on several platforms. <br />
-                 <br />
-                The underlying "Steam Network Users" data set describes the network activity (i.e. currently active users) on the Steam gaming platform for the respective timeline. 
+                <div v-if="selectedDataset_graph1=='Internet Exchange Points'">
+                    <h4 class="title incode">Internet Exchange Points</h4>
+                    In order to accurately depict the trend of an in- or decreasing internet traffic, 
+                    data from worldwide exchange points are most representative and given in bitrates per time. <br />
+                    <br>
+                    These internet exchange points are the physical infrastructure nodes through which Internet Service Providers (ISPs) 
+                    such as Deutsche Telekom or Vodafone as well as Content Delivery Networks (CDNs) exchange their internet traffic. As such, 
+                    every package worldwide is sent through one of such exchange points. <br />
+                    <br />
+                    The underlying data set comprises exchange points from Frankfurt, ...
                 </div>
-                        <div v-else-if="selectedDataset_graph1=='steam_ingame'">
-                <h4 class="title incode">Q4</h4>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </div>
-                        <div v-else-if="selectedDataset_graph1=='twitch_views'">
-                <h4 class="title incode">Twitch Viewtime</h4>
-                During the COVID-19 pandemic, internet streaming has greatly increased. The currently most popular streaming platform Twitch thus suffices to provide data for a time-series forecast. <br />
-                <br />
-                The underlying "Twitch Viewtime" data set describes the actual time spend watching streams. The data was obtained by scraping through Twitch analytics using a custom build Twitch scraper. </div>
-                        <div v-else-if="selectedDataset_graph1=='twitch_channels'">
-                <h4 class="title incode">Twitch Channels</h4>
-                During the COVID-19 pandemic, internet streaming has greatly increased. The currently most popular streaming platform Twitch thus suffices to provide data for a time-series forecast. <br />
-                <br />
-                The underlying "Twitch Channels" data set describes the channel count (i.e. new channels added or existing terminated). The data was obtained by scraping through Twitch analytics using a custom build Twitch scraper. 
+            
+                <div v-else-if="selectedDataset_graph1=='YouTube Views'">
+                    <h4 class="title incode">YouTube Views</h4>
+                    No text
                 </div>
-            <div v-else>
-                <h4 class="title incode">nothing selected</h4>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+                <div v-else-if="selectedDataset_graph1=='Steam Users'">
+                    <h4 class="title incode">Steam Network Users</h4>
+                    Online gaming has seen a surge during the COVID-19 pandemic on several platforms. <br />
+                    <br />
+                    The underlying "Steam Network Users" data set describes the network activity (i.e. currently active users) 
+                    on the Steam gaming platform for the respective timeline. 
+                </div>
+
+                <div v-else-if="selectedDataset_graph1=='Twitch Views'">
+                    <h4 class="title incode">Twitch Viewtime</h4>
+                    During the COVID-19 pandemic, internet streaming has greatly increased.
+                    The currently most popular streaming platform Twitch thus suffices to
+                    provide data for a time-series forecast.<br><br>
+
+                    The underlying ”Twitch Views” data set describes the viewcount for the
+                    respective streams on the platform. The data was obtained by scraping
+                    through Twitch analytics using a custom build Twitch scraper.
+                </div>
+
+                <div v-else-if="selectedDataset_graph1=='PlayStation Network Users'">
+                    <h4 class="title incode">PlayStation Network Users</h4>
+                    Online gaming has seen a surge during the COVID-19 pandemic on several
+                    platforms.<br><br>
+                    The underlying ”PlayStation Network Users” data set describes the network activity (i.e. currently active users) on Sony PlayStation consoles
+                    for the respective timeline.
+                </div>
+                
+                <div v-else>
+                    <h4 class="title incode">No dataset selected yet</h4>
+                </div>
             </div>
 
-            </div>
-
-            <div class="container" id="web">
+            <div class="container" id="stock">
                 <h3 class="title">Stock Predictions</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
@@ -95,14 +101,14 @@
                     <md-menu md-size="medium" md-align-trigger class="menuu">
                         <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset_graph2}}</md-button>
                         <md-menu-content>
-                            <md-menu-item @click="dataset_id='10', selectedDataset_graph2='stock_med'">stock_med</md-menu-item>
-                            <md-menu-item @click="dataset_id='11', selectedDataset_graph2='stock_bank'">stock_bank</md-menu-item>
-                            <md-menu-item @click="dataset_id='12', selectedDataset_graph2='stock_energy'">stock_energy</md-menu-item>
-                            <md-menu-item @click="dataset_id='13', selectedDataset_graph2='stock_oil'">stock_oil</md-menu-item>
-                            <md-menu-item @click="dataset_id='14', selectedDataset_graph2='stock_steel'">stock_steel</md-menu-item>
-                            <md-menu-item @click="dataset_id='15', selectedDataset_graph2='stock_automotive'">stock_automotive</md-menu-item>
-                            <md-menu-item @click="dataset_id='16', selectedDataset_graph2='stock_telecom'">stock_telecom</md-menu-item>
-                            <md-menu-item @click="dataset_id='17', selectedDataset_graph2='stock_tech'">stock_tech</md-menu-item>
+                            <md-menu-item @click="dataset_id='10', selectedDataset_graph2='Medical Stock'">Medical Stock</md-menu-item>
+                            <md-menu-item @click="dataset_id='11', selectedDataset_graph2='Banking Stock'">Banking Stock</md-menu-item>
+                            <md-menu-item @click="dataset_id='12', selectedDataset_graph2='Energy Stock'">Energy Stock</md-menu-item>
+                            <md-menu-item @click="dataset_id='13', selectedDataset_graph2='Oil Stock'">Oil Stock</md-menu-item>
+                            <md-menu-item @click="dataset_id='14', selectedDataset_graph2='Steel Stock'">Steel Stock</md-menu-item>
+                            <md-menu-item @click="dataset_id='15', selectedDataset_graph2='Automotive Stock'">Automotive Stock</md-menu-item>
+                            <md-menu-item @click="dataset_id='16', selectedDataset_graph2='Telecom Stock'">Telecom Stock</md-menu-item>
+                            <md-menu-item @click="dataset_id='17', selectedDataset_graph2='Tech Stock'">Tech Stock</md-menu-item>
                         </md-menu-content>
                     </md-menu>
                     <md-button class="md-success md-round run" @click='select_set(2)'>Run Inference</md-button>
@@ -111,16 +117,117 @@
             </div>
 
             <div class="code">
-                <h4 class="title incode">Corona has taken porn consumption to a new level </h4>
-                Obviously, this is placeholder content. Also, I am fluent in Latin.<br />Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </div>
-            <div class="container" id="faq">
-                <div class="profile-tabs mx-auto">
-                    <tabs plain nav-pills-icons color-button="success">
-                    </tabs>
+                <div v-if="selectedDataset_graph2=='Medical Stock'">
+                    <h4 class="title incode">Medical Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
 
+                    The underlying ”Medical Stock” data set comprises a feature set of the
+                    currently most important medical tech companies. In particular, these are<br><br>
+
+                    (a) Evotec AG<br>
+                    (b) Siemens Healthineers AG<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Banking Stock'">
+                    <h4 class="title incode">Banking Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+
+                    The underlying ”Banking Stock” data set comprises a feature set of the
+                    currently most important financial institutions listed in the worldwide
+                    stock indexes. In particular, these are<br><br>
+
+                    (a) Deutsche Bank<br>
+                    (b) Goldman Sachs<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Energy Stock'">
+                    <h4 class="title incode">Energy Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Energy Stock” data set comprises a feature set of the
+                    currently most important companies with a focus in energy and electricity
+                    operation listed in the worldwide stock indexes. In particular, these are<br><br>
+
+                    (a) Siemens AG<br>
+                    (b) Duke Energy Corporation<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Oil Stock'">
+                    <h4 class="title incode">Oil Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Oil Stock” data set comprises a feature set of the currently most important companies operating in the field of oil production.
+                    In particular, these are<br><br>
+
+                    (a) Shell<br>
+                    (b) ExxonMobil<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Steel Stock'">
+                    <h4 class="title incode">Steel Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Steel Stock” data set comprises a feature set of the currently most important companies operating in the field of steel production.
+                    In particular, these are<br><br>
+
+                    (a) ThyssenKrupp AG<br>
+                    (b) ArcelorMittal S.A.<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Automotive Stock'">
+                    <h4 class="title incode">Automotive Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Automotive Stock” data set comprises a feature set of
+                    the currently most important automitive companies. In particular, these
+                    are<br><br>
+
+                    (a) BMW<br>
+                    (b) Toyota<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Telecom Stock'">
+                    <h4 class="title incode">Telecom Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Telecom Stock” data set comprises a feature set of the
+                    currently most important telecom companies. In particular, these are<br><br>
+
+                    (a) ATT<br>
+                    (b) Verizon<br>
+                    (c) ...
+                </div>
+
+                <div v-if="selectedDataset_graph2=='Tech Stock'">
+                    <h4 class="title incode">Tech Stock</h4>
+                    The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                    
+                    The underlying ”Tech Stock” data set comprises a feature set of the currently most important tech companies. In particular, these are<br><br>
+
+                    (a) Apple<br>
+                    (b) Huawei<br>
+                    (c) ...
+                </div>
+
+                <div v-else>
+                    <h4 class="title incode">No dataset selected yet</h4>
                 </div>
             </div>
+            
         </div>
 
     </div>
