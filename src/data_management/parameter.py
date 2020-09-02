@@ -1,28 +1,30 @@
-"""Module docstring"""
+"""
+Parameter file defining a singelton parameter class.
+"""
 
-# from requests import get
-# import datetime as dt
 import os
 import datetime as dt
 
 
 class Parameter:
-    """This class contains parameters and methods to convert them.
+    """
+    This class contains parameters and methods to convert them.
     This is a Singleton object check for thread safety.
     Init with s = Parameter.getInstance()
     s = Parameter() will raise an exception.
-    With each .getInstance you will get the same (id) object"""
-    # public attributes THESE TWO SHOULD BE THE ONLY PUBLIC ATTRIBUTES !!!!
+    With each .getInstance you will get the same (id) object
+    """
     DEBUG = True
 
-    # private attributes PLEASE USE GETTER AND SETTER
+    # private attributes PLEASE USE GETTER AND SETTER!!
     __instance = None
     __CWD = None
     __logfile_path = None
 
     @staticmethod
     def get_instance():
-        """ Static access method.
+        """
+        Static access method.
         Use instead of Parameter(). So you get everytime the same instance of the object.
         """
         if Parameter.__instance is None:
@@ -42,7 +44,6 @@ class Parameter:
 
         # Financial Data
         # Corresponding Symbol Table -> /src/data_management/res/dailyCSV/financeAbbreviations.md
-
         self.__med_comp = ['EVT', 'SHL', 'BAS', 'BAYN', 'JNJ',
                            'PFE', 'FMS', 'FRE.DE', 'ABT', 'KMB',
                            'MDT', 'PHG', 'GE', 'BDX', 'CAH', 'SYK']
@@ -50,7 +51,7 @@ class Parameter:
         self.__banking = ['DB', 'CMC', 'NCB', 'GS', 'BRYN', 'WFC',
                           'JPHLF', 'CICHY', 'ACGBY', 'CRARY', 'BACHF', 'C']
 
-        self.__stock_index = ['DAX', 'TDXP', 'INDU', 'NDAQ', 'NKY']  # double SNP
+        self.__stock_index = ['DAX', 'TDXP', 'INDU', 'NDAQ', 'NKY']
 
         self.__energy_comp = ['SIEGY', 'EOAN.DE', 'RWE.DE',
                               'DUK', 'ENGI.PA', 'NGG', 'NEE', 'EDF']
@@ -70,7 +71,7 @@ class Parameter:
 
         self.__tec_comp = ['AAPL', 'AMZN', 'GOOGL', 'CCCMF',
                            'IFX.DE', 'SAP', 'CSCO', 'IBM', 'INL',
-                           'INTC', 'MSF', 'EBAY', 'TWRT', 'QCOM',  # 'EA',
+                           'INTC', 'MSF', 'EBAY', 'TWRT', 'QCOM',
                            'TXN', 'SNE']
 
         self.__finance_companies = (self.__med_comp + self.__energy_comp +
@@ -79,11 +80,11 @@ class Parameter:
                                     self.__automotive_comp +
                                     self.__telecom_comp + self.__tec_comp)
 
-        self.__folders = ['covid', 'finance', 'playstation', 'ix',  # 'de-cix',
+        self.__folders = ['covid', 'finance', 'playstation', 'ix',
                           'socialblade', 'steam', 'twitch']
 
     def __init__(self):
-        """ Virtual private constructor."""
+        """Virtual private constructor."""
         if Parameter.__instance is not None:
             raise Exception("This class is a singleton!")
 
@@ -91,11 +92,11 @@ class Parameter:
         self.__singelton_init()
 
     def get_working_directory(self):
-        """returns current working directory"""
+        """Returns current working directory"""
         return self.working_directory
 
     def get_logfile_path(self):
-        """returns file path"""
+        """Returns file path"""
         filepath = self.__logfile_path
         return filepath
 

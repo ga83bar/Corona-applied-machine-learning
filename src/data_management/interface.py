@@ -20,9 +20,6 @@ class DatasetInterface():
     def load_data(self):
         """This method is an interface method for loading the data it is implemented inpreprocessing.py"""
 
-    def more_functions_tb_implemented(self):
-        """This method is an interface method for loading the data it is implemented inpreprocessing.py"""
-
 
 class PreprocessDataInterface(metaclass=ABCMeta):
     """Edit doxy !!!"""

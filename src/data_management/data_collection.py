@@ -276,7 +276,6 @@ class FinanceCollector(ICollector):
         Input is the raw data as pandas frame.
         Returns the preprocessed dataset as pandas frame.
         """
-        # frame_raw = frame_raw.dropna(axis=1)
 
         return frame_raw
 
@@ -303,7 +302,7 @@ class FinanceCollector(ICollector):
 
             try:
                 # prepare the frame
-                loaded_data, _ = time_series.get_daily(company, outputsize='full')
+                loaded_data, _ = time_series.get_daily(company, outputsize='full')  # pylint: disable=unbalanced-tuple-unpacking
                 loaded_data = pd.DataFrame(loaded_data)
                 loaded_data.reset_index(level=0, inplace=True)
 
@@ -312,7 +311,7 @@ class FinanceCollector(ICollector):
                 loaded_data.columns = ['Date', str(company)]
                 loaded_data = loaded_data[loaded_data['Date'] > start_date]
 
-            except Exception as inst:
+            except Exception as inst:  # pylint: disable=broad-except
                 print('Error during downloading stock data {}'.format(inst))
                 print('Problems downloading {}'.format(company))
 
