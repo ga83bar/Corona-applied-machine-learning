@@ -14,44 +14,6 @@ PARSER = reqparse.RequestParser()
 PARSER.add_argument("dataset_id_req")
 PARSER.add_argument("ping")
 PARSER.add_argument("selected_graph")
-# Unpickle our model so we can use it!
-
-
-# def load_data(data_folder_name, csv_file_name, type):
-#     """
-#     !@brief Opens a csv file starting from the folder 'res' and the input subfolders and
-#     extracts the data for the specified type
-#     @param folder structure starting from the directory 'res' to the csv-file,
-#     the name of the csv-file,
-#     type of the data to be extracted (name of column in csv)
-#     @return extracted data in form of a list
-#     """
-
-#     # TODO: Remove test
-#     # filePath = __file__
-#     # print("This script file path is ", filePath)
-#     # absFilePath = os.path.abspath(__file__)
-#     # print("This script absolute path is ", absFilePath)
-
-#     # Path to data directory
-#     data_path = Path("../../../res/")
-#     # Path to open CSV-file from
-#     file_path = Path("{}/{}".format(data_folder_name, csv_file_name))
-#     # Join the two partial paths to a complete path to access the file
-#     complete_path = Path(data_path, file_path)
-
-#     # Open file as a pandas frame
-#     csv_file = pd.read_csv(complete_path)
-#     # Convert the "Date" entries into datetime objects
-#     csv_file["Date"] = pd.to_datetime(csv_file["Date"])
-#     # Sort the pandas frame in the ascending date order
-#     csv_file.sort_values(by=["Date"], inplace=True)
-#     # Reconvert the datetime objects into Strings
-#     csv_file["Date"] = csv_file["Date"].astype(str)
-#     # Extract data of specified type to a list
-#     data = csv_file[type].to_list()
-
-#     return data
 
 
 class Switcher():
