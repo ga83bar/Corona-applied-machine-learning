@@ -24,8 +24,8 @@ import joblib
 
 from src.inference import extreme_learning as EM
 from src.inference import prophet as pro
-
 from src.inference.load_in import LoadIn
+
 
 
 def get_model_list():
@@ -139,17 +139,18 @@ def get_predict_data(label):
         factor = 1000000000.0
 
         predicted_df = predicted_df * var
-        predicted_df = predicted_df * mean
+        predicted_df = predicted_df + mean
         predicted_df = predicted_df * factor
         
         prophet_attr_df_post[label] = prophet_attr_df_post[label] * var
-        prophet_attr_df_post[label] = prophet_attr_df_post[label] * mean
+        prophet_attr_df_post[label] = prophet_attr_df_post[label] + mean
         prophet_attr_df_post[label] = prophet_attr_df_post[label] * factor
 
         prophet_attr_df_pre[label] = prophet_attr_df_pre[label] * var
-        prophet_attr_df_pre[label] = prophet_attr_df_pre[label] * mean
+        prophet_attr_df_pre[label] = prophet_attr_df_pre[label] + mean
         prophet_attr_df_pre[label] = prophet_attr_df_pre[label] * factor
 
+    
     return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre
 
 
