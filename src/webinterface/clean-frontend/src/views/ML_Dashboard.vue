@@ -607,16 +607,7 @@ export default {
 }
 
 .fixed-width-button {
-<<<<<<< HEAD
-    width: 16em; //was 12em -> Changed to 16em to display bigger words such as "Internet Exchange Points"
-=======
-    width: 16em;
-}
-
-.profile-content
-{
-    padding-bottom: 9px;
->>>>>>> 8fe21f7f40748159345474463159967e9049685a
+    width: 16em; //<!-- was 12em -> Changed to 16em to display bigger words such as "Internet Exchange Points" -->
 }
 </style>
 
