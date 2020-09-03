@@ -34,6 +34,7 @@ class PreprocessDataInterface(metaclass=ABCMeta):
         Sets the paths to the raw and processed folders.
         Input should be a string similar to the naming in the res folder e.g 'pornhub'
         """
+        frame = None
         # check if name object is string
         if isinstance(name, str):
             # we can be sure that every .csv has a different name so we iterate over the files in folder
@@ -49,7 +50,7 @@ class PreprocessDataInterface(metaclass=ABCMeta):
                 return frame
             # raise Exception('There are too many .csv files in folder {}'.format(self.path_to_processed))
         else:
-            raise Exception('ICollector : get_paths name is no valid string')
+            return frame
 
     def set_scalinging_algorithm(self, algo=2):
         """

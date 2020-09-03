@@ -302,7 +302,7 @@ class FinanceCollector(ICollector):
 
             try:
                 # prepare the frame
-                loaded_data, _ = time_series.get_daily(company,
+                loaded_data, _ = time_series.get_daily(company,  # pylint: disable=unbalanced-tuple-unpacking
                                                        outputsize='full')  # pylint: disable=unbalanced-tuple-unpacking
                 loaded_data = pd.DataFrame(loaded_data)
                 loaded_data.reset_index(level=0, inplace=True)

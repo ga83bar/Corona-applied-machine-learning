@@ -35,7 +35,7 @@ class DataMerger():
         '''
         start = self.params.start_date_data
         end = self.params.end_date_data
-        self.frame = self.__get_date_frame(start, end)
+        self.frame = get_date_frame(start, end)
 
         for folder in self.path_to_processed:
             dirs = os.listdir(folder)
@@ -56,18 +56,19 @@ class DataMerger():
 
         return self.frame
 
-    def __get_date_frame(self, start, end):
-        """ Generate list of all dates between start and end date"""
-        date_list = [start + dt.timedelta(days=x) for x in range(0, (end - start).days)]
-        frame = pd.DataFrame(date_list)
-        frame.columns = ['Date']
-        frame['Date'] = pd.to_datetime(frame['Date'], utc=True)
-        return frame
+
 
     def get_all_paths(self):
         '''Returns all file paths where we read data from '''
         return self.path_to_processed
 
+def get_date_frame(start, end):
+    """ Generate list of all dates between start and end date"""
+    date_list = [start + dt.timedelta(days=x) for x in range(0, (end - start).days)]
+    frame = pd.DataFrame(date_list)
+    frame.columns = ['Date']
+    frame['Date'] = pd.to_datetime(frame['Date'], utc=True)
+    return frame
 
 def test():
     '''Dummy'''
