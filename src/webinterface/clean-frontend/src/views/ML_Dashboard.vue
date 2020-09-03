@@ -18,7 +18,7 @@
                 <h3 class="title">Web Traffic Analysis</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
-                        <h2 v-if="loading_graph1==true">Loading... </h2>
+                        <div v-if="loading_graph1==true" class="loading-banner"><img type="image/svg+xml" src="@/assets/img/loading_graph.svg" /></div>
                         <line-chart v-if="loading_graph1 == false" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
@@ -524,6 +524,7 @@ export default {
         header: {
             type: String,
             default: require("@/assets/img/background.jpg")
+
         }
     },
     computed: {
@@ -629,5 +630,15 @@ export default {
 {
     padding-bottom: 9px;
 }
+
+.loading-banner img{
+width: 50%;
+}
+.loading-banner{
+height: 400px;
+text-align: center;
+}
 </style>
+
+
 

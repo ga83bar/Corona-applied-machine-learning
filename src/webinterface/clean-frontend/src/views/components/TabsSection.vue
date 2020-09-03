@@ -9,7 +9,7 @@
             <template slot="content">
               <md-tabs class="md-danger" md-alignment="center">
                 <md-tab id="tab-how-to" md-label="How to use what_if.ai">
-                  
+                
                   <p>
                     In order to model and eventually compare <b>global economic</b> and <b>online activity trends</b>, what if.ai provides many different data sets to choose from. 
                     These range from <b>stock market projections</b> for industry branches such as the medical and tech one, to <b>more specific metrics</b> as internet exchange point bitrates 
@@ -23,7 +23,6 @@
                   and <b>R2</b> are given and <b>confidence intervals</b> are displayed in gray in order
                   to give a perception of how good the prediction is.
                   </l>
-
                 </md-tab>
 
                 <md-tab id="tab-about-the-model" md-label="About the AI Model">
@@ -113,4 +112,10 @@ export default {
 };
 </script>
 
-<style lang="css"></style>
+<style lang="css">
+
+.lefttext
+{
+  text-align: left;
+}
+</style>
