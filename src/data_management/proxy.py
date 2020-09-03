@@ -56,7 +56,6 @@ class DataMerger():
 
         return self.frame
 
-
     def get_all_paths(self):
         '''Returns all file paths where we read data from '''
         return self.path_to_processed

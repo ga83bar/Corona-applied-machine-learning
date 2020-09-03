@@ -51,7 +51,6 @@ class PreprocessDataInterface(metaclass=ABCMeta):
         else:
             raise Exception('ICollector : get_paths name is no valid string')
 
-
     def set_scalinging_algorithm(self, algo=2):
         """
         these functions only serve the purpose of providing an example

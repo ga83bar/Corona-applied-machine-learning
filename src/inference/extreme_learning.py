@@ -135,7 +135,7 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         if (days is None and date is None):
             raise Exception('Extreme Learning Machine predict_next_days : days and date is None')
 
-        if days is None:
+        elif days is None:
             today = datetime.date.today()
             days = date - today
 
@@ -173,7 +173,6 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
             plt.plot(x_values[len(data):], predictions, label='Prediction')
             plt.show()
 
-
         return predictions
 
     def build_network(self, neurons=128, layers=1, train_window=TRAIN_WINDOW,
@@ -205,7 +204,7 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         x_train_test = []
         y_train_test = []
 
-        for iterator in range(train_window, len(data)):
+        for iterator in range(self.train_window, len(data)):
             x_vals = data[(iterator-train_window):iterator]
             x_train_test.append(x_vals)
             y_train_test.append(data[iterator])
@@ -229,18 +228,16 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         @param error_measure : error measure e.g mse, mae
         @return : boolean value indicates if we seted the value or not
         '''
-        return_value = False
         if isinstance(self.__measure, str):
             if (self.__measure == 'mse' or self.__measure == 'mae'):
                 self.__measure = error_measure
-                return_value = True
+                return True
             else:
                 print('{} is no valid Error measure for ELM'.format(error_measure))
-                return_value = False
+                return False
         else:
             print('Your input is not even a string =(')
-            return_value = False
-        return return_value
+            return False
 
     def mse(self, y_real, y_predict):
         '''
@@ -249,7 +246,6 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         difference_array = np.subtract(y_real, y_predict)
         squared_array = np.square(difference_array)
         mse = squared_array.mean()
-        print('The {} error is {}'.format(self.__measure, mse))
         return mse
 
     def mae(self, y_real, y_predict):
@@ -259,11 +255,11 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         difference_array = np.subtract(y_real, y_predict)
         abs_array = np.abs(difference_array)
         error = abs_array.mean()
-        print('The {} error is {}'.format(self.__measure, error))
         return error
 
     # Prpoerties
     error_measure = property(get_error_measure, set_error_measure)
+
 
 def test_cv():
     ''' Test running sckikit learn cross validation'''
@@ -299,7 +295,7 @@ def test_grid_search():
         # Set the parameters by cross-validation
         tuned_parameters = {'neurons': [10, 20],
                             'lambd': [0.001, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5],
-                            'regu': ['no', 'L1', 'L2']}
+                            'regu': ['no', 'L1', 'L2']},
         clf = GridSearchCV(ExtremeLearningMachine(),
                            tuned_parameters)
         clf.fit(x_train_test, y_train_test)
