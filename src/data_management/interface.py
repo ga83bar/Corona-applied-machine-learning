@@ -29,7 +29,7 @@ class PreprocessDataInterface(metaclass=ABCMeta):
         self._path_to_scaler = os.path.join(self.path_to_processed, 'scaler.save')
         self.frame = self._load_data(name)
 
-    def _load_data(self, name):
+    def _load_data(self, name):  # pylint: disable=inconsistent-return-statements
         """
         Sets the paths to the raw and processed folders.
         Input should be a string similar to the naming in the res folder e.g 'pornhub'
