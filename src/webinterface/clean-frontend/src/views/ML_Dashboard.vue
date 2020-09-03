@@ -586,6 +586,6 @@ export default {
 }
 
 .fixed-width-button {
-    width: 12em;
+    width: 16em;
 }
 </style>
