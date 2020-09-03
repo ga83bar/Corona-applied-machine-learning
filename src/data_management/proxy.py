@@ -7,11 +7,12 @@ import pandas as pd
 from parameter import Parameter
 
 
-class DataMerger(object):
+class DataMerger():
     '''
     Class that handels the merging of the different Dataframes.
     '''
     def __init__(self):
+        '''Constructor of DataMerger'''
         self.params = Parameter.get_instance()
         # make a list containing all paths to processed data
         folders = self.params.folders
@@ -56,18 +57,23 @@ class DataMerger(object):
         return self.frame
 
     def __get_date_frame(self, start, end):
-        """ Gen list of all dates between start and end date"""
+        """ Generate list of all dates between start and end date"""
         date_list = [start + dt.timedelta(days=x) for x in range(0, (end - start).days)]
         frame = pd.DataFrame(date_list)
         frame.columns = ['Date']
         frame['Date'] = pd.to_datetime(frame['Date'], utc=True)
         return frame
 
+    def get_all_paths(self):
+        '''Returns all file paths where we read data from '''
+        return self.path_to_processed
+
 
 def test():
     '''Dummy'''
     da_me = DataMerger()
     da_me.get_all_data()
+
 
 if __name__ == '__main__':
     test()

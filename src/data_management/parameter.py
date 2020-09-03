@@ -108,7 +108,7 @@ class Parameter:
     @start_date_data.setter
     def start_date_data(self, start_date):
         """Setter method for start date of data collection"""
-        if isinstance(start_date, dt):
+        if isinstance(start_date, dt.date):
             self.__start_date_data = start_date
         else:
             raise Exception('Your start date is no valid datetime object!')
@@ -121,7 +121,7 @@ class Parameter:
     @end_date_data.setter
     def end_date_data(self, start_date):
         """Setter method for start date of data collection"""
-        if isinstance(start_date, dt):
+        if isinstance(start_date, dt.date):
             self.__end_date_data = start_date
         else:
             raise Exception('Your start date is no valid datetime object!')
@@ -141,8 +141,3 @@ class Parameter:
     def folders(self):
         """Getter method"""
         return self.__folders
-
-    @folders.setter
-    def folders(self, _):
-        """Setter method"""
-        print('Access denied !!!!!')
