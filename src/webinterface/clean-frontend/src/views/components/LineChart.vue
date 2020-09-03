@@ -53,6 +53,7 @@ export default {
                         value: "2020-01-01",
                         borderColor: "red",
                         borderWidth: 2,
+                        borderDash:[10, 10],
                         label: {
                             content: "BEGIN PREDICTION",
                             enabled: true,
