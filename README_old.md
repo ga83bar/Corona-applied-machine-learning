@@ -23,6 +23,8 @@ The problem is approached via data driven analysis. At the start of the project,
 **Last team session:** August 7 \
 **Next team session:** TBA
 
+[Stan](https://mc-stan.org/)
+
 [Meeting Summary & Milestone 3 Objectives](/documentation/meeting_transcripts/summary_milestone3_july_7.md) \
 [ML Candidate Model Overview](/documentation/Machine Learning Models/MachineLearningModels.md) \
 [General ML Strategy](/documentation/Machine Learning Models/GeneralStrategy.md) \

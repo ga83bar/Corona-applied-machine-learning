@@ -27,9 +27,9 @@
                         <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset_graph1}}</md-button>
                         <md-menu-content>
                             <md-menu-item @click="dataset_id='0', selectedDataset_graph1='Internet Exchange Points'">Internet Exchange Points</md-menu-item>
-                            <md-menu-item @click="dataset_id='1', selectedDataset_graph1='YouTube Viewchange'">YouTube Viewchange</md-menu-item>
-                            <md-menu-item @click="dataset_id='3', selectedDataset_graph1='Steam Users'">Steam Users</md-menu-item>
-                            <md-menu-item @click="dataset_id='5', selectedDataset_graph1='Twitch Views'">Twitch Views</md-menu-item>
+                            <md-menu-item @click="dataset_id='1', selectedDataset_graph1='YouTube View Count'">YouTube View Count</md-menu-item> <!-- Was YouTube Viewchange-->
+                            <md-menu-item @click="dataset_id='3', selectedDataset_graph1='Steam Network Users'">Steam Network Users</md-menu-item>
+                            <md-menu-item @click="dataset_id='5', selectedDataset_graph1='Twitch View Count'">Twitch View Count</md-menu-item> <!-- Was Twitch Views -->
                             <md-menu-item @click="dataset_id='9', selectedDataset_graph1='PlayStation Network Users'">PlayStation Network Users</md-menu-item>
                         </md-menu-content>
                     </md-menu>
@@ -49,38 +49,43 @@
                     such as Deutsche Telekom or Vodafone as well as Content Delivery Networks (CDNs) exchange their internet traffic. As such, 
                     every package worldwide is sent through one of such exchange points. <br />
                     <br />
-                    The underlying data set comprises exchange points from Frankfurt, ...
+                    The selected Internet Exchange Points data set comprises international exchange nodes from Frankfurt, Hamburg, Munich, Duesseldorf, Moscow, London, Seattle, Nova Scotia
+                    Helsinki, Glasgow and Cardiff.
                 </div>
             
-                <div v-else-if="selectedDataset_graph1=='YouTube Views'">
-                    <h4 class="title incode">YouTube Views</h4>
-                    No text
+                <div v-else-if="selectedDataset_graph1=='YouTube View Count'"> <!-- Was YouTube Viewchange-->
+                    <h4 class="title incode">YouTube View Count</h4>
+                    YouTube - as one of the most popular content creator websites - has seen a surge in user activity during the pandemic. The website traffic has thus increased 
+                    at a steady pace and can be described by the number of views. 
+                    <br><br>
+                    The selected YouTube View Count data set comprises the amount of views for the 250 most popular channels on YouTube. The data was obtained by scraping through 
+                    YouTube analytics using a custom build Youtube scraper.    
                 </div>
 
-                <div v-else-if="selectedDataset_graph1=='Steam Users'">
+                <div v-else-if="selectedDataset_graph1=='Steam Network Users'">
                     <h4 class="title incode">Steam Network Users</h4>
                     Online gaming has seen a surge during the COVID-19 pandemic on several platforms. <br />
                     <br />
-                    The underlying "Steam Network Users" data set describes the network activity (i.e. currently active users) 
+                    The selected Steam Network Users data set describes the network activity (i.e. currently active users) 
                     on the Steam gaming platform for the respective timeline. 
                 </div>
 
-                <div v-else-if="selectedDataset_graph1=='Twitch Views'">
-                    <h4 class="title incode">Twitch Viewtime</h4>
-                    During the COVID-19 pandemic, internet streaming has greatly increased.
-                    The currently most popular streaming platform Twitch thus suffices to
-                    provide data for a time-series forecast.<br><br>
-
-                    The underlying ”Twitch Views” data set describes the viewcount for the
+                <div v-else-if="selectedDataset_graph1=='Twitch View Count'"> <!-- Was Twitch Views -->
+                    <h4 class="title incode">Twitch View Count</h4>
+                    During the COVID-19 pandemic, online streaming has greatly increased.
+                    The currently most popular (gaming) streaming platform Twitch has seen an 
+                    increase in members as well as overall stream views. 
+                    <br><br>
+                    The selected Twitch View Count data set describes the amount of views for the
                     respective streams on the platform. The data was obtained by scraping
                     through Twitch analytics using a custom build Twitch scraper.
                 </div>
 
                 <div v-else-if="selectedDataset_graph1=='PlayStation Network Users'">
                     <h4 class="title incode">PlayStation Network Users</h4>
-                    Online gaming has seen a surge during the COVID-19 pandemic on several
+                    Online gaming has seen a significant surge in popularity during the COVID-19 pandemic on several
                     platforms.<br><br>
-                    The underlying ”PlayStation Network Users” data set describes the network activity (i.e. currently active users) on Sony PlayStation consoles
+                    The selected PlayStation Network Users data set describes the network activity (i.e. currently active users) on Sony PlayStation consoles
                     for the respective timeline.
                 </div>
                 
@@ -101,14 +106,14 @@
                     <md-menu md-size="medium" md-align-trigger class="menuu">
                         <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset_graph2}}</md-button>
                         <md-menu-content>
-                            <md-menu-item @click="dataset_id='10', selectedDataset_graph2='Medical Stock'">Medical Stock</md-menu-item>
-                            <md-menu-item @click="dataset_id='11', selectedDataset_graph2='Banking Stock'">Banking Stock</md-menu-item>
-                            <md-menu-item @click="dataset_id='12', selectedDataset_graph2='Energy Stock'">Energy Stock</md-menu-item>
-                            <md-menu-item @click="dataset_id='13', selectedDataset_graph2='Oil Stock'">Oil Stock</md-menu-item>
-                            <md-menu-item @click="dataset_id='14', selectedDataset_graph2='Steel Stock'">Steel Stock</md-menu-item>
-                            <md-menu-item @click="dataset_id='15', selectedDataset_graph2='Automotive Stock'">Automotive Stock</md-menu-item>
-                            <md-menu-item @click="dataset_id='16', selectedDataset_graph2='Telecom Stock'">Telecom Stock</md-menu-item>
-                            <md-menu-item @click="dataset_id='17', selectedDataset_graph2='Tech Stock'">Tech Stock</md-menu-item>
+                            <md-menu-item @click="dataset_id='10', selectedDataset_graph2='Medical Branch'">Medical Branch</md-menu-item> <!-- Was Medical Stock -->
+                            <md-menu-item @click="dataset_id='11', selectedDataset_graph2='Banking Branch'">Banking Branch</md-menu-item> <!-- Was Banking Stock -->
+                            <md-menu-item @click="dataset_id='12', selectedDataset_graph2='Energy Branch'">Energy Branch</md-menu-item> <!-- Was Energy Stock -->
+                            <md-menu-item @click="dataset_id='13', selectedDataset_graph2='Oil Branch'">Oil Branch</md-menu-item> <!-- Was Oil Stock -->
+                            <md-menu-item @click="dataset_id='14', selectedDataset_graph2='Steel Branch'">Steel Branch</md-menu-item> <!-- Was Steel Stock -->
+                            <md-menu-item @click="dataset_id='15', selectedDataset_graph2='Automotive Branch'">Automotive Branch</md-menu-item> <!-- Was Automotive Stock -->
+                            <md-menu-item @click="dataset_id='16', selectedDataset_graph2='Telecom Branch'">Telecom Branch</md-menu-item> <!-- Was Telecom Stock -->
+                            <md-menu-item @click="dataset_id='17', selectedDataset_graph2='Tech Branch'">Tech Branch</md-menu-item> <!-- Was Tech Stock -->
                         </md-menu-content>
                     </md-menu>
                     <md-button class="md-success md-round run" @click='select_set(2)'>Run Inference</md-button>
@@ -117,115 +122,131 @@
             </div>
 
             <div class="code">
-                <div v-if="selectedDataset_graph2=='Medical Stock'">
-                    <h4 class="title incode">Medical Stock</h4>
-                    The COVID-19 pandemic has had and still has a great influence on the
-                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                <div v-if="selectedDataset_graph2=='Medical Branch'"> <!-- Was Medical Stock -->
+                    <h4 class="title incode">Medical Branch</h4>
+                    <!-- The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
 
-                    The underlying ”Medical Stock” data set comprises a feature set of the
-                    currently most important medical tech companies. In particular, these are<br><br>
+                    The selected Medical Branch data set comprises a feature set of the
+                    currently most dominant medical tech companies. In particular, it contains stock market data from 16 companies such as <br><br>
 
                     (a) Evotec AG<br>
                     (b) Siemens Healthineers AG<br>
-                    (c) ...
+                    (c) BASF
+                    <br><br>
+                    and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Banking Stock'">
-                    <h4 class="title incode">Banking Stock</h4>
-                    The COVID-19 pandemic has had and still has a great influence on the
-                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                <div v-if="selectedDataset_graph2=='Banking Branch'"> <!-- Was Banking Stock -->
+                    <h4 class="title incode">Banking Branch</h4>
+                    <!-- The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
 
-                    The underlying ”Banking Stock” data set comprises a feature set of the
+                    The selected Banking Branch data set comprises a feature set of the
                     currently most important financial institutions listed in the worldwide
-                    stock indexes. In particular, these are<br><br>
+                    stock indexes. In particular, it contains stock market data from 13 companies such as<br><br>
 
                     (a) Deutsche Bank<br>
                     (b) Goldman Sachs<br>
-                    (c) ...
+                    (c) JPMorgan Chase
+                    <br><br>
+                    and many others. 
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Energy Stock'">
-                    <h4 class="title incode">Energy Stock</h4>
-                    The COVID-19 pandemic has had and still has a great influence on the
-                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                <div v-if="selectedDataset_graph2=='Energy Branch'"> <!-- Was Energy Stock -->
+                    <h4 class="title incode">Energy Branch</h4>
+                    <!-- The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
                     
-                    The underlying ”Energy Stock” data set comprises a feature set of the
+                    The selected Energy Branch data set comprises a feature set of the
                     currently most important companies with a focus in energy and electricity
-                    operation listed in the worldwide stock indexes. In particular, these are<br><br>
+                    operation listed in the worldwide stock indexes. In particular, it contains stock market data from 8 companies such as<br><br>
 
                     (a) Siemens AG<br>
                     (b) Duke Energy Corporation<br>
-                    (c) ...
+                    (c) Electricite de France SA
+                    <br><br>
+                    and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Oil Stock'">
-                    <h4 class="title incode">Oil Stock</h4>
-                    The COVID-19 pandemic has had and still has a great influence on the
-                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                <div v-if="selectedDataset_graph2=='Oil Branch'"> <!-- Was Oil Stock -->
+                    <h4 class="title incode">Oil Branch</h4>
+                    <!-- The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
                     
-                    The underlying ”Oil Stock” data set comprises a feature set of the currently most important companies operating in the field of oil production.
-                    In particular, these are<br><br>
+                    The selected Oil Branch data set comprises a feature set of the currently most important companies operating in the field of oil production.
+                    In particular, it contains stock market data from 9 companies such as<br><br>
 
                     (a) Shell<br>
                     (b) ExxonMobil<br>
-                    (c) ...
+                    (c) ROSNEFT
+                    <br><br>
+                    and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Steel Stock'">
-                    <h4 class="title incode">Steel Stock</h4>
-                    The COVID-19 pandemic has had and still has a great influence on the
-                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                <div v-if="selectedDataset_graph2=='Steel Branch'"> <!-- Was Steel Stock -->
+                    <h4 class="title incode">Steel Branch</h4>
+                    <!-- The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
                     
-                    The underlying ”Steel Stock” data set comprises a feature set of the currently most important companies operating in the field of steel production.
-                    In particular, these are<br><br>
-
+                    The selected Steel Branch data set comprises a feature set of the currently most important companies operating in the field of steel production.
+                    In particular, it contains stock market data from 7 companies such as<br><br>
+ 
                     (a) ThyssenKrupp AG<br>
                     (b) ArcelorMittal S.A.<br>
-                    (c) ...
+                    (c) Hebei Iron and Steel Group
+                    <br><br>
+                    and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Automotive Stock'">
-                    <h4 class="title incode">Automotive Stock</h4>
-                    The COVID-19 pandemic has had and still has a great influence on the
-                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                <div v-if="selectedDataset_graph2=='Automotive Branch'"> <!-- Was Automotive Stock -->
+                    <h4 class="title incode">Automotive Branch</h4>
+                    <!-- The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
                     
-                    The underlying ”Automotive Stock” data set comprises a feature set of
-                    the currently most important automitive companies. In particular, these
-                    are<br><br>
+                    The selected Automotive Branch data set comprises a feature set of
+                    the currently most important automitive companies. In particular, it contains stock market data from 9 companies such as<br><br>
 
                     (a) BMW<br>
                     (b) Toyota<br>
-                    (c) ...
+                    (c) TESLA
+                    <br><br>
+                    and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Telecom Stock'">
-                    <h4 class="title incode">Telecom Stock</h4>
-                    The COVID-19 pandemic has had and still has a great influence on the
-                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
+                <div v-if="selectedDataset_graph2=='Telecom Branch'"> <!-- Was Telecom Stock -->
+                    <h4 class="title incode">Telecom Branch</h4>
+                    <!-- The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
                     
-                    The underlying ”Telecom Stock” data set comprises a feature set of the
-                    currently most important telecom companies. In particular, these are<br><br>
+                    The selected Telecom Branch data set comprises a feature set of the
+                    currently most important telecom companies. In particular, it contains stock market data from 13 companies such as<br><br>
 
-                    (a) ATT<br>
-                    (b) Verizon<br>
-                    (c) ...
+                    (a) AT&amp;T<br>
+                    (b) Vodafone Group<br>
+                    (c) China Mobile
+                    <br><br>
+                    and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Tech Stock'">
-                    <h4 class="title incode">Tech Stock</h4>
-                    The COVID-19 pandemic has had and still has a great influence on the
-                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br>
-                    
-                    The underlying ”Tech Stock” data set comprises a feature set of the currently most important tech companies. In particular, these are<br><br>
+                <div v-if="selectedDataset_graph2=='Tech Branch'"> <!-- Was Tech Stock -->
+                    <h4 class="title incode">Tech Branch</h4>
+                    <!-- The COVID-19 pandemic has had and still has a great influence on the
+                    global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
 
-                    (a) Apple<br>
-                    (b) Huawei<br>
-                    (c) ...
+                    The selected Tech Branch data set comprises a feature set of the currently most important tech companies. In particular, it contains stock market
+                    data from 21 companies such as<br><br>
+
+                    (a) Alphabet<br>
+                    (b) Apple<br>
+                    (c) Netflix
+                    <br><br>
                 </div>
-
+                
                 <div v-else>
                     <h4 class="title incode">No dataset selected yet</h4>
                 </div>
+
             </div>
             
         </div>
@@ -260,7 +281,7 @@ export default {
             selectedDataset_graph1: 'Select dataset',
             selectedDataset_graph2: 'Select dataset',
             disabledDates: function (date) {
-                // compare if today is greater then the datepickers date
+                // compare if today is greater than the datepickers date
             },
             dataset_id: '1',
             chartdata: null,
@@ -586,6 +607,6 @@ export default {
 }
 
 .fixed-width-button {
-    width: 12em;
+    width: 16em; //was 12em -> Changed to 16em to display bigger words such as "Internet Exchange Points"
 }
 </style>

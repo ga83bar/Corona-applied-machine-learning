@@ -8,22 +8,22 @@
           <h3><small>Getting started</small></h3>
           <nav-tabs-card no-label tabs-plain>
             <template slot="content">
-              <md-tabs class="md-danger" md-alignment="left">
+              <md-tabs class="md-danger" md-alignment="center">
                 <md-tab id="tab-how-to" md-label="How to use what_if.ai">
                   
                   <p>
-                    In order to model global economic and online traffic trends, what if.ai provides many different data sets to choose from. These range from medical
-                    and tech stock projections for the economic data to more specific ones such
-                    as internet exchange point bitrates and twitch statistics for the internet
-                    traffic analysis.                  
+                    In order to model and eventually compare <b>global economic</b> and <b>online activity trends</b>, what if.ai provides many different data sets to choose from. 
+                    These range from <b>stock market projections</b> for industry branches such as the medical and tech one, to <b>more specific metrics</b> as internet exchange point bitrates 
+                    and streaming statistics which describe the online activity in form of internet traffic.               
                   </p>
-                  <p>
-                  Simply select your desired data set and let the AI model do its magic.
-                  The resulting model prediction is displayed in green alongside the original
-                  true data in red. Additionally, common error metrics such as the MSE
-                  and R2 are given and confidence intervals are displayed in gray in order
+                  <br><br>
+                  <l>
+                  Simply select your desired data set and let the <b>AI model</b> do its magic.
+                  The resulting <b>model prediction</b> is displayed in green alongside the original
+                  true data in red. Additionally, common <b>error metrics</b> such as the <b>MSE</b>
+                  and <b>R2</b> are given and <b>confidence intervals</b> are displayed in gray in order
                   to give a perception of how good the prediction is.
-                  </p>
+                  </l>
 
                 </md-tab>
 
