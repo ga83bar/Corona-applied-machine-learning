@@ -8,19 +8,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-class DatasetInterface():
-    """This interface defines the most important attributes and methods to load/get the raw dataset"""
-    # DO NOT IMPLEMENT THIS
-    # attributes
-
-    # methods
-    def __init__(self):
-        pass
-
-    def load_data(self):
-        """This method is an interface method for loading the data it is implemented inpreprocessing.py"""
-
-
 class PreprocessDataInterface(metaclass=ABCMeta):
     """Edit doxy !!!"""
     NUMBER_ALGOS = 3
@@ -60,7 +47,7 @@ class PreprocessDataInterface(metaclass=ABCMeta):
 
             if count == 1:
                 return frame
-            raise Exception('There are too many .csv files in folder {}'.format(self.path_to_processed))
+            # raise Exception('There are too many .csv files in folder {}'.format(self.path_to_processed))
         else:
             raise Exception('ICollector : get_paths name is no valid string')
 
