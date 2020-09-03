@@ -57,10 +57,10 @@ class DataMerger():
         return self.frame
 
 
-
     def get_all_paths(self):
         '''Returns all file paths where we read data from '''
         return self.path_to_processed
+
 
 def get_date_frame(start, end):
     """ Generate list of all dates between start and end date"""
@@ -69,6 +69,7 @@ def get_date_frame(start, end):
     frame.columns = ['Date']
     frame['Date'] = pd.to_datetime(frame['Date'], utc=True)
     return frame
+
 
 def test():
     '''Dummy'''
