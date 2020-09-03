@@ -160,8 +160,8 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
         forecast = self.model.predict(future)
 
-        if do_plot:
-            self.plot(forecast, label)
+        # if do_plot:
+            # self.plot(forecast, label)
             # fig = plot_plotly(model, forecast)  # This returns a plotly Figure
             # py.iplot(fig)
 
