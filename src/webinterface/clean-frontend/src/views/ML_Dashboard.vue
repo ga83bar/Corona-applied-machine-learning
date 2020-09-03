@@ -18,7 +18,8 @@
                 <h3 class="title">Web Traffic Analysis</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
-                        <line-chart v-if="loaded_graph1" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" />
+                        <h2 v-if="loading_graph1==true">Loading... </h2>
+                        <line-chart v-if="loading_graph1 == false" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
                 </div>
@@ -98,7 +99,8 @@
                 <h3 class="title">Stock Predictions</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
-                        <line-chart v-if="loaded_graph2" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" />
+                        <h2 v-if="loading_graph2==true">Loading... </h2>
+                        <line-chart v-if="loading_graph2 == false" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
                 </div>
@@ -273,8 +275,8 @@ export default {
         let now = new Date()
 
         return {
-            loaded_graph1: false,
-            loaded_graph2: false,
+            loading_graph1: false,
+            loading_graph2: false,
             connection: false,
             start_date: format(now, dateFormat),
             end_date: format(now, dateFormat),
@@ -391,10 +393,10 @@ export default {
         select_set(selected_graph) {
 
             if(selected_graph == 1){
-                this.loaded_graph1 = false;
+                this.loading_graph1 = true;
             }
             else{
-                this.loaded_graph2 = false;
+                this.loading_graph2 = true;
             }
             
             axios.post('http://localhost:5000/predict', {
@@ -409,7 +411,7 @@ export default {
                         {
                             this.chartlabels_graph1 = response.data.labels,
                             this.chartdata_graph1 = [{
-                                    label: 'real data',
+                                    label: 'ground truth',
                                     data: response.data.chart_data_1,
                                     borderColor: 'rgb(0, 0, 0)',
                                     fill: false,
@@ -440,7 +442,7 @@ export default {
                         {
                             this.chartlabels_graph2 = response.data.labels,
                             this.chartdata_graph2 = [{
-                                    label: 'real data',
+                                    label: 'ground truth',
                                     data: response.data.chart_data_1,
                                     borderColor: 'rgb(0, 0, 0)',
                                     fill: false,
@@ -468,10 +470,10 @@ export default {
                         
                         this.datecheck_bool = response.data.datecheck;
                         if(selected_graph == 1){
-                            this.loaded_graph1 = true;
+                            this.loading_graph1 = false;
                         }
                         else{
-                            this.loaded_graph2 = true;
+                            this.loading_graph2 = false;
                         }
                         this.checkdate(this.datecheck_bool);
                 })
@@ -514,7 +516,7 @@ export default {
     mounted() {
         //executed after page is loaded -> see vue component lifeciycle
         this.ping_server();
-        this.select_set();
+        //this.select_set();
 
     },
 
