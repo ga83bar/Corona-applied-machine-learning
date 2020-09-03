@@ -588,4 +588,10 @@ export default {
 .fixed-width-button {
     width: 16em;
 }
+
+.profile-content
+{
+    padding-bottom: 9px;
+}
 </style>
+
