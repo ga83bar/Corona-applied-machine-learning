@@ -412,19 +412,22 @@ export default {
                                     label: 'real data',
                                     data: response.data.chart_data_1,
                                     borderColor: 'rgb(0, 0, 0)',
-                                    fill: false
+                                    fill: false,
+                                    pointRadius: 0
                                 },
                                 {
                                     label: 'model data',
                                     data: response.data.chart_data_2,
                                     borderColor: 'rgb(112, 112, 112)',
-                                    fill: false
+                                    fill: false,
+                                    pointRadius: 0
                                 },
                                 {
                                     label: 'prediction',
                                     data: response.data.chart_data_3,
                                     borderColor: 'rgb(255, 0, 0)',
-                                    fill: false
+                                    fill: false,
+                                    pointRadius: 0
                                 }
                             ]
                         }
@@ -436,19 +439,22 @@ export default {
                                     label: 'real data',
                                     data: response.data.chart_data_1,
                                     borderColor: 'rgb(0, 0, 0)',
-                                    fill: false
+                                    fill: false,
+                                    borderRadius: 0
                                 },
                                 {
                                     label: 'model data',
                                     data: response.data.chart_data_2,
                                     borderColor: 'rgb(112, 112, 112)',
-                                    fill: false
+                                    fill: false,
+                                    borderRadius: 0
                                 },
                                 {
                                     label: 'prediction',
                                     data: response.data.chart_data_3,
                                     borderColor: 'rgb(255, 0, 0)',
-                                    fill: false
+                                    fill: false,
+                                    borderRadius: 0
                                 }
                             ]
                         }
