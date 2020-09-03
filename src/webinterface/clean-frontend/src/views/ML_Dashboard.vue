@@ -478,7 +478,11 @@ export default {
                         this.checkdate(this.datecheck_bool);
                 })
                 .catch(e => {
+                    this.loading_graph1 = false,
+                    this.loading_graph2 = false,
                     this.notifyVue('top', 'center', 'danger', 'Connection failed.');
+                    
+                    
                 })
 
         },
