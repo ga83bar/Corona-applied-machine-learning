@@ -27,7 +27,6 @@ from src.inference import prophet as pro
 from src.inference.load_in import LoadIn
 
 
-
 def get_model_list():
     """returns a list containing available regressors for model comparison"""
     model_list = [('DecisionTree', DecisionTreeRegressor()), 
@@ -51,7 +50,7 @@ def get_params(df, ELM= False, prophet = False):
     performs grid search
     {'growth': 'linear', 'changepoint_prior_scale': 0.10499999999999995, 'interval_width': 0.8, 'seasonality_mode': 'additive', 'metric': 0.0011843675774291197}
     """
-    if prophet == True:
+    if prophet is True:
         param_dict ={}
         prophet_dataframes_pre = LoadIn().load_all(typ='pre')
         for label in prophet_dataframes_pre:
@@ -73,15 +72,12 @@ def get_params(df, ELM= False, prophet = False):
             best_params = prophet.gridsearchcv(parameters, dataframe= prophet_attr_df_pre, safe=True)
             param_dict[label] = best_params
             
-    
-    if ELM == True:
+    if ELM is True:
         # ELM 
         param_dict = {}
         lambdalst = []
         lambdalst = [0.001, 0.005, 0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1]
         neuronlst = [20, 40, 60, 80, 100, 120, 140, 150]
-        lmbd = 0
-        neuron = 20
         
         for attribute in df:
             if attribute == "Unnamed: 0":
@@ -121,37 +117,56 @@ def get_predict_data(label):
 
     prophet = pro.MyProphet()    
     prophet.fit(prophet_attr_df_pre['Date'], prophet_attr_df_pre[label])
-    predicted_df = prophet.predict(do_plot=False, label=label)
+    prophet_output = prophet.predict(do_plot=True, label=label)
+    predicted_df = prophet_output["yhat"]
+    lower_bound_df = prophet_output["yhat_lower"]
+    upper_bound_df = prophet_output["yhat_upper"]
 
     pipeline_path = Path(__file__).parent.parent.parent.joinpath('res', 'pipeline')
     scaler_path = pipeline_path.joinpath('scaler_'+label+'.save')
 
     scaler = joblib.load(scaler_path)
-   
+
     predicted_df = scaler.inverse_transform(predicted_df)
     prophet_attr_df_post[label] = scaler.inverse_transform(prophet_attr_df_post[label])
     prophet_attr_df_pre[label] = scaler.inverse_transform(prophet_attr_df_pre[label])
+    
+    lower_bound_df = scaler.inverse_transform(lower_bound_df)
+    upper_bound_df = scaler.inverse_transform(lower_bound_df)
 
     if label == "ix_bitrate":
         # factor for ix  dataset inverse transform
-        mean = 976.122858594206
-        var = 16558.93738199964
+        mean = 5370.573816155988
+        var = 337.82851880230834
         factor = 1000000000.0
-
+        
+        
         predicted_df = predicted_df * var
-        predicted_df = predicted_df + mean
+        print(predicted_df.min())
+        predicted_df = predicted_df + mean        
         predicted_df = predicted_df * factor
         
         prophet_attr_df_post[label] = prophet_attr_df_post[label] * var
+        print(prophet_attr_df_post[label].min())
         prophet_attr_df_post[label] = prophet_attr_df_post[label] + mean
         prophet_attr_df_post[label] = prophet_attr_df_post[label] * factor
 
         prophet_attr_df_pre[label] = prophet_attr_df_pre[label] * var
+        print(prophet_attr_df_pre[label].min())
         prophet_attr_df_pre[label] = prophet_attr_df_pre[label] + mean
         prophet_attr_df_pre[label] = prophet_attr_df_pre[label] * factor
 
-    
-    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre
+        lower_bound_df = lower_bound_df *var
+        lower_bound_df = lower_bound_df + mean
+        lower_bound_df = lower_bound_df * factor
+
+        print(lower_bound_df)
+
+        upper_bound_df = upper_bound_df *var
+        upper_bound_df = upper_bound_df + mean
+        upper_bound_df = upper_bound_df * factor
+
+    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre #, upper_bound_df, lower_bound_df
 
 
 def compare_models(model_dict, dataframe, plotting=False):
@@ -249,6 +264,4 @@ def compare_models(model_dict, dataframe, plotting=False):
 
     return score_dict, best_model_dict
 
-
-if __name__ == '__main__':
-    a,b,c = get_predict_data("ix_bitrate")
+  
