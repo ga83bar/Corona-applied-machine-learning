@@ -137,7 +137,7 @@
                     and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Banking Branch'"> <!-- Was Banking Stock -->
+                <div v-else-if="selectedDataset_graph2=='Banking Branch'"> <!-- Was Banking Stock -->
                     <h4 class="title incode">Banking Branch</h4>
                     <!-- The COVID-19 pandemic has had and still has a great influence on the
                     global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
@@ -153,7 +153,7 @@
                     and many others. 
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Energy Branch'"> <!-- Was Energy Stock -->
+                <div v-else-if="selectedDataset_graph2=='Energy Branch'"> <!-- Was Energy Stock -->
                     <h4 class="title incode">Energy Branch</h4>
                     <!-- The COVID-19 pandemic has had and still has a great influence on the
                     global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
@@ -169,7 +169,7 @@
                     and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Oil Branch'"> <!-- Was Oil Stock -->
+                <div v-else-if="selectedDataset_graph2=='Oil Branch'"> <!-- Was Oil Stock -->
                     <h4 class="title incode">Oil Branch</h4>
                     <!-- The COVID-19 pandemic has had and still has a great influence on the
                     global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
@@ -184,7 +184,7 @@
                     and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Steel Branch'"> <!-- Was Steel Stock -->
+                <div v-else-if="selectedDataset_graph2=='Steel Branch'"> <!-- Was Steel Stock -->
                     <h4 class="title incode">Steel Branch</h4>
                     <!-- The COVID-19 pandemic has had and still has a great influence on the
                     global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
@@ -199,7 +199,7 @@
                     and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Automotive Branch'"> <!-- Was Automotive Stock -->
+                <div v-else-if="selectedDataset_graph2=='Automotive Branch'"> <!-- Was Automotive Stock -->
                     <h4 class="title incode">Automotive Branch</h4>
                     <!-- The COVID-19 pandemic has had and still has a great influence on the
                     global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
@@ -214,7 +214,7 @@
                     and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Telecom Branch'"> <!-- Was Telecom Stock -->
+                <div v-else-if="selectedDataset_graph2=='Telecom Branch'"> <!-- Was Telecom Stock -->
                     <h4 class="title incode">Telecom Branch</h4>
                     <!-- The COVID-19 pandemic has had and still has a great influence on the
                     global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
@@ -229,7 +229,7 @@
                     and many others.
                 </div>
 
-                <div v-if="selectedDataset_graph2=='Tech Branch'"> <!-- Was Tech Stock -->
+                <div v-else-if="selectedDataset_graph2=='Tech Branch'"> <!-- Was Tech Stock -->
                     <h4 class="title incode">Tech Branch</h4>
                     <!-- The COVID-19 pandemic has had and still has a great influence on the
                     global stock market. In order to analyze its effect, stocks within a specified time range can be analyzed.<br><br> -->
@@ -607,16 +607,12 @@ export default {
 }
 
 .fixed-width-button {
-<<<<<<< HEAD
-    width: 16em; //was 12em -> Changed to 16em to display bigger words such as "Internet Exchange Points"
-=======
     width: 16em;
 }
 
 .profile-content
 {
     padding-bottom: 9px;
->>>>>>> 8fe21f7f40748159345474463159967e9049685a
 }
 </style>
 
