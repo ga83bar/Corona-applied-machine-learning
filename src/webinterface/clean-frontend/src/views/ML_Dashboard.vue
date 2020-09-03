@@ -99,7 +99,7 @@
                 <h3 class="title">Stock Predictions</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
-                        <h2 v-if="loading_graph2==true">Loading... </h2>
+                        <div v-if="loading_graph2==true" class="loading-banner"><img type="image/svg+xml" src="@/assets/img/loading_graph.svg" /></div>
                         <line-chart v-if="loading_graph2 == false" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
