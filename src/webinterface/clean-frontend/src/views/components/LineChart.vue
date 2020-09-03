@@ -51,7 +51,7 @@ export default {
                         mode: "vertical",
                         scaleID: "x-axis-0",
                         value: "2020-01-01",
-                        borderColor: "red",
+                        borderColor: "#e53935",
                         borderWidth: 2,
                         borderDash:[10, 10],
                         label: {

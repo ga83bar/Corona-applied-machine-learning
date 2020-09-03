@@ -429,7 +429,7 @@ export default {
                                 {
                                     label: 'prediction',
                                     data: response.data.chart_data_3,
-                                    borderColor: 'rgb(255, 0, 0)',
+                                    borderColor: '#e53935',
                                     fill: false,
                                     pointRadius: 0,
                                     borderWidth:2
@@ -460,7 +460,7 @@ export default {
                                 {
                                     label: 'prediction',
                                     data: response.data.chart_data_3,
-                                    borderColor: 'rgb(255, 0, 0)',
+                                    borderColor: '#e53935',
                                     fill: false,
                                     pointRadius: 0,
                                     borderWidth:2
