@@ -23,12 +23,14 @@ from src.inference.load_in import LoadIn
 
 class MyProphet(BaseEstimator, RegressorMixin):
     """
-    Prophet class for handling forecasts.
+    @brief: Prophet class for handling forecasts.
+    @param BaseEstimator: get necessary function to be abele to use Scikit GridSearchCV
+    @param RegressorMixin: get score function
     """
 
     def __init__(self):
         """
-        Input data must be a dataframe containing a Date and a target value.
+        @brief: Input data must be a dataframe containing a Date and a target value.
         """
         self.cols = ['ds', 'y']
         self.dset = None
@@ -82,28 +84,28 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
     def set_dset(self, dset):
         """
-        Sets dset
+        @brief: Sets dset
         @param dset: new dset
         """
         self.dset = dset
 
     def set_cap(self, cap=1):
         """
-        sets the cap for max in logistic growth
+        @brief: sets the cap for max in logistic growth
         @param cap: max logistic growth
         """
         self.cap = cap
 
     def set_floor(self, floor=1):
         """
-        sets the floor for min in logistic growth
+        @brief: sets the floor for min in logistic growth
         @param floor min logistic growth
         """
         self.floor = floor
 
     def set_metric(self, metric='mse'):
         """
-        sets the score unit
+        @brief: sets the score unit
         @param metric: decide which metric for evaluation should be set avaiable is mse, rmse, mae, mape
         """
         self.metric = metric
@@ -112,7 +114,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
                   changepoint_prior_scale=0.05, interval_width=0.8,\
                   seasonality_mode='additive'):
         """
-        Adapt the model
+        @brief: Adapt the model
         @param growth: is the model linear or logistic in rising/falling
         @param changepoint_prior_scale: how flexibel ist the model greater more felxibel
         @param interval_width: the width of the uncertantiy
@@ -128,14 +130,14 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
     def set_period(self, period):
         """
-        set timespan to predict
+        @brief: set timespan to predict
         @param period: timespan of prediction
         """
         self.period = period
 
     def fit(self, x_date, y_data):
         """
-        Data must be a pd frame in the form Date | y
+        @brief: Data must be a pd frame in the form Date | y
         @param x_date: data for training
         @param y_data The time series values to fit the prophet to.
         """
@@ -148,7 +150,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
     def predict(self, label, do_plot=False):
         """
-        Predict the next values
+        @brief: Predict the next values
         @param do_plot: Do a plot of the forcast and the seasonalities
         """
         # get the current timeline plus a future timeline specified in period
@@ -167,7 +169,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
     def plot(self, forecast, label):
         """
-        Plot and save the predictions
+        @brief: Plot and save the predictions
         """
         fig1 = self.model.plot(forecast)
         fig2 = self.model.plot_components(forecast)
@@ -176,7 +178,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
     def cross_validation(self):
         """
-        Cross evaluates the data frames
+        @brief: Cross evaluates the data frames
         """
         horizon = str(self.period) + ' days'
         dataframe_cv = cross_validation(self.model, initial='400 days', period='100 days', horizon=horizon)
@@ -185,7 +187,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
     def score_cross(self, dataframe_cv):
         """
-        Evaluates the Model by cross validation
+        @brief: Evaluates the Model by cross validation
         @param dataframe_cv: data frame from cross validation
         """
         dataframe_metric = performance_metrics(dataframe_cv, rolling_window=0.1)
@@ -194,8 +196,8 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
     def gridsearchcv(self, parameters, dataframe, safe=False):
         """
-        Custom grid search via cross validation. Necessary because of Prophets unique prediction interface.
-        Looking for the best parameters to fit the model.
+        @brief: Custom grid search via cross validation. Necessary because of Prophets unique prediction interface.
+        @brief: Looking for the best parameters to fit the model.
         @param parameters: parameters that give the option where to look is a dict
         @param dataframe The data frame to predict for cross validation.
         @param safe Option to save the resulting data frame.
@@ -236,7 +238,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
     def load_best_param(self, label):
         """
-        Loads the best parameters for the given dataset
+        @brief: Loads the best parameters for the given dataset
         @param label: name of the dataset
         """
         self.set_dset(label)
@@ -248,7 +250,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
     def score(self, x, y, sample_weight=None):  # pylint: disable=arguments-differ
         """
-        Evalute the Models performance via MSE
+        @brief: Evalute the Models performance via MSE
         @param x: dates to predict
         @param y: true values to that time
         @param sample_weight Possible interface for future sample weighting mechanisms.
@@ -276,21 +278,21 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
     def save_model(self):
         """
-        Saves a model
+        @brief: Saves a model
         """
         with open(f"prophet{self.dset}_{dt.time}.pkl", 'wb') as f:
             pickle.dump(self.model, f)
 
     def load_model(self, dset, time):
         """
-        Loads a pretrained model
+        @brief: Loads a pretrained model
         """
         with open(f"prophet{dset}_{time}.pkl", 'rb') as f:
             self.model = pickle.load(f)
 
     def set_params(self, **parameters):
         '''
-        sets all the parameters that are given
+        @brief: sets all the parameters that are given
         @param parameters: pointer to the location of the parameters
         '''
         # set default values
@@ -315,7 +317,7 @@ class MyProphet(BaseEstimator, RegressorMixin):
 
 def best_param(dataframe):
     """
-    get the parameters which result in the best results
+    @brief: get the parameters which result in the best results
     @param dataframe: select best parameters given dataframe
     """
     idx = dataframe['metric'].idxmin()
@@ -327,11 +329,13 @@ def best_param(dataframe):
 
 def sklearn_gridsearch():
     """
-    Test data on sklearn Gridsearchcv
+    @brief: Test data on sklearn Gridsearchcv
     """
     attr = 'youtube_viewchange'
     dataframes = LoadIn().load_all(typ='pre')
     dataframes = dataframes.dropna()
+    testframes = dataframes.iloc[-100:]
+    dataframes = dataframes.iloc[:-100]
 
     print(dataframes[['Date', attr]].head())
 
@@ -346,29 +350,37 @@ def sklearn_gridsearch():
     grid = GridSearchCV(estimator=pro, param_grid=parameters)
     grid.fit(dataframes['Date'], dataframes[attr])
 
+    #  get best paramaters and set them
     best_parameters = grid.best_params_
     pro.growth = best_parameters['growth']
     pro.changepoint_prior_scale = best_parameters['changepoint_prior_scale']
     pro.interval_width = best_parameters['interval_width']
     pro.seasonality_mode = best_parameters['seasonality_mode']
     metric = grid.best_score_
+
+    # set best model
+    pro.set_model(after_best=True)
+
+    # test if metric is correct
+    metric_check = pro.score(x=testframes['Date'], y=testframes[attr])
+
     print('growth:', best_parameters['growth'], '\n',
           'changepoint_prior_scale:', best_parameters['changepoint_prior_scale'], '\n',
           'interval_width:', best_parameters['interval_width'], '\n',
           'seasonality_mode:', best_parameters['seasonality_mode'], '\n',
-          'Best metric:', metric, '\n')
+          'Best metric:', metric, '\n',
+          'Metric Check', metric_check, '\n')
 
     print('Test_scroes: ', grid.cv_results_['mean_test_score'])
 
     # plot best
-    pro.set_model(after_best=True)
     pro.fit(x_date=dataframes['Date'], y_data=dataframes[attr])
     pro.predict(do_plot=True, label=attr)
 
 
 def fbprophet_gridsearch():
     """
-    Test data on fbprophet Gridsearchcv
+    @breif: Test data on fbprophet Gridsearchcv
     """
     attr = 'steam_users'
     dataframes = LoadIn().load_all(typ='pre')
@@ -397,7 +409,7 @@ def fbprophet_gridsearch():
 
 def test():
     """
-    Test function
+    @brief: Test function
     """
     #########################################################
     # Gridseachcv with sklearn
