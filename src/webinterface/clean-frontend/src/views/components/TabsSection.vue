@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
     <div id="nav-tabs">
-      <h3>Background Section</h3>
       <div class="md-layout">
 
         <div class="md-layout-item md-size-100 md-small-size-100">
