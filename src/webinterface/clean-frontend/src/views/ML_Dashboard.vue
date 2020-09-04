@@ -60,7 +60,7 @@
                     YouTube - as one of the most popular content creator websites - has seen a surge in user activity during the pandemic. The website traffic has thus increased 
                     at a steady pace and can be described by the number of views. 
                     <br><br>
-                    The selected YouTube View Count data set comprises the amount of views for the 250 most popular channels on YouTube. The data was obtained by scraping through 
+                    The selected YouTube View Count data set comprises the amount of views for the most popular channels on YouTube. The data was obtained by scraping through 
                     YouTube analytics using a custom build Youtube scraper.    
                 </div>
 
