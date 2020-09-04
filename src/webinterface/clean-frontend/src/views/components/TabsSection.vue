@@ -74,7 +74,7 @@
                         forecast</b>. This is done by choosing a flexible curve-fitting like regression
                         model instead of more traditional time series models.<br><br>
 
-                        The Prophet model is eventually fitted using <a href="https://mc-stan.org/"><b>Stan</b> which performs a <b>MAP
+                        The Prophet model is eventually fitted using <a href="https://mc-stan.org/"> <b>Stan</b></a> which performs a <b>MAP
                         optimization</b> for the respective parameters. Additionally, this allows for
                         a parameter uncertainty estimation using the Hamiltonian Monte Carlo
                         algorithm.<br><br>
