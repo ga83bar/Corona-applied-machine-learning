@@ -21,7 +21,6 @@ import matplotlib.pyplot as plt
 
 import joblib
 
-
 from src.inference import extreme_learning as EM
 from src.inference import prophet as pro
 from src.inference.load_in import LoadIn
@@ -29,7 +28,7 @@ from src.inference.load_in import LoadIn
 
 def get_model_list():
     """returns a list containing available regressors for model comparison"""
-    model_list = [('DecisionTree', DecisionTreeRegressor()), 
+    model_list = [('DecisionTree', DecisionTreeRegressor()),
     ('NeuralNetwork', MLPRegressor(shuffle=False)),
     ('LinearModel', LinearRegression()),
     ('PolyLinearModel', LinearRegression())]  
@@ -71,7 +70,7 @@ def get_params(df, ELM= False, prophet = False):
                     'seasonality_mode': ['additive', 'multiplicative']}
             best_params = prophet.gridsearchcv(parameters, dataframe= prophet_attr_df_pre, safe=True)
             param_dict[label] = best_params
-            
+
     if ELM is True:
         # ELM 
         param_dict = {}
@@ -115,7 +114,7 @@ def get_predict_data(label):
     prophet_attr_df_post = prophet_dataframes_post[["Date", label]]
     prophet_attr_df_post = prophet_attr_df_post.dropna()
 
-    prophet = pro.MyProphet()    
+    prophet = pro.MyProphet()
     prophet.fit(prophet_attr_df_pre['Date'], prophet_attr_df_pre[label])
     prophet_output = prophet.predict(do_plot=False, label=label)
     predicted_df = prophet_output["yhat"]
@@ -130,7 +129,7 @@ def get_predict_data(label):
     predicted_df = scaler.inverse_transform(predicted_df)
     prophet_attr_df_post[label] = scaler.inverse_transform(prophet_attr_df_post[label])
     prophet_attr_df_pre[label] = scaler.inverse_transform(prophet_attr_df_pre[label])
-    
+
     lower_bound_df = scaler.inverse_transform(lower_bound_df)
     upper_bound_df = scaler.inverse_transform(lower_bound_df)
 
@@ -139,13 +138,12 @@ def get_predict_data(label):
         mean = 5370.573816155988
         var = 337.82851880230834
         factor = 1000000000.0
-        
-        
+
         predicted_df = predicted_df * var
         print(predicted_df.min())
-        predicted_df = predicted_df + mean        
+        predicted_df = predicted_df + mean
         predicted_df = predicted_df * factor
-        
+
         prophet_attr_df_post[label] = prophet_attr_df_post[label] * var
         print(prophet_attr_df_post[label].min())
         prophet_attr_df_post[label] = prophet_attr_df_post[label] + mean
@@ -162,11 +160,11 @@ def get_predict_data(label):
 
         print(lower_bound_df)
 
-        upper_bound_df = upper_bound_df *var
+        upper_bound_df = upper_bound_df * var
         upper_bound_df = upper_bound_df + mean
         upper_bound_df = upper_bound_df * factor
 
-    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre #, upper_bound_df, lower_bound_df
+    return predicted_df, prophet_attr_df_post, prophet_attr_df_pre #, upper_bound_df, lower_bound_df
 
 
 def compare_models(model_dict, dataframe, plotting=False):
@@ -186,13 +184,12 @@ def compare_models(model_dict, dataframe, plotting=False):
         ELM = model_dict["ELM"]
         prophet = model_dict["Prophet"]
 
-        
         print("Attribute: ", attr)
         print("\n\n\n")
-        attr_dict={}
-        
+        attr_dict = {}
+
         #ELM
-        
+
         ELM_dataframe.fillna(method='backfill', inplace=True)
         train, test = train_test_split(ELM_dataframe[attr], test_size=0.2)
         
@@ -200,42 +197,40 @@ def compare_models(model_dict, dataframe, plotting=False):
         scores = cross_validate(ELM, x_train_test, y_train_test)
         attr_dict["ELM"] = sum(abs(scores['test_score']))/len(scores['test_score'])
         score_dict[attr] = attr_dict
-        
-        
+
         #PRophet
         prophet.load_best_param(attr)
-        
+
         prophet_attr_df = prophet_dataframes[["Date", attr]]
         prophet_attr_df = prophet_attr_df.dropna()
-        
-        
+
         scores = cross_validate(estimator=prophet, X=prophet_attr_df['Date'], y=prophet_attr_df[attr])
         attr_dict["Prophet"] = sum(abs(scores['test_score']))/len(scores['test_score'])
-        
+
         if attr_dict["Prophet"] > attr_dict["ELM"]:
             best_model_dict[attr] = "Prophet"
         else:
             best_model_dict[attr] = "ELM"
-        
-        #plots 
+
+        #plots
         if plotting == True:
             model_dict = load_models()
             ELM = model_dict["ELM"]
             prophet = model_dict["Prophet"]
-            
+
             days_to_predict = 60
             TRAIN_WINDOW = 30
             elm = EM.ExtremeLearningMachine()
 
             loaded_data = dataframe
-            
+
             train_size = len(loaded_data) - days_to_predict
             train_data = loaded_data[attr][:train_size]
             test_data = loaded_data[attr][train_size:]
             predictions = elm.predict_next_days(regu='no', train_win=TRAIN_WINDOW, do_plot=False,
                                                 lambd=0.01, num_neurons=128, days=days_to_predict,
                                                 data=train_data)
-            
+
             x_values = range(len(loaded_data))
             plt.title('No name')
             plt.plot(x_values[:train_size], train_data, label='Train data')
@@ -243,9 +238,7 @@ def compare_models(model_dict, dataframe, plotting=False):
             plt.plot(x_values[train_size:], test_data, label='Test data')
             plt.legend()
             plt.savefig("ELM predictions")
-            
-            
-            
+
             prophet = pro.MyProphet()
             #prophet.load_best_param(attr)
             changepoint_prior_scale = np.arange(0.03, 0.2, 0.005)
@@ -253,11 +246,13 @@ def compare_models(model_dict, dataframe, plotting=False):
                   'changepoint_prior_scale': changepoint_prior_scale,
                   'interval_width': [0.8],
                   'seasonality_mode': ['additive', 'multiplicative']}
-            loaded_param = prophet.gridsearchcv(parameters, dataframe = prophet_attr_df, safe=True )
+            loaded_param = prophet.gridsearchcv(parameters, dataframe=prophet_attr_df, safe=True )
             print(attr)
             print(loaded_param)
-            prophet.set_model( self.set_model(growth=loaded_param['growth'], changepoint_prior_scale=loaded_param['changepoint_prior_scale'],
-                       interval_width=loaded_param['interval_width'], seasonality_mode=loaded_param['seasonality_mode']))
+            prophet.set_model(self.set_model(growth=loaded_param['growth'],
+                              changepoint_prior_scale=loaded_param['changepoint_prior_scale'],
+                              interval_width=loaded_param['interval_width'],
+                              seasonality_mode=loaded_param['seasonality_mode']))
             prophet.fit(prophet_attr_df['Date'], prophet_attr_df[attr])
             y_pred = prophet.predict(do_plot=True, label=attr)
             print(y_pred)
