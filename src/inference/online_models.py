@@ -13,7 +13,6 @@ from keras.models import Model
 from keras.optimizers import Adam
 
 
-
 class OnlineDense():
     """
     Class contains an online linear model and all of its pre and post
@@ -69,7 +68,6 @@ class OnlineDense():
         self.metrics = metrics
         return self.metrics
 
-
     def fit_model(self):
         """
         Train the model
@@ -93,7 +91,6 @@ class OnlineDense():
                 if passed >= self.data_length - 1:
                     self.output = self.output.append(pd.Series([prediction[0][0]]))
                 self.predictions.append(prediction)
-        #return self.predictions
 
     def data_transform(self, start, end):
         """

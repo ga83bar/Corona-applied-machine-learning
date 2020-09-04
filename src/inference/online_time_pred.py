@@ -14,6 +14,7 @@ from creme import time_series
 from creme import optim
 from matplotlib.pyplot import plot as plt
 
+
 class OnTimePred():
     """
     Utilizes the Creme TimeSeries library and online

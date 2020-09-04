@@ -12,7 +12,6 @@ from creme import stream
 from creme import ensemble
 
 
-
 class OnlineFCN():
     """
     Class contains an online linear model and all of its pre and post

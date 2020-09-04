@@ -11,6 +11,7 @@ import pandas as pd
 DATA_FILE = "res/{}/{}/{}.csv"
 DATA_DIRECTORY = "res/{}/{}"
 
+
 class LoadIn():
     """
     This class handles imports and persistent storage of datasets

@@ -6,8 +6,6 @@ from src.inference.load_in import LoadIn
 from src.inference.online_fcn import OnlineFCN
 from src.inference.online_time_pred import OnTimePred
 from src.inference.online_models import OnlineDense
-#from extreme_learning import ExtremeLearningMachine
-#from prophet import MyProphet
 
 
 class Learning():
@@ -106,16 +104,11 @@ class Learning():
         '''
         proph = frame
         return proph
-        #proph = MyProphet()
-        #for attribute in frame:
-        #proph.fit(frame['Date', attribute])
-
 
     def elm_fit(self, frame):
         """
         Method fits the elm model
         """
-        #elm = ExtremeLearningMachine(self.dataframe)
         return frame
 
     def linear_fit(self, frame):
