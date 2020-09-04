@@ -36,6 +36,7 @@ export default {
                         },
                         ticks: {
                             beginAtZero: false,
+                            precision: 0,
                             callback: (value, index, values) => {
                                 return this.formatNumber(value)
                             }
