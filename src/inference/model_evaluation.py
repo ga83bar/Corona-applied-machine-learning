@@ -2,10 +2,10 @@
 This module serves as the hub for the model evaluation and training
 """
 import datetime as dt
-from load_in import LoadIn
-from online_fcn import OnlineFCN
-from online_time_pred import OnTimePred
-from online_models import OnlineDense
+from src.inference.load_in import LoadIn
+from src.inference.online_fcn import OnlineFCN
+from src.inference.online_time_pred import OnTimePred
+from src.inference.online_models import OnlineDense
 #from extreme_learning import ExtremeLearningMachine
 #from prophet import MyProphet
 

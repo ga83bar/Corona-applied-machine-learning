@@ -17,5 +17,12 @@ beautifulsoup4
 setuptools
 pytrends
 alpha_vantage
-collections
 joblib
+keras
+tensorflow
+flask
+flask_restful
+flask_cors
+fbprophet
+creme
+pytest

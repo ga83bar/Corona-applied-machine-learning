@@ -1,6 +1,8 @@
 [MASTER]
 disable=
-    F0401
+    F0401,
+    no-self-use,
+    no-else-raise
 persistent=no
 jobs=0
 init-hook="from pylint.config import find_pylintrc; import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))"
@@ -17,7 +19,10 @@ min-similarity-lines=10
 max-line-length=120
 
 [DESIGN]
-max-attributes=17
+max-attributes=20
+max-args=10
+max-locals=20
+min-public-methods=1
 
 [MISCELLANEOUS]
 notes=FIXME

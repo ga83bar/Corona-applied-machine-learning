@@ -79,7 +79,7 @@ class OnlineFCN():
         """
         Saves a model
         """
-        with open(f"onln_fcn_{self.dset}_{dt.time}.pkl", 'wb') as f:
+        with open("onln_fcn_"+self.dset+"_"+str(dt.time)+".pkl", 'wb') as f:
             pickle.dump(self.trained_model, f)
             return self.trained_model
 
@@ -87,6 +87,6 @@ class OnlineFCN():
         """
         Loads a pretrained model
         """
-        with open(f"onln_fcn_{self.dset}_{time}.pkl", 'rb') as f:
+        with open("onln_fcn_"+str(self.dset)+"_"+str(time)+".pkl", 'rb') as f:
             model = pickle.load(f)
             return model
