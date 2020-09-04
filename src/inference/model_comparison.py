@@ -78,7 +78,7 @@ def get_params(dframe, elm=False, prophet=False):
             print(attribute)
             elm_param_grid = {'neurons': neuronlst,
                               'lambd': lambdalst,
-                              'regu': ['no', 'L1', 'L2']},
+                              'regu': ['no', 'L1', 'L2']}
             el_machine = EM.ExtremeLearningMachine()
             dframe[attribute].fillna(method='backfill', inplace=True)
             inp, out = el_machine.prepare_data(dframe[attribute])
@@ -248,7 +248,6 @@ def compare_models(model_dict, dataframe, plotting=False):
                                                 seasonality_mode=seasonality))
             prophet.fit(prophet_attr_df['Date'], prophet_attr_df[attr])
             y_pred = prophet.predict(do_plot=True, label=attr)
-            print(y_pred)
     return score_dict, best_model_dict
 
 
