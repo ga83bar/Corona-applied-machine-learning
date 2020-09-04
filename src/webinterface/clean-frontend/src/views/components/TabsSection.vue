@@ -147,6 +147,7 @@ export default {
 
 .text-alignment{
   text-align: left;
+  margin: 16px;
 }
 
 </style>
