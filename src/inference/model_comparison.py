@@ -156,7 +156,7 @@ def get_predict_data(label):
         upper_bound_df = upper_bound_df + mean
         upper_bound_df = upper_bound_df * factor
 
-    return predicted_df, prophet_attr_df_post, prophet_attr_df_pre #, upper_bound_df, lower_bound_df
+    return predicted_df, prophet_attr_df_post, prophet_attr_df_pre
 
 
 def compare_models(model_dict, dataframe, plotting=False):
@@ -248,6 +248,7 @@ def compare_models(model_dict, dataframe, plotting=False):
                                                 seasonality_mode=seasonality))
             prophet.fit(prophet_attr_df['Date'], prophet_attr_df[attr])
             y_pred = prophet.predict(do_plot=True, label=attr)
+            print(y_pred)
     return score_dict, best_model_dict
 
 
