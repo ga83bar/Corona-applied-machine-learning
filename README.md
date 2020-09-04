@@ -46,3 +46,7 @@ The project documentation can be found in the [documentation](/documentation) fo
 ### Code base
 
 Our code base is located in the [src](/src) folder. Scrapers, API scripts etc. to obtain raw data can be found in the [data_collection](/src/data_collection) folder. Basic preprocessing and data extraction scripts are located in [data_management](/src/data_management). The unified data preprocessing scripts are saved in [data_pipeline](/src/data_pipeline). The code for training, final model evaluation and live inference for the web interface is located in [inference](/src/inference). Finally, [webinterface](/src/webinterface) contains the code for both front- and backend. As mentioned before, a complete documentation of the code can be accessed by opening the [Doxygen documentation](/documentation/html/index.html) in a web browser.
+
+### Model Parameters
+
+The model parameters were determined by cross validation. We created a dictionary with the optimal parameters in our [model file](src/inference/prophet.py). Using the parameters, the model is trained on the respective time series.
