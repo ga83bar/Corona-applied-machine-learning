@@ -2,14 +2,33 @@
   <div class="wrapper">
     <div id="nav-tabs">
       <div class="md-layout">
-
         <div class="md-layout-item md-size-100 md-small-size-100">
           <nav-tabs-card no-label tabs-plain>
             <template slot="content">
-              
-              <md-tabs class="md-danger" md-alignment="center">
-                
-                  <md-tab id="tab-how-to" md-label="How to use what_if.ai">
+              <md-tabs class="md-danger" 
+                       md-alignment="center">
+                  <md-tab id="tab-home" 
+                          md-label="Welcome">
+                    <div class="text-alignment">
+                      <img src="./../../assets/logo.png" 
+                           style="float:left;width:300px;height:150px;margin: 16px;"/>
+                      <p>The COVID-19 pandemic has affected our everyday lives to a huge extend. 
+                      More often than not, we wonder <b>what</b> the world would have looked like <b>if</b> the pandemic actually never happened.
+                      </p>
+                      <p>
+                      Using <b>what_if.ai</b>, two of the most impactful driving factors of the modern world - our <b>global 
+                      economy</b> and <b>internet traffic</b> behavior - are modeled and predicted for a scenario without COVID-19. 
+                      It allows you to observe the influence of the pandemic and analyzes whether the common assumption, 
+                      that the surge in internet traffic has solely benefited the technology sector, holds true. 
+                      </p>
+                      <br>
+                      <p style="font-size:24px;text-align:center;">
+                      <b>Are you excited for an insight?</b>
+                      </p>
+                    </div>
+                  </md-tab>
+                  <md-tab id="tab-how-to" 
+                          md-label="How to use what_if.ai">
                     <div class="text-alignment">
                       <p>
                         In order to model and eventually compare <b>global economic</b> and <b>online activity trends</b>, what if.ai provides many different data sets to choose from. 
@@ -25,9 +44,7 @@
                       to give a perception of how good the prediction is.
                       </l>
                     </div>
-
                   </md-tab>
-
                   <md-tab id="tab-about-the-model" md-label="About the AI Model">
                     <div class="text-alignment">
                       <p>
@@ -61,13 +78,43 @@
 
                         <b>Where Prophet performs best</b> Prophet aims to tackle as many usecases in time series forecasting problems as possible. The experience of
                         many Facebook engineers has led to a framework that suffices to model.
-
                       </p>
                     </div>
                   </md-tab>
-
-                  <md-tab id="tab-meet-the-team" md-label="Meet the Team">
+                  <md-tab id="tab-anal" md-label="Analysis">
                     <div class="text-alignment">
+                      <img src="./../../assets/corona.png" alt="Corona" style="float:left;margin:16px;width:300px;height:150px;"/>
+                      <br />
+                      <p>
+                        The discrepancies between our <b>modeled courses</b> and the <b>actual observations </b>
+                        strongly suggest that the pandemic had a major impact on internet consumption 
+                        by <b>increasing traffic</b> across a wide variety of platforms. We interpret 
+                        this as a consequence of government enforced lockdowns all around the world, 
+                        eventually forcing people to increasingly rely on home office and online entertainment. 
+                      </p>
+                      <br />
+                      <p>
+                      As a further consequence of the lockdowns, all economic sectors we look at took a <b>huge blow</b>. 
+                      We attribute this to the fear of the economic impact of the pandemic spreading across the markets. 
+                      Surprisingly, some traditional industries like the steel sector were less 
+                      affected than we initially thought. We are unsure as to why that is, but one reason could be that 
+                      branches not directly related to the consumer market are less bound to immediate consumer decisions, 
+                      and are thus more likely to be bound to delivery contracts in the industrial sector.   
+                      </p>
+                      <br />
+                      <p>
+                      Also, counter to the common narrative, the tech sector <b>wasn’t the only sector to make a speedy 
+                      recovery</b> once the initial shock was over. 
+                      We take this as an indication that, although certainly a contributing factor, 
+                      the shift towards online communication and entertainment is <b>not the main driver</b> 
+                      constituting a rapid rehabilitation.
+                      </p>
+                    </div>
+                  </md-tab>
+                  <md-tab id="tab-meet-the-team" md-label="Meet the Team" style="margin: 16px;">
+                    <div class="text-alignment">
+                      <img src="./../../assets/team.jpeg" alt="Legends of tomorrow =)" />
+                      <br />
                       <p>
                         The team behind what if.ai is composed of 9 extraordinary individuals
                         that took time and effort during the extremely demanding COVID-19
@@ -76,41 +123,10 @@
                       </p>
                     </div>
                   </md-tab>
-
-                  <md-tab id="tab-about" md-label="About the Data Sets">
-                    <div class="text-alignment">
-                      <p>
-                        
-                      </p>
-                    </div>
-                  </md-tab>
-
-                  <md-tab id="tab-compare-section" md-label="Compare Section">
-                    <div class="text-alignment">
-                      <p>
-                        
-                      </p>
-                    </div>
-                  </md-tab>
-
-                  <md-tab id="tab-start-predicting" md-label="Start Predicting">
-                    <div class="text-alignment">
-                      <p>
-
-                      </p>
-                    </div>
-                  </md-tab>
-                
               </md-tabs>
-          
             </template>
           </nav-tabs-card>
         </div>
-
-
-
-
-
       </div>
     </div>
   </div>
