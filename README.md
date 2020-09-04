@@ -9,7 +9,7 @@
 README for group 11 of the 2020 Applied Machine Intelligence lecture at TUM. 
 </div>
 
-
+## Table of contents
 
 [[_TOC_]]
 
