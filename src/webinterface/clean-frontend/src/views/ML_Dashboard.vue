@@ -540,9 +540,16 @@ export default {
         }
     }
 };
+
+
 </script>
 
 <style lang="scss" scoped>
+
+html {
+  scroll-behavior: smooth;
+}
+
 .section {
     padding: 0;
 }
