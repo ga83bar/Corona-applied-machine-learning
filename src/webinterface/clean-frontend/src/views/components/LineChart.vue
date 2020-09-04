@@ -65,7 +65,7 @@ export default {
                         borderWidth: 2,
                         borderDash:[10, 10],
                         label: {
-                            content: "BEGIN PREDICTION",
+                            content: "PREDICTION START",
                             enabled: true,
                             position: "top"
                         }
