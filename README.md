@@ -30,6 +30,8 @@ After cloning the directory, you can start the project by running the [docker-co
 > <user>:~$ docker-compose up
 > ```
 
+> **_WARNING:_** Building the docker image for the first time takes a lot of time. Some installation steps are complex, and the libraries are quite large. Even if the installation seems to stop, be patient.
+
 ## File structure
 
 ### Data sets
@@ -39,7 +41,7 @@ All data sets can be found in the [res](/res) folder. Most Subsets have their ow
 
 ### Documentation
 
-The project documentation can be found in the [documentation](/documentation) folder. The project's code is documented with Doxygen. To access the documentation, simply open the [index](/documentation/html/index.html) file with a web browser of your liking. The documentation folder also includes all [milestone reports](/documentation/reports) as well as some meeting transcripts. 
+The project documentation can be found in the [documentation](/documentation) folder. The project's code is documented with Doxygen. To access the documentation, simply open the [index](/documentation/html/index.html) file with a web browser of your liking. The documentation folder also includes all [milestone reports](/documentation/reports) as well as some meeting transcripts. The final report is located [here](/documentation/reports/milestone_4_report.pdf).
 
 ### Code base
 
