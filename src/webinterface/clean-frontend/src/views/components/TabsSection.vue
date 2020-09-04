@@ -10,7 +10,7 @@
                   <md-tab id="tab-home" 
                           md-label="Welcome">
                     <div class="text-alignment">
-                      <iframe src="https://www.youtube-nocookie.com/embed/XcdwG_F7pNw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      
                       <p>The COVID-19 pandemic has affected our everyday lives to a huge extent. 
                       More often than not, we wonder <b>what</b> the world would have looked like <b>if</b> the pandemic actually never happened.
                       </p>
@@ -24,6 +24,10 @@
                       <p style="font-size:24px;text-align:center;">
                       <b>Are you excited for an insight?</b>
                       </p>
+                      <br>
+                      <div style="position:relative;padding-top:56.25%;">
+                        <iframe src="https://www.youtube-nocookie.com/embed/XcdwG_F7pNw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                      </div>
                       
                     </div>
                   </md-tab>
