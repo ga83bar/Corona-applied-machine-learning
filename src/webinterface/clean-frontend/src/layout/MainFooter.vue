@@ -13,7 +13,7 @@
             </a>
           </li>
           <li>
-            <a href="https://www.youtube.com/watch?v=GmoPx8k74mM&feature=youtu.be">
+            <a href="https://youtu.be/XcdwG_F7pNw">
               Project Video
             </a>
           </li>
