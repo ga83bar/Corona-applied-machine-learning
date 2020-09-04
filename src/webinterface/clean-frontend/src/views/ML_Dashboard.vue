@@ -97,7 +97,7 @@
             </div>
 
             <div class="container" id="stock">
-                <h3 class="title">Stock Predictions</h3>
+                <h3 class="title">Economic Performance Analysis</h3>
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
                         <div v-if="loading_graph2==true" class="loading-banner"><img type="image/svg+xml" src="@/assets/img/loading_graph.svg" /></div>
