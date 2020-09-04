@@ -8,7 +8,7 @@
   >
     <div class="md-toolbar-row md-collapse-lateral">
       <div class="md-toolbar-section-start">
-        <img src="./../assets/logo.png" class="md-title top-logo"/>
+        <img src="./../assets/logo.png" class="md-title top-logo" />
         <h1 class="md-title">what_if.ai</h1>
       </div>
       <div class="md-toolbar-section-end">
@@ -39,23 +39,18 @@
                         slot="title"
                         class="md-button md-button-link md-white md-simple dropdown-toggle"
                         data-toggle="dropdown"
-                      >
-                        
-                        DATASETS
-                      </md-button>
+                      >DATASETS</md-button>
                       <ul class="dropdown-menu dropdown-with-icons">
                         <li>
-                          <a href="#/ml">
-                            <i class="material-icons">timeline</i>
-                            <p>Finance</p>
+                          <a href="#web">
+                            <i class="material-icons">language</i>
+                            <p>Web Traffic</p>
                           </a>
                         </li>
                         <li>
-                          <a
-                            href="https://gitlab.ldv.ei.tum.de/ami2020/group11"
-                          >
-                            <i class="material-icons">language</i>
-                            <p>Web Traffic</p>
+                          <a href="#stock">
+                            <i class="material-icons">timeline</i>
+                            <p>Finance</p>
                           </a>
                         </li>
                       </ul>
@@ -64,18 +59,10 @@
                 </a>
               </li>
 
-           
-
-
-              <md-list-item
-                href="https://gitlab.ldv.ei.tum.de/ami2020/group11"
-                target="_blank"
-              >
+              <md-list-item href="https://gitlab.ldv.ei.tum.de/ami2020/group11" target="_blank">
                 <i class="fab fa-gitlab"></i>
                 <p>GitLab Project</p>
-
               </md-list-item>
-   
             </md-list>
           </div>
         </div>
@@ -188,11 +175,11 @@ export default {
 
 <style>
 .dropdown .md-ripple {
-  font-size:18px;
-  font-weight: 500
+  font-size: 18px;
+  font-weight: 500;
 }
 
-.top-logo{
-  scale:1.5;
+.top-logo {
+  scale: 1.5;
 }
 </style>

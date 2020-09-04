@@ -112,7 +112,7 @@ def get_predict_data(label):
 
     prophet = pro.MyProphet()
     prophet.fit(prophet_attr_df_pre['Date'], prophet_attr_df_pre[label])
-    prophet_output = prophet.predict(do_plot=True, label=label)
+    prophet_output = prophet.predict(do_plot=False, label=label)
     predicted_df = prophet_output["yhat"]
     lower_bound_df = prophet_output["yhat_lower"]
     upper_bound_df = prophet_output["yhat_upper"]

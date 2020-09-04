@@ -8,7 +8,8 @@
         <div class="section profile-content">
 
             <div class="container" id="faq">
-                <div class="profile-tabs mx-auto">
+            <h3 class="title no-margin">Getting started</h3>
+                <div class="profile-tabs mx-auto tab-fix">
                     <tabs plain nav-pills-icons color-button="success">
                     </tabs>
                 </div>
@@ -429,7 +430,7 @@ export default {
                                 {
                                     label: 'prediction',
                                     data: response.data.chart_data_3,
-                                    borderColor: 'rgb(255, 0, 0)',
+                                    borderColor: '#e53935',
                                     fill: false,
                                     pointRadius: 0,
                                     borderWidth:2
@@ -460,7 +461,7 @@ export default {
                                 {
                                     label: 'prediction',
                                     data: response.data.chart_data_3,
-                                    borderColor: 'rgb(255, 0, 0)',
+                                    borderColor: '#e53935',
                                     fill: false,
                                     pointRadius: 0,
                                     borderWidth:2
@@ -594,6 +595,7 @@ export default {
 
 }
 
+
 /* chart */
 
 .top-pinned {
@@ -641,6 +643,11 @@ width: 50%;
 .loading-banner{
 height: 400px;
 text-align: center;
+}
+
+.no-margin
+{
+    margin-bottom: -25px;
 }
 </style>
 

@@ -4,7 +4,6 @@
       <div class="md-layout">
 
         <div class="md-layout-item md-size-100 md-small-size-100">
-          <h3><small>Getting started</small></h3>
           <nav-tabs-card no-label tabs-plain>
             <template slot="content">
               
