@@ -1,7 +1,7 @@
-"""everythin related to preprocessing - might be extended to a whole package if required"""
-
+"""
+Everything related to preprocessing - might be extended to a whole package if required
+"""
 import os
-# from datetime import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -12,6 +12,9 @@ RESOURC_PATH = '../../res/ix'
 
 
 def read_dataset(path, name):
+    """
+    Reads dataset
+    """
     return pd.read_csv(os.path.join(path, name + '.csv'))
 
 
@@ -21,8 +24,7 @@ def main():
     Parses arguments, registers the client and starts containers for all jobs that were specified.
     """
     data = read_dataset(RESOURC_PATH, 'all')
-
-    fig, axs = plt.subplots(2, 1, constrained_layout=True)
+    _, axs = plt.subplots(2, 1, constrained_layout=True)
     axs[0].plot(data["Date"], data["bitrate"], 'o', )
     plt.show()
     print('done')
