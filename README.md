@@ -1,6 +1,6 @@
 # README - What If AI
 
-![alt text](/documentation/Machine%20Learning%20Models/images/logo.png =250x "WhatIfAI")
+![alt text](/documentation/Machine%20Learning%20Models/images/logo.png "WhatIfAI")
 README for group 11 of the 2020 Applied Machine Intelligence lecture at TUM. 
 
 [[_TOC_]]
