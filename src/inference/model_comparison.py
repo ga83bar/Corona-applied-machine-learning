@@ -253,4 +253,4 @@ def compare_models(model_dict, dataframe, plotting=False):
 
 
 if __name__ == '__main__':
-    a, b, c = get_predict_data("ix_bitrate")
+    A, B, C = get_predict_data("ix_bitrate")
