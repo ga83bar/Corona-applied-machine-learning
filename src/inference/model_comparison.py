@@ -128,7 +128,7 @@ def get_predict_data(label):
     if label == "ix_bitrate":
         # Factor for ix  dataset inverse transform
         mean = 53705.73816155988
-        var = 3378.2851880230834
+        var = 33782.851880230834
         factor = 1000000000.0
 
         predicted_df = predicted_df * var
