@@ -12,7 +12,7 @@
                     <div class="text-alignment">
                       <img src="./../../assets/logo.png" 
                            style="float:left;width:300px;height:150px;margin: 16px;"/>
-                      <p>The COVID-19 pandemic has affected our everyday lives to a huge extend. 
+                      <p>The COVID-19 pandemic has affected our everyday lives to a huge extent. 
                       More often than not, we wonder <b>what</b> the world would have looked like <b>if</b> the pandemic actually never happened.
                       </p>
                       <p>
