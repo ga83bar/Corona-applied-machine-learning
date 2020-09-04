@@ -228,16 +228,18 @@ class ExtremeLearningMachine(BaseEstimator, ClassifierMixin):
         @param error_measure : error measure e.g mse, mae
         @return : boolean value indicates if we seted the value or not
         '''
+        bool_ret = False
         if isinstance(self.__measure, str):
             if (self.__measure == 'mse' or self.__measure == 'mae'):
                 self.__measure = error_measure
-                return True
+                bool_ret = True
             else:
                 print('{} is no valid Error measure for ELM'.format(error_measure))
-                return False
+                bool_ret = False
         else:
             print('Your input is not even a string =(')
-            return False
+            bool_ret = False
+        return bool_ret
 
     def mse(self, y_real, y_predict):
         '''
@@ -295,7 +297,7 @@ def test_grid_search():
         # Set the parameters by cross-validation
         tuned_parameters = {'neurons': [10, 20],
                             'lambd': [0.001, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5],
-                            'regu': ['no', 'L1', 'L2']},
+                            'regu': ['no', 'L1', 'L2']}
         clf = GridSearchCV(ExtremeLearningMachine(),
                            tuned_parameters)
         clf.fit(x_train_test, y_train_test)

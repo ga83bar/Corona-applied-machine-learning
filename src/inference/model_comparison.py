@@ -27,7 +27,7 @@ def get_model_list():
     model_list = [('DecisionTree', DecisionTreeRegressor()),
                   ('NeuralNetwork', MLPRegressor(shuffle=False)),
                   ('LinearModel', LinearRegression()),
-                  ('PolyLinearModel', LinearRegression())]
+                  ('PolyLinearModel', LinearRegression())]  
 
     return model_list
 
@@ -124,11 +124,8 @@ def get_predict_data(label):
     scaler = joblib.load(scaler_path)
 
     predicted_df = scaler.inverse_transform(predicted_df)
-
-    prophet_attr_df_post[label] = scaler.inverse_transform(
-                                    prophet_attr_df_post[label])
-    prophet_attr_df_pre[label] = scaler.inverse_transform(
-                                    prophet_attr_df_pre[label])
+    prophet_attr_df_post[label] = scaler.inverse_transform(prophet_attr_df_post[label])
+    prophet_attr_df_pre[label] = scaler.inverse_transform(prophet_attr_df_pre[label])
 
     lower_bound_df = scaler.inverse_transform(lower_bound_df)
     upper_bound_df = scaler.inverse_transform(lower_bound_df)
@@ -164,8 +161,7 @@ def get_predict_data(label):
         upper_bound_df = upper_bound_df + mean
         upper_bound_df = upper_bound_df * factor
 
-    return predicted_df, prophet_attr_df_post,  prophet_attr_df_pre
-# upper_bound_df, lower_bound_df
+    return predicted_df, prophet_attr_df_post, prophet_attr_df_pre #, upper_bound_df, lower_bound_df
 
 
 def compare_models(model_dict, dataframe, plotting=False):
@@ -205,18 +201,16 @@ def compare_models(model_dict, dataframe, plotting=False):
         prophet_attr_df = prophet_dataframes[["Date", attr]]
         prophet_attr_df = prophet_attr_df.dropna()
 
-        scores = cross_validate(estimator=prophet, X=prophet_attr_df['Date'],
-                                y=prophet_attr_df[attr])
-        attr_dict["Prophet"] = sum(abs(scores['test_score']))/len(
-            scores['test_score'])
+        scores = cross_validate(estimator=prophet, X=prophet_attr_df['Date'], y=prophet_attr_df[attr])
+        attr_dict["Prophet"] = sum(abs(scores['test_score']))/len(scores['test_score'])
 
         if attr_dict["Prophet"] > attr_dict["ELM"]:
             best_model_dict[attr] = "Prophet"
         else:
             best_model_dict[attr] = "ELM"
 
-        # plots
-        if plotting is True:
+        #plots
+        if plotting == True:
             model_dict = load_models()
             ELM = model_dict["ELM"]
             prophet = model_dict["Prophet"]
