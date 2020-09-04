@@ -20,7 +20,7 @@
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
                         <div v-if="loading_graph1==true" class="loading-banner"><img type="image/svg+xml" src="@/assets/img/loading_graph.svg" /></div>
-                        <line-chart v-if="loading_graph1 == false" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" />
+                        <line-chart v-if="loading_graph1 == false" ref="charty" :chartData="chartdata_graph1" :chartLabels="chartlabels_graph1" :axisLabel="dataset_axis_label" />
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
                 </div>
@@ -28,11 +28,11 @@
                     <md-menu md-size="medium" md-align-trigger class="menuu">
                         <md-button md-menu-trigger class="fixed-width-button">{{selectedDataset_graph1}}</md-button>
                         <md-menu-content>
-                            <md-menu-item @click="dataset_id='0', selectedDataset_graph1='Internet Exchange Points'">Internet Exchange Points</md-menu-item>
-                            <md-menu-item @click="dataset_id='1', selectedDataset_graph1='YouTube View Count'">YouTube View Count</md-menu-item> <!-- Was YouTube Viewchange-->
-                            <md-menu-item @click="dataset_id='3', selectedDataset_graph1='Steam Network Users'">Steam Network Users</md-menu-item>
-                            <md-menu-item @click="dataset_id='5', selectedDataset_graph1='Twitch View Count'">Twitch View Count</md-menu-item> <!-- Was Twitch Views -->
-                            <md-menu-item @click="dataset_id='9', selectedDataset_graph1='PlayStation Network Users'">PlayStation Network Users</md-menu-item>
+                            <md-menu-item @click="dataset_id='0', selectedDataset_graph1='Internet Exchange Points', dataset_axis_label= 'bit/s'">Internet Exchange Points</md-menu-item>
+                            <md-menu-item @click="dataset_id='1', selectedDataset_graph1='YouTube View Count', dataset_axis_label= 'Views per day'">YouTube View Count</md-menu-item> <!-- Was YouTube Viewchange-->
+                            <md-menu-item @click="dataset_id='3', selectedDataset_graph1='Steam Network Users', dataset_axis_label= 'Users per day'">Steam Network Users</md-menu-item>
+                            <md-menu-item @click="dataset_id='5', selectedDataset_graph1='Twitch View Count', dataset_axis_label= 'Views per day'">Twitch View Count</md-menu-item> <!-- Was Twitch Views -->
+                            <md-menu-item @click="dataset_id='9', selectedDataset_graph1='PlayStation Network Users', dataset_axis_label= 'Users per day'">PlayStation Network Users</md-menu-item>
                         </md-menu-content>
                     </md-menu>
                     <md-button class="md-success md-round run" @click='select_set(1)'>Run Inference</md-button>
@@ -101,7 +101,7 @@
                 <div class="md-layout mx-auto fullwidth">
                     <div class="fsize-chart">
                         <div v-if="loading_graph2==true" class="loading-banner"><img type="image/svg+xml" src="@/assets/img/loading_graph.svg" /></div>
-                        <line-chart v-if="loading_graph2 == false" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" />
+                        <line-chart v-if="loading_graph2 == false" ref="charty" :chartData="chartdata_graph2" :chartLabels="chartlabels_graph2" :axisLabel="''"/>
                     </div>
                     <!-- <div v-if="chartdata"> Predicted Class is: {{ chartdata }} yo {{ chartlabels }}</div> -->
                 </div>
@@ -283,10 +283,11 @@ export default {
             end_date: format(now, dateFormat),
             selectedDataset_graph1: 'Select dataset',
             selectedDataset_graph2: 'Select dataset',
+            dataset_axis_label: '',
             disabledDates: function (date) {
                 // compare if today is greater than the datepickers date
             },
-            dataset_id: '1',
+            dataset_id: '',
             chartdata: null,
             chartlabels: null,
             datecheck_bool: null,
@@ -294,57 +295,6 @@ export default {
                 responsive: true,
                 maintainAspectRatio: true,
                 aspectRatio: 2
-            },
-            options: {
-                showScale: true,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: false,
-                            callback: (value, index, values) => {
-                                return this.formatNumber(value)
-                            }
-                        },
-                        gridLines: {
-                            display: true,
-                            color: '#EEF0F4',
-                            borderDash: [5, 15]
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            display: true,
-                            color: '#EEF0F4',
-                            borderDash: [5, 15]
-                        }
-                    }]
-                },
-                tooltips: {
-                    backgroundColor: '#4F5565',
-                    titleFontStyle: 'normal',
-                    titleFontSize: 18,
-                    bodyFontFamily: "'Proxima Nova', sans-serif",
-                    cornerRadius: 3,
-                    bodyFontColor: '#20C4C8',
-                    bodyFontSize: 14,
-                    xPadding: 14,
-                    yPadding: 14,
-                    displayColors: false,
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
-                        title: tooltipItem => {
-                            return `🗓 ${tooltipItem[0].xLabel}`
-                        },
-                        label: (tooltipItem, data) => {
-                            let dataset = data.datasets[tooltipItem.datasetIndex]
-                            let currentValue = dataset.data[tooltipItem.index]
-                            return `📦 ${currentValue.toLocaleString()}`
-                        }
-                    }
-                },
-                responsive: true,
-                maintainAspectRatio: false
             }
 
         }

@@ -16,6 +16,10 @@ export default {
         chartLabels: {
             type: Array,
             required: true
+        },
+        axisLabel:{
+            type: String,
+            required: true
         }
     },
     data() {
@@ -25,6 +29,11 @@ export default {
                 showScale: true,
                 scales: {
                     yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: this.axisLabel,
+                            fontSize: 14
+                        },
                         ticks: {
                             beginAtZero: false,
                             callback: (value, index, values) => {
