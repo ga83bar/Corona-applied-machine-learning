@@ -39,8 +39,8 @@ All data sets can be found in the [res](/res) folder. Most Subsets have their ow
 
 ### Documentation
 
-The project documentation can be found in the [documentation](/documentation) folder. It includes all milestone reports as well as some meeting transcripts.
+The project documentation can be found in the [documentation](/documentation) folder. The project's code is documented with Doxygen. To access the documentation, simply open the [index](/documentation/html/index.html) file with a web browser of your liking. The documentation folder also includes all [milestone reports](/documentation/reports) as well as some meeting transcripts. 
 
 ### Code base
 
-Our code base is located in the [src](/src) folder. Scrapers, API scripts etc. to obtain raw data can be found in the [data_collection](/src/data_collection) folder. Basic preprocessing and data extraction scripts are located in [data_management](/src/data_management). The unified data preprocessing scripts are saved in [data_pipeline](/src/data_pipeline). The code for training, final model evaluation and live inference for the web interface is located in [inference](/src/inference). Finally, [webinterface](/src/webinterface) contains the code for both front- and backend.  
+Our code base is located in the [src](/src) folder. Scrapers, API scripts etc. to obtain raw data can be found in the [data_collection](/src/data_collection) folder. Basic preprocessing and data extraction scripts are located in [data_management](/src/data_management). The unified data preprocessing scripts are saved in [data_pipeline](/src/data_pipeline). The code for training, final model evaluation and live inference for the web interface is located in [inference](/src/inference). Finally, [webinterface](/src/webinterface) contains the code for both front- and backend. As mentioned before, a complete documentation of the code can be accessed by opening the [Doxygen documentation](/documentation/html/index.html) in a web browser.
