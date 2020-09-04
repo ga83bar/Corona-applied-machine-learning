@@ -1,0 +1,22 @@
+\hypertarget{seattleix__max_8py}{}\doxysection{src/data\+\_\+collection/api\+\_\+request/seattleix/seattleix\+\_\+max.py File Reference}
+\label{seattleix__max_8py}\index{src/data\_collection/api\_request/seattleix/seattleix\_max.py@{src/data\_collection/api\_request/seattleix/seattleix\_max.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceseattleix__max}{seattleix\+\_\+max}}
+\begin{DoxyCompactList}\small\item\em getting the raw data max from Seattleix \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceseattleix__max_a8bc57d34ffd0e2536a77eb79a7363dc7}{seattleix\+\_\+max.\+source}} = requests.\+get(\textquotesingle{}https\+://www.\+seattleix.\+net/statistics/agg\+\_\+max\+\_\+daily.\+txt\textquotesingle{}).text
+\item 
+\mbox{\hyperlink{namespaceseattleix__max_a0394d5aa8feb02fc70701a29902762b6}{seattleix\+\_\+max.\+soup}} = Beautiful\+Soup(source, \textquotesingle{}lxml\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceseattleix__max_a359b9aebb6669374761a0ee5d50975e1}{seattleix\+\_\+max.\+result}} = soup.\+p.\+text
+\item 
+\mbox{\hyperlink{namespaceseattleix__max_ac101ea6b770ac86d910453b482787b82}{seattleix\+\_\+max.\+writer}}
+\item 
+\mbox{\hyperlink{namespaceseattleix__max_ae076cb13ac83dde0d2f13c50abfbaffb}{seattleix\+\_\+max.\+result\+\_\+file}}
+\item 
+\mbox{\hyperlink{namespaceseattleix__max_add28b4acb635769e659a1fe5957f8443}{seattleix\+\_\+max.\+delimiter}}
+\end{DoxyCompactItemize}

@@ -1,0 +1,69 @@
+\hypertarget{namespacede__cix__pre__processing}{}\doxysection{de\+\_\+cix\+\_\+pre\+\_\+processing Namespace Reference}
+\label{namespacede__cix__pre__processing}\index{de\_cix\_pre\_processing@{de\_cix\_pre\_processing}}
+
+
+Script to reformat csv file of D\+E-\/\+C\+IX data according to the already used format for other IX in this project.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacede__cix__pre__processing_a2aeec6b96cf10977383de82babe180b0}{generate\+\_\+new\+\_\+line}} (formatted\+\_\+raw\+\_\+line, data\+\_\+unit\+\_\+factor, ix\+\_\+name, ix\+\_\+type)
+\item 
+def \mbox{\hyperlink{namespacede__cix__pre__processing_ad8b22cb10060a79b14a597db992afa28}{remove\+\_\+semicolon}} (raw\+\_\+unformatted\+\_\+line)
+\item 
+def \mbox{\hyperlink{namespacede__cix__pre__processing_a1d5b61215fe324c06824a112b17fd4ff}{process\+\_\+file}} (csv\+\_\+file\+\_\+name, new\+\_\+file\+\_\+name, data\+\_\+unit\+\_\+factor, ix\+\_\+name, ix\+\_\+type)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Script to reformat csv file of D\+E-\/\+C\+IX data according to the already used format for other IX in this project. 
+
+\begin{DoxyAuthor}{Author}
+Felix Montnacher 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06.\+07.\+2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacede__cix__pre__processing_a2aeec6b96cf10977383de82babe180b0}\label{namespacede__cix__pre__processing_a2aeec6b96cf10977383de82babe180b0}} 
+\index{de\_cix\_pre\_processing@{de\_cix\_pre\_processing}!generate\_new\_line@{generate\_new\_line}}
+\index{generate\_new\_line@{generate\_new\_line}!de\_cix\_pre\_processing@{de\_cix\_pre\_processing}}
+\doxysubsubsection{\texorpdfstring{generate\_new\_line()}{generate\_new\_line()}}
+{\footnotesize\ttfamily def de\+\_\+cix\+\_\+pre\+\_\+processing.\+generate\+\_\+new\+\_\+line (\begin{DoxyParamCaption}\item[{}]{formatted\+\_\+raw\+\_\+line,  }\item[{}]{data\+\_\+unit\+\_\+factor,  }\item[{}]{ix\+\_\+name,  }\item[{}]{ix\+\_\+type }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}!@brief Create a new line for a csv-file. Generate the according timestamp and calculate the bitrate in b/s.
+@param csv-file as a list line sperated with commas, factor to multiply datarate to receive b/s,
+name of the IX of the data, type of the ix.
+@return Line in form of a list for a csv file, seperated with commas
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacede__cix__pre__processing_a1d5b61215fe324c06824a112b17fd4ff}\label{namespacede__cix__pre__processing_a1d5b61215fe324c06824a112b17fd4ff}} 
+\index{de\_cix\_pre\_processing@{de\_cix\_pre\_processing}!process\_file@{process\_file}}
+\index{process\_file@{process\_file}!de\_cix\_pre\_processing@{de\_cix\_pre\_processing}}
+\doxysubsubsection{\texorpdfstring{process\_file()}{process\_file()}}
+{\footnotesize\ttfamily def de\+\_\+cix\+\_\+pre\+\_\+processing.\+process\+\_\+file (\begin{DoxyParamCaption}\item[{}]{csv\+\_\+file\+\_\+name,  }\item[{}]{new\+\_\+file\+\_\+name,  }\item[{}]{data\+\_\+unit\+\_\+factor,  }\item[{}]{ix\+\_\+name,  }\item[{}]{ix\+\_\+type }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}!@brief Generate a new csv-file with processed data from a csv-file with
+data from a graph.
+Opens and extracts the data from the input csv-file.
+Generates a new csv-file with the given name.
+Process raw data to usable data and add the input information.
+Write new lines with the specified format.
+@param Name of the CSV-file, name of the new file to generate,
+which factor to multiply datarate to receive b/s,
+name of the IX of the data, type of the ix.
+@return None
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacede__cix__pre__processing_ad8b22cb10060a79b14a597db992afa28}\label{namespacede__cix__pre__processing_ad8b22cb10060a79b14a597db992afa28}} 
+\index{de\_cix\_pre\_processing@{de\_cix\_pre\_processing}!remove\_semicolon@{remove\_semicolon}}
+\index{remove\_semicolon@{remove\_semicolon}!de\_cix\_pre\_processing@{de\_cix\_pre\_processing}}
+\doxysubsubsection{\texorpdfstring{remove\_semicolon()}{remove\_semicolon()}}
+{\footnotesize\ttfamily def de\+\_\+cix\+\_\+pre\+\_\+processing.\+remove\+\_\+semicolon (\begin{DoxyParamCaption}\item[{}]{raw\+\_\+unformatted\+\_\+line }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}!@brief Reformats CSV-files with seperation symbols ";"(semicolon) or a mix of ";" and "," to ","(commas) only
+@param Line of CSV-File to be processed in form of a list
+@return Reformatted line of a CSV-file, seperated with ","(commas) in form of a list
+\end{DoxyVerb}
+ 

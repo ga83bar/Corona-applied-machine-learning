@@ -1,0 +1,40 @@
+\hypertarget{namespaceget__data}{}\doxysection{get\+\_\+data Namespace Reference}
+\label{namespaceget__data}\index{get\_data@{get\_data}}
+
+
+try to get data from A\+M\+S-\/\+IX  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceget__data_a36ceac8490b958d018ece53853420d39}{source}} = requests.\+get(\textquotesingle{}https\+://www.\+ams-\/ix.\+net/ams/documentation/total-\/stats\textquotesingle{}).text
+\item 
+\mbox{\hyperlink{namespaceget__data_a226cdc3a872486ca5784012b7c26ac15}{soup}} = Beautiful\+Soup(\mbox{\hyperlink{namespaceget__data_a36ceac8490b958d018ece53853420d39}{source}}, \textquotesingle{}lxml\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceget__data_a7d2438a2e7dbfcdb856740e4f4291132}{match}} = soup.\+find(\textquotesingle{}div\textquotesingle{}, id=\textquotesingle{}root\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+try to get data from A\+M\+S-\/\+IX 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceget__data_a7d2438a2e7dbfcdb856740e4f4291132}\label{namespaceget__data_a7d2438a2e7dbfcdb856740e4f4291132}} 
+\index{get\_data@{get\_data}!match@{match}}
+\index{match@{match}!get\_data@{get\_data}}
+\doxysubsubsection{\texorpdfstring{match}{match}}
+{\footnotesize\ttfamily get\+\_\+data.\+match = soup.\+find(\textquotesingle{}div\textquotesingle{}, id=\textquotesingle{}root\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceget__data_a226cdc3a872486ca5784012b7c26ac15}\label{namespaceget__data_a226cdc3a872486ca5784012b7c26ac15}} 
+\index{get\_data@{get\_data}!soup@{soup}}
+\index{soup@{soup}!get\_data@{get\_data}}
+\doxysubsubsection{\texorpdfstring{soup}{soup}}
+{\footnotesize\ttfamily get\+\_\+data.\+soup = Beautiful\+Soup(\mbox{\hyperlink{namespaceget__data_a36ceac8490b958d018ece53853420d39}{source}}, \textquotesingle{}lxml\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceget__data_a36ceac8490b958d018ece53853420d39}\label{namespaceget__data_a36ceac8490b958d018ece53853420d39}} 
+\index{get\_data@{get\_data}!source@{source}}
+\index{source@{source}!get\_data@{get\_data}}
+\doxysubsubsection{\texorpdfstring{source}{source}}
+{\footnotesize\ttfamily get\+\_\+data.\+source = requests.\+get(\textquotesingle{}https\+://www.\+ams-\/ix.\+net/ams/documentation/total-\/stats\textquotesingle{}).text}
+

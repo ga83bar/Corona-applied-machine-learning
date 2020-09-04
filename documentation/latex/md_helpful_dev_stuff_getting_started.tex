@@ -1,0 +1,133 @@
+\doxysection*{G\+R\+O\+UP \+: ml\+\_\+boyz}
+
+\doxysection*{Doxygen \+:}
+
+
+\begin{DoxyItemize}
+\item doxygen is a code documentation tool !! Use it!!
+\item For using it you just have to make this kind of comments -\/ \textquotesingle{}\textquotesingle{}\textquotesingle{}Simple Python doxy comment\textquotesingle{}\textquotesingle{} -\/ in your function.
+\item You just have to download doxygen (L\+I\+N\+UX\+: sudo apt-\/get install doxygen)
+\item the system is ready to use (L\+I\+N\+UX\+: in the current working directory -\/-\/$>$ C\+WD doxygen aml\+\_\+doxy\+\_\+conf.\+dxy
+\item Then go to documentation/latex and make the .pdf file (L\+I\+N\+UX \+: make)
+\end{DoxyItemize}
+
+\doxysection*{Filepaths \+:}
+
+
+\begin{DoxyItemize}
+\item as we probably will/must work with different operating systems use the command -\/os.\+path.\+join() -\/ to create paths!!!
+\end{DoxyItemize}
+
+\doxysection*{Python \+: virtual enviroment}
+
+
+\begin{DoxyItemize}
+\item 
+\end{DoxyItemize}
+
+\doxysection*{Interfaces \+:}
+
+
+\begin{DoxyItemize}
+\item Informations of how to implement this Interfaces \+: \href{https://www.python-course.eu/python3_abstract_classes.php}{\texttt{ https\+://www.\+python-\/course.\+eu/python3\+\_\+abstract\+\_\+classes.\+php}}
+\item The extrem short version would be
+\begin{DoxyItemize}
+\item inherit interface to your class (ideally with the same name only without i) e.\+g. class Data(i\+Data)\+: .....
+\item copy the methods and overwrite them =)
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\doxysection*{P\+E\+P8 \+:}
+
+
+\begin{DoxyItemize}
+\item we want P\+E\+P8 compliant code
+\item please have a look at this 5 minutes tutorial (see \+: \href{https://pybit.es/pep8.html}{\texttt{ https\+://pybit.\+es/pep8.\+html}})
+\item who takes it exactly can also read the long version (see \+: \href{https://pep8.org/}{\texttt{ https\+://pep8.\+org/}})
+\end{DoxyItemize}
+
+\doxysection*{V\+S\+C\+O\+DE}
+
+
+\begin{DoxyItemize}
+\item we recommend that you use vscode
+\end{DoxyItemize}
+
+\doxysubsection*{Setup launch.\+json}
+
+
+\begin{DoxyItemize}
+\item this file is a powerful tool to manage different debug settings (see \+: \href{https://code.visualstudio.com/docs/editor/debugging}{\texttt{ https\+://code.\+visualstudio.\+com/docs/editor/debugging}})
+\item example \+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    // Use IntelliSense to learn about possible attributes.}
+\DoxyCodeLine{    // Hover to view descriptions of existing attributes.}
+\DoxyCodeLine{    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387}
+\DoxyCodeLine{    "version": "0.2.0",}
+\DoxyCodeLine{    "configurations": [}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            "preLaunchTask": "prelaunch",}
+\DoxyCodeLine{            "postDebugTask": "postlaunch",}
+\DoxyCodeLine{            "name": "debug main",}
+\DoxyCodeLine{            "type": "python",}
+\DoxyCodeLine{            "request": "launch",}
+\DoxyCodeLine{            "program": "\$\{workspaceFolder\}/main.py",}
+\DoxyCodeLine{            "console": "integratedTerminal",}
+\DoxyCodeLine{            "stopOnEntry": true}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    ]}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+\doxysubsection*{Setup task.\+json}
+
+
+\begin{DoxyItemize}
+\item This file defines different tasks that can be executed before and after the code
+\item example \+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    // See https://go.microsoft.com/fwlink/?LinkId=733558}
+\DoxyCodeLine{    // for the documentation about the tasks.json format}
+\DoxyCodeLine{    "version": "2.0.0",}
+\DoxyCodeLine{    "tasks": [}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            "label": "prelaunch",}
+\DoxyCodeLine{            "type": "shell",}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            "linux":\{}
+\DoxyCodeLine{                "command": "\$\{workspaceFolder\}/scripts/activate\_venv.sh",}
+\DoxyCodeLine{            \},}
+\DoxyCodeLine{            "windows": \{}
+\DoxyCodeLine{                "command": "\$\{workspaceFolder\}\(\backslash\)\(\backslash\)scripts\(\backslash\)\(\backslash\)activate\_venv.cmd"}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \},}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            "label": "postlaunch",}
+\DoxyCodeLine{            "type": "shell",}
+\DoxyCodeLine{}
+\DoxyCodeLine{            "linux":\{}
+\DoxyCodeLine{                "command": "\$\{workspaceFolder\}/scripts/disable\_venv.sh",}
+\DoxyCodeLine{            \},}
+\DoxyCodeLine{            "windows": \{}
+\DoxyCodeLine{                "command": "\$\{workspaceFolder\}\(\backslash\)\(\backslash\)scripts\(\backslash\)\(\backslash\)disable\_venv.cmd"}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    ]}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+\doxysection*{Logging}
+
+
+\begin{DoxyItemize}
+\item Please do not use print() instead use logging.\+info(\textquotesingle{}message\textquotesingle{}) or logging.\+error(\textquotesingle{}mes\textquotesingle{}) (see \+: \href{https://docs.python.org/3/library/logging.html}{\texttt{ https\+://docs.\+python.\+org/3/library/logging.\+html}})
+\end{DoxyItemize}
+
+\doxysection*{Flake8}

@@ -1,0 +1,94 @@
+\hypertarget{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector}{}\doxysection{src.\+data\+\_\+management.\+data\+\_\+collection.\+Steam\+Collector Class Reference}
+\label{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector}\index{src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}}
+
+
+Inheritance diagram for src.\+data\+\_\+management.\+data\+\_\+collection.\+Steam\+Collector\+:
+% FIG 0
+
+
+Collaboration diagram for src.\+data\+\_\+management.\+data\+\_\+collection.\+Steam\+Collector\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_a0fb69f995128615ae94e08c1c99055f1}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_ae03e80b196babc6e6317649b753c07df}{process\+\_\+data}} (self, frame\+\_\+raw)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_a49789c4a6be93397bf27e36ce669a032}{source}}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_acf377f60dfbf82aefcbc60c677ab6009}{csv\+\_\+name}}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_a9b145f0757c83042e2b635d6a2977d33}{path\+\_\+to\+\_\+raw}}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_ae1a69d4d460c9fd7c839dfac54e5d28e}{path\+\_\+to\+\_\+processed}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class handles the datacollection of the worldwide Steam data.
+Example sage:
+STEAM = SteamCollector()
+stframe = STEAM.get_data()
+STEAM.plot(stframe)
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_a0fb69f995128615ae94e08c1c99055f1}\label{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_a0fb69f995128615ae94e08c1c99055f1}} 
+\index{src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def src.\+data\+\_\+management.\+data\+\_\+collection.\+Steam\+Collector.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_ae03e80b196babc6e6317649b753c07df}\label{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_ae03e80b196babc6e6317649b753c07df}} 
+\index{src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}!process\_data@{process\_data}}
+\index{process\_data@{process\_data}!src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}}
+\doxysubsubsection{\texorpdfstring{process\_data()}{process\_data()}}
+{\footnotesize\ttfamily def src.\+data\+\_\+management.\+data\+\_\+collection.\+Steam\+Collector.\+process\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{frame\+\_\+raw }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Simple preprocessing of the steam dataset. Drop null values and set Date as index.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1ICollector_aaa7d2a672cd98c17bbce6ca9b6561491}{src.\+data\+\_\+management.\+data\+\_\+collection.\+I\+Collector}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_acf377f60dfbf82aefcbc60c677ab6009}\label{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_acf377f60dfbf82aefcbc60c677ab6009}} 
+\index{src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}!csv\_name@{csv\_name}}
+\index{csv\_name@{csv\_name}!src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}}
+\doxysubsubsection{\texorpdfstring{csv\_name}{csv\_name}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+Steam\+Collector.\+csv\+\_\+name}
+
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_ae1a69d4d460c9fd7c839dfac54e5d28e}\label{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_ae1a69d4d460c9fd7c839dfac54e5d28e}} 
+\index{src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}!path\_to\_processed@{path\_to\_processed}}
+\index{path\_to\_processed@{path\_to\_processed}!src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}}
+\doxysubsubsection{\texorpdfstring{path\_to\_processed}{path\_to\_processed}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+Steam\+Collector.\+path\+\_\+to\+\_\+processed}
+
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_a9b145f0757c83042e2b635d6a2977d33}\label{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_a9b145f0757c83042e2b635d6a2977d33}} 
+\index{src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}!path\_to\_raw@{path\_to\_raw}}
+\index{path\_to\_raw@{path\_to\_raw}!src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}}
+\doxysubsubsection{\texorpdfstring{path\_to\_raw}{path\_to\_raw}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+Steam\+Collector.\+path\+\_\+to\+\_\+raw}
+
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_a49789c4a6be93397bf27e36ce669a032}\label{classsrc_1_1data__management_1_1data__collection_1_1SteamCollector_a49789c4a6be93397bf27e36ce669a032}} 
+\index{src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}!source@{source}}
+\index{source@{source}!src.data\_management.data\_collection.SteamCollector@{src.data\_management.data\_collection.SteamCollector}}
+\doxysubsubsection{\texorpdfstring{source}{source}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+Steam\+Collector.\+source}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/data\+\_\+management/\mbox{\hyperlink{data__collection_8py}{data\+\_\+collection.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,39 @@
+\hypertarget{socialblade__processing_8py}{}\doxysection{src/data\+\_\+management/socialblade\+\_\+processing.py File Reference}
+\label{socialblade__processing_8py}\index{src/data\_management/socialblade\_processing.py@{src/data\_management/socialblade\_processing.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing}{src.\+data\+\_\+management.\+socialblade\+\_\+processing}}
+\begin{DoxyCompactList}\small\item\em Socialblade preprocessing script. Reads raw data, processes it with pandas and saves it into csv files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_aba0212ff5e57dc10db119329008827d7}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+load\+\_\+raw\+\_\+data}} (data\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Loads the raw data from the scraper. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_abefc17597c8467106d0e0f4575143a14}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+extract\+\_\+key\+\_\+list}} (raw\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Extracts all keys present in the raw data. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_a8de44bcfcbf3ad6c47e22c402991d472}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+extract\+\_\+stable\+\_\+channel\+\_\+urls}} (raw\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Extracts all channel urls that have data going back at least 2 years. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_ad0fdbbd050471e44d830d7d1cc7167f9}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+sort\+\_\+data}} (raw\+\_\+data, key\+\_\+list, allowed\+\_\+channels=None)
+\begin{DoxyCompactList}\small\item\em Sorts the time data and value data from the arrays in the correct arrays. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_ad3be87619d79244b54ad285a5baba260}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+show\+\_\+data\+\_\+subset}} (data\+\_\+dict)
+\begin{DoxyCompactList}\small\item\em Shows a subset of raw data. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_afd1586b82125d3ab6f0e1aab1f96e04a}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+create\+\_\+month\+\_\+df}} (data\+\_\+dict, key, drop=False)
+\begin{DoxyCompactList}\small\item\em Creates a pandas data frame from the data dictionary resampled into monthly bins. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_ab407e6ceda7be7bb2d3b1743f38d8433}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+create\+\_\+week\+\_\+df}} (data\+\_\+dict, key, drop=False)
+\begin{DoxyCompactList}\small\item\em Creates a pandas data frame from the data dictionary resampled into weekly bins. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_a17078a93bfe11fb2e1bdddc3b956da0f}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+plot\+\_\+df}} (data\+\_\+frame, title)
+\begin{DoxyCompactList}\small\item\em Plots the data frame. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_a4ce9bef766cc0f0f56ece65dfb84eab2}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+clean\+\_\+df}} (data\+\_\+frame)
+\begin{DoxyCompactList}\small\item\em Cleans the pandas data frame. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_acce4674a945992dc8d945064fb897104}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+concat\+\_\+data\+\_\+frames}} (df\+\_\+list)
+\begin{DoxyCompactList}\small\item\em Loads the usable data into a single pandas frame. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_a2fca53b8d0c529badd52181a252ea014}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+main}} ()
+\begin{DoxyCompactList}\small\item\em Loads the raw data, processes it and stores it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_a6d2bc0bb10bb2462f4d44160292ce717}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+style}}
+\item 
+\mbox{\hyperlink{namespacesrc_1_1data__management_1_1socialblade__processing_ab69a68c1af8d746d3df5e123962dd490}{src.\+data\+\_\+management.\+socialblade\+\_\+processing.\+P\+A\+TH}} = Pure\+Path.\+joinpath(Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve().parents\mbox{[}2\mbox{]}, \textquotesingle{}res\textquotesingle{}, \textquotesingle{}socialblade\textquotesingle{})
+\end{DoxyCompactItemize}

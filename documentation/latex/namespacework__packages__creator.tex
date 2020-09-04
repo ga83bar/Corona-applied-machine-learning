@@ -1,0 +1,149 @@
+\hypertarget{namespacework__packages__creator}{}\doxysection{work\+\_\+packages\+\_\+creator Namespace Reference}
+\label{namespacework__packages__creator}\index{work\_packages\_creator@{work\_packages\_creator}}
+
+
+Script to create work packages for the Docker containers.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacework__packages__creator_ae95df1322a0e1fe3733721d53aa172b8}{assemble\+\_\+work\+\_\+packages}} (url\+\_\+list, n\+\_\+packages)
+\begin{DoxyCompactList}\small\item\em Assembles a list of U\+R\+Ls into work packages. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacework__packages__creator_a4696dd65883456ce801c276b3cbb8ed3}{load\+\_\+country\+\_\+results}} (result\+\_\+file=\textquotesingle{}results.\+json\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Loads the list of countries available on socialblade from a json file. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacework__packages__creator_a7f790c0158608f3c2b29b30c3308ded3}{clear\+\_\+dictionaries}} ()
+\begin{DoxyCompactList}\small\item\em Clears all dictionaries below the work packages folder. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacework__packages__creator_abcd7202bd02d2db02b281c78542393f5}{show\+\_\+dialogue}} (dialogue\+\_\+nr=0)
+\begin{DoxyCompactList}\small\item\em Prints dialogue options to the console and processes input. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacework__packages__creator_a8b8b5ae538d73dcf94804d5f775d3e07}{write\+\_\+fails}} (fails)
+\begin{DoxyCompactList}\small\item\em Writes a list of urls into a fails.\+json file. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacework__packages__creator_a5f7e5a06876f75ada0c19b14c44ccfba}{write\+\_\+results}} (results)
+\begin{DoxyCompactList}\small\item\em Writes dictionary of results into a results.\+json file. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacework__packages__creator_a5db98a560b926f60e1db89c0204f5df4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main function for the script. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacework__packages__creator_a4be825095aa3efb0f07252d23eb8ce9c}{P\+A\+TH}} = os.\+path.\+join(os.\+path.\+abspath(\char`\"{}\char`\"{}))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Script to create work packages for the Docker containers. 
+
+Scrapes all available countries from Socialblade, then also scrapes the respective top 250 channel lists from the site. Reads the user input on how many work packages should be created, splits the link list accordingly and creates the necessary folders. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacework__packages__creator_ae95df1322a0e1fe3733721d53aa172b8}\label{namespacework__packages__creator_ae95df1322a0e1fe3733721d53aa172b8}} 
+\index{work\_packages\_creator@{work\_packages\_creator}!assemble\_work\_packages@{assemble\_work\_packages}}
+\index{assemble\_work\_packages@{assemble\_work\_packages}!work\_packages\_creator@{work\_packages\_creator}}
+\doxysubsubsection{\texorpdfstring{assemble\_work\_packages()}{assemble\_work\_packages()}}
+{\footnotesize\ttfamily def work\+\_\+packages\+\_\+creator.\+assemble\+\_\+work\+\_\+packages (\begin{DoxyParamCaption}\item[{}]{url\+\_\+list,  }\item[{}]{n\+\_\+packages }\end{DoxyParamCaption})}
+
+
+
+Assembles a list of U\+R\+Ls into work packages. 
+
+Work packages are saved at work\+\_\+packages/package\+\_\+xx. 
+\begin{DoxyParams}{Parameters}
+{\em url\+\_\+list} & List of url strings that have to be scraped. \\
+\hline
+{\em n\+\_\+packages} & Number of packages to divide the url list into. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacework__packages__creator_a7f790c0158608f3c2b29b30c3308ded3}\label{namespacework__packages__creator_a7f790c0158608f3c2b29b30c3308ded3}} 
+\index{work\_packages\_creator@{work\_packages\_creator}!clear\_dictionaries@{clear\_dictionaries}}
+\index{clear\_dictionaries@{clear\_dictionaries}!work\_packages\_creator@{work\_packages\_creator}}
+\doxysubsubsection{\texorpdfstring{clear\_dictionaries()}{clear\_dictionaries()}}
+{\footnotesize\ttfamily def work\+\_\+packages\+\_\+creator.\+clear\+\_\+dictionaries (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clears all dictionaries below the work packages folder. 
+
+\mbox{\Hypertarget{namespacework__packages__creator_a4696dd65883456ce801c276b3cbb8ed3}\label{namespacework__packages__creator_a4696dd65883456ce801c276b3cbb8ed3}} 
+\index{work\_packages\_creator@{work\_packages\_creator}!load\_country\_results@{load\_country\_results}}
+\index{load\_country\_results@{load\_country\_results}!work\_packages\_creator@{work\_packages\_creator}}
+\doxysubsubsection{\texorpdfstring{load\_country\_results()}{load\_country\_results()}}
+{\footnotesize\ttfamily def work\+\_\+packages\+\_\+creator.\+load\+\_\+country\+\_\+results (\begin{DoxyParamCaption}\item[{}]{result\+\_\+file = {\ttfamily \textquotesingle{}results.json\textquotesingle{}} }\end{DoxyParamCaption})}
+
+
+
+Loads the list of countries available on socialblade from a json file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result\+\_\+file} & Filename of the save file located under work\+\_\+packages. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the list of list of all country main page urls for socialblade. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacework__packages__creator_a5db98a560b926f60e1db89c0204f5df4}\label{namespacework__packages__creator_a5db98a560b926f60e1db89c0204f5df4}} 
+\index{work\_packages\_creator@{work\_packages\_creator}!main@{main}}
+\index{main@{main}!work\_packages\_creator@{work\_packages\_creator}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def work\+\_\+packages\+\_\+creator.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main function for the script. 
+
+Controls the dialogue flow, sets parameters accordingly, starts the scraping and saves the results and fails into the respective files. \mbox{\Hypertarget{namespacework__packages__creator_abcd7202bd02d2db02b281c78542393f5}\label{namespacework__packages__creator_abcd7202bd02d2db02b281c78542393f5}} 
+\index{work\_packages\_creator@{work\_packages\_creator}!show\_dialogue@{show\_dialogue}}
+\index{show\_dialogue@{show\_dialogue}!work\_packages\_creator@{work\_packages\_creator}}
+\doxysubsubsection{\texorpdfstring{show\_dialogue()}{show\_dialogue()}}
+{\footnotesize\ttfamily def work\+\_\+packages\+\_\+creator.\+show\+\_\+dialogue (\begin{DoxyParamCaption}\item[{}]{dialogue\+\_\+nr = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Prints dialogue options to the console and processes input. 
+
+Dialogue options are called via their dialogue number. Convenient way to store all prints into a single function. 
+\begin{DoxyParams}{Parameters}
+{\em dialogue\+\_\+nr} & Number of the dialogue and input check to perform. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the parsed and processed user input. Differs in between different dialogue numbers. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacework__packages__creator_a8b8b5ae538d73dcf94804d5f775d3e07}\label{namespacework__packages__creator_a8b8b5ae538d73dcf94804d5f775d3e07}} 
+\index{work\_packages\_creator@{work\_packages\_creator}!write\_fails@{write\_fails}}
+\index{write\_fails@{write\_fails}!work\_packages\_creator@{work\_packages\_creator}}
+\doxysubsubsection{\texorpdfstring{write\_fails()}{write\_fails()}}
+{\footnotesize\ttfamily def work\+\_\+packages\+\_\+creator.\+write\+\_\+fails (\begin{DoxyParamCaption}\item[{}]{fails }\end{DoxyParamCaption})}
+
+
+
+Writes a list of urls into a fails.\+json file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fails} & List of failed urls. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacework__packages__creator_a5f7e5a06876f75ada0c19b14c44ccfba}\label{namespacework__packages__creator_a5f7e5a06876f75ada0c19b14c44ccfba}} 
+\index{work\_packages\_creator@{work\_packages\_creator}!write\_results@{write\_results}}
+\index{write\_results@{write\_results}!work\_packages\_creator@{work\_packages\_creator}}
+\doxysubsubsection{\texorpdfstring{write\_results()}{write\_results()}}
+{\footnotesize\ttfamily def work\+\_\+packages\+\_\+creator.\+write\+\_\+results (\begin{DoxyParamCaption}\item[{}]{results }\end{DoxyParamCaption})}
+
+
+
+Writes dictionary of results into a results.\+json file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em results} & Result dictionary to write. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacework__packages__creator_a4be825095aa3efb0f07252d23eb8ce9c}\label{namespacework__packages__creator_a4be825095aa3efb0f07252d23eb8ce9c}} 
+\index{work\_packages\_creator@{work\_packages\_creator}!PATH@{PATH}}
+\index{PATH@{PATH}!work\_packages\_creator@{work\_packages\_creator}}
+\doxysubsubsection{\texorpdfstring{PATH}{PATH}}
+{\footnotesize\ttfamily work\+\_\+packages\+\_\+creator.\+P\+A\+TH = os.\+path.\+join(os.\+path.\+abspath(\char`\"{}\char`\"{}))}
+

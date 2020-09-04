@@ -1,0 +1,24 @@
+\doxysection*{Data origin}
+
+The data comes from the web pages of various IX providers that publicly provide their data throughput statistics. The list of IX points we tried to scrape can be found in the \href{../../src/data_collection/api_request/ix_list.xlsx}{\texttt{ IX list file}}.
+
+\doxysection*{Code for obtaining and preprocessing}
+
+The code for scraping and preprocessing can be found \href{../../src/data_collection/api_request/datapoint_collection.py}{\texttt{ here}}.
+
+\doxysection*{Info about the dataset}
+
+
+\begin{DoxyItemize}
+\item 20230 Data samples
+\item Features
+\begin{DoxyItemize}
+\item Timestamp
+\item Date
+\item bitrate
+\item IX (Internet Exchange)
+\item type (average or maximum)
+\end{DoxyItemize}
+\item Only IX and type are categorical everything else is numeric
+\item Of every IX we have a time series of data flux 
+\end{DoxyItemize}

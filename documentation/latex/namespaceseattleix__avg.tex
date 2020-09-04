@@ -1,0 +1,72 @@
+\hypertarget{namespaceseattleix__avg}{}\doxysection{seattleix\+\_\+avg Namespace Reference}
+\label{namespaceseattleix__avg}\index{seattleix\_avg@{seattleix\_avg}}
+
+
+getting the raw data avgerage from Seattleix  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{namespaceseattleix__avg_a73b95c951594cebbfbc09737e6fb191a}{U\+RL}} = \textquotesingle{}https\+://www.\+seattleix.\+net/statistics/agg\+\_\+avg\+\_\+daily.\+txt\textquotesingle{}
+\item 
+\mbox{\hyperlink{namespaceseattleix__avg_a9222ee04b2525bc1809ddcd8e342a53c}{source}} = requests.\+get(\mbox{\hyperlink{namespaceseattleix__avg_a73b95c951594cebbfbc09737e6fb191a}{U\+RL}}).text
+\item 
+\mbox{\hyperlink{namespaceseattleix__avg_a497784604bffc19fb3dc16db5e941d29}{soup}} = Beautiful\+Soup(\mbox{\hyperlink{namespaceseattleix__avg_a9222ee04b2525bc1809ddcd8e342a53c}{source}}, \textquotesingle{}lxml\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceseattleix__avg_a86d00339c61bf4d3ca38902b48ac9765}{result}} = soup.\+p.\+text
+\item 
+\mbox{\hyperlink{namespaceseattleix__avg_ac8a5dde5d4d77068df6c5a21ad8b14d0}{writer}}
+\item 
+\mbox{\hyperlink{namespaceseattleix__avg_aa1d262812d19cadd78a48abc1bbbce5f}{result\+\_\+file}}
+\item 
+\mbox{\hyperlink{namespaceseattleix__avg_afb060c86530ec1ab97813b0382fbd4e6}{delimiter}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+getting the raw data avgerage from Seattleix 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceseattleix__avg_afb060c86530ec1ab97813b0382fbd4e6}\label{namespaceseattleix__avg_afb060c86530ec1ab97813b0382fbd4e6}} 
+\index{seattleix\_avg@{seattleix\_avg}!delimiter@{delimiter}}
+\index{delimiter@{delimiter}!seattleix\_avg@{seattleix\_avg}}
+\doxysubsubsection{\texorpdfstring{delimiter}{delimiter}}
+{\footnotesize\ttfamily seattleix\+\_\+avg.\+delimiter}
+
+\mbox{\Hypertarget{namespaceseattleix__avg_a86d00339c61bf4d3ca38902b48ac9765}\label{namespaceseattleix__avg_a86d00339c61bf4d3ca38902b48ac9765}} 
+\index{seattleix\_avg@{seattleix\_avg}!result@{result}}
+\index{result@{result}!seattleix\_avg@{seattleix\_avg}}
+\doxysubsubsection{\texorpdfstring{result}{result}}
+{\footnotesize\ttfamily seattleix\+\_\+avg.\+result = soup.\+p.\+text}
+
+\mbox{\Hypertarget{namespaceseattleix__avg_aa1d262812d19cadd78a48abc1bbbce5f}\label{namespaceseattleix__avg_aa1d262812d19cadd78a48abc1bbbce5f}} 
+\index{seattleix\_avg@{seattleix\_avg}!result\_file@{result\_file}}
+\index{result\_file@{result\_file}!seattleix\_avg@{seattleix\_avg}}
+\doxysubsubsection{\texorpdfstring{result\_file}{result\_file}}
+{\footnotesize\ttfamily seattleix\+\_\+avg.\+result\+\_\+file}
+
+\mbox{\Hypertarget{namespaceseattleix__avg_a497784604bffc19fb3dc16db5e941d29}\label{namespaceseattleix__avg_a497784604bffc19fb3dc16db5e941d29}} 
+\index{seattleix\_avg@{seattleix\_avg}!soup@{soup}}
+\index{soup@{soup}!seattleix\_avg@{seattleix\_avg}}
+\doxysubsubsection{\texorpdfstring{soup}{soup}}
+{\footnotesize\ttfamily seattleix\+\_\+avg.\+soup = Beautiful\+Soup(\mbox{\hyperlink{namespaceseattleix__avg_a9222ee04b2525bc1809ddcd8e342a53c}{source}}, \textquotesingle{}lxml\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceseattleix__avg_a9222ee04b2525bc1809ddcd8e342a53c}\label{namespaceseattleix__avg_a9222ee04b2525bc1809ddcd8e342a53c}} 
+\index{seattleix\_avg@{seattleix\_avg}!source@{source}}
+\index{source@{source}!seattleix\_avg@{seattleix\_avg}}
+\doxysubsubsection{\texorpdfstring{source}{source}}
+{\footnotesize\ttfamily seattleix\+\_\+avg.\+source = requests.\+get(\mbox{\hyperlink{namespaceseattleix__avg_a73b95c951594cebbfbc09737e6fb191a}{U\+RL}}).text}
+
+\mbox{\Hypertarget{namespaceseattleix__avg_a73b95c951594cebbfbc09737e6fb191a}\label{namespaceseattleix__avg_a73b95c951594cebbfbc09737e6fb191a}} 
+\index{seattleix\_avg@{seattleix\_avg}!URL@{URL}}
+\index{URL@{URL}!seattleix\_avg@{seattleix\_avg}}
+\doxysubsubsection{\texorpdfstring{URL}{URL}}
+{\footnotesize\ttfamily string seattleix\+\_\+avg.\+U\+RL = \textquotesingle{}https\+://www.\+seattleix.\+net/statistics/agg\+\_\+avg\+\_\+daily.\+txt\textquotesingle{}}
+
+\mbox{\Hypertarget{namespaceseattleix__avg_ac8a5dde5d4d77068df6c5a21ad8b14d0}\label{namespaceseattleix__avg_ac8a5dde5d4d77068df6c5a21ad8b14d0}} 
+\index{seattleix\_avg@{seattleix\_avg}!writer@{writer}}
+\index{writer@{writer}!seattleix\_avg@{seattleix\_avg}}
+\doxysubsubsection{\texorpdfstring{writer}{writer}}
+{\footnotesize\ttfamily seattleix\+\_\+avg.\+writer}
+

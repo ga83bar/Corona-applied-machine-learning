@@ -1,0 +1,192 @@
+\mbox{[}\mbox{[}{\itshape T\+OC}\mbox{]}\mbox{]}
+
+\doxysection*{Quick Summary}
+
+Predictive time series modeling is a more or less {\bfseries{standard problem}} in the field of statistical modeling for which {\bfseries{many different approaches}} exist. One of the main goals during the A\+MI project is to evaluate some of these {\bfseries{candidate model approaches}} and to eventually decide for one that suits the project task at hand. This underlying document thus presents a quick \& dirty analysis of three possible learning approaches and discusses their respective feasibility. ~\newline
+
+
+\doxysection*{Extreme Learning Machines (E\+L\+Ms)}
+
+One very promising emerging approach to combat {\bfseries{regression and classification problems}} is the utilization of {\bfseries{Extreme Learning Machines (E\+L\+Ms)}}. While being not so prominent in traditional ML lectures, E\+L\+Ms are widely known for a {\bfseries{fairly good accuracy}} and {\bfseries{extremely fast performance}}. The latter follows from the fact that the respective {\bfseries{pseudo-\/hidden neuron parameters}} (in the following just referred to as hidden) do not need to be tuned during learning and are thus independent of the underlying training data set. More so, the hidden neurons are rather {\bfseries{randomly generated}} which consequently implies a {\bfseries{random initialization of its parameters}} such as input weights, biases, centers, etc. Still, the universal approximation capability holds, for which an arbitrary model accuracy -\/ supposing that there are enough hidden neurons -\/ can be achieved for the regression/classification task at hand.
+
+The probably most distinct property embedded in the E\+LM nature is the {\bfseries{non-\/iterative linear solution}} for the respective output weights. This is mainly due to the independence between the input and output weights, unlike in a backpropagation scenario. This ultimately renders E\+L\+Ms to be very fast compared to similar M\+LP and S\+VM solutions.
+
+Most of the discussed concepts below can be re-\/read in the following articles\+:
+\begin{DoxyItemize}
+\item \href{https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7140733}{\texttt{ High-\/\+Performance Extreme Learning Machines\+: A Complete Toolbox for Big Data Applications}}
+\item \href{http://www.di.unito.it/~cancelli/retineu11_12/ELM-NC-2006.pdf}{\texttt{ Extreme learning machine\+: Theory and applications}}
+\item \href{https://csce.ucmss.com/cr/books/2018/LFS/CSREA2018/ICA4128.pdf}{\texttt{ tfelm\+: a Tensor\+Flow Toolbox for the Investigation of E\+L\+Ms and M\+L\+Ps Performance}}
+\end{DoxyItemize}
+
+\doxysubsection*{E\+LM Model}
+
+E\+L\+Ms are {\bfseries{fast training methods}} for {\bfseries{single layer feed-\/forward neural networks (S\+L\+FN)}}. Once again, this is because input weights W and biases b are randomly set and never adjusted. Consequently, the respective output weights β are independent. Furthermore, the {\bfseries{randomness of the input layer weights}} improves the generalization property w.\+r.\+t. the solution of a linear output layer. The so induced orthogonality leads to almost orthogonal and thus {\bfseries{weakly correlated}} hidden layer features.
+
+In general, we can define an E\+LM model as follows. Consider a set of N distinct training samples (x\+\_\+i, t\+\_\+i) where i ranges between 1 and N. The S\+L\+FN output equation with L hidden neurons can then be denoted as
+
+
+
+with φ being the activation function (usually a sigmoid), w\+\_\+i the input weights, b\+\_\+i the biases and β\+\_\+i the respective output weights. Consequently, the relation between the network inputs x\+\_\+i, the target outputs t\+\_\+i and the estimated outputs y\+\_\+i is given by
+
+
+
+where ε denotes the noise comprised of random noise and certain dependencies on hidden variables excluded from the inputs x\+\_\+i. This process can be re-\/examined in below figure.
+
+
+
+\doxysubsection*{Computation}
+
+Before discussing the simple computation technique behind E\+L\+Ms, it is reasonable to first discuss the processes behind the respective hidden neurons as well as a compact matrix notation.
+
+\doxysubsubsection*{Pseudo-\/\+Hidden Neurons}
+
+In general, the hidden neurons {\bfseries{transform}} the underlying input data into a different representation. This is usually done in two steps\+: 1) The data is projected into the hidden layer using the input layer weights and biases. 2) The projected data is transformed using a non-\/linear transformation function.
+
+In particular, using above {\bfseries{non-\/linear transformation}}, the learning capabilities of the E\+LM can be greatly {\bfseries{increased}}. After transformation, the data in the hidden layers h\+\_\+I can be used to find the output layer weights. Another {\bfseries{practical advantage}} is that the respective transformation functions are not constrained by type, that is they can be selected to be very different and even non-\/existent. Furthermore, since the neurons are linear, they consequently adapt and learn linear dependencies between data features and targets which happens directly without any nonlinear approximation at all. With that in mind, it becomes clear that the number of neurons {\bfseries{must equal}} the number of data features.
+
+Note however, that other types of neurons have also found application in E\+L\+Ms such as {\bfseries{R\+BF neurons}} with nonlinear projection functions. These can be used to compute predictions based on similar training data samples in order to solve tasks with some more complex dependencies between data features and targets.
+
+\doxysubsubsection*{Compact Matrix Notation}
+
+E\+L\+Ms exhibit a {\bfseries{closed form solution}} in which the hidden neurons are comprised in a matrix H. The network structure itself though is not noticable in practice meaning that there is only a {\bfseries{single matrix}} that describes the projection between two -\/ usually linear -\/ spaces. The projections for the input (X⋅W) and the output (H⋅β) are connected through a nonlinear transformation as follows.
+
+
+
+The number of hidden neurons thus consequently {\bfseries{regulates}} the size of the matrices W, H and β. However, the network neurons are never treated separately. With different types of hidden neurons, the first projection and transformation are performed {\bfseries{independently}} for each type of neuron. Then the resulting sub-\/matrices H\+\_\+1 are concatenated along the second dimension. For two types of hidden neurons it follows that
+
+
+
+where linear neurons are added by simply copying the inputs into the hidden layer outpus
+
+
+
+\doxysubsubsection*{Solution Computation}
+
+In general, E\+LM problems are usually {\bfseries{over-\/determined (N$>$L)}} with the number of training data samples being much larger than the number of selected hidden neurons. In all other cases (N$<$=L), regularization should be used in order to obtain a better generalization performance.
+
+Nevertheless, a unique solution can be found using the pseudoinverse\+:
+
+
+
+\doxysubsection*{Conclusion}
+
+In order to summarize, E\+L\+Ms have very promising and efficient properties. They have been proven to be very useful for regression tasks as needed in our project. Nevertheless, there have been some reports on negative effects such as
+\begin{DoxyItemize}
+\item Bad initial randomization
+\item Speedy performance but low accuracy
+\item Need of regularization options
+\end{DoxyItemize}
+
+In particular, it has to be pointed out that E\+L\+Ms only operate on {\bfseries{one hidden layer}} in contrast to general DL approaches. In order to achieve a very high accuracy and approximation, this might not be necessarily the best performing choice considering the amount of C\+O\+V\+I\+D-\/19 data that we have gathered throughout the collection process.
+
+Nevertheless, there are two very high-\/performance {\bfseries{Matlab and Python implementations}} in form of {\bfseries{ready-\/to-\/use toolboxes}} discussed in above articles. They promise automatic model structure selection as well as the application of regularization techniques. Furthermore, many approaches using self-\/written Python code have emerged online.
+
+However, the main argument that seems to disqualify E\+L\+Ms -\/ at least from our user point of view -\/ is that {\bfseries{only one group member}} has even had any experience at all using them. Furthermore, even though the concepts of E\+L\+Ms seem promising and effective, most of the ML experience was simply gained in Python using {\bfseries{Tensor\+Flow and Py\+Torch}}. The goal thus remains to find a time series modeling approach which exploits the vast availability of pre-\/built functions as found in these aforementioned frameworks. ~\newline
+
+
+\doxysection*{Gaussian Processes (G\+Ps)}
+
+Another very promising approach which solves {\bfseries{regressional time series problems}} is the use of {\bfseries{Gaussian Processes (G\+Ps)}} for which a handful of implementations is given in the {\bfseries{scikit ML library}}. In particular, there have already been attempts to model and forecast C\+O2 emissions using G\+Ps, as done \href{https://stats.stackexchange.com/questions/377999/why-are-gaussian-processes-valid-statistical-models-for-time-series-forecasting}{\texttt{ here}}. This not only {\bfseries{motivates}} to further investigate G\+Ps for our project but also demonstrates a successful application, ultimately rendering this approach as {\bfseries{highly plausible}} to achieve our specified project target.
+
+\doxysubsection*{GP Model}
+
+G\+Ps are a very generic class of {\bfseries{supervised learning methods}} which are designed to not only solve {\bfseries{regression but also probabilitsic classification problems}}. In general, a GP is a {\bfseries{stochastic process}} and thus a collection of random variables, e.\+g. in the time or space domain. Note that every such finite collection of random variables has a {\bfseries{multivariate normal distribution}}, that is every finite linear combination of these random variables is strictly {\bfseries{normally distributed}}. As such, every GP can be compactly described by the {\bfseries{joint distribution}} of all those random variables and is thus strictly specified by its {\bfseries{mean and covariance functions}}.
+
+A GP can be described as a functional mapping of random variables x\+\_\+i
+
+
+
+with mean function m(x)
+
+
+
+and covariance function k(x, x\textquotesingle{})
+
+
+
+Most ML algorithms that make use of G\+Ps often apply {\bfseries{lazy learning approaches}} in order to measure the {\bfseries{similarity}} between the respective evaluation points. To this, the so-\/called {\bfseries{kernel function}} is examined which aids to predict the value for a future, e.\+g. time series point. The so obtained prediction -\/ in form of a {\bfseries{distribution}} -\/ not just provides an estimation but also contains some {\bfseries{uncertainty information}} which is embedded in the {\bfseries{one-\/dimensional Gaussian distribution}}. The same holds for multidimensional predictions where the GP is multivariate and for which the respective multivariate Gaussian distributions are the corresponding marginal distributions at the current evaluation point.
+
+\doxysubsection*{Pros and Cons}
+
+The advantages of GP models can mainly be summarized as follows\+:
+\begin{DoxyItemize}
+\item The model prediction interpolates between the observations for regular kernels.
+\item The prediction is probabilistic and allows for an analysis of confidence intervals which in turn aids to decide whether refitting is necessary. The latter one can thus be solved in an online fashion.
+\item There is a certain versatitlity due to the possibility to choose differently specified kernels.
+\end{DoxyItemize}
+
+However, there are also some severe disadvantages of GP models\+:
+\begin{DoxyItemize}
+\item Non-\/sparsity\+: The models use the whole sample space and all feature information in order to perform a prediction.
+\item Low efficiency in high-\/dimensional ($>$12) spaces.
+\end{DoxyItemize}
+
+\doxysubsection*{Conclusion}
+
+While GP models bring many different advantages and are also quite broady represented in the desired frameworks to be used during the project, once again {\bfseries{only few group members}} have actively dealt with both the {\bfseries{theory and practical implementation}} of such models. Thus, diving deeper in the more complex stochastic modeling theory will certainly {\bfseries{take up more time}} than we initially desired to give for the ML core development. As such, we decide that more time should be spent {\bfseries{analyzing, optimizing and troubleshooting}} the model output which is frankly the more {\bfseries{exhausting}} part for a successful model application. Therefore, we live by the notion that the {\bfseries{more simple the model the better}}. Since most of the group members have gained considerable experience in DL modeling scenarios, these are to choose and GP models will thus not be further considered. ~\newline
+
+
+\doxysection*{L\+S\+TM R\+NN}
+
+What all above ML approaches have led to is a more or less pre-\/determined decision for a {\bfseries{DL solution}}. In particular, there are many time-\/series modeling approaches using {\bfseries{recurrent neural networks (R\+N\+Ns)}}. However, while these seem to achieve some {\bfseries{very high accuracies}}, they also suffer from severe drawbacks which might also affect our project scope due to the vast amount of data that we have gathered. To be precise, one particularly dangerous disadvantage of conventional R\+N\+Ns is their {\bfseries{short-\/term memory capacity}}. In order to combat this drawback, {\bfseries{long short-\/term memory (L\+S\+TM) R\+N\+Ns}} have been introduced that incorporate a significantly {\bfseries{greater (longer) memory capacity}}.
+
+Unlike feed-\/forward neural networks, L\+S\+T\+Ms have {\bfseries{feedback connections}} and are not only able to process {\bfseries{single data points}} but also {\bfseries{entire sequences}} -\/ a character trait especially needed for our project implementation! A huge proportion of L\+S\+TM associated model applications so far have been based on time series data. In particular, some models -\/ as presented \href{https://www.curiousily.com/posts/time-series-forecasting-with-lstm-for-daily-coronavirus-cases/}{\texttt{ here}} -\/ have been constructed that actively address the C\+O\+V\+I\+D-\/19 pandemic and use time-\/series data for accurate predictions. This once again {\bfseries{motivates}} to further discuss L\+S\+TM R\+N\+Ns as a valid approach for our project realization.
+
+\doxysubsection*{L\+S\+TM core idea}
+
+In general, R\+N\+Ns can be represented in a {\bfseries{chain-\/like form of repeating modules}} which incorporate loops and interconnections. L\+S\+T\+Ms in particular introduce a repeating module which has a more advanced structure containing {\bfseries{several neural network layers}}. The general chain layout for the repeating module of such L\+S\+T\+Ms is depicted below.
+
+
+
+
+
+The core of L\+S\+TM based R\+N\+Ns is the {\bfseries{cell state C}} which is defined by the horizontal line on the top of the respective module\+:
+
+
+
+In particular, the cell state interacts {\bfseries{linearly}} with other elements throughout its way. The main feature of L\+S\+T\+Ms is the ability to {\bfseries{add and remove}} certain information w.\+r.\+t. the cell state, that is information can be {\bfseries{sequentially}} added to and removed from it. This mechanism is regulated by so-\/called {\bfseries{gates}} which will be examined in more detail in the following subsection.
+
+\doxysubsection*{L\+S\+TM Information Gates}
+
+The gate structures are usually composed of {\bfseries{sigmoid neural net layers}} and {\bfseries{pointwise multiplication operators}}. Depending on their function, we can classify them as forget, input and output gates.
+
+\doxysubsubsection*{Forget Gate}
+
+The forget gate more or less describes the first decision that the network has to make\+: What information has to be {\bfseries{thrown away}} from the cell state. It thus decides whether information will be {\bfseries{deleted or not}}. In order to do so, the gate considers the {\bfseries{previous h\+\_\+(t-\/1) and current x\+\_\+t value}}, passes both through the sigmoid layer and computes a value {\bfseries{f\+\_\+t between 0 and 1}} for the current cell state C\+\_\+t which describes the {\bfseries{memory degree}} (0 = forget entirely, 1 = remember entirely).
+
+
+
+\doxysubsubsection*{Input Gate}
+
+The next consequent step for the L\+S\+TM is decide what {\bfseries{new information is going to be added}} to the current cell state. This is performed by the input gate which consists of two parts\+:
+\begin{DoxyItemize}
+\item First, a sigmoid layer -\/ the so-\/called input gate layer -\/ decides which former values will be updated.
+\item Second, a tanh layer creates a dedicated vector of new candidate values that could be added to the cell state.
+\end{DoxyItemize}
+
+
+
+Furthermore, the now old cell state C\+\_\+(t-\/1) has to be updated to the new cell state C\+\_\+t by multiplying the old state with f\+\_\+t -\/ forgetting the information we decided to forget in the forget gate -\/ and by adding above multiplication of i\+\_\+t with the candidate vector.
+
+
+
+\doxysubsubsection*{Output Gate}
+
+Last but not least, the L\+S\+TM has to decide {\bfseries{what to output}}. This is highly dependent on the cell state and is essentially going to be a {\bfseries{filtered version}} of it performed by the output gate\+:
+\begin{DoxyItemize}
+\item First, a sigmoid layer is run for h\+\_\+(t-\/1) and x\+\_\+t analogously to above input gate.
+\item Second, the current cell state is pushed through a tanh layer which confines a value space between -\/1 and 1.
+\item Third, we multiply each outcome and obtain the consecutive value for h\+\_\+t which reflects all our previous decisions.
+\end{DoxyItemize}
+
+
+
+\doxysubsection*{Conclusion}
+
+To summarize, L\+S\+TM R\+N\+Ns have a {\bfseries{very high and most importantly proven performance}} w.\+r.\+t. time series modeling. In particular, there are also {\bfseries{many guides and tutorials}} on how to realize and troubleshoot (optimize) L\+S\+TM R\+N\+Ns using Python. Due to their {\bfseries{DL character}}, they are furthermore very {\bfseries{familiar}} to the group members as multiple layers can and should be constructed. In particular, there is also {\bfseries{no higher effort in understanding}} the advanced L\+S\+TM architecture and its many variants as they can be {\bfseries{astractly considered}} as \char`\"{}just elements in a R\+N\+N\char`\"{}. As such, L\+S\+TM R\+N\+Ns are currently the most promising solution to the time series model approach that we intend for our project scope.
+
+A sample realization of L\+S\+TM R\+N\+Ns using Keras in Python is demonstrated \href{https://machinelearningmastery.com/time-series-prediction-lstm-recurrent-neural-networks-python-keras/}{\texttt{ in this article}}, a time series weather forecasting guide using L\+S\+T\+Ms in Python has been shown \href{https://www.tensorflow.org/tutorials/structured_data/time_series}{\texttt{ in this approach}} and above C\+O\+V\+I\+D-\/19 forecast using L\+S\+T\+Ms can once again be found \href{https://www.curiousily.com/posts/time-series-forecasting-with-lstm-for-daily-coronavirus-cases/}{\texttt{ here}}.
+
+\doxysection*{Decision}
+
+After having reviewed above candidate ML models that {\bfseries{certainly would all suffice}} to achieve the project task at hand, a final decision is hard to make. {\bfseries{L\+S\+T\+M-\/based R\+N\+Ns}} in particular seem to be a very powerful solution to the problem. Furthermore, the {\bfseries{matureness of L\+S\+T\+Ms}} compared to Extreme Learning and GP models as well as their {\bfseries{familiarity to every group member}} -\/ as they can be seen as an extension to R\+N\+Ns -\/ are two of the main driving factors fueling the decision for it. However, one major drawback that has emerged throughout the {\bfseries{data collection phase}} is that not all of our data sets are of a particularly high quality due to {\bfseries{noise}} and other factors. Thus, we believe that performing predictions using L\+S\+T\+M-\/based R\+N\+Ns {\bfseries{will not exploit above high-\/feature advantages}} nor will the predictions be of a particularly high accuracy due to the {\bfseries{low-\/quality data}} in some cases. Furthermore, we believe that above candidate approaches need to be compared to more {\bfseries{traditional regression approaches}} such as linear regression and decision trees which are well-\/known to the group members. In particular, necessary obstacles such as {\bfseries{troubleshooting, hyperparameter optimizing and model verification}} are well understood for these regression model classes. In conclusion, very powerful model architectures have been discussed and examined. However, the preliminary performance assessment will determine whether complex approaches {\bfseries{outperform}} standard regression models. A {\bfseries{final decision}} on the model architecture can certainly only be made {\bfseries{after the assessment}}. 

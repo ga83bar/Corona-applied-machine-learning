@@ -1,0 +1,83 @@
+\hypertarget{namespacescrapper}{}\doxysection{scrapper Namespace Reference}
+\label{namespacescrapper}\index{scrapper@{scrapper}}
+
+
+scrapper script. gets the Google Trends Data for certain keywords.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacescrapper_a1dc8e4d20de844e287bffc7d67e515d9}{get\+\_\+keywords}} (keywords\+\_\+file)
+\item 
+def \mbox{\hyperlink{namespacescrapper_aa1a76286d4e3e61aa451e8ae84597d17}{get\+\_\+interest\+\_\+over\+\_\+time}} (kw\+\_\+list)
+\item 
+def \mbox{\hyperlink{namespacescrapper_a25bbe20b5751d3493ce088f02e735335}{get\+\_\+data}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacescrapper_a7386e7437bbe4790abdf5831eb23f840}{dir\+\_\+path}} = os.\+path.\+dirname(os.\+path.\+realpath(\+\_\+\+\_\+file\+\_\+\+\_\+))
+\item 
+\mbox{\hyperlink{namespacescrapper_a4761dfc9b6c8409bbdadbccabebfc304}{cwd}} = os.\+getcwd()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+scrapper script. gets the Google Trends Data for certain keywords. 
+
+\begin{DoxyAuthor}{Author}
+H\+Enrique Frutuoso 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+24.\+6.\+2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacescrapper_a25bbe20b5751d3493ce088f02e735335}\label{namespacescrapper_a25bbe20b5751d3493ce088f02e735335}} 
+\index{scrapper@{scrapper}!get\_data@{get\_data}}
+\index{get\_data@{get\_data}!scrapper@{scrapper}}
+\doxysubsubsection{\texorpdfstring{get\_data()}{get\_data()}}
+{\footnotesize\ttfamily def scrapper.\+get\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}!@brief Run to get all the data and save them into a csv
+@param  None
+@return None
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescrapper_aa1a76286d4e3e61aa451e8ae84597d17}\label{namespacescrapper_aa1a76286d4e3e61aa451e8ae84597d17}} 
+\index{scrapper@{scrapper}!get\_interest\_over\_time@{get\_interest\_over\_time}}
+\index{get\_interest\_over\_time@{get\_interest\_over\_time}!scrapper@{scrapper}}
+\doxysubsubsection{\texorpdfstring{get\_interest\_over\_time()}{get\_interest\_over\_time()}}
+{\footnotesize\ttfamily def scrapper.\+get\+\_\+interest\+\_\+over\+\_\+time (\begin{DoxyParamCaption}\item[{}]{kw\+\_\+list }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}!@brief Uses the Pytrends library to search for the keywords
+saves the in a csv file in pandas dataframe format
+@param  A list with all the keywords to search for
+@return Saves the data in csv file for each keyword
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescrapper_a1dc8e4d20de844e287bffc7d67e515d9}\label{namespacescrapper_a1dc8e4d20de844e287bffc7d67e515d9}} 
+\index{scrapper@{scrapper}!get\_keywords@{get\_keywords}}
+\index{get\_keywords@{get\_keywords}!scrapper@{scrapper}}
+\doxysubsubsection{\texorpdfstring{get\_keywords()}{get\_keywords()}}
+{\footnotesize\ttfamily def scrapper.\+get\+\_\+keywords (\begin{DoxyParamCaption}\item[{}]{keywords\+\_\+file }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}!@brief Opens and extracts the keywords to search for in the keywords.txt
+@param name of the file to search for
+@return Returns the keywords as a list
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacescrapper_a4761dfc9b6c8409bbdadbccabebfc304}\label{namespacescrapper_a4761dfc9b6c8409bbdadbccabebfc304}} 
+\index{scrapper@{scrapper}!cwd@{cwd}}
+\index{cwd@{cwd}!scrapper@{scrapper}}
+\doxysubsubsection{\texorpdfstring{cwd}{cwd}}
+{\footnotesize\ttfamily scrapper.\+cwd = os.\+getcwd()}
+
+\mbox{\Hypertarget{namespacescrapper_a7386e7437bbe4790abdf5831eb23f840}\label{namespacescrapper_a7386e7437bbe4790abdf5831eb23f840}} 
+\index{scrapper@{scrapper}!dir\_path@{dir\_path}}
+\index{dir\_path@{dir\_path}!scrapper@{scrapper}}
+\doxysubsubsection{\texorpdfstring{dir\_path}{dir\_path}}
+{\footnotesize\ttfamily scrapper.\+dir\+\_\+path = os.\+path.\+dirname(os.\+path.\+realpath(\+\_\+\+\_\+file\+\_\+\+\_\+))}
+

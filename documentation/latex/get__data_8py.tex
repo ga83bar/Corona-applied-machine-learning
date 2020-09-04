@@ -1,0 +1,16 @@
+\hypertarget{get__data_8py}{}\doxysection{src/data\+\_\+collection/api\+\_\+request/ams-\/ix/get\+\_\+data.py File Reference}
+\label{get__data_8py}\index{src/data\_collection/api\_request/ams-\/ix/get\_data.py@{src/data\_collection/api\_request/ams-\/ix/get\_data.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceget__data}{get\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em try to get data from A\+M\+S-\/\+IX \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceget__data_a36ceac8490b958d018ece53853420d39}{get\+\_\+data.\+source}} = requests.\+get(\textquotesingle{}https\+://www.\+ams-\/ix.\+net/ams/documentation/total-\/stats\textquotesingle{}).text
+\item 
+\mbox{\hyperlink{namespaceget__data_a226cdc3a872486ca5784012b7c26ac15}{get\+\_\+data.\+soup}} = Beautiful\+Soup(source, \textquotesingle{}lxml\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespaceget__data_a7d2438a2e7dbfcdb856740e4f4291132}{get\+\_\+data.\+match}} = soup.\+find(\textquotesingle{}div\textquotesingle{}, id=\textquotesingle{}root\textquotesingle{})
+\end{DoxyCompactItemize}

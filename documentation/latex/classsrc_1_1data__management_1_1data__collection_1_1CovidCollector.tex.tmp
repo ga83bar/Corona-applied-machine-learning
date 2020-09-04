@@ -1,0 +1,100 @@
+\hypertarget{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector}{}\doxysection{src.\+data\+\_\+management.\+data\+\_\+collection.\+Covid\+Collector Class Reference}
+\label{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector}\index{src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}}
+
+
+Inheritance diagram for src.\+data\+\_\+management.\+data\+\_\+collection.\+Covid\+Collector\+:
+% FIG 0
+
+
+Collaboration diagram for src.\+data\+\_\+management.\+data\+\_\+collection.\+Covid\+Collector\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a647895042b222888b3832066c22190d7}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a81e67f4a2bb4ee2897fe675d3bcfab0b}{download\+\_\+data}} (self)
+\item 
+def \mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a9dfeacbdc956660824f91b787c01b757}{process\+\_\+data}} (self, frame\+\_\+raw)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_acdf4a81a7583f5fdd31ac62a66cb4f1c}{source}}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a594fd1f04c6001960944db1448cb492a}{csv\+\_\+name}}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a9cf36c21fcbe006726390dfbf13eeac5}{path\+\_\+to\+\_\+raw}}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a91e2f6ec24f17b5a7aacb8c0d1e65df5}{path\+\_\+to\+\_\+processed}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class that handels the collection of the Covid data
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a647895042b222888b3832066c22190d7}\label{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a647895042b222888b3832066c22190d7}} 
+\index{src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def src.\+data\+\_\+management.\+data\+\_\+collection.\+Covid\+Collector.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a81e67f4a2bb4ee2897fe675d3bcfab0b}\label{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a81e67f4a2bb4ee2897fe675d3bcfab0b}} 
+\index{src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}!download\_data@{download\_data}}
+\index{download\_data@{download\_data}!src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}}
+\doxysubsubsection{\texorpdfstring{download\_data()}{download\_data()}}
+{\footnotesize\ttfamily def src.\+data\+\_\+management.\+data\+\_\+collection.\+Covid\+Collector.\+download\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Download corona data from api
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a9dfeacbdc956660824f91b787c01b757}\label{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a9dfeacbdc956660824f91b787c01b757}} 
+\index{src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}!process\_data@{process\_data}}
+\index{process\_data@{process\_data}!src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}}
+\doxysubsubsection{\texorpdfstring{process\_data()}{process\_data()}}
+{\footnotesize\ttfamily def src.\+data\+\_\+management.\+data\+\_\+collection.\+Covid\+Collector.\+process\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{frame\+\_\+raw }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Processes the pandas data frame by converting to datetime and dropping columns.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1ICollector_aaa7d2a672cd98c17bbce6ca9b6561491}{src.\+data\+\_\+management.\+data\+\_\+collection.\+I\+Collector}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a594fd1f04c6001960944db1448cb492a}\label{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a594fd1f04c6001960944db1448cb492a}} 
+\index{src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}!csv\_name@{csv\_name}}
+\index{csv\_name@{csv\_name}!src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}}
+\doxysubsubsection{\texorpdfstring{csv\_name}{csv\_name}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+Covid\+Collector.\+csv\+\_\+name}
+
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a91e2f6ec24f17b5a7aacb8c0d1e65df5}\label{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a91e2f6ec24f17b5a7aacb8c0d1e65df5}} 
+\index{src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}!path\_to\_processed@{path\_to\_processed}}
+\index{path\_to\_processed@{path\_to\_processed}!src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}}
+\doxysubsubsection{\texorpdfstring{path\_to\_processed}{path\_to\_processed}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+Covid\+Collector.\+path\+\_\+to\+\_\+processed}
+
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a9cf36c21fcbe006726390dfbf13eeac5}\label{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_a9cf36c21fcbe006726390dfbf13eeac5}} 
+\index{src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}!path\_to\_raw@{path\_to\_raw}}
+\index{path\_to\_raw@{path\_to\_raw}!src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}}
+\doxysubsubsection{\texorpdfstring{path\_to\_raw}{path\_to\_raw}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+Covid\+Collector.\+path\+\_\+to\+\_\+raw}
+
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_acdf4a81a7583f5fdd31ac62a66cb4f1c}\label{classsrc_1_1data__management_1_1data__collection_1_1CovidCollector_acdf4a81a7583f5fdd31ac62a66cb4f1c}} 
+\index{src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}!source@{source}}
+\index{source@{source}!src.data\_management.data\_collection.CovidCollector@{src.data\_management.data\_collection.CovidCollector}}
+\doxysubsubsection{\texorpdfstring{source}{source}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+Covid\+Collector.\+source}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/data\+\_\+management/\mbox{\hyperlink{data__collection_8py}{data\+\_\+collection.\+py}}\end{DoxyCompactItemize}

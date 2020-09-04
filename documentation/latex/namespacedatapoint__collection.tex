@@ -1,0 +1,324 @@
+\hypertarget{namespacedatapoint__collection}{}\doxysection{datapoint\+\_\+collection Namespace Reference}
+\label{namespacedatapoint__collection}\index{datapoint\_collection@{datapoint\_collection}}
+
+
+This class serves as data collection for different Datapoints. It uses A\+P\+Is and simple Webcrawling.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_a2496d24f64c796341562ea9f488d97c0}{get\+\_\+six\+\_\+avg\+\_\+raw}} ()
+\begin{DoxyCompactList}\small\item\em getting the data from S\+IX the average usage \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_a7f0ccfa922b4abc3cb8c77db08d7d881}{get\+\_\+six\+\_\+max\+\_\+raw}} ()
+\begin{DoxyCompactList}\small\item\em getting the data from S\+IX the max usage \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_ade99ce7ddde278eeb6792e41e88ed8fa}{get\+\_\+mskix\+\_\+raw}} ()
+\begin{DoxyCompactList}\small\item\em getting data from M\+S\+K-\/\+IX Average and Max \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_a9432d963b6d3bfc1d1dcc8726aed4459}{get\+\_\+raw}} ()
+\begin{DoxyCompactList}\small\item\em is getting and saving all the raw data \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_afad9cf80d20337315b57e232faec474b}{get\+\_\+six\+\_\+pre}} ()
+\begin{DoxyCompactList}\small\item\em This method is to standardize the datasets and add the feature of which datapoint it is. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_ad8eda7033372aabf262a123aa5580f65}{get\+\_\+mskix\+\_\+pre}} ()
+\begin{DoxyCompactList}\small\item\em This method is to standardize the datasets and add the feature of which datapoint it is. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_abf9a40348a738e34433346836bdb9f53}{df\+\_\+timestamp\+\_\+floor}} (df\+\_\+conv)
+\begin{DoxyCompactList}\small\item\em floor Timestamps \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_a7779cbd82086b7a3bb8578c9a44925c0}{get\+\_\+linx}} ()
+\begin{DoxyCompactList}\small\item\em This method is to get from L\+I\+NX. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_a1ddf9abd00f29869c241c3e53bce838d}{get\+\_\+peering\+\_\+cz}} (start\+\_\+time=1498305600, end\+\_\+time=1592990400)
+\begin{DoxyCompactList}\small\item\em This method extracts data form peering.\+cz. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_a58da09ffd9212e86947a290835a6f547}{get\+\_\+ficix}} ()
+\begin{DoxyCompactList}\small\item\em This method extracts data fro, the ficix csv. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_add2bd8b2e1a94f5be792869161443773}{create\+\_\+date}} (concat)
+\begin{DoxyCompactList}\small\item\em Concat all pandaframes to output it as on big dataframe. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_a49d07ef35c78c14a26ba9046e51d9467}{save\+\_\+dataframe}} (data, name, path)
+\begin{DoxyCompactList}\small\item\em This method is to save the pandaframe. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_aa43575d8f96301e62c7df6ba2850af73}{get\+\_\+request\+\_\+json}} (url)
+\begin{DoxyCompactList}\small\item\em This method makes \char`\"{}get\char`\"{} http request. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacedatapoint__collection_aa5075f8c2089cd959c72b3528136ad9f}{main}} ()
+\begin{DoxyCompactList}\small\item\em This function is call Class method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacedatapoint__collection_a683d16566a625770bb2ec76bde2c465d}{level}}
+\item 
+string \mbox{\hyperlink{namespacedatapoint__collection_a611e6de866caabc0451d7862725f4890}{S\+I\+X\+\_\+\+A\+V\+G\+\_\+\+U\+RL}} = \textquotesingle{}https\+://www.\+seattleix.\+net/statistics/agg\+\_\+avg\+\_\+daily.\+txt\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespacedatapoint__collection_a4aadcba92bebe57e793b39c2be6c896c}{S\+I\+X\+\_\+\+M\+A\+X\+\_\+\+U\+RL}} = \textquotesingle{}https\+://www.\+seattleix.\+net/statistics/agg\+\_\+max\+\_\+daily.\+txt\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespacedatapoint__collection_a90e94007c50621b8b2d204e76659eee7}{M\+S\+K\+I\+X\+\_\+\+U\+RL}}
+\item 
+string \mbox{\hyperlink{namespacedatapoint__collection_a720d6d5caa85fa0bcf94f497baf04283}{L\+I\+N\+X\+\_\+\+U\+RL}}
+\item 
+string \mbox{\hyperlink{namespacedatapoint__collection_a6d75b2061949d1a67cfe275ae5ef8217}{P\+E\+E\+R\+I\+N\+G\+\_\+\+C\+Z\+\_\+\+U\+RL}} = \char`\"{}https\+://web-\/api.\+peering.\+cz/graphql\char`\"{}
+\item 
+string \mbox{\hyperlink{namespacedatapoint__collection_a45a56f205d7fca082f924507b4078028}{R\+E\+S\+O\+U\+R\+C\+\_\+\+P\+A\+TH}} = \textquotesingle{}../../../res/ix\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespacedatapoint__collection_a1fec6148532164f0784a2fa21735e108}{R\+E\+S\+O\+U\+R\+C\+\_\+\+P\+A\+T\+H\+\_\+\+R\+AW}} = \textquotesingle{}../../../res/ix/raw\textquotesingle{}
+\item 
+string \mbox{\hyperlink{namespacedatapoint__collection_a09e652b54af4d82241446096d5ef883b}{R\+E\+S\+O\+U\+R\+C\+\_\+\+P\+A\+T\+H\+\_\+\+P\+R\+OC}} = \textquotesingle{}../../../res/ix/processed\textquotesingle{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class serves as data collection for different Datapoints. It uses A\+P\+Is and simple Webcrawling. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacedatapoint__collection_add2bd8b2e1a94f5be792869161443773}\label{namespacedatapoint__collection_add2bd8b2e1a94f5be792869161443773}} 
+\index{datapoint\_collection@{datapoint\_collection}!create\_date@{create\_date}}
+\index{create\_date@{create\_date}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{create\_date()}{create\_date()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+create\+\_\+date (\begin{DoxyParamCaption}\item[{}]{concat }\end{DoxyParamCaption})}
+
+
+
+Concat all pandaframes to output it as on big dataframe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em should} & be one dataframe put together (True) or seperated dataframes (False) be created \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacedatapoint__collection_abf9a40348a738e34433346836bdb9f53}\label{namespacedatapoint__collection_abf9a40348a738e34433346836bdb9f53}} 
+\index{datapoint\_collection@{datapoint\_collection}!df\_timestamp\_floor@{df\_timestamp\_floor}}
+\index{df\_timestamp\_floor@{df\_timestamp\_floor}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{df\_timestamp\_floor()}{df\_timestamp\_floor()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+df\+\_\+timestamp\+\_\+floor (\begin{DoxyParamCaption}\item[{}]{df\+\_\+conv }\end{DoxyParamCaption})}
+
+
+
+floor Timestamps 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataframe} & that has Timestamps that should be converted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+preprocessed df 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacedatapoint__collection_a58da09ffd9212e86947a290835a6f547}\label{namespacedatapoint__collection_a58da09ffd9212e86947a290835a6f547}} 
+\index{datapoint\_collection@{datapoint\_collection}!get\_ficix@{get\_ficix}}
+\index{get\_ficix@{get\_ficix}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{get\_ficix()}{get\_ficix()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+get\+\_\+ficix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This method extracts data fro, the ficix csv. 
+
+\begin{DoxyReturn}{Returns}
+saves and returns preprocessed data from linx datapoint 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacedatapoint__collection_a7779cbd82086b7a3bb8578c9a44925c0}\label{namespacedatapoint__collection_a7779cbd82086b7a3bb8578c9a44925c0}} 
+\index{datapoint\_collection@{datapoint\_collection}!get\_linx@{get\_linx}}
+\index{get\_linx@{get\_linx}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{get\_linx()}{get\_linx()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+get\+\_\+linx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This method is to get from L\+I\+NX. 
+
+\begin{DoxyReturn}{Returns}
+preprocessed df 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacedatapoint__collection_ad8eda7033372aabf262a123aa5580f65}\label{namespacedatapoint__collection_ad8eda7033372aabf262a123aa5580f65}} 
+\index{datapoint\_collection@{datapoint\_collection}!get\_mskix\_pre@{get\_mskix\_pre}}
+\index{get\_mskix\_pre@{get\_mskix\_pre}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{get\_mskix\_pre()}{get\_mskix\_pre()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+get\+\_\+mskix\+\_\+pre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This method is to standardize the datasets and add the feature of which datapoint it is. 
+
+\begin{DoxyReturn}{Returns}
+preprocessed df 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacedatapoint__collection_ade99ce7ddde278eeb6792e41e88ed8fa}\label{namespacedatapoint__collection_ade99ce7ddde278eeb6792e41e88ed8fa}} 
+\index{datapoint\_collection@{datapoint\_collection}!get\_mskix\_raw@{get\_mskix\_raw}}
+\index{get\_mskix\_raw@{get\_mskix\_raw}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{get\_mskix\_raw()}{get\_mskix\_raw()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+get\+\_\+mskix\+\_\+raw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getting data from M\+S\+K-\/\+IX Average and Max 
+
+\mbox{\Hypertarget{namespacedatapoint__collection_a1ddf9abd00f29869c241c3e53bce838d}\label{namespacedatapoint__collection_a1ddf9abd00f29869c241c3e53bce838d}} 
+\index{datapoint\_collection@{datapoint\_collection}!get\_peering\_cz@{get\_peering\_cz}}
+\index{get\_peering\_cz@{get\_peering\_cz}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{get\_peering\_cz()}{get\_peering\_cz()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+get\+\_\+peering\+\_\+cz (\begin{DoxyParamCaption}\item[{}]{start\+\_\+time = {\ttfamily 1498305600},  }\item[{}]{end\+\_\+time = {\ttfamily 1592990400} }\end{DoxyParamCaption})}
+
+
+
+This method extracts data form peering.\+cz. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & when until when in Timestamp format in milliseconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+saves and returns preprocessed data from linx datapoint 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacedatapoint__collection_a9432d963b6d3bfc1d1dcc8726aed4459}\label{namespacedatapoint__collection_a9432d963b6d3bfc1d1dcc8726aed4459}} 
+\index{datapoint\_collection@{datapoint\_collection}!get\_raw@{get\_raw}}
+\index{get\_raw@{get\_raw}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{get\_raw()}{get\_raw()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+get\+\_\+raw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+is getting and saving all the raw data 
+
+\mbox{\Hypertarget{namespacedatapoint__collection_aa43575d8f96301e62c7df6ba2850af73}\label{namespacedatapoint__collection_aa43575d8f96301e62c7df6ba2850af73}} 
+\index{datapoint\_collection@{datapoint\_collection}!get\_request\_json@{get\_request\_json}}
+\index{get\_request\_json@{get\_request\_json}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{get\_request\_json()}{get\_request\_json()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+get\+\_\+request\+\_\+json (\begin{DoxyParamCaption}\item[{}]{url }\end{DoxyParamCaption})}
+
+
+
+This method makes \char`\"{}get\char`\"{} http request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & where to retrieve the data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+json response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacedatapoint__collection_a2496d24f64c796341562ea9f488d97c0}\label{namespacedatapoint__collection_a2496d24f64c796341562ea9f488d97c0}} 
+\index{datapoint\_collection@{datapoint\_collection}!get\_six\_avg\_raw@{get\_six\_avg\_raw}}
+\index{get\_six\_avg\_raw@{get\_six\_avg\_raw}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{get\_six\_avg\_raw()}{get\_six\_avg\_raw()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+get\+\_\+six\+\_\+avg\+\_\+raw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getting the data from S\+IX the average usage 
+
+\mbox{\Hypertarget{namespacedatapoint__collection_a7f0ccfa922b4abc3cb8c77db08d7d881}\label{namespacedatapoint__collection_a7f0ccfa922b4abc3cb8c77db08d7d881}} 
+\index{datapoint\_collection@{datapoint\_collection}!get\_six\_max\_raw@{get\_six\_max\_raw}}
+\index{get\_six\_max\_raw@{get\_six\_max\_raw}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{get\_six\_max\_raw()}{get\_six\_max\_raw()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+get\+\_\+six\+\_\+max\+\_\+raw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+getting the data from S\+IX the max usage 
+
+\mbox{\Hypertarget{namespacedatapoint__collection_afad9cf80d20337315b57e232faec474b}\label{namespacedatapoint__collection_afad9cf80d20337315b57e232faec474b}} 
+\index{datapoint\_collection@{datapoint\_collection}!get\_six\_pre@{get\_six\_pre}}
+\index{get\_six\_pre@{get\_six\_pre}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{get\_six\_pre()}{get\_six\_pre()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+get\+\_\+six\+\_\+pre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This method is to standardize the datasets and add the feature of which datapoint it is. 
+
+\begin{DoxyReturn}{Returns}
+preprocessed df 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacedatapoint__collection_aa5075f8c2089cd959c72b3528136ad9f}\label{namespacedatapoint__collection_aa5075f8c2089cd959c72b3528136ad9f}} 
+\index{datapoint\_collection@{datapoint\_collection}!main@{main}}
+\index{main@{main}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function is call Class method. 
+
+So it is possible to generate dataset. \mbox{\Hypertarget{namespacedatapoint__collection_a49d07ef35c78c14a26ba9046e51d9467}\label{namespacedatapoint__collection_a49d07ef35c78c14a26ba9046e51d9467}} 
+\index{datapoint\_collection@{datapoint\_collection}!save\_dataframe@{save\_dataframe}}
+\index{save\_dataframe@{save\_dataframe}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{save\_dataframe()}{save\_dataframe()}}
+{\footnotesize\ttfamily def datapoint\+\_\+collection.\+save\+\_\+dataframe (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{name,  }\item[{}]{path }\end{DoxyParamCaption})}
+
+
+
+This method is to save the pandaframe. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & dataframe that should be saved \\
+\hline
+{\em name} & under what name should the data be saved \\
+\hline
+{\em path} & where should the name be saved in absolute path \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacedatapoint__collection_a683d16566a625770bb2ec76bde2c465d}\label{namespacedatapoint__collection_a683d16566a625770bb2ec76bde2c465d}} 
+\index{datapoint\_collection@{datapoint\_collection}!level@{level}}
+\index{level@{level}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily datapoint\+\_\+collection.\+level}
+
+\mbox{\Hypertarget{namespacedatapoint__collection_a720d6d5caa85fa0bcf94f497baf04283}\label{namespacedatapoint__collection_a720d6d5caa85fa0bcf94f497baf04283}} 
+\index{datapoint\_collection@{datapoint\_collection}!LINX\_URL@{LINX\_URL}}
+\index{LINX\_URL@{LINX\_URL}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{LINX\_URL}{LINX\_URL}}
+{\footnotesize\ttfamily string datapoint\+\_\+collection.\+L\+I\+N\+X\+\_\+\+U\+RL}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 =  \textcolor{stringliteral}{"https://portal.linx.net/api/lans/throughput?start=\(\backslash\)}}
+\DoxyCodeLine{2 \textcolor{stringliteral}{1498305600000\&end=1592990400000"}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacedatapoint__collection_a90e94007c50621b8b2d204e76659eee7}\label{namespacedatapoint__collection_a90e94007c50621b8b2d204e76659eee7}} 
+\index{datapoint\_collection@{datapoint\_collection}!MSKIX\_URL@{MSKIX\_URL}}
+\index{MSKIX\_URL@{MSKIX\_URL}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{MSKIX\_URL}{MSKIX\_URL}}
+{\footnotesize\ttfamily string datapoint\+\_\+collection.\+M\+S\+K\+I\+X\+\_\+\+U\+RL}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 =  \textcolor{stringliteral}{'https://www.msk-\/ix.ru/data/json/traffic/ix.all/yearly/\(\backslash\)}}
+\DoxyCodeLine{2 \textcolor{stringliteral}{?0.615278690833298'}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacedatapoint__collection_a6d75b2061949d1a67cfe275ae5ef8217}\label{namespacedatapoint__collection_a6d75b2061949d1a67cfe275ae5ef8217}} 
+\index{datapoint\_collection@{datapoint\_collection}!PEERING\_CZ\_URL@{PEERING\_CZ\_URL}}
+\index{PEERING\_CZ\_URL@{PEERING\_CZ\_URL}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{PEERING\_CZ\_URL}{PEERING\_CZ\_URL}}
+{\footnotesize\ttfamily string datapoint\+\_\+collection.\+P\+E\+E\+R\+I\+N\+G\+\_\+\+C\+Z\+\_\+\+U\+RL = \char`\"{}https\+://web-\/api.\+peering.\+cz/graphql\char`\"{}}
+
+\mbox{\Hypertarget{namespacedatapoint__collection_a45a56f205d7fca082f924507b4078028}\label{namespacedatapoint__collection_a45a56f205d7fca082f924507b4078028}} 
+\index{datapoint\_collection@{datapoint\_collection}!RESOURC\_PATH@{RESOURC\_PATH}}
+\index{RESOURC\_PATH@{RESOURC\_PATH}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{RESOURC\_PATH}{RESOURC\_PATH}}
+{\footnotesize\ttfamily string datapoint\+\_\+collection.\+R\+E\+S\+O\+U\+R\+C\+\_\+\+P\+A\+TH = \textquotesingle{}../../../res/ix\textquotesingle{}}
+
+\mbox{\Hypertarget{namespacedatapoint__collection_a09e652b54af4d82241446096d5ef883b}\label{namespacedatapoint__collection_a09e652b54af4d82241446096d5ef883b}} 
+\index{datapoint\_collection@{datapoint\_collection}!RESOURC\_PATH\_PROC@{RESOURC\_PATH\_PROC}}
+\index{RESOURC\_PATH\_PROC@{RESOURC\_PATH\_PROC}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{RESOURC\_PATH\_PROC}{RESOURC\_PATH\_PROC}}
+{\footnotesize\ttfamily string datapoint\+\_\+collection.\+R\+E\+S\+O\+U\+R\+C\+\_\+\+P\+A\+T\+H\+\_\+\+P\+R\+OC = \textquotesingle{}../../../res/ix/processed\textquotesingle{}}
+
+\mbox{\Hypertarget{namespacedatapoint__collection_a1fec6148532164f0784a2fa21735e108}\label{namespacedatapoint__collection_a1fec6148532164f0784a2fa21735e108}} 
+\index{datapoint\_collection@{datapoint\_collection}!RESOURC\_PATH\_RAW@{RESOURC\_PATH\_RAW}}
+\index{RESOURC\_PATH\_RAW@{RESOURC\_PATH\_RAW}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{RESOURC\_PATH\_RAW}{RESOURC\_PATH\_RAW}}
+{\footnotesize\ttfamily string datapoint\+\_\+collection.\+R\+E\+S\+O\+U\+R\+C\+\_\+\+P\+A\+T\+H\+\_\+\+R\+AW = \textquotesingle{}../../../res/ix/raw\textquotesingle{}}
+
+\mbox{\Hypertarget{namespacedatapoint__collection_a611e6de866caabc0451d7862725f4890}\label{namespacedatapoint__collection_a611e6de866caabc0451d7862725f4890}} 
+\index{datapoint\_collection@{datapoint\_collection}!SIX\_AVG\_URL@{SIX\_AVG\_URL}}
+\index{SIX\_AVG\_URL@{SIX\_AVG\_URL}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{SIX\_AVG\_URL}{SIX\_AVG\_URL}}
+{\footnotesize\ttfamily string datapoint\+\_\+collection.\+S\+I\+X\+\_\+\+A\+V\+G\+\_\+\+U\+RL = \textquotesingle{}https\+://www.\+seattleix.\+net/statistics/agg\+\_\+avg\+\_\+daily.\+txt\textquotesingle{}}
+
+\mbox{\Hypertarget{namespacedatapoint__collection_a4aadcba92bebe57e793b39c2be6c896c}\label{namespacedatapoint__collection_a4aadcba92bebe57e793b39c2be6c896c}} 
+\index{datapoint\_collection@{datapoint\_collection}!SIX\_MAX\_URL@{SIX\_MAX\_URL}}
+\index{SIX\_MAX\_URL@{SIX\_MAX\_URL}!datapoint\_collection@{datapoint\_collection}}
+\doxysubsubsection{\texorpdfstring{SIX\_MAX\_URL}{SIX\_MAX\_URL}}
+{\footnotesize\ttfamily string datapoint\+\_\+collection.\+S\+I\+X\+\_\+\+M\+A\+X\+\_\+\+U\+RL = \textquotesingle{}https\+://www.\+seattleix.\+net/statistics/agg\+\_\+max\+\_\+daily.\+txt\textquotesingle{}}
+

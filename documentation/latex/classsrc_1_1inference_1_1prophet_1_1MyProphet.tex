@@ -1,0 +1,336 @@
+\hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet}{}\doxysection{src.\+inference.\+prophet.\+My\+Prophet Class Reference}
+\label{classsrc_1_1inference_1_1prophet_1_1MyProphet}\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+
+
+Inheritance diagram for src.\+inference.\+prophet.\+My\+Prophet\+:
+% FIG 0
+
+
+Collaboration diagram for src.\+inference.\+prophet.\+My\+Prophet\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a0574f4583081b4e0e52dc293c7aa3599}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a5771e908c8e1bc8daea48011dc52b0e6}{set\+\_\+dset}} (self, \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a68d357918aa266c8d28f13cbbe33d4f7}{dset}})
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a4d6a43d344980c0408389cdc4749a689}{set\+\_\+cap}} (self, \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a779d1a3ceabc6d265970a33dc481ba53}{cap}}=1)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a15a522d9518a171b1bd7e82ccd60445f}{set\+\_\+floor}} (self, \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a455d307fb2586c2d28343581deb5cdce}{floor}}=1)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_af9b5b2840b6c624f811eef823d6539f2}{set\+\_\+metric}} (self, \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_ab2f350e279840f989beccf4622645934}{metric}}=\textquotesingle{}mse\textquotesingle{})
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a72c94baf9c803feacbedc9537ce3f42e}{set\+\_\+model}} (self, after\+\_\+best=False, \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a1f4828e3642d19c6c0910ca8253960e5}{growth}}=\textquotesingle{}linear\textquotesingle{}, \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a66747d63daba4c7707592755ceb3a5b4}{changepoint\+\_\+prior\+\_\+scale}}=0.\+05, \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a37c2af7ab5d1f63cd6b18ff7487e62c4}{interval\+\_\+width}}=0.\+8, \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a091c4d546249e3e3753644bf9500573a}{seasonality\+\_\+mode}}=\textquotesingle{}additive\textquotesingle{})
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_af45f5b0327626396db10802918e06b0e}{set\+\_\+period}} (self, \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_afff8f0b15d31fee9e91c2f6195d6ac24}{period}})
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a26ea586f7366924321afd5a636ef37e7}{fit}} (self, x\+\_\+date, y\+\_\+data)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_ab5aa82046c094d70c238f63110c0878d}{predict}} (self, label, do\+\_\+plot=False)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a389d990a22bdc14d9835348cc98ac902}{plot}} (self, forecast, label)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a1b7a6f1ae18fcecc56f908440e08a6ff}{cross\+\_\+validation}} (self)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_acd6dc32e4c8472855236ebfd8ff20d25}{score\+\_\+cross}} (self, dataframe\+\_\+cv)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a698d0604383de99e6eb243d4ec3d0bc4}{gridsearchcv}} (self, parameters, dataframe, safe=False)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_af496d7731548963270627d79b014bfd6}{load\+\_\+best\+\_\+param}} (self, label)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_aafb1b7b3f7c4f6e8725f1296fe62fb12}{score}} (self, x, y, sample\+\_\+weight=None)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a36a45543b8584dbfaef3fb4f263516c7}{save\+\_\+model}} (self)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a2ab460dae8c35aed66bdbbf076bb2943}{load\+\_\+model}} (self, \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a68d357918aa266c8d28f13cbbe33d4f7}{dset}}, time)
+\item 
+def \mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a6cb719cb980b18dbe129c28dc83a4a14}{set\+\_\+params}} (self, $\ast$$\ast$parameters)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a706a42d6451a5739e50e989ec5f98afe}{cols}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a68d357918aa266c8d28f13cbbe33d4f7}{dset}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_afff8f0b15d31fee9e91c2f6195d6ac24}{period}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_ab2f350e279840f989beccf4622645934}{metric}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a1f4828e3642d19c6c0910ca8253960e5}{growth}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a66747d63daba4c7707592755ceb3a5b4}{changepoint\+\_\+prior\+\_\+scale}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a37c2af7ab5d1f63cd6b18ff7487e62c4}{interval\+\_\+width}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a091c4d546249e3e3753644bf9500573a}{seasonality\+\_\+mode}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a9d51d4caed35c25e54ed0f74f0e6af46}{model}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a779d1a3ceabc6d265970a33dc481ba53}{cap}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a455d307fb2586c2d28343581deb5cdce}{floor}}
+\item 
+\mbox{\hyperlink{classsrc_1_1inference_1_1prophet_1_1MyProphet_a381b283333e65ce67d709ff082c69812}{param}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@brief: Prophet class for handling forecasts.
+@param BaseEstimator: get necessary function to be abele to use Scikit GridSearchCV
+@param RegressorMixin: get score function
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a0574f4583081b4e0e52dc293c7aa3599}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a0574f4583081b4e0e52dc293c7aa3599}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Input data must be a dataframe containing a Date and a target value.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a1b7a6f1ae18fcecc56f908440e08a6ff}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a1b7a6f1ae18fcecc56f908440e08a6ff}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!cross\_validation@{cross\_validation}}
+\index{cross\_validation@{cross\_validation}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{cross\_validation()}{cross\_validation()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+cross\+\_\+validation (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Cross evaluates the data frames
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a26ea586f7366924321afd5a636ef37e7}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a26ea586f7366924321afd5a636ef37e7}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!fit@{fit}}
+\index{fit@{fit}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{fit()}{fit()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+fit (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x\+\_\+date,  }\item[{}]{y\+\_\+data }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Data must be a pd frame in the form Date | y
+@param x_date: data for training
+@param y_data The time series values to fit the prophet to.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a698d0604383de99e6eb243d4ec3d0bc4}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a698d0604383de99e6eb243d4ec3d0bc4}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!gridsearchcv@{gridsearchcv}}
+\index{gridsearchcv@{gridsearchcv}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{gridsearchcv()}{gridsearchcv()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+gridsearchcv (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{parameters,  }\item[{}]{dataframe,  }\item[{}]{safe = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Custom grid search via cross validation. Necessary because of Prophets unique prediction interface.
+@brief: Looking for the best parameters to fit the model.
+@param parameters: parameters that give the option where to look is a dict
+@param dataframe The data frame to predict for cross validation.
+@param safe Option to save the resulting data frame.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_af496d7731548963270627d79b014bfd6}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_af496d7731548963270627d79b014bfd6}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!load\_best\_param@{load\_best\_param}}
+\index{load\_best\_param@{load\_best\_param}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{load\_best\_param()}{load\_best\_param()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+load\+\_\+best\+\_\+param (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{label }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Loads the best parameters for the given dataset
+@param label: name of the dataset
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a2ab460dae8c35aed66bdbbf076bb2943}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a2ab460dae8c35aed66bdbbf076bb2943}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!load\_model@{load\_model}}
+\index{load\_model@{load\_model}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{load\_model()}{load\_model()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+load\+\_\+model (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{dset,  }\item[{}]{time }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Loads a pretrained model
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a389d990a22bdc14d9835348cc98ac902}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a389d990a22bdc14d9835348cc98ac902}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!plot@{plot}}
+\index{plot@{plot}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{plot()}{plot()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+plot (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{forecast,  }\item[{}]{label }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Plot and save the predictions
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_ab5aa82046c094d70c238f63110c0878d}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_ab5aa82046c094d70c238f63110c0878d}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!predict@{predict}}
+\index{predict@{predict}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{predict()}{predict()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+predict (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{label,  }\item[{}]{do\+\_\+plot = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Predict the next values
+@param do_plot: Do a plot of the forcast and the seasonalities
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a36a45543b8584dbfaef3fb4f263516c7}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a36a45543b8584dbfaef3fb4f263516c7}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!save\_model@{save\_model}}
+\index{save\_model@{save\_model}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{save\_model()}{save\_model()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+save\+\_\+model (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Saves a model
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_aafb1b7b3f7c4f6e8725f1296fe62fb12}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_aafb1b7b3f7c4f6e8725f1296fe62fb12}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!score@{score}}
+\index{score@{score}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{score()}{score()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+score (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{sample\+\_\+weight = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Evalute the Models performance via MSE
+@param x: dates to predict
+@param y: true values to that time
+@param sample_weight Possible interface for future sample weighting mechanisms.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_acd6dc32e4c8472855236ebfd8ff20d25}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_acd6dc32e4c8472855236ebfd8ff20d25}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!score\_cross@{score\_cross}}
+\index{score\_cross@{score\_cross}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{score\_cross()}{score\_cross()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+score\+\_\+cross (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{dataframe\+\_\+cv }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Evaluates the Model by cross validation
+@param dataframe_cv: data frame from cross validation
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a4d6a43d344980c0408389cdc4749a689}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a4d6a43d344980c0408389cdc4749a689}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!set\_cap@{set\_cap}}
+\index{set\_cap@{set\_cap}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{set\_cap()}{set\_cap()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+set\+\_\+cap (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{cap = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: sets the cap for max in logistic growth
+@param cap: max logistic growth
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a5771e908c8e1bc8daea48011dc52b0e6}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a5771e908c8e1bc8daea48011dc52b0e6}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!set\_dset@{set\_dset}}
+\index{set\_dset@{set\_dset}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{set\_dset()}{set\_dset()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+set\+\_\+dset (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{dset }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Sets dset
+@param dset: new dset
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a15a522d9518a171b1bd7e82ccd60445f}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a15a522d9518a171b1bd7e82ccd60445f}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!set\_floor@{set\_floor}}
+\index{set\_floor@{set\_floor}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{set\_floor()}{set\_floor()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+set\+\_\+floor (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{floor = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: sets the floor for min in logistic growth
+@param floor min logistic growth
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_af9b5b2840b6c624f811eef823d6539f2}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_af9b5b2840b6c624f811eef823d6539f2}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!set\_metric@{set\_metric}}
+\index{set\_metric@{set\_metric}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{set\_metric()}{set\_metric()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+set\+\_\+metric (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{metric = {\ttfamily \textquotesingle{}mse\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: sets the score unit
+@param metric: decide which metric for evaluation should be set avaiable is mse, rmse, mae, mape
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a72c94baf9c803feacbedc9537ce3f42e}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a72c94baf9c803feacbedc9537ce3f42e}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!set\_model@{set\_model}}
+\index{set\_model@{set\_model}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{set\_model()}{set\_model()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+set\+\_\+model (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{after\+\_\+best = {\ttfamily False},  }\item[{}]{growth = {\ttfamily \textquotesingle{}linear\textquotesingle{}},  }\item[{}]{changepoint\+\_\+prior\+\_\+scale = {\ttfamily 0.05},  }\item[{}]{interval\+\_\+width = {\ttfamily 0.8},  }\item[{}]{seasonality\+\_\+mode = {\ttfamily \textquotesingle{}additive\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: Adapt the model
+@param growth: is the model linear or logistic in rising/falling
+@param changepoint_prior_scale: how flexibel ist the model greater more felxibel
+@param interval_width: the width of the uncertantiy
+@param seasonality_mode: additive or multiplicative if datapoint distirbution over time
+@param after_best: only used after gridsearchcv get model with best parameters
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a6cb719cb980b18dbe129c28dc83a4a14}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a6cb719cb980b18dbe129c28dc83a4a14}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!set\_params@{set\_params}}
+\index{set\_params@{set\_params}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{set\_params()}{set\_params()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+set\+\_\+params (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{$\ast$$\ast$}]{parameters }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: sets all the parameters that are given
+@param parameters: pointer to the location of the parameters
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_af45f5b0327626396db10802918e06b0e}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_af45f5b0327626396db10802918e06b0e}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!set\_period@{set\_period}}
+\index{set\_period@{set\_period}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{set\_period()}{set\_period()}}
+{\footnotesize\ttfamily def src.\+inference.\+prophet.\+My\+Prophet.\+set\+\_\+period (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{period }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief: set timespan to predict
+@param period: timespan of prediction
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a779d1a3ceabc6d265970a33dc481ba53}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a779d1a3ceabc6d265970a33dc481ba53}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!cap@{cap}}
+\index{cap@{cap}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{cap}{cap}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+cap}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a66747d63daba4c7707592755ceb3a5b4}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a66747d63daba4c7707592755ceb3a5b4}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!changepoint\_prior\_scale@{changepoint\_prior\_scale}}
+\index{changepoint\_prior\_scale@{changepoint\_prior\_scale}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{changepoint\_prior\_scale}{changepoint\_prior\_scale}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+changepoint\+\_\+prior\+\_\+scale}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a706a42d6451a5739e50e989ec5f98afe}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a706a42d6451a5739e50e989ec5f98afe}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!cols@{cols}}
+\index{cols@{cols}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{cols}{cols}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+cols}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a68d357918aa266c8d28f13cbbe33d4f7}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a68d357918aa266c8d28f13cbbe33d4f7}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!dset@{dset}}
+\index{dset@{dset}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{dset}{dset}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+dset}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a455d307fb2586c2d28343581deb5cdce}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a455d307fb2586c2d28343581deb5cdce}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!floor@{floor}}
+\index{floor@{floor}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{floor}{floor}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+floor}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a1f4828e3642d19c6c0910ca8253960e5}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a1f4828e3642d19c6c0910ca8253960e5}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!growth@{growth}}
+\index{growth@{growth}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{growth}{growth}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+growth}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a37c2af7ab5d1f63cd6b18ff7487e62c4}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a37c2af7ab5d1f63cd6b18ff7487e62c4}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!interval\_width@{interval\_width}}
+\index{interval\_width@{interval\_width}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{interval\_width}{interval\_width}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+interval\+\_\+width}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_ab2f350e279840f989beccf4622645934}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_ab2f350e279840f989beccf4622645934}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!metric@{metric}}
+\index{metric@{metric}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{metric}{metric}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+metric}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a9d51d4caed35c25e54ed0f74f0e6af46}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a9d51d4caed35c25e54ed0f74f0e6af46}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!model@{model}}
+\index{model@{model}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+model}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a381b283333e65ce67d709ff082c69812}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a381b283333e65ce67d709ff082c69812}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!param@{param}}
+\index{param@{param}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{param}{param}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+param}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_afff8f0b15d31fee9e91c2f6195d6ac24}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_afff8f0b15d31fee9e91c2f6195d6ac24}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!period@{period}}
+\index{period@{period}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{period}{period}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+period}
+
+\mbox{\Hypertarget{classsrc_1_1inference_1_1prophet_1_1MyProphet_a091c4d546249e3e3753644bf9500573a}\label{classsrc_1_1inference_1_1prophet_1_1MyProphet_a091c4d546249e3e3753644bf9500573a}} 
+\index{src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}!seasonality\_mode@{seasonality\_mode}}
+\index{seasonality\_mode@{seasonality\_mode}!src.inference.prophet.MyProphet@{src.inference.prophet.MyProphet}}
+\doxysubsubsection{\texorpdfstring{seasonality\_mode}{seasonality\_mode}}
+{\footnotesize\ttfamily src.\+inference.\+prophet.\+My\+Prophet.\+seasonality\+\_\+mode}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/inference/\mbox{\hyperlink{prophet_8py}{prophet.\+py}}\end{DoxyCompactItemize}

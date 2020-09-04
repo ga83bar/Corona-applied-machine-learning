@@ -1,0 +1,108 @@
+\hypertarget{namespacesrc_1_1inference_1_1model__evaluation}{}\doxysection{src.\+inference.\+model\+\_\+evaluation Namespace Reference}
+\label{namespacesrc_1_1inference_1_1model__evaluation}\index{src.inference.model\_evaluation@{src.inference.model\_evaluation}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classsrc_1_1inference_1_1model__evaluation_1_1Learning}{Learning}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_ad652c9c23f9aad18971d861539f2f302}{split\+\_\+before\+\_\+after}} (frames, split\+\_\+date=dt.\+datetime(2020, 1, 1))
+\item 
+def \mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_a98e5bb5e542ce2ce05bcab75b3a5a63c}{month\+\_\+and\+\_\+day}} (dataframe)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+list \mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_a330803dc40e22589634f2d0880944fe8}{L\+A\+B\+E\+L\+S\+\_\+1}} = \mbox{[}\char`\"{}ix\+\_\+bitrate\char`\"{}\mbox{]}
+\item 
+list \mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_af6f37523eacb69c4398fc944027036ad}{L\+A\+B\+E\+LS}}
+\item 
+list \mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_ab1bf4d4b9cfa65e6cddd4c20c5b107a6}{A\+L\+G\+O\+R\+I\+T\+H\+MS}} = \mbox{[}\char`\"{}online\+\_\+dense\char`\"{}\mbox{]}
+\item 
+list \mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_ac723ddffea14529f0dd02a285ac0ca05}{D\+A\+T\+A\+S\+E\+TS}} = \mbox{[}\char`\"{}covid\char`\"{}\mbox{]}
+\item 
+\mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_a81fdfe8ab873d35a9b66ec8095fbe3bf}{E\+V\+A\+L\+U\+A\+T\+OR}} = \mbox{\hyperlink{classsrc_1_1inference_1_1model__evaluation_1_1Learning}{Learning}}(\mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_ab1bf4d4b9cfa65e6cddd4c20c5b107a6}{A\+L\+G\+O\+R\+I\+T\+H\+MS}}, \mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_ac723ddffea14529f0dd02a285ac0ca05}{D\+A\+T\+A\+S\+E\+TS}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This module serves as the hub for the model evaluation and training
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacesrc_1_1inference_1_1model__evaluation_a98e5bb5e542ce2ce05bcab75b3a5a63c}\label{namespacesrc_1_1inference_1_1model__evaluation_a98e5bb5e542ce2ce05bcab75b3a5a63c}} 
+\index{src.inference.model\_evaluation@{src.inference.model\_evaluation}!month\_and\_day@{month\_and\_day}}
+\index{month\_and\_day@{month\_and\_day}!src.inference.model\_evaluation@{src.inference.model\_evaluation}}
+\doxysubsubsection{\texorpdfstring{month\_and\_day()}{month\_and\_day()}}
+{\footnotesize\ttfamily def src.\+inference.\+model\+\_\+evaluation.\+month\+\_\+and\+\_\+day (\begin{DoxyParamCaption}\item[{}]{dataframe }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get month and day from dates in dataframe.
+Append to dataframe.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacesrc_1_1inference_1_1model__evaluation_ad652c9c23f9aad18971d861539f2f302}\label{namespacesrc_1_1inference_1_1model__evaluation_ad652c9c23f9aad18971d861539f2f302}} 
+\index{src.inference.model\_evaluation@{src.inference.model\_evaluation}!split\_before\_after@{split\_before\_after}}
+\index{split\_before\_after@{split\_before\_after}!src.inference.model\_evaluation@{src.inference.model\_evaluation}}
+\doxysubsubsection{\texorpdfstring{split\_before\_after()}{split\_before\_after()}}
+{\footnotesize\ttfamily def src.\+inference.\+model\+\_\+evaluation.\+split\+\_\+before\+\_\+after (\begin{DoxyParamCaption}\item[{}]{frames,  }\item[{}]{split\+\_\+date = {\ttfamily dt.datetime(2020,~1,~1)} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Splits data in two frames the one before and the one after corona.
+We define after corona as after 1.1.2020.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacesrc_1_1inference_1_1model__evaluation_ab1bf4d4b9cfa65e6cddd4c20c5b107a6}\label{namespacesrc_1_1inference_1_1model__evaluation_ab1bf4d4b9cfa65e6cddd4c20c5b107a6}} 
+\index{src.inference.model\_evaluation@{src.inference.model\_evaluation}!ALGORITHMS@{ALGORITHMS}}
+\index{ALGORITHMS@{ALGORITHMS}!src.inference.model\_evaluation@{src.inference.model\_evaluation}}
+\doxysubsubsection{\texorpdfstring{ALGORITHMS}{ALGORITHMS}}
+{\footnotesize\ttfamily list src.\+inference.\+model\+\_\+evaluation.\+A\+L\+G\+O\+R\+I\+T\+H\+MS = \mbox{[}\char`\"{}online\+\_\+dense\char`\"{}\mbox{]}}
+
+\mbox{\Hypertarget{namespacesrc_1_1inference_1_1model__evaluation_ac723ddffea14529f0dd02a285ac0ca05}\label{namespacesrc_1_1inference_1_1model__evaluation_ac723ddffea14529f0dd02a285ac0ca05}} 
+\index{src.inference.model\_evaluation@{src.inference.model\_evaluation}!DATASETS@{DATASETS}}
+\index{DATASETS@{DATASETS}!src.inference.model\_evaluation@{src.inference.model\_evaluation}}
+\doxysubsubsection{\texorpdfstring{DATASETS}{DATASETS}}
+{\footnotesize\ttfamily list src.\+inference.\+model\+\_\+evaluation.\+D\+A\+T\+A\+S\+E\+TS = \mbox{[}\char`\"{}covid\char`\"{}\mbox{]}}
+
+\mbox{\Hypertarget{namespacesrc_1_1inference_1_1model__evaluation_a81fdfe8ab873d35a9b66ec8095fbe3bf}\label{namespacesrc_1_1inference_1_1model__evaluation_a81fdfe8ab873d35a9b66ec8095fbe3bf}} 
+\index{src.inference.model\_evaluation@{src.inference.model\_evaluation}!EVALUATOR@{EVALUATOR}}
+\index{EVALUATOR@{EVALUATOR}!src.inference.model\_evaluation@{src.inference.model\_evaluation}}
+\doxysubsubsection{\texorpdfstring{EVALUATOR}{EVALUATOR}}
+{\footnotesize\ttfamily src.\+inference.\+model\+\_\+evaluation.\+E\+V\+A\+L\+U\+A\+T\+OR = \mbox{\hyperlink{classsrc_1_1inference_1_1model__evaluation_1_1Learning}{Learning}}(\mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_ab1bf4d4b9cfa65e6cddd4c20c5b107a6}{A\+L\+G\+O\+R\+I\+T\+H\+MS}}, \mbox{\hyperlink{namespacesrc_1_1inference_1_1model__evaluation_ac723ddffea14529f0dd02a285ac0ca05}{D\+A\+T\+A\+S\+E\+TS}})}
+
+\mbox{\Hypertarget{namespacesrc_1_1inference_1_1model__evaluation_af6f37523eacb69c4398fc944027036ad}\label{namespacesrc_1_1inference_1_1model__evaluation_af6f37523eacb69c4398fc944027036ad}} 
+\index{src.inference.model\_evaluation@{src.inference.model\_evaluation}!LABELS@{LABELS}}
+\index{LABELS@{LABELS}!src.inference.model\_evaluation@{src.inference.model\_evaluation}}
+\doxysubsubsection{\texorpdfstring{LABELS}{LABELS}}
+{\footnotesize\ttfamily list src.\+inference.\+model\+\_\+evaluation.\+L\+A\+B\+E\+LS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 =  [\textcolor{stringliteral}{"ix\_bitrate"},}
+\DoxyCodeLine{2               \textcolor{stringliteral}{"youtube\_viewchange"},}
+\DoxyCodeLine{3               \textcolor{stringliteral}{"youtube\_views"},}
+\DoxyCodeLine{4               \textcolor{stringliteral}{"steam\_users"},}
+\DoxyCodeLine{5               \textcolor{stringliteral}{"steam\_ingame"},}
+\DoxyCodeLine{6               \textcolor{stringliteral}{"twitch\_views"},}
+\DoxyCodeLine{7               \textcolor{stringliteral}{"twitch\_channels"},}
+\DoxyCodeLine{8               \textcolor{stringliteral}{"twitch\_viewtime"},}
+\DoxyCodeLine{9               \textcolor{stringliteral}{"twitch\_streams"},}
+\DoxyCodeLine{10               \textcolor{stringliteral}{"ps\_users"},}
+\DoxyCodeLine{11               \textcolor{stringliteral}{"stock\_med"},}
+\DoxyCodeLine{12               \textcolor{stringliteral}{"stock\_bank"},}
+\DoxyCodeLine{13               \textcolor{stringliteral}{"stock\_energy"},}
+\DoxyCodeLine{14               \textcolor{stringliteral}{"stock\_oil"},}
+\DoxyCodeLine{15               \textcolor{stringliteral}{"stock\_steel"},}
+\DoxyCodeLine{16               \textcolor{stringliteral}{"stock\_automotive"},}
+\DoxyCodeLine{17               \textcolor{stringliteral}{"stock\_telecom"},}
+\DoxyCodeLine{18               \textcolor{stringliteral}{"stock\_tech"}]}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacesrc_1_1inference_1_1model__evaluation_a330803dc40e22589634f2d0880944fe8}\label{namespacesrc_1_1inference_1_1model__evaluation_a330803dc40e22589634f2d0880944fe8}} 
+\index{src.inference.model\_evaluation@{src.inference.model\_evaluation}!LABELS\_1@{LABELS\_1}}
+\index{LABELS\_1@{LABELS\_1}!src.inference.model\_evaluation@{src.inference.model\_evaluation}}
+\doxysubsubsection{\texorpdfstring{LABELS\_1}{LABELS\_1}}
+{\footnotesize\ttfamily list src.\+inference.\+model\+\_\+evaluation.\+L\+A\+B\+E\+L\+S\+\_\+1 = \mbox{[}\char`\"{}ix\+\_\+bitrate\char`\"{}\mbox{]}}
+

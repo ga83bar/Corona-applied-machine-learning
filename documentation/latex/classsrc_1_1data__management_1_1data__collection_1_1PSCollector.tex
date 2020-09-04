@@ -1,0 +1,97 @@
+\hypertarget{classsrc_1_1data__management_1_1data__collection_1_1PSCollector}{}\doxysection{src.\+data\+\_\+management.\+data\+\_\+collection.\+P\+S\+Collector Class Reference}
+\label{classsrc_1_1data__management_1_1data__collection_1_1PSCollector}\index{src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}}
+
+
+Inheritance diagram for src.\+data\+\_\+management.\+data\+\_\+collection.\+P\+S\+Collector\+:
+% FIG 0
+
+
+Collaboration diagram for src.\+data\+\_\+management.\+data\+\_\+collection.\+P\+S\+Collector\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a6a5e08bf5f778e68c9b1d9d01d4affeb}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a184d5c426be563e306db3b215827ae5e}{process\+\_\+data}} (self, frame\+\_\+raw)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_af6ebf798881796b1fa269d0786f4c374}{source}}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a10fe41f250eef95565069cea190ef09b}{csv\+\_\+name}}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a56869f234037bd3b37de63cdcdef22ef}{path\+\_\+to\+\_\+raw}}
+\item 
+\mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a76e3c4f80eff35a2fbe859f23f60a4a6}{path\+\_\+to\+\_\+processed}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}This Colector handles the collection of Playstation data.
+
+Example usage :
+PS = PSCollector()
+ps_frame = PS.get_data()
+PS.plot(ps_frame)
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a6a5e08bf5f778e68c9b1d9d01d4affeb}\label{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a6a5e08bf5f778e68c9b1d9d01d4affeb}} 
+\index{src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def src.\+data\+\_\+management.\+data\+\_\+collection.\+P\+S\+Collector.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a184d5c426be563e306db3b215827ae5e}\label{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a184d5c426be563e306db3b215827ae5e}} 
+\index{src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}!process\_data@{process\_data}}
+\index{process\_data@{process\_data}!src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}}
+\doxysubsubsection{\texorpdfstring{process\_data()}{process\_data()}}
+{\footnotesize\ttfamily def src.\+data\+\_\+management.\+data\+\_\+collection.\+P\+S\+Collector.\+process\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{frame\+\_\+raw }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Processing the Playstation data.
+Input is the raw data as pandas frame.
+Returns the preprocessed dataset as pandas frame.
+\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classsrc_1_1data__management_1_1data__collection_1_1ICollector_aaa7d2a672cd98c17bbce6ca9b6561491}{src.\+data\+\_\+management.\+data\+\_\+collection.\+I\+Collector}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a10fe41f250eef95565069cea190ef09b}\label{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a10fe41f250eef95565069cea190ef09b}} 
+\index{src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}!csv\_name@{csv\_name}}
+\index{csv\_name@{csv\_name}!src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}}
+\doxysubsubsection{\texorpdfstring{csv\_name}{csv\_name}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+P\+S\+Collector.\+csv\+\_\+name}
+
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a76e3c4f80eff35a2fbe859f23f60a4a6}\label{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a76e3c4f80eff35a2fbe859f23f60a4a6}} 
+\index{src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}!path\_to\_processed@{path\_to\_processed}}
+\index{path\_to\_processed@{path\_to\_processed}!src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}}
+\doxysubsubsection{\texorpdfstring{path\_to\_processed}{path\_to\_processed}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+P\+S\+Collector.\+path\+\_\+to\+\_\+processed}
+
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a56869f234037bd3b37de63cdcdef22ef}\label{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_a56869f234037bd3b37de63cdcdef22ef}} 
+\index{src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}!path\_to\_raw@{path\_to\_raw}}
+\index{path\_to\_raw@{path\_to\_raw}!src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}}
+\doxysubsubsection{\texorpdfstring{path\_to\_raw}{path\_to\_raw}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+P\+S\+Collector.\+path\+\_\+to\+\_\+raw}
+
+\mbox{\Hypertarget{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_af6ebf798881796b1fa269d0786f4c374}\label{classsrc_1_1data__management_1_1data__collection_1_1PSCollector_af6ebf798881796b1fa269d0786f4c374}} 
+\index{src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}!source@{source}}
+\index{source@{source}!src.data\_management.data\_collection.PSCollector@{src.data\_management.data\_collection.PSCollector}}
+\doxysubsubsection{\texorpdfstring{source}{source}}
+{\footnotesize\ttfamily src.\+data\+\_\+management.\+data\+\_\+collection.\+P\+S\+Collector.\+source}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/data\+\_\+management/\mbox{\hyperlink{data__collection_8py}{data\+\_\+collection.\+py}}\end{DoxyCompactItemize}

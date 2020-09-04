@@ -1,0 +1,638 @@
+\hypertarget{classsb__scraper_1_1SBScraper}{}\doxysection{sb\+\_\+scraper.\+S\+B\+Scraper Class Reference}
+\label{classsb__scraper_1_1SBScraper}\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+
+
+S\+B\+Scaper class to expose simple functions for scraping Socialblade data.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a3a23dcd291b4916c7f2427cce2dc52a9}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_ac88f6a75d81fc4f72b000637d0c41028}{get\+\_\+all\+\_\+country\+\_\+urls}} (self, proxies=None)
+\begin{DoxyCompactList}\small\item\em Uses the Socialblade top 100 Youtube channel website to get the urls of all available countries top 250 channel lists. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_aafbc46b710a7a2a739e6fb7c594b1b5a}{get\+\_\+channels\+\_\+by\+\_\+country}} (self, url, proxies=None)
+\begin{DoxyCompactList}\small\item\em Uses the provided url to scrape the links to all 250 top channels. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_ad4fbfb697ed20c91a6ca3d7648dfdfcf}{get\+\_\+channel\+\_\+data}} (self, url, proxies=None)
+\begin{DoxyCompactList}\small\item\em Uses the provided url to scrape the data of this specific channel. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a3a23dcd291b4916c7f2427cce2dc52a9}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_ac88f6a75d81fc4f72b000637d0c41028}{get\+\_\+all\+\_\+country\+\_\+urls}} (self, proxies=None)
+\begin{DoxyCompactList}\small\item\em Uses the Socialblade top 100 Youtube channel website to get the urls of all available countries top 250 channel lists. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_aafbc46b710a7a2a739e6fb7c594b1b5a}{get\+\_\+channels\+\_\+by\+\_\+country}} (self, url, proxies=None)
+\begin{DoxyCompactList}\small\item\em Uses the provided url to scrape the links to all 250 top channels. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_ad4fbfb697ed20c91a6ca3d7648dfdfcf}{get\+\_\+channel\+\_\+data}} (self, url, proxies=None)
+\begin{DoxyCompactList}\small\item\em Uses the provided url to scrape the data of this specific channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsb__scraper_1_1SBScraper_ad6f2477c8e769d105ec63540399d71ab}{request\+\_\+thread}}
+\item 
+\mbox{\hyperlink{classsb__scraper_1_1SBScraper_a24059540dbd1412fab7c39a500da48ac}{html\+\_\+response}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_add492f938081c27e5710426cc659c2c7}{\+\_\+get\+\_\+url\+\_\+wrapper}} (self, url, proxies=None)
+\begin{DoxyCompactList}\small\item\em Wrapper for the \+\_\+get\+\_\+url function. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a96f45b46481f0d2f71af1cbdc4ac3211}{\+\_\+get\+\_\+url}} (self, url, proxies=None)
+\begin{DoxyCompactList}\small\item\em Scrapes the specified url. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a4d3c2dd13b8e1416363b7ee0ae3525f2}{\+\_\+extract\+\_\+channel\+\_\+data}} (self, html\+\_\+rsp)
+\begin{DoxyCompactList}\small\item\em Extracts all channel statistics from an H\+T\+ML string. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_af3e05a6a0112c0f1d8e5928a8e8073f1}{\+\_\+parse\+\_\+js}} (self, script)
+\begin{DoxyCompactList}\small\item\em Parses a javascript for charts data. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_add492f938081c27e5710426cc659c2c7}{\+\_\+get\+\_\+url\+\_\+wrapper}} (self, url, proxies=None)
+\begin{DoxyCompactList}\small\item\em Wrapper for the \+\_\+get\+\_\+url function. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a96f45b46481f0d2f71af1cbdc4ac3211}{\+\_\+get\+\_\+url}} (self, url, proxies=None)
+\begin{DoxyCompactList}\small\item\em Scrapes the specified url. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a4d3c2dd13b8e1416363b7ee0ae3525f2}{\+\_\+extract\+\_\+channel\+\_\+data}} (self, html\+\_\+rsp)
+\begin{DoxyCompactList}\small\item\em Extracts all channel statistics from an H\+T\+ML string. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_af3e05a6a0112c0f1d8e5928a8e8073f1}{\+\_\+parse\+\_\+js}} (self, script)
+\begin{DoxyCompactList}\small\item\em Parses a javascript for charts data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a7297df21d6fb9e97ea463a54f5b3d4f8}{\+\_\+extract\+\_\+country\+\_\+ids}} (html\+\_\+rsp)
+\begin{DoxyCompactList}\small\item\em Extracts all country I\+Ds from an H\+T\+ML string. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a1f18f9dc98cd70e15d4d60535aec6f9c}{\+\_\+extract\+\_\+channels\+\_\+from\+\_\+sb\+\_\+country}} (html\+\_\+rsp)
+\begin{DoxyCompactList}\small\item\em Extracts all country\textquotesingle{}s top 250 channel urls from an H\+T\+ML string. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_aadcd98ad5eafdc9fb55afba40e67e3d0}{\+\_\+filter\+\_\+scripts}} (scripts)
+\begin{DoxyCompactList}\small\item\em Filters the data script from a list of js scripts. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a84ebf0e1b18ce953cdbed3bbcc1a8223}{\+\_\+process\+\_\+categories}} (categories)
+\begin{DoxyCompactList}\small\item\em Processes the extracted categories. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_ad55680e82c5aa40fad740b34cd05b886}{\+\_\+process\+\_\+data}} (data)
+\begin{DoxyCompactList}\small\item\em Processes the extracted data. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a7297df21d6fb9e97ea463a54f5b3d4f8}{\+\_\+extract\+\_\+country\+\_\+ids}} (html\+\_\+rsp)
+\begin{DoxyCompactList}\small\item\em Extracts all country I\+Ds from an H\+T\+ML string. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a1f18f9dc98cd70e15d4d60535aec6f9c}{\+\_\+extract\+\_\+channels\+\_\+from\+\_\+sb\+\_\+country}} (html\+\_\+rsp)
+\begin{DoxyCompactList}\small\item\em Extracts all country\textquotesingle{}s top 250 channel urls from an H\+T\+ML string. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_aadcd98ad5eafdc9fb55afba40e67e3d0}{\+\_\+filter\+\_\+scripts}} (scripts)
+\begin{DoxyCompactList}\small\item\em Filters the data script from a list of js scripts. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_a84ebf0e1b18ce953cdbed3bbcc1a8223}{\+\_\+process\+\_\+categories}} (categories)
+\begin{DoxyCompactList}\small\item\em Processes the extracted categories. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsb__scraper_1_1SBScraper_ad55680e82c5aa40fad740b34cd05b886}{\+\_\+process\+\_\+data}} (data)
+\begin{DoxyCompactList}\small\item\em Processes the extracted data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+S\+B\+Scaper class to expose simple functions for scraping Socialblade data. 
+
+This class is essentially a wrapper around the cloudscraper module fitted to the Socialblade Youtube section. Provides functions to get urls to all supported countries for the Socialblades Youtube section, all top 250 channel urls of a given country url, and a function to scrape the data off a specific channel url. Also converts the scraped data from js into a usable format.
+
+\begin{DoxyNote}{Note}
+Currently only supports Socialblade Youtube links. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\href{https://socialblade.com/}{\texttt{ https\+://socialblade.\+com/}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a3a23dcd291b4916c7f2427cce2dc52a9}\label{classsb__scraper_1_1SBScraper_a3a23dcd291b4916c7f2427cce2dc52a9}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a3a23dcd291b4916c7f2427cce2dc52a9}\label{classsb__scraper_1_1SBScraper_a3a23dcd291b4916c7f2427cce2dc52a9}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a4d3c2dd13b8e1416363b7ee0ae3525f2}\label{classsb__scraper_1_1SBScraper_a4d3c2dd13b8e1416363b7ee0ae3525f2}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_extract\_channel\_data@{\_extract\_channel\_data}}
+\index{\_extract\_channel\_data@{\_extract\_channel\_data}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_extract\_channel\_data()}{\_extract\_channel\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+extract\+\_\+channel\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{html\+\_\+rsp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Extracts all channel statistics from an H\+T\+ML string. 
+
+Uses Beautiful\+Soup to identify all scripts. Filters the scripts until only the script containing the data for the graphs remains. Parses the script and zips all data into a data dictionary.
+
+
+\begin{DoxyParams}{Parameters}
+{\em html\+\_\+rsp} & The website\textquotesingle{}s H\+T\+ML as a string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the dictionary with processed table names as keys and the data as values. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a4d3c2dd13b8e1416363b7ee0ae3525f2}\label{classsb__scraper_1_1SBScraper_a4d3c2dd13b8e1416363b7ee0ae3525f2}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_extract\_channel\_data@{\_extract\_channel\_data}}
+\index{\_extract\_channel\_data@{\_extract\_channel\_data}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_extract\_channel\_data()}{\_extract\_channel\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+extract\+\_\+channel\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{html\+\_\+rsp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Extracts all channel statistics from an H\+T\+ML string. 
+
+Uses Beautiful\+Soup to identify all scripts. Filters the scripts until only the script containing the data for the graphs remains. Parses the script and zips all data into a data dictionary.
+
+
+\begin{DoxyParams}{Parameters}
+{\em html\+\_\+rsp} & The website\textquotesingle{}s H\+T\+ML as a string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the dictionary with processed table names as keys and the data as values. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a1f18f9dc98cd70e15d4d60535aec6f9c}\label{classsb__scraper_1_1SBScraper_a1f18f9dc98cd70e15d4d60535aec6f9c}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_extract\_channels\_from\_sb\_country@{\_extract\_channels\_from\_sb\_country}}
+\index{\_extract\_channels\_from\_sb\_country@{\_extract\_channels\_from\_sb\_country}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_extract\_channels\_from\_sb\_country()}{\_extract\_channels\_from\_sb\_country()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+extract\+\_\+channels\+\_\+from\+\_\+sb\+\_\+country (\begin{DoxyParamCaption}\item[{}]{html\+\_\+rsp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Extracts all country\textquotesingle{}s top 250 channel urls from an H\+T\+ML string. 
+
+Uses Beautiful\+Soup to identify all links. If the links contain the \textquotesingle{}/youtube/user\textquotesingle{} keyword, they are added to the list. Links are edited to directly access the detailed statistics page of a channel.
+
+
+\begin{DoxyParams}{Parameters}
+{\em html\+\_\+rsp} & The website\textquotesingle{}s H\+T\+ML as a string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the list of channel urls. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a1f18f9dc98cd70e15d4d60535aec6f9c}\label{classsb__scraper_1_1SBScraper_a1f18f9dc98cd70e15d4d60535aec6f9c}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_extract\_channels\_from\_sb\_country@{\_extract\_channels\_from\_sb\_country}}
+\index{\_extract\_channels\_from\_sb\_country@{\_extract\_channels\_from\_sb\_country}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_extract\_channels\_from\_sb\_country()}{\_extract\_channels\_from\_sb\_country()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+extract\+\_\+channels\+\_\+from\+\_\+sb\+\_\+country (\begin{DoxyParamCaption}\item[{}]{html\+\_\+rsp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Extracts all country\textquotesingle{}s top 250 channel urls from an H\+T\+ML string. 
+
+Uses Beautiful\+Soup to identify all links. If the links contain the \textquotesingle{}/youtube/user\textquotesingle{} keyword, they are added to the list. Links are edited to directly access the detailed statistics page of a channel.
+
+
+\begin{DoxyParams}{Parameters}
+{\em html\+\_\+rsp} & The website\textquotesingle{}s H\+T\+ML as a string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the list of channel urls. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a7297df21d6fb9e97ea463a54f5b3d4f8}\label{classsb__scraper_1_1SBScraper_a7297df21d6fb9e97ea463a54f5b3d4f8}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_extract\_country\_ids@{\_extract\_country\_ids}}
+\index{\_extract\_country\_ids@{\_extract\_country\_ids}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_extract\_country\_ids()}{\_extract\_country\_ids()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+extract\+\_\+country\+\_\+ids (\begin{DoxyParamCaption}\item[{}]{html\+\_\+rsp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Extracts all country I\+Ds from an H\+T\+ML string. 
+
+Uses Beautiful\+Soup to identify all options with only 2 chars. All options on relevant Socialblade links are confirmed to be country I\+Ds.
+
+
+\begin{DoxyParams}{Parameters}
+{\em html\+\_\+rsp} & The website\textquotesingle{}s H\+T\+ML as a string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the list of available country I\+Ds. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a7297df21d6fb9e97ea463a54f5b3d4f8}\label{classsb__scraper_1_1SBScraper_a7297df21d6fb9e97ea463a54f5b3d4f8}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_extract\_country\_ids@{\_extract\_country\_ids}}
+\index{\_extract\_country\_ids@{\_extract\_country\_ids}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_extract\_country\_ids()}{\_extract\_country\_ids()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+extract\+\_\+country\+\_\+ids (\begin{DoxyParamCaption}\item[{}]{html\+\_\+rsp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Extracts all country I\+Ds from an H\+T\+ML string. 
+
+Uses Beautiful\+Soup to identify all options with only 2 chars. All options on relevant Socialblade links are confirmed to be country I\+Ds.
+
+
+\begin{DoxyParams}{Parameters}
+{\em html\+\_\+rsp} & The website\textquotesingle{}s H\+T\+ML as a string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the list of available country I\+Ds. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_aadcd98ad5eafdc9fb55afba40e67e3d0}\label{classsb__scraper_1_1SBScraper_aadcd98ad5eafdc9fb55afba40e67e3d0}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_filter\_scripts@{\_filter\_scripts}}
+\index{\_filter\_scripts@{\_filter\_scripts}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_filter\_scripts()}{\_filter\_scripts()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+filter\+\_\+scripts (\begin{DoxyParamCaption}\item[{}]{scripts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Filters the data script from a list of js scripts. 
+
+A somewhat heuristic search. Data scripts are the largest script on the website. Therefore we filter the largest script and return it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em scripts} & A list of scripts scraped from the website with Beautiful\+Soup. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the first script larger than 1000 chars. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_aadcd98ad5eafdc9fb55afba40e67e3d0}\label{classsb__scraper_1_1SBScraper_aadcd98ad5eafdc9fb55afba40e67e3d0}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_filter\_scripts@{\_filter\_scripts}}
+\index{\_filter\_scripts@{\_filter\_scripts}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_filter\_scripts()}{\_filter\_scripts()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+filter\+\_\+scripts (\begin{DoxyParamCaption}\item[{}]{scripts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Filters the data script from a list of js scripts. 
+
+A somewhat heuristic search. Data scripts are the largest script on the website. Therefore we filter the largest script and return it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em scripts} & A list of scripts scraped from the website with Beautiful\+Soup. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the first script larger than 1000 chars. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a96f45b46481f0d2f71af1cbdc4ac3211}\label{classsb__scraper_1_1SBScraper_a96f45b46481f0d2f71af1cbdc4ac3211}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_get\_url@{\_get\_url}}
+\index{\_get\_url@{\_get\_url}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_get\_url()}{\_get\_url()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+get\+\_\+url (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{url,  }\item[{}]{proxies = {\ttfamily None} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Scrapes the specified url. 
+
+Uses the cloudscraper module to scrape Socialblade despite Cloudflare protection. Cloudscraper imitates the required js response for accessing Socialblade. For more information, \begin{DoxySeeAlso}{See also}
+\href{https://pypi.org/project/cloudscraper}{\texttt{ https\+://pypi.\+org/project/cloudscraper}}. The H\+T\+ML document gets stored in self.\+html\+\_\+response to transfer the web page to the wrapper.
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em url} & url to the channel\textquotesingle{}s statistics page. \\
+\hline
+{\em proxies} & Proxy to be used for the request. Used exactly as in pythons requests library. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a96f45b46481f0d2f71af1cbdc4ac3211}\label{classsb__scraper_1_1SBScraper_a96f45b46481f0d2f71af1cbdc4ac3211}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_get\_url@{\_get\_url}}
+\index{\_get\_url@{\_get\_url}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_get\_url()}{\_get\_url()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+get\+\_\+url (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{url,  }\item[{}]{proxies = {\ttfamily None} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Scrapes the specified url. 
+
+Uses the cloudscraper module to scrape Socialblade despite Cloudflare protection. Cloudscraper imitates the required js response for accessing Socialblade. For more information, \begin{DoxySeeAlso}{See also}
+\href{https://pypi.org/project/cloudscraper}{\texttt{ https\+://pypi.\+org/project/cloudscraper}}. The H\+T\+ML document gets stored in self.\+html\+\_\+response to transfer the web page to the wrapper.
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em url} & url to the channel\textquotesingle{}s statistics page. \\
+\hline
+{\em proxies} & Proxy to be used for the request. Used exactly as in pythons requests library. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_add492f938081c27e5710426cc659c2c7}\label{classsb__scraper_1_1SBScraper_add492f938081c27e5710426cc659c2c7}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_get\_url\_wrapper@{\_get\_url\_wrapper}}
+\index{\_get\_url\_wrapper@{\_get\_url\_wrapper}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_get\_url\_wrapper()}{\_get\_url\_wrapper()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+get\+\_\+url\+\_\+wrapper (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{url,  }\item[{}]{proxies = {\ttfamily None} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Wrapper for the \+\_\+get\+\_\+url function. 
+
+\+\_\+get\+\_\+url results in most of the errors. Sometimes, requests also get stuck indefinitely. Wrapper starts a timeout to deal with this. 
+\begin{DoxyParams}{Parameters}
+{\em url} & Url to scrape from. \\
+\hline
+{\em proxies} & Proxy to be used for the request. Used exactly as in pythons requests library. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the H\+T\+ML page in case of success and False in case of failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_add492f938081c27e5710426cc659c2c7}\label{classsb__scraper_1_1SBScraper_add492f938081c27e5710426cc659c2c7}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_get\_url\_wrapper@{\_get\_url\_wrapper}}
+\index{\_get\_url\_wrapper@{\_get\_url\_wrapper}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_get\_url\_wrapper()}{\_get\_url\_wrapper()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+get\+\_\+url\+\_\+wrapper (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{url,  }\item[{}]{proxies = {\ttfamily None} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Wrapper for the \+\_\+get\+\_\+url function. 
+
+\+\_\+get\+\_\+url results in most of the errors. Sometimes, requests also get stuck indefinitely. Wrapper starts a timeout to deal with this. 
+\begin{DoxyParams}{Parameters}
+{\em url} & Url to scrape from. \\
+\hline
+{\em proxies} & Proxy to be used for the request. Used exactly as in pythons requests library. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the H\+T\+ML page in case of success and False in case of failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_af3e05a6a0112c0f1d8e5928a8e8073f1}\label{classsb__scraper_1_1SBScraper_af3e05a6a0112c0f1d8e5928a8e8073f1}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_parse\_js@{\_parse\_js}}
+\index{\_parse\_js@{\_parse\_js}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_parse\_js()}{\_parse\_js()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+parse\+\_\+js (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{script }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses a javascript for charts data. 
+
+Converts js to a xml tree. Uses the highchart identifier and Socialblade\textquotesingle{}s script structure to navigate to the relevant data. Also does basic processing on the data and keys.
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & A javascript as string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a dictionary of all processed chart descriptions and their data. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_af3e05a6a0112c0f1d8e5928a8e8073f1}\label{classsb__scraper_1_1SBScraper_af3e05a6a0112c0f1d8e5928a8e8073f1}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_parse\_js@{\_parse\_js}}
+\index{\_parse\_js@{\_parse\_js}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_parse\_js()}{\_parse\_js()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+parse\+\_\+js (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{script }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses a javascript for charts data. 
+
+Converts js to a xml tree. Uses the highchart identifier and Socialblade\textquotesingle{}s script structure to navigate to the relevant data. Also does basic processing on the data and keys.
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & A javascript as string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a dictionary of all processed chart descriptions and their data. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a84ebf0e1b18ce953cdbed3bbcc1a8223}\label{classsb__scraper_1_1SBScraper_a84ebf0e1b18ce953cdbed3bbcc1a8223}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_process\_categories@{\_process\_categories}}
+\index{\_process\_categories@{\_process\_categories}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_process\_categories()}{\_process\_categories()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+process\+\_\+categories (\begin{DoxyParamCaption}\item[{}]{categories }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Processes the extracted categories. 
+
+Removes empty category entries and strips unnecessary descriptions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em categories} & List of raw extracted categories. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a list of processed and valid categories. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a84ebf0e1b18ce953cdbed3bbcc1a8223}\label{classsb__scraper_1_1SBScraper_a84ebf0e1b18ce953cdbed3bbcc1a8223}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_process\_categories@{\_process\_categories}}
+\index{\_process\_categories@{\_process\_categories}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_process\_categories()}{\_process\_categories()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+process\+\_\+categories (\begin{DoxyParamCaption}\item[{}]{categories }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Processes the extracted categories. 
+
+Removes empty category entries and strips unnecessary descriptions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em categories} & List of raw extracted categories. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a list of processed and valid categories. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_ad55680e82c5aa40fad740b34cd05b886}\label{classsb__scraper_1_1SBScraper_ad55680e82c5aa40fad740b34cd05b886}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_process\_data@{\_process\_data}}
+\index{\_process\_data@{\_process\_data}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_process\_data()}{\_process\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+process\+\_\+data (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Processes the extracted data. 
+
+Sometimes, the time axis of the arrays is decreasing instead of increasing. In this case, the whole data set gets reversed while keeping each time stamp at its respective data point.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & List of raw extracted data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a list of data ordered with increasing time scale. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_ad55680e82c5aa40fad740b34cd05b886}\label{classsb__scraper_1_1SBScraper_ad55680e82c5aa40fad740b34cd05b886}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!\_process\_data@{\_process\_data}}
+\index{\_process\_data@{\_process\_data}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{\_process\_data()}{\_process\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+\_\+process\+\_\+data (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Processes the extracted data. 
+
+Sometimes, the time axis of the arrays is decreasing instead of increasing. In this case, the whole data set gets reversed while keeping each time stamp at its respective data point.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & List of raw extracted data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a list of data ordered with increasing time scale. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_ac88f6a75d81fc4f72b000637d0c41028}\label{classsb__scraper_1_1SBScraper_ac88f6a75d81fc4f72b000637d0c41028}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!get\_all\_country\_urls@{get\_all\_country\_urls}}
+\index{get\_all\_country\_urls@{get\_all\_country\_urls}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{get\_all\_country\_urls()}{get\_all\_country\_urls()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+get\+\_\+all\+\_\+country\+\_\+urls (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{proxies = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Uses the Socialblade top 100 Youtube channel website to get the urls of all available countries top 250 channel lists. 
+
+Country urls are constructed with the extracted I\+SO 3166 tags and not scraped directly!
+
+
+\begin{DoxyParams}{Parameters}
+{\em proxies} & Proxy to be used for the request. Used exactly as in pythons requests library. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the url list in case of success or False in case of failure. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Won\textquotesingle{}t work anymore if Socialblade changes the structure of its country\textquotesingle{}s top channels urls! 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_ac88f6a75d81fc4f72b000637d0c41028}\label{classsb__scraper_1_1SBScraper_ac88f6a75d81fc4f72b000637d0c41028}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!get\_all\_country\_urls@{get\_all\_country\_urls}}
+\index{get\_all\_country\_urls@{get\_all\_country\_urls}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{get\_all\_country\_urls()}{get\_all\_country\_urls()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+get\+\_\+all\+\_\+country\+\_\+urls (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{proxies = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Uses the Socialblade top 100 Youtube channel website to get the urls of all available countries top 250 channel lists. 
+
+Country urls are constructed with the extracted I\+SO 3166 tags and not scraped directly!
+
+
+\begin{DoxyParams}{Parameters}
+{\em proxies} & Proxy to be used for the request. Used exactly as in pythons requests library. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the url list in case of success or False in case of failure. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Won\textquotesingle{}t work anymore if Socialblade changes the structure of its country\textquotesingle{}s top channels urls! 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_ad4fbfb697ed20c91a6ca3d7648dfdfcf}\label{classsb__scraper_1_1SBScraper_ad4fbfb697ed20c91a6ca3d7648dfdfcf}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!get\_channel\_data@{get\_channel\_data}}
+\index{get\_channel\_data@{get\_channel\_data}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{get\_channel\_data()}{get\_channel\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+get\+\_\+channel\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{url,  }\item[{}]{proxies = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Uses the provided url to scrape the data of this specific channel. 
+
+Channel website gets scraped with cloudscraper. The data itself is stored in several javascripts. Function calls a custom pipeline to convert js to xml and extract the data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & url to the channel\textquotesingle{}s statistics page. \\
+\hline
+{\em proxies} & Proxy to be used for the request. Used exactly as in pythons requests library. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a dictionary with the table names as keys and the list of contents in case of success or False in case of failure. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Some sites contain more tables than others. Dictionary will have variable length of elements, typically 4 or 6. Might also have only 2 keys. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Won\textquotesingle{}t work anymore if Socialblade changes the structure of its js nodes! 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_ad4fbfb697ed20c91a6ca3d7648dfdfcf}\label{classsb__scraper_1_1SBScraper_ad4fbfb697ed20c91a6ca3d7648dfdfcf}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!get\_channel\_data@{get\_channel\_data}}
+\index{get\_channel\_data@{get\_channel\_data}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{get\_channel\_data()}{get\_channel\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+get\+\_\+channel\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{url,  }\item[{}]{proxies = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Uses the provided url to scrape the data of this specific channel. 
+
+Channel website gets scraped with cloudscraper. The data itself is stored in several javascripts. Function calls a custom pipeline to convert js to xml and extract the data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & url to the channel\textquotesingle{}s statistics page. \\
+\hline
+{\em proxies} & Proxy to be used for the request. Used exactly as in pythons requests library. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a dictionary with the table names as keys and the list of contents in case of success or False in case of failure. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Some sites contain more tables than others. Dictionary will have variable length of elements, typically 4 or 6. Might also have only 2 keys. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Won\textquotesingle{}t work anymore if Socialblade changes the structure of its js nodes! 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_aafbc46b710a7a2a739e6fb7c594b1b5a}\label{classsb__scraper_1_1SBScraper_aafbc46b710a7a2a739e6fb7c594b1b5a}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!get\_channels\_by\_country@{get\_channels\_by\_country}}
+\index{get\_channels\_by\_country@{get\_channels\_by\_country}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{get\_channels\_by\_country()}{get\_channels\_by\_country()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+get\+\_\+channels\+\_\+by\+\_\+country (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{url,  }\item[{}]{proxies = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Uses the provided url to scrape the links to all 250 top channels. 
+
+Channel urls are constructed with the extracted channel names and not scraped directly!
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & url to the country\textquotesingle{}s top 250 channels list. \\
+\hline
+{\em proxies} & Proxy to be used for the request. Used exactly as in pythons requests library. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a dictionary with the country ID as key and the list of urls as value in case of success or False in case of failure. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Won\textquotesingle{}t work anymore if Socialblade changes the structure of its channel details urls! 
+\end{DoxyWarning}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_aafbc46b710a7a2a739e6fb7c594b1b5a}\label{classsb__scraper_1_1SBScraper_aafbc46b710a7a2a739e6fb7c594b1b5a}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!get\_channels\_by\_country@{get\_channels\_by\_country}}
+\index{get\_channels\_by\_country@{get\_channels\_by\_country}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{get\_channels\_by\_country()}{get\_channels\_by\_country()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily def sb\+\_\+scraper.\+S\+B\+Scraper.\+get\+\_\+channels\+\_\+by\+\_\+country (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{url,  }\item[{}]{proxies = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Uses the provided url to scrape the links to all 250 top channels. 
+
+Channel urls are constructed with the extracted channel names and not scraped directly!
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & url to the country\textquotesingle{}s top 250 channels list. \\
+\hline
+{\em proxies} & Proxy to be used for the request. Used exactly as in pythons requests library. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a dictionary with the country ID as key and the list of urls as value in case of success or False in case of failure. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Won\textquotesingle{}t work anymore if Socialblade changes the structure of its channel details urls! 
+\end{DoxyWarning}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_a24059540dbd1412fab7c39a500da48ac}\label{classsb__scraper_1_1SBScraper_a24059540dbd1412fab7c39a500da48ac}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!html\_response@{html\_response}}
+\index{html\_response@{html\_response}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{html\_response}{html\_response}}
+{\footnotesize\ttfamily sb\+\_\+scraper.\+S\+B\+Scraper.\+html\+\_\+response}
+
+\mbox{\Hypertarget{classsb__scraper_1_1SBScraper_ad6f2477c8e769d105ec63540399d71ab}\label{classsb__scraper_1_1SBScraper_ad6f2477c8e769d105ec63540399d71ab}} 
+\index{sb\_scraper.SBScraper@{sb\_scraper.SBScraper}!request\_thread@{request\_thread}}
+\index{request\_thread@{request\_thread}!sb\_scraper.SBScraper@{sb\_scraper.SBScraper}}
+\doxysubsubsection{\texorpdfstring{request\_thread}{request\_thread}}
+{\footnotesize\ttfamily sb\+\_\+scraper.\+S\+B\+Scraper.\+request\+\_\+thread}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/data\+\_\+collection/social\+\_\+scraper\+\_\+lite/docker/\mbox{\hyperlink{docker_2sb__scraper_8py}{sb\+\_\+scraper.\+py}}\end{DoxyCompactItemize}
