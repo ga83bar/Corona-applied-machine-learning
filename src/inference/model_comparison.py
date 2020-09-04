@@ -159,6 +159,56 @@ def get_predict_data(label):
     return predicted_df, prophet_attr_df_post, prophet_attr_df_pre
 
 
+def plot_for_compare_models(dataframe, attr, prophet_attr_df):
+    """Plot-function for the function compare_models()"""
+    model_dict = load_models()
+    prophet = model_dict["Prophet"]
+    days_to_predict = 60
+    # Hardcoded due to linter convention: too many variables
+    # train_window = 30
+    el_machine = EM.ExtremeLearningMachine()
+    loaded_data = dataframe
+    train_size = len(loaded_data) - days_to_predict
+    train_data = loaded_data[attr][:train_size]
+    test_data = loaded_data[attr][train_size:]
+    predictions = el_machine.predict_next_days(regu='no',
+                                               train_win=30,
+                                               do_plot=False,
+                                               lambd=0.01,
+                                               num_neurons=128,
+                                               days=days_to_predict,
+                                               data=train_data)
+
+    x_values = range(len(loaded_data))
+    plt.title('No name')
+    plt.plot(x_values[:train_size], train_data, label='Train data')
+    plt.plot(x_values[train_size:], predictions, label='Prediction')
+    plt.plot(x_values[train_size:], test_data, label='Test data')
+    plt.legend()
+    plt.savefig("ELM predictions")
+    prophet = pro.MyProphet()
+    changepoint_prior_scale = np.arange(0.03, 0.2, 0.005)
+    parameters = {'growth': ['linear', 'logistic'],
+                  'changepoint_prior_scale': changepoint_prior_scale,
+                  'interval_width': [0.8],
+                  'seasonality_mode': ['additive', 'multiplicative']}
+    loaded_param = prophet.gridsearchcv(parameters,
+                                        dataframe=prophet_attr_df,
+                                        safe=True)
+    print(attr)
+    print(loaded_param)
+    prior_scale = loaded_param['changepoint_prior_scale']
+    seasonality = loaded_param['seasonality_mode']
+    interval_width_param = loaded_param['interval_width']
+    growth_param = loaded_param['growth']
+    prophet.set_model(prophet.set_model(growth=growth_param,
+                                        changepoint_prior_scale=prior_scale,
+                                        interval_width=interval_width_param,
+                                        seasonality_mode=seasonality))
+    prophet.fit(prophet_attr_df['Date'], prophet_attr_df[attr])
+    prophet.predict(do_plot=True, label=attr)
+
+
 def compare_models(model_dict, dataframe, plotting=False):
     """compares the performance of given models using the
     provided dataframe by performing cross validation"""
@@ -203,54 +253,10 @@ def compare_models(model_dict, dataframe, plotting=False):
 
         # Plots
         if plotting is True:
-            model_dict = load_models()
-            prophet = model_dict["Prophet"]
-            days_to_predict = 60
-            train_window = 30
-            el_machine = EM.ExtremeLearningMachine()
-            loaded_data = dataframe
-            train_size = len(loaded_data) - days_to_predict
-            train_data = loaded_data[attr][:train_size]
-            test_data = loaded_data[attr][train_size:]
-            predictions = el_machine.predict_next_days(regu='no',
-                                                       train_win=train_window,
-                                                       do_plot=False,
-                                                       lambd=0.01,
-                                                       num_neurons=128,
-                                                       days=days_to_predict,
-                                                       data=train_data)
+            plot_for_compare_models(dataframe, attr, prophet_attr_df)
 
-            x_values = range(len(loaded_data))
-            plt.title('No name')
-            plt.plot(x_values[:train_size], train_data, label='Train data')
-            plt.plot(x_values[train_size:], predictions, label='Prediction')
-            plt.plot(x_values[train_size:], test_data, label='Test data')
-            plt.legend()
-            plt.savefig("ELM predictions")
-            prophet = pro.MyProphet()
-            changepoint_prior_scale = np.arange(0.03, 0.2, 0.005)
-            parameters = {'growth': ['linear', 'logistic'],
-                          'changepoint_prior_scale': changepoint_prior_scale,
-                          'interval_width': [0.8],
-                          'seasonality_mode': ['additive', 'multiplicative']}
-            loaded_param = prophet.gridsearchcv(parameters,
-                                                dataframe=prophet_attr_df,
-                                                safe=True)
-            print(attr)
-            print(loaded_param)
-            prior_scale = loaded_param['changepoint_prior_scale']
-            seasonality = loaded_param['seasonality_mode']
-            interval_width_param = loaded_param['interval_width']
-            growth_param = loaded_param['growth']
-            prophet.set_model(prophet.set_model(growth=growth_param,
-                                                changepoint_prior_scale=prior_scale,
-                                                interval_width=interval_width_param,
-                                                seasonality_mode=seasonality))
-            prophet.fit(prophet_attr_df['Date'], prophet_attr_df[attr])
-            y_pred = prophet.predict(do_plot=True, label=attr)
-            print(y_pred)
     return score_dict, best_model_dict
 
 
 if __name__ == '__main__':
-    a, b, c = get_predict_data("ix_bitrate")
+    A, B, C = get_predict_data("ix_bitrate")
