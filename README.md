@@ -2,7 +2,7 @@
 
 # README - What If AI
 
-![alt text](/documentation/Machine%20Learning%20Models/images/logo.png "WhatIfAI")
+![alt text](/documentation/misc/img/logo.png "WhatIfAI")
 
 
 
