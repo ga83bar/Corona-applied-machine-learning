@@ -1,24 +1,25 @@
 """
 Implementation of online models for our dataset
 """
+import datetime as dt
+from datetime import timedelta
 import numpy as np
 import pandas as pd
-import datetime as dt
 from matplotlib import pyplot as plt
-from datetime import timedelta
 from keras.layers import concatenate
 from keras.layers import Dense
 from keras.layers import Input
 from keras.models import Model
+from keras.optimizers import Adam
 
-SETTINGS = {}
+
 
 class OnlineDense():
     """
     Class contains an online linear model and all of its pre and post
     training attributes.
     """
-    def __init__(self, dataframe, output, dset, settings=SETTINGS):
+    def __init__(self, dataframe, output, dset, settings):
         """
         Constructor
         """
@@ -28,7 +29,7 @@ class OnlineDense():
         self.model = None
         self.dset = dset
         self.output = output
-        self.metrics = ['mse']
+        self.metrics = ['mae']
         self.data_length = len(self.dataframe)
         self.last_day = dataframe["Date"][dataframe.index[-1]]
 
@@ -41,11 +42,12 @@ class OnlineDense():
         """
         Model setup
         """
+        optimizer = Adam(learning_rate=0.03)
         neurons = self.settings["neurons"]
         layer_number = self.settings["layers"]
         input_a = Input(shape=(1,))
         input_b = Input(shape=(2,))
-        inp_a = Dense(4, activation="linear")(input_a)
+        inp_a = Dense(2, activation="linear")(input_a)
         inp_b = Dense(12, activation=self.settings["lay_activ"])(input_b)
         for layer in range(1, layer_number):
             inp_b = Dense(neurons[layer], activation=self.settings["lay_activ"])(inp_b)
@@ -56,7 +58,7 @@ class OnlineDense():
         out = Dense(2, activation="relu")(combined)
         out = Dense(1, activation="linear")(out)
         self.model = Model(inputs=[inp_a.input, inp_b.input], outputs=out)
-        self.model.compile(loss=self.settings["loss"], optimizer='adam', metrics=self.metrics)
+        self.model.compile(loss=self.settings["loss"], optimizer=optimizer, metrics=self.metrics)
         self.model.summary()
         return self.model
 
@@ -76,8 +78,7 @@ class OnlineDense():
         for itr in range(0, 300):
             print(f"This is iteration: {itr}, with max nat. points: {self.data_length}")
             inp_a, inp_b, out = self.data_transform(itr + 1, itr + window)
-            self.model.fit([inp_a, inp_b], out, epochs=12, batch_size=12)
-            last = inp_b[-1]
+            self.model.fit([inp_a, inp_b], out, epochs=1, batch_size=8)
             if itr == 0:
                 self.predictions = np.array(self.output[0:window+1]).tolist()
             if itr > 0:
@@ -88,7 +89,7 @@ class OnlineDense():
                 if itr >= window-1:
                     self.dataframe = self.dataframe.append([{"month": month, "day": day, "Date": "none"}])
                 inp = inp[-1, :]
-                prediction = self.model.predict([np.arange(passed, passed + 1, 1).reshape((1,1)), inp.reshape((1,2))])
+                prediction = self.model.predict([np.arange(passed, passed + 1, 1).reshape((1, 1)), inp.reshape((1, 2))])
                 if passed >= self.data_length - 1:
                     self.output = self.output.append(pd.Series([prediction[0][0]]))
                 self.predictions.append(prediction)
@@ -130,14 +131,14 @@ class OnlineDense():
         """
         Initialize settings
         """
-        self.settings = {"in_dim":2,
-                         "layers":3,
-                         "lay_activ":"linear",
-                         "out_activ":"linear",
-                         "neurons":[20, 30, 20],
-                         "loss":"mean_squared_error",
-                         "window":45,
-                         "end":1000}
+        self.settings = {"in_dim": 2,
+                         "layers": 2,
+                         "lay_activ": "relu",
+                         "out_activ": "linear",
+                         "neurons": [4, 2],
+                         "loss": "mean_absolute_error",
+                         "window": 91,
+                         "end": 1000}
         for setter in settings:
             self.settings[setter] = settings[setter]
         return self.settings

@@ -93,7 +93,6 @@ class LoadIn():
         """
         self.dataframes = {}
         self.keys = {}
-        return None
 
     def clear_set(self, dset):
         """

@@ -10,7 +10,6 @@ from creme import linear_model
 from creme import preprocessing
 from creme import metrics
 from creme import stream
-from creme import stats
 from creme import time_series
 from creme import optim
 from matplotlib.pyplot import plot as plt
@@ -78,12 +77,3 @@ class OnTimePred():
         """
         weekdays = self.dataframe[["day"]].copy().pop("day")
         return weekdays
-
-def get_ordinal_date(frame):
-    return {'ordinal_date': x['month'].toordinal()}
-
-def get_month(x):
-    return {
-        calendar.month_name[month]: month == x['month'].month
-        for month in range(1, 13)
-    }
