@@ -10,9 +10,6 @@ from creme import metrics
 from creme import preprocessing
 from creme import stream
 from creme import ensemble
-from creme import model_selection
-from creme import optim
-
 
 
 class OnlineFCN():

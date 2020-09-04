@@ -6,9 +6,6 @@ from src.inference.load_in import LoadIn
 from src.inference.online_fcn import OnlineFCN
 from src.inference.online_time_pred import OnTimePred
 from src.inference.online_models import OnlineDense
-#from extreme_learning import ExtremeLearningMachine
-#from prophet import MyProphet
-import calendar
 
 
 class Learning():
@@ -62,7 +59,6 @@ class Learning():
         """
         Predict values depending on
         """
-        pass
 
     def online_dense_fit(self, frame, labels):
         """
@@ -70,14 +66,15 @@ class Learning():
         """
         for lbl in labels:
             dfr = frame[["month",
-                           "day",
-                           "Date"]].copy()
+                         "day",
+                         "Date"]].copy()
             lbls = self.dataframe[[lbl]].copy().pop(lbl)
-            model = OnlineDense(dfr, lbls, lbl)
+            model = OnlineDense(dfr, lbls, lbl, {"in_dim": 2})
             model.init_model()
             model.fit_model()
             model.plot_model()
             self.models[f"online_dense_{lbl}"] = model
+        return frame
 
     def online_pred_fit(self, frame, labels):
         """
@@ -105,17 +102,13 @@ class Learning():
         '''
         Method fits prophet
         '''
-        attribute = ''
-        proph = MyProphet()
-        #for attribute in frame:
-        proph.fit(frame['Date', attribute])
-
+        proph = frame
+        return proph
 
     def elm_fit(self, frame):
         """
         Method fits the elm model
         """
-        #elm = ExtremeLearningMachine(self.dataframe)
         return frame
 
     def linear_fit(self, frame):
@@ -214,5 +207,3 @@ if __name__ == '__main__':
     DATASETS = ["covid"]
     EVALUATOR = Learning(ALGORITHMS, DATASETS)
     EVALUATOR.pipeline()
-
-

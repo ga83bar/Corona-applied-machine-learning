@@ -11,6 +11,7 @@ import pandas as pd
 DATA_FILE = "res/{}/{}/{}.csv"
 DATA_DIRECTORY = "res/{}/{}"
 
+
 class LoadIn():
     """
     This class handles imports and persistent storage of datasets
@@ -93,7 +94,6 @@ class LoadIn():
         """
         self.dataframes = {}
         self.keys = {}
-        return None
 
     def clear_set(self, dset):
         """
